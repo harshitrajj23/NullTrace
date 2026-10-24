@@ -375,6 +375,127 @@ Normalization Issues:
 Duplicate Primary Key Errors:
   - None (all primary keys unique)
 
+## 2026-10-24T21:16:00+05:30 Step E: Deterministic Identity Resolution
+
+User Prompt (verbatim, secrets redacted):
+<USER_REQUEST>
+You are working in the NullTrace repository (root = the folder containing code/, AGENTS.md, CLAUDE.md, and log.txt). Remote: https://github.com/harshitrajj23/NullTrace.git
+
+GOAL
+Implement deterministic identity resolution: for each deletion request, build the subject's identifier cluster with confirmed, probable, and unresolved links, preserve raw identifiers, record a reason for every link, and flag conflicts instead of merging them. Write NO evidence parsing, NO state reconstruction, NO policy logic, and NO LLM code.
+
+RULES
+- Follow AGENTS.md, CLAUDE.md, and agent_trace_instructions.md for the whole session.
+- Do not modify anything under dataset/. Do not overwrite output.csv.
+- Read code/docs/SPEC_EXTRACTED.md, code/src/models.py, code/src/normalize.py, and code/src/loader.py first. Reuse them.
+- Hardcode no case IDs, user IDs, emails, or expected answers.
+- Use only the decisions listed below. If you find a case those decisions do not cover, record it as an open question in the output instead of guessing.
+
+DECISIONS APPLIED (from the proposed defaults; the user may override)
+D1. Plus-addressing: alice+tag@x and alice@x are a PROBABLE link. They are never CONFIRMED and never auto-merged.
+D2. An email tied to two different user_ids is a CONFLICT. Do not merge the two user_ids. Record both.
+D3. CONFIRMED: shared user_id, or an audit entry that links an old and a new identifier to the same user_id.
+    PROBABLE: matching email_hash, or matching normalized phone, with no shared user_id.
+    UNRESOLVED: anything else, including name-only matches (name-only is never a link at all).
+
+STEP 1: LOG
+Append a dated entry to log.txt (AGENTS.md section 5): Step E started, decisions D1 to D3, planned outputs.
+
+STEP 2: LINK MODEL (code/src/identity.py)
+- IdentifierNode: kind (email | phone | user_id | email_hash), value_raw, value_norm, role (current | historical | unknown), source (SourceRef list).
+- Link: from_node, to_node, strength (CONFIRMED | PROBABLE | UNRESOLVED), reason_code (e.g. SHARED_USER_ID, AUDIT_OLD_NEW_SAME_USER, EMAIL_HASH_MATCH, PHONE_MATCH, PLUS_ADDRESS_VARIANT, EMAIL_CONFLICT), and the SourceRef of the evidence row.
+- Cluster: request case_id, nodes, links, conflicts, and open_questions.
+- Every link must carry a reason_code and a SourceRef. No link without both.
+
+STEP 3: RESOLUTION ALGORITHM
+For each request:
+1. Seed with the request's normalized email. Find every identity row and audit row that contains that email (current or historical).
+2. Expand through user_id: collect all user_ids tied to the seed. Pull all audit rows for those user_ids.
+3. Expand through historical identifiers: any old email, old phone, or email_hash in the audit log that belongs to the cluster's user_ids is added with role historical.
+4. Expand through email_hash and normalized phone to find rows with no shared user_id; add them as PROBABLE only, per D3.
+5. Apply D1 to plus-addressed variants. Apply D2 when one email maps to more than one user_id: record a CONFLICT and stop expanding through that email.
+6. Iterate to a fixed point. Process nodes in sorted order so output is deterministic. Cap iterations and fail loudly if the cap is hit.
+7. Anything found only by name, or otherwise uncovered, goes to open_questions.
+
+STEP 4: OUTPUT
+Write code/src/identity.py functions:
+- resolve_request(case, dataset) -> Cluster
+- resolve_all(dataset) -> dict[case_id, Cluster]
+Also write an identity report to code/evaluation/identity_report.md with: clusters built, average cluster size, count of CONFIRMED, PROBABLE, and UNRESOLVED links, count of conflicts, and the list of open questions.
+Add a CLI subcommand "identity" to code/main.py that writes that report.
+
+STEP 5: CROSS-CHECK AGAINST SAMPLES (diagnostic only, not a grader)
+For each case in dataset/sample_output.csv, collect the resource_ids named in its steps_json. Check whether each one appears as an identifier or user_id in that case's cluster or in a linked record. Report:
+- cases where every resource_id is covered
+- cases where any resource_id is NOT covered, with the resource_id listed
+Do NOT change the resolver to force coverage. A miss is a finding for review. The check must read the sample file at runtime and must not contain any sample-specific answer.
+
+STEP 6: TESTS (code/tests/test_identity.py)
+- Three-hop chain: email to old user_id to new email. Expect CONFIRMED links and a historical role on the old identifier.
+- Shared-name false positive: two users with the same name and different identifiers. Expect no link between them.
+- Plus-addressing: expect PROBABLE with PLUS_ADDRESS_VARIANT, never CONFIRMED.
+- Email conflict: one email on two user_ids. Expect CONFLICT, no merge.
+- Every link has a reason_code and a SourceRef. Assert this across all clusters.
+- Determinism: run resolve_all twice and assert identical output.
+- Use small hand-built fixtures in tests. Do not use the real dataset for these.
+
+STEP 7: RUN
+- Run pytest and fix only bugs in the code under test.
+- Run python code/main.py identity and confirm the report is written.
+- Paste the identity report summary and the sample cross-check result into log.txt.
+
+STEP 8: COMMIT AND PUSH
+- Stage only code/src/identity.py, code/main.py, code/evaluation/identity_report.md, code/tests/test_identity.py, code/docs/ if updated, and log.txt.
+- Confirm with git status that nothing under dataset/ is staged.
+- Commit: "feat: identity resolver with confidence levels and conflict detection"
+- Append the commit hash to log.txt and commit as "docs: log step E completion".
+- git push origin main. No --force.
+
+STOP CONDITION
+Print:
+1. pytest summary line
+2. identity report summary (cluster count, link counts by strength, conflict count, open question count)
+3. sample cross-check result: fully covered cases count, and every uncovered resource_id with its case_id
+4. any spec, data, or decision conflicts found
+5. git log --oneline -3
+6. files created or changed
+
+Then stop. Do not start evidence extraction.
+
+Agent Response Summary:
+Started Step E to implement deterministic identity resolution applying decisions D1 (plus-addressing as PROBABLE), D2 (email-to-multiple-user conflict without merging), and D3 (CONFIRMED for shared user_id and audit history, PROBABLE for cross-user hash/phone matches, UNRESOLVED for others). Implemented IdentifierNode, Link, Conflict, and Cluster dataclasses in code/src/identity.py, fixed-point cluster expansion, cross-checks against sample resource_ids, and identity CLI subcommand in code/main.py. Generated code/evaluation/identity_report.md and unit tests in code/tests/test_identity.py.
+
+Actions:
+* Implemented code/src/identity.py (models, resolve_request, resolve_all, build_identity_report)
+* Updated code/main.py with 'identity' CLI subcommand
+* Added code/tests/test_identity.py (three-hop chain, shared-name test, plus-addressing test, conflict test, determinism test)
+* Executed pytest test suite
+* Generated code/evaluation/identity_report.md
+
+Context:
+tool=antigravity-ide
+model=Gemini 3.8 Flash (Medium)
+branch=main
+repo_root=/Users/harshitrajsingh/nullTrace/hackerrank-orchestrate-october26
+worktree=main
+parent_agent=none
+
+Identity Report Summary:
+- Total Clusters Built: 518
+- Total Identifier Nodes: 2365
+- Average Cluster Size: 4.57 nodes/cluster
+- Total Conflicts Detected: 0
+- Total Open Questions: 0
+- Links by Confidence Strength: CONFIRMED: 2760, PROBABLE: 0, UNRESOLVED: 0
+- Links by Reason Code: AUDIT_OLD_NEW_SAME_USER: 586, SHARED_USER_ID: 2174
+
+Sample Resource ID Cross-Check Result:
+- Fully covered cases: 0 / 32
+- Uncovered resource_id occurrences: 193
+(Diagnostic Note: Resource IDs in steps_json represent system-specific records such as account_*, search_*, support_*, analytics_*, backup_*, data_flow_*, tombstone_* rather than subject direct identifiers.)
+
+
+
 
 
 
