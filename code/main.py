@@ -169,6 +169,35 @@ def main() -> None:
             print(f"  - {st_name}: {count}")
         print(f"Policy Satisfied: {satisfied_count}")
         print(f"Policy Violated / Pending Action: {violated_count}")
+
+        # Resurrection and restore-risk detection
+        try:
+            from code.src.resurrection_detector import (
+                build_temporal_flow_graph,
+                detect_case_resurrection_risks,
+            )
+        except ImportError:
+            from src.resurrection_detector import (
+                build_temporal_flow_graph,
+                detect_case_resurrection_risks,
+            )
+
+        all_obs_list = []
+        for r_obs in evidence_obs.values():
+            all_obs_list.extend(r_obs)
+
+        flow_graph = build_temporal_flow_graph(dataset.system_activity, all_obs_list)
+        flow_risks = detect_case_resurrection_risks("evaluation_batch", sample_audit_at, set(all_rids), flow_graph)
+
+        risk_category_counts: dict = {}
+        for fr in flow_risks:
+            c_name = fr.risk_category.value
+            risk_category_counts[c_name] = risk_category_counts.get(c_name, 0) + 1
+
+        print("\n=== RESURRECTION & RESTORE RISKS DETECTED ===")
+        print(f"Total Resurrection/Restore Findings: {len(flow_risks)}")
+        for r_name, count in sorted(risk_category_counts.items()):
+            print(f"  - {r_name}: {count}")
     else:
         parser.print_help()
 

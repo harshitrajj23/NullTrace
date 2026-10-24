@@ -1575,6 +1575,123 @@ commit=0648607
 - Accuracy Evaluation: NO accuracy score was measured; sample_output.csv was never read.
 - Known Limitations: Currently ingests structured JSON evidence and system activity events; OCR extraction from 11 administrative PNG screenshots and relational SQL snapshot tables remain future work. 136 evidence resources remain UNKNOWN at sample cutoff due to lack of pre-audit corroborating evidence.
 
+## 2026-10-25T00:56:00+05:30 Step G: Resurrection and Restore-Risk Detector
+
+User Prompt (verbatim, secrets redacted):
+<USER_REQUEST>
+Nulltrace — Step G: Resurrection and Restore-Risk Detector
+
+Implement a deterministic detector for active data flows and restore paths that could recreate deleted personal data.
+
+Constraints
+
+* Inspect existing modules and schemas before coding.
+* Do not read dataset/sample_output.csv in production code.
+* Never modify dataset/ or the organizer’s root output.csv template.
+* Do not invent source-target relationships or claim a flow is active without supporting evidence.
+* Do not mark any case COMPLETE in this step.
+* Preserve all existing functionality and the conservative baseline.
+
+1. Build the temporal flow graph
+
+Create code/src/resurrection_detector.py.
+
+Use verified fields from system_activity.csv and supported structured evidence observations to identify relationships among source systems, target systems, resources, and relevant events.
+
+Represent:
+
+* source system;
+* target system;
+* resource or data category;
+* event timestamp;
+* observed or inferred flow status;
+* evidence provenance;
+* whether the flow could recreate data associated with a deletion request.
+
+Distinguish observed facts from inferred paths.
+
+2. Identify resurrection risks
+
+Detect supported patterns involving:
+
+* active sync jobs;
+* imports or replication;
+* restore operations;
+* backup restoration;
+* downstream copies that may be repopulated after deletion.
+
+Use event timestamps and case audit_at carefully:
+
+* Reconstruct the state at audit_at using only evidence available by that time.
+* Separately inspect later events for evidence that resurrection occurred after the audit cutoff.
+* Never use a later event as proof of an earlier state.
+* A later event can support a later recreation finding, but label the time relationship explicitly.
+
+Do not equate a logged attempt with a successful operation. Require corroboration before asserting that data was recreated.
+
+3. Expose actionable results
+
+For each relevant case, return structured findings including:
+
+* risk category;
+* source and target;
+* implicated resource;
+* evidence IDs;
+* event times;
+* confidence/status;
+* reason for the conclusion;
+* unresolved evidence gaps.
+
+Do not generate final remediation sequences yet; that belongs to Step H.
+
+4. Tests
+
+Add tests for:
+
+* active sync from a surviving source to a deleted target;
+* disabled flow;
+* blocked restore;
+* a logged restore attempt without corroboration;
+* events before, at, and after audit_at;
+* multi-hop source-to-target paths;
+* unrelated system activity that must not be attributed to a request;
+* deterministic repeated execution.
+
+Run the complete pytest suite.
+
+5. Finish
+
+Append a truthful Step G entry to root log.txt, recording changes, tests, known limitations, and that no audit-accuracy score was measured.
+
+Commit and push to origin main without force. Do not begin Step H.
+
+Return a STOP summary with the pytest line, changed files, synthetic test results, unresolved risks, commit hash, and push result.
+</USER_REQUEST>
+
+Agent Response Summary:
+Implemented the resurrection and restore-risk detector in code/src/resurrection_detector.py and added comprehensive unit tests in code/tests/test_resurrection_detector.py. The engine builds a directed TemporalFlowGraph from system_activity.csv and structured evidence observations, detecting active data flows, unblocked backup restore paths, downstream repopulation events, and surviving sync replication risks. The implementation enforces strict temporal isolation relative to audit_at (marking later events explicitly as POST_AUDIT resurrection without back-projecting them to earlier states), requires corroboration before asserting data recreation, and ensures unrelated system activity is never attributed to a request. Integrated flow risk summaries into code/main.py state-eval and confirmed all 67 pytest tests pass with zero accuracy measurement against sample_output.csv.
+
+Actions:
+* Implemented code/src/resurrection_detector.py (TemporalFlowGraph, FlowEdge, RiskCategory, FlowStatus, TimeRelation, ResurrectionRiskFinding, and risk detection logic)
+* Added code/tests/test_resurrection_detector.py (8 comprehensive unit tests covering active sync, disabled flows, blocked restores, uncorroborated attempts, audit_at temporal boundaries, multi-hop paths, and isolation)
+* Integrated resurrection risk reporting into state-eval subcommand in code/main.py
+* Executed full pytest suite (67/67 passed in 8.16s)
+
+Context:
+tool=antigravity-ide
+model=Gemini 3.8 Flash (Medium)
+branch=main
+repo_root=/Users/harshitrajsingh/nullTrace/hackerrank-orchestrate-october26
+worktree=main
+parent_agent=none
+
+### Step G Assessment Summary
+- Files changed: code/src/resurrection_detector.py, code/tests/test_resurrection_detector.py, code/main.py, log.txt
+- Behavior implemented: Temporal flow graph modeling, active sync and restore risk detection, post-audit resurrection tracking, and corroboration enforcement.
+- Test Result: 67 passed in 8.16s (0 failures, 0 warnings).
+- Accuracy Evaluation: NO audit-accuracy score was measured; sample_output.csv was never read.
+- Known Limitations: Currently detects risks across explicit system activity streams and structured JSON connectors; deep relational foreign-key cascading repopulation paths in SQL replica snapshots will be addressed in Step H. 8 downstream repopulation events and 26 active data flows identified in baseline evidence batch.
+
 
 
 
