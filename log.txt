@@ -1155,3 +1155,145 @@ commit=f4430e3
 - **(b) NO FIELD QUALIFIES; accept current linkage and mark the 73 as a documented gap.**
 - Justification: Exactly 0 of the 73 unlinked expected pairs have a row in any SQL database table (100% of misses are completely absent from SQL snapshot dumps), so no hidden SQL identifier field qualifies or can recover any missing pair.
 
+## 2026-10-24T23:28:30+05:30 Step I: Record-Level JSON Linkage Test
+
+User Prompt (verbatim, secrets redacted):
+<USER_REQUEST>
+You are working in the NullTrace repository (root = the folder containing code/, AGENTS.md, CLAUDE.md, and log.txt). Remote: https://github.com/harshitrajj23/NullTrace.git
+
+GOAL
+Test whether the 73 unlinked expected pairs become linkable when JSON evidence is grouped by record (object) instead of by line. This is the last linkage diagnostic. Time-box it to 45 minutes. If it does not close the gap, stop and record the gap.
+
+CRITICAL RULE: sample_output.csv is the answer key. Build all candidate links WITHOUT reading it. Read it only in Step 5, after the candidate table is written to disk.
+
+RULES
+- Follow AGENTS.md, CLAUDE.md, and agent_trace_instructions.md for the whole session.
+- Do not modify anything under dataset/. Do not overwrite output.csv.
+- Do not modify identity.py, resource_link.py, sql_join_scan.py, or hidden_identifier_scan.py. Write new code in a new file.
+- Read code/evaluation/hidden_identifier_report.md first. Correct the Step H.1 recommendation in your report: it was based only on SQL tables and is not final.
+- Hardcode no case IDs, resource IDs, field names, or expected answers. Discover all names from the files.
+- Exclude code/evaluation/ and code/docs/ from every search. Their content is not evidence.
+
+STEP 1: LOG
+Append a dated entry to log.txt (AGENTS.md section 5): Step I started, the 45-minute time-box, the record-level hypothesis (line-level scan undercounts multi-line JSON), the answer-key rule, and the correction to the H.1 recommendation.
+
+STEP 2: JSON RECORD INVENTORY
+For every .json file under dataset/evidence/ (including records/):
+- parse with the json module (not line regex)
+- report the top-level structure type (object, array, or lines of objects)
+- for each record, list the key paths and the value types
+- report files that fail to parse, with the error
+
+STEP 3: RECORD-LEVEL CO-OCCURRENCE
+For each JSON record, at any depth:
+- collect every identifier-shaped value (user_id, email, phone digits, email_hash, or any reference-like token; discover the shapes from the data, do not hardcode the field names)
+- collect every resource_id-shaped value (prefix_digits pattern as found in system_activity.csv)
+- create a candidate pair for every (identifier, resource_id) in the same record
+Record: source file, record index, JSON path of each value, identifier value and type, resource_id, and the reason code RECORD_COOCCURRENCE.
+Write the table to code/evaluation/record_cooccurrence.csv.
+
+STEP 4: ACTIVITY-TO-RECORD BRIDGE
+For each resource_id in system_activity.csv that also appears in a JSON record, check whether that record carries an identifier. This tests whether a subject can reach a resource through a shared resource_id even when the subject is not on the activity row. Record these as BRIDGE_VIA_RESOURCE candidates with both source rows. Do not chain more than one bridge hop.
+
+STEP 5: TEST THE 73 MISSES (answer key read only here)
+- Only after Steps 2 to 4 are on disk, read sample_output.csv.
+- For each of the 73 unlinked (case_id, resource_id) pairs, check whether it now has a candidate from Step 3 (RECORD_COOCCURRENCE) or Step 4 (BRIDGE_VIA_RESOURCE), and whether the identifier belongs to that case's identity cluster.
+- Report counts: recovered by record-level, recovered by bridge, still unlinked.
+- Report the same counts for the odd and even halves (sorted by case_id position).
+- Report extra candidates: resource_ids linked to the cluster that are not in the expected set.
+
+STEP 6: GENERALITY CHECK
+A rule is GENERAL only if it applies to every JSON record type in the dataset, not just the records that happen to hold sample resources. Report, for each reason code, the number of record types it applies to and how many of those record types it recovered misses from.
+
+STEP 7: DECISION
+Choose exactly one:
+(a) RECORD-LEVEL LINKING QUALIFIES: adopt it as a general rule and list the exact change to make in resource_link.py in the next step. Only choose this if the recovered misses hold on both halves and the rule is GENERAL.
+(b) BRIDGE QUALIFIES ONLY: same condition, for the bridge rule.
+(c) NOT RECOVERABLE FROM DATA: record the remaining unlinked pairs as a documented gap, with the source and reason for each.
+
+STEP 8: REPORT
+Write code/evaluation/record_linkage_report.md with: JSON inventory summary, record-level and bridge candidate counts by reason code, the Step 5 counts overall and per half, the Step 6 generality table, the Step 7 decision, and a paragraph for the judge explaining the result.
+
+STEP 9: TESTS
+- Fixture test: a multi-line JSON object with a user identifier on one line and a resource_id on another. Expect a RECORD_COOCCURRENCE candidate, and no candidate from the line-level scanner.
+- Fixture test: a bridge case where the subject identifier appears only on record B, and record B shares a resource_id with activity row A. Expect one BRIDGE_VIA_RESOURCE candidate, and no second hop.
+- Test that code/evaluation/ and sample_output.csv are not read by the scan.
+- Run pytest. Fix only bugs in the code under test.
+
+STEP 10: COMMIT AND PUSH
+- Stage only files created or changed in this step, plus log.txt.
+- Confirm with git status that nothing under dataset/ is staged.
+- Commit: "diag: record-level json linkage test"
+- Append the commit hash to log.txt, then commit as "docs: log step I completion".
+- git push origin main. No --force.
+
+STOP CONDITION
+Print:
+1. pytest summary line
+2. JSON inventory: files, record counts, parse failures
+3. record-level and bridge candidate counts by reason code
+4. Step 5 counts: recovered by record-level, recovered by bridge, still unlinked; per half
+5. Step 6 generality table
+6. the Step 7 decision, with one sentence of justification
+7. git log --oneline -3
+8. files created or changed
+
+Then stop. Do not change identity or linking code, and do not start state reconstruction. Next step after this is the output pipeline.
+</USER_REQUEST>
+
+Agent Response Summary:
+Completed Step I diagnostic testing whether the 73 unlinked expected sample pairs become linkable when JSON evidence files are grouped by logical record (object) instead of single-line text regex. Enforced strict Answer-Key Isolation by serializing 1,204 candidate links (1,171 RECORD_COOCCURRENCE, 33 BRIDGE_VIA_RESOURCE) to code/evaluation/record_cooccurrence.csv before reading sample_output.csv. Evaluated the 73 misses: record-level grouping successfully recovered 37 pairs (50.7%) with zero extra candidates (0 false positives) and balanced recovery across both halves (17 on odd, 20 on even). The activity-to-record bridge rule recovered 0 pairs and was not general. Reached Decision (a): RECORD-LEVEL LINKING QUALIFIES as a general rule across all 19 JSON record types in the dataset, while the remaining 36 unlinked pairs survive exclusively in the 11 IMAGE_ONLY console UI screenshots.
+
+Actions:
+* Parsed all 28 JSON evidence files under dataset/evidence/ (1,019 records, 0 parse errors)
+* Implemented code/evaluation/record_link_scan.py (JSON record inventory, record co-occurrences, activity bridges, isolated evaluation)
+* Materialized code/evaluation/record_cooccurrence.csv with 1,204 candidate pairs
+* Evaluated 73 misses against sample_output.csv (37 recovered by record-level, 0 by bridge, 36 still unlinked; 17 odd, 20 even)
+* Verified generality across all 19 JSON record types (10 recovering sample misses) with 0 extra candidates
+* Authored code/evaluation/record_linkage_report.md documenting decision (a) and residual 36 image pairs
+* Added code/tests/test_record_link.py (3 unit tests)
+* Executed pytest test suite (48/48 passed in 8.19s)
+
+Context:
+tool=antigravity-ide
+model=Gemini 3.8 Flash (Medium)
+branch=main
+repo_root=/Users/harshitrajsingh/nullTrace/hackerrank-orchestrate-october26
+worktree=main
+parent_agent=none
+commit=PENDING
+
+### Diagnostic Results Summary (Step I)
+
+#### 1. JSON Record Inventory
+- Total JSON Files Scanned: 28
+- Total Logical Records: 1,019
+- Parse Failures: 0
+- Top-Level Structure: 28 `object` (containing lists of records, snapshots, or service exports)
+
+#### 2. Candidate Counts by Reason Code
+- `RECORD_COOCCURRENCE`: 1,171
+- `BRIDGE_VIA_RESOURCE`: 33
+- Total Candidates: 1,204 (written to `code/evaluation/record_cooccurrence.csv`)
+
+#### 3. Step 5 Evaluation of the 73 Unlinked Expected Pairs
+- Recovered by Record-Level: **37** (50.7%)
+- Recovered by Bridge: **0** (0.0%)
+- Still Unlinked: **36** (49.3%)
+- Extra Candidates on Sample Cases: **0** (0 false positives!)
+- **Odd Half (36 misses)**: 17 recovered by record, 0 by bridge, 19 unlinked
+- **Even Half (37 misses)**: 20 recovered by record, 0 by bridge, 17 unlinked
+
+#### 4. Step 6 Generality Check
+| Reason Code | Record Types Applied To | Recovered Misses Record Types | Generality Status |
+| :--- | :---: | :---: | :---: |
+| `RECORD_COOCCURRENCE` | 19 / 19 (100.0%) | 10 record types | **GENERAL** |
+| `BRIDGE_VIA_RESOURCE` | 5 / 19 (26.3%) | 0 record types | **NOT GENERAL / INEFFECTIVE** |
+
+#### 5. Step 7 Decision
+- **(a) RECORD-LEVEL LINKING QUALIFIES**
+- Justification: Record-level linking is a GENERAL rule that applies to 100% of JSON record types across the dataset, successfully recovering 37 of the 73 unlinked sample expected pairs (50.7%) with balanced performance across odd (17) and even (20) halves, and producing zero extra candidate pairs (0 false positives).
+- Residual 36 unlinked pairs: represent purged accounts and system records surviving exclusively in the 11 `IMAGE_ONLY` administrative console UI screenshots.
+
+
+
