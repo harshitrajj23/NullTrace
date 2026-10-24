@@ -619,5 +619,116 @@ commit=17a17db
 - Total Uncited Rows: 13
 - Root Cause: All 13 rows belong exclusively to 7 registered subjects (`user_10`, `user_12`, `user_15`, `user_25`, `user_29`, `user_30`, `user_50`) who never submitted a deletion request in `deletion_requests.csv`. Because the identity resolver seeds only from submitted deletion requests, these subjects' audit rows were never traversed. Zero rows for requesting users were dropped.
 
+## 2026-10-24T22:18:00+05:30 Step F: Link Identity Clusters to System Records via System Activity
 
+User Prompt (verbatim, secrets redacted):
+<USER_REQUEST>
+You are working in the NullTrace repository (root = the folder containing code/, AGENTS.md, CLAUDE.md, and log.txt). Remote: https://github.com/harshitrajj23/NullTrace.git
 
+GOAL
+Link each deletion request's identity cluster to the system records that carry that subject's data, using system_activity.csv. Output a candidate resource set per case with a reason and source row for every entry. Diagnostic only for the sample cross-check; do NOT write state, policy, or LLM code in this step.
+
+RULES
+- Follow AGENTS.md, CLAUDE.md, and agent_trace_instructions.md for the whole session.
+- Do not modify anything under dataset/. Do not overwrite output.csv.
+- Read code/docs/SPEC_EXTRACTED.md, code/src/identity.py, code/src/loader.py, code/evaluation/linkage_diagnostic.md, and the header of system_activity.csv first.
+- Hardcode no case IDs, resource IDs, or expected answers. Read sample_output.csv at runtime only for the cross-check.
+- Use only the columns that actually exist in system_activity.csv. Confirm them from the header before writing any code.
+
+STEP 1: LOG
+Append a dated entry to log.txt (AGENTS.md section 5): Step F started, the goal, and the rule that no state, policy, or LLM logic is added.
+
+STEP 2: CHECK THE ACTIVITY SCHEMA
+Print the header of system_activity.csv and the distinct values of every column with five or fewer distinct values. Report which columns can carry a subject identifier (user_id, email, phone, hash) and which carry a resource_id. Stop and report if no column links an activity row to a user_id.
+
+STEP 3: LINK ACTIVITY ROWS TO CLUSTERS (code/src/resource_link.py)
+For each cluster from identity.py, find system_activity rows where any identifier in the cluster matches the row's subject column, using normalized values for emails and phones. Each candidate gets:
+- resource_id, activity_id, system_id, operation/event type, timestamp, reported_result
+- the link reason code (SUBJECT_USER_ID_MATCH, SUBJECT_EMAIL_MATCH, SUBJECT_PHONE_MATCH, or whatever the schema supports)
+- the SourceRef of the activity row
+- link strength, following D3 in identity.py: CONFIRMED only if the match is on user_id; PROBABLE otherwise
+Keep deterministic ordering by timestamp, then activity_id.
+
+STEP 4: CHECK THE 4 UNFOUND RESOURCE IDs
+For account_004, support_001, audit_record_5569, and audit_record_6645, record every file in the dataset where the string appears, including evidence/ file contents, and show the context line. Do not treat their absence as a finding until this check has run.
+
+STEP 5: SAMPLE CROSS-CHECK (diagnostic only)
+For each case in sample_output.csv, compare the set of resource_ids named in steps_json with the candidate resource set from Step 3 for that case's cluster. Report, per case:
+- resource_ids in the expected set but missing from candidates
+- candidates not named in the expected set
+Report totals: expected resources, candidate resources, matched, missed, and extra. Do NOT tune the linker to improve these numbers in this step. Record the miss list and stop.
+
+STEP 6: REPORT
+Write code/evaluation/resource_link_report.md with:
+- schema findings from Step 2
+- counts of candidate links by reason code and strength
+- the 4 unfound IDs with their search results
+- the sample cross-check totals and the full miss list
+- a short paragraph stating what the linker cannot see yet, for example audit_record_* IDs that exist only in evidence content
+
+STEP 7: TESTS
+- Hand-built fixture: one subject with two activity rows under the same user_id and one unrelated row. Expect two candidates, correct reason codes, and no candidate for the unrelated row.
+- Determinism: run the linker twice and assert identical output.
+- Every candidate must have a reason code and a SourceRef.
+Use fixtures, not the real dataset. Run pytest and fix only bugs in the code under test.
+
+STEP 8: RUN AND LOG
+- Run the linker on the full dataset and paste the summary counts into log.txt.
+- Add a short entry to code/docs/JUDGE_NOTES.md: why the resource link uses activity rows, and why its confidence follows D3.
+
+STEP 9: COMMIT AND PUSH
+- Stage only the files created or changed in this step, plus log.txt and JUDGE_NOTES.md.
+- Confirm with git status that nothing under dataset/ is staged.
+- Commit: "feat: subject-to-resource linkage from system activity"
+- Append the commit hash to log.txt, then commit as "docs: log step F completion".
+- git push origin main. No --force.
+
+STOP CONDITION
+Print:
+1. pytest summary line
+2. schema findings from Step 2 (which columns link to subjects, which carry resource IDs)
+3. candidate link counts by reason code and strength
+4. the 4 unfound IDs and where each appeared, if anywhere
+5. sample cross-check totals: expected, candidates, matched, missed, extra
+6. the full miss list (case_id and resource_id)
+7. git log --oneline -3
+8. files created or changed
+
+Then stop. Do not start evidence extraction or state reconstruction.
+</USER_REQUEST>
+
+Agent Response Summary:
+Completed Step F subject-to-resource linkage using system_activity.csv without writing state reconstruction, deletion policy, or LLM code. Analyzed system_activity schema finding that only details contains subject identifiers (in 12 LINK_RESOURCE_IDENTITY rows) and no dedicated user_id column exists. Implemented code/src/resource_link.py assigning candidate resources with D3 confidence levels (CONFIRMED for user_id, PROBABLE for email/phone), conducted exhaustive binary check of the 4 unfound IDs (account_004, support_001, audit_record_5569, audit_record_6645), performed the sample cross-check (finding 111 expected resources missed by activity alone, proving evidence extraction is required), authored code/evaluation/resource_link_report.md, created code/docs/JUDGE_NOTES.md, and validated 36 unit tests.
+
+Actions:
+* Implemented code/src/resource_link.py (CandidateResource, ActivitySubjectIndex, link_all_clusters, cross_check_sample_candidates)
+* Conducted binary sweep of 4 unfound resource IDs
+* Executed sample cross-check and full 518-case candidate linking
+* Generated code/evaluation/resource_link_report.md
+* Added code/tests/test_resource_link.py (3 new unit tests, all 36 tests passing)
+* Created code/docs/JUDGE_NOTES.md
+
+Context:
+tool=antigravity-ide
+model=Gemini 3.8 Flash (Medium)
+branch=main
+repo_root=/Users/harshitrajsingh/nullTrace/hackerrank-orchestrate-october26
+worktree=main
+parent_agent=none
+
+### Full Dataset Linker Summary Counts (518 Evaluation Cases)
+- Total Candidate Records Linked: 14
+- Cases with at least one candidate: 12 / 518
+- Reason Code Breakdown:
+  - `SUBJECT_USER_ID_MATCH`: 14
+- Strength Breakdown (Decision D3):
+  - `CONFIRMED`: 14
+  - `PROBABLE`: 0
+  - `UNRESOLVED`: 0
+
+### Sample Cross-Check Summary Counts (32 Sample Cases)
+- Expected Resources (case-resource pairs): 111
+- Candidate Resources from Activity Linker: 2
+- Matched Resources: 0
+- Missed Resources: 111 (full miss list documented in code/evaluation/resource_link_report.md)
+- Extra Candidates: 2 (case_07: object_19, case_17: tombstone_17)
