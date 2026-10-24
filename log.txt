@@ -1295,5 +1295,102 @@ commit=fe3a0da
 - Justification: Record-level linking is a GENERAL rule that applies to 100% of JSON record types across the dataset, successfully recovering 37 of the 73 unlinked sample expected pairs (50.7%) with balanced performance across odd (17) and even (20) halves, and producing zero extra candidate pairs (0 false positives).
 - Residual 36 unlinked pairs: represent purged accounts and system records surviving exclusively in the 11 `IMAGE_ONLY` administrative console UI screenshots.
 
+## 2026-10-25T00:25:00+05:30 Baseline 518-Case Pipeline
+
+User Prompt (verbatim, secrets redacted):
+<USER_REQUEST>
+Nulltrace — Next Task: Baseline 518-Case Pipeline
+
+We have completed the record-level JSON linkage experiment. Now build a conservative end-to-end baseline that produces one valid result for every deletion request. Do not implement the full state reconstruction/rule engine yet.
+
+1. Inspect before coding
+
+* Inspect the existing loader, identity resolver, resource-linking modules, operations grammar, sorter, validator, tests, and current output paths.
+* Confirm the schemas of the existing linkage artifacts, especially record_cooccurrence.csv.
+* Do not assume a candidate row is automatically a valid finding or that its source reference is a valid evidence_id.
+* Do not read dataset/sample_output.csv from the pipeline, linker, or planner.
+
+2. Implement the baseline pipeline
+
+Create a clearly named pipeline entry point, reusing existing modules wherever possible.
+
+For each request:
+
+* Apply a general, deterministic rule to identify clear non-deletion inquiries. Mark these NOT_APPLICABLE with steps_json = []. Do not infer this from reported_status.
+* For deletion requests, conservatively return INCOMPLETE for now.
+* Emit FINDING steps only for resources that can be linked to the request using actual evidence. Use only real evidence IDs from the evidence inventory or source records, as appropriate.
+* Do not invent resource links, evidence IDs, remediation actions, or verification claims.
+* If a deletion request has no confidently linked resources, emit a valid conservative INCOMPLETE result and record that the case had insufficient evidence. Do not fabricate findings just to make the array nonempty.
+* Use the existing operation grammar and sorter. Validate every generated row.
+
+3. Output safety
+
+* Produce exactly 518 rows, one per input request, sorted by case_id.
+* Required columns: case_id,deletion_status,steps_json.
+* Preserve the organizer’s root output.csv template. Write generated output to a separate path, such as build/nulltrace_baseline.csv, unless inspection confirms a safe, non-template destination.
+* Log every fallback and validation failure. No silent fallback.
+
+4. Tests
+
+Add tests covering:
+
+* all input requests are represented exactly once;
+* output column names, row count, and case sorting;
+* valid JSON and consecutive step numbers;
+* all 15 operation/state combinations and phase ordering through the existing validator;
+* NOT_APPLICABLE always has [];
+* COMPLETE is not emitted by this baseline;
+* unknown/unlinked evidence never becomes a fabricated finding;
+* pipeline never reads the answer key.
+
+Run the full pytest suite. Report the generated row count and how many cases are NOT_APPLICABLE, INCOMPLETE, and have no confidently linked resources. Clearly state that this is a baseline, not an accuracy result.
+
+5. Finish the task
+
+* Append a concise entry to root log.txt describing the implementation, tests, output path, and limitations.
+* Commit the code, tests, and log with a descriptive commit message.
+* Push to origin main without force.
+* Do not add or modify anything under dataset/; do not commit secrets, .env, or generated dataset contents.
+
+Stop and return a STOP summary containing changed files, pytest result, output path and counts, commit hash, push result, and unresolved issues. Do not begin the next step.
+
+
+The evidence_id for a finding must be a real file or activity ID that actually supports the link. Say which field supplies it.
+Re-check the 0-vs-4 extra-candidate discrepancy, since that’s still unexplained.
+</USER_REQUEST>
+
+Agent Response Summary:
+Built and validated the conservative end-to-end baseline pipeline for all 518 deletion requests in code/src/pipeline.py and exposed via code/main.py baseline. Implemented a deterministic non-deletion intent classifier identifying 10 pure inquiry/rectification cases as NOT_APPLICABLE (steps_json = []). For the remaining 508 deletion requests, conservatively returned INCOMPLETE, emitting FINDING steps only for confidently linked resources backed by real evidence IDs from system_activity (activity_id) or JSON evidence manifests (file_id) with 0 fabricated findings and 0 validation errors. Re-checked and explained the 0-vs-4 extra candidate discrepancy (extra candidates in F.1 stemmed from non-JSON .log/.sql files, while Step I evaluated strictly .json records). Generated build/nulltrace_baseline.csv with exactly 518 rows, preserving root output.csv template intact, and added 4 unit tests passing all 52 suite tests.
+
+Actions:
+* Implemented code/src/pipeline.py (deterministic non-deletion classifier, canonical system mapping, evidence-grounded FINDING builder, and validation)
+* Added baseline subcommand to code/main.py
+* Generated build/nulltrace_baseline.csv (518 cases: 10 NOT_APPLICABLE, 222 INCOMPLETE with findings, 286 INCOMPLETE with insufficient evidence, 0 COMPLETE)
+* Re-checked and resolved the 0-vs-4 extra-candidate discrepancy
+* Added code/tests/test_pipeline.py (4 new unit tests covering invariants, sorting, validation, and answer-key isolation)
+* Executed pytest test suite (52/52 passed in 8.30s)
+
+Context:
+tool=antigravity-ide
+model=Gemini 3.8 Flash (Medium)
+branch=main
+repo_root=/Users/harshitrajsingh/nullTrace/hackerrank-orchestrate-october26
+worktree=main
+parent_agent=none
+commit=PENDING
+
+### Baseline Pipeline Execution Summary
+- Total Requests Processed: 518
+- NOT_APPLICABLE: 10 (steps_json = [])
+- INCOMPLETE: 508
+  - with confidently linked findings: 222 (total steps emitted: 612)
+  - with insufficient evidence: 286 (steps_json = [])
+- COMPLETE: 0 (never emitted by baseline)
+- Output File: build/nulltrace_baseline.csv
+- Root output.csv: Intact / unchanged
+- Validation Failures: 0
+- Discrepancy Resolution: The 4 extra candidates in Step F.1 derived from .log and .sql files; Step I evaluated strictly .json files where 0 extra candidates occurred.
+
+
 
 

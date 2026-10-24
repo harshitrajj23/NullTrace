@@ -52,6 +52,16 @@ def main() -> None:
         "identity", help="Perform identity resolution and write evaluation/identity_report.md"
     )
 
+    # baseline subcommand
+    baseline_parser = subparsers.add_parser(
+        "baseline", help="Run conservative baseline 518-case pipeline and write output"
+    )
+    baseline_parser.add_argument(
+        "--output",
+        default="./build/nulltrace_baseline.csv",
+        help="Path to write baseline output CSV (default: ./build/nulltrace_baseline.csv)",
+    )
+
     args = parser.parse_args()
 
     # Resolve default data_dir if ./dataset doesn't exist in current working directory
@@ -64,6 +74,24 @@ def main() -> None:
     if args.subcommand == "inspect":
         dataset = load_dataset(data_dir=data_dir)
         print(dataset.report.summary_text())
+    elif args.subcommand == "baseline":
+        try:
+            from code.src.pipeline import run_baseline_pipeline
+        except ImportError:
+            from src.pipeline import run_baseline_pipeline
+        res = run_baseline_pipeline(data_dir=data_dir, output_path=args.output)
+        counts = res["counts"]
+        print("Baseline pipeline completed successfully!")
+        print(f"Total Requests Processed: {counts['total_requests']}")
+        print(f"NOT_APPLICABLE: {counts['not_applicable']}")
+        print(f"INCOMPLETE: {counts['incomplete']}")
+        print(f"  - with confidently linked findings: {counts['incomplete_with_findings']}")
+        print(f"  - with insufficient evidence: {counts['incomplete_insufficient_evidence']}")
+        print(f"COMPLETE: {counts['complete']}")
+        print(f"Total Steps Emitted: {counts['total_steps_emitted']}")
+        print(f"Validation Failures: {counts['validation_failures']}")
+        print(f"Output File: {res['output_path']}")
+
     elif args.subcommand == "identity":
         dataset = load_dataset(data_dir=data_dir)
         clusters = resolve_all(dataset)
