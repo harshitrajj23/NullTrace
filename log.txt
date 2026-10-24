@@ -2125,5 +2125,196 @@ commit=638e832
 - Test Result: 91 passed in 8.18s (0 failures, 0 errors, 0 warnings).
 - Accuracy Evaluation: NO audit-accuracy score was measured; sample_output.csv was never read in production code. Audit accuracy remains unmeasured.
 
+## 2026-10-25T01:35:00+05:30 Step E.1: Evidence Extraction Expansion and Coverage Tracking
 
+User Prompt (verbatim, secrets redacted):
+<USER_REQUEST>
+Nulltrace — Step E.1: Evidence Extraction Expansion and Coverage Tracking
+
+Objective
+
+Expand the existing evidence extraction pipeline to cover relational SQL snapshots, logs, PDFs, and structured evidence records. Introduce explicit per-file and per-case evidence coverage tracking.
+
+This task prepares the pipeline for integration but does not implement Step J.
+
+Absolute constraints
+
+* Work on branch main.
+* Never use git push --force.
+* Never modify anything under dataset/.
+* Never overwrite the organizer’s root output.csv template.
+* Never read dataset/sample_output.csv in production code or use it to tune extraction.
+* Do not invent evidence, identities, resource links, or observations.
+* Preserve existing functionality and tests.
+* Do not mark any case COMPLETE.
+* Do not add Gemini or Mistral API calls yet. First establish which files actually need model-assisted extraction.
+* Keep secrets out of source code, logs, and commits.
+
+1. Inspect the current extraction architecture
+
+Inspect the existing loader, normalizers, identity resolver, resource-link scanner, state reconstruction, and evidence inventory.
+
+Inspect the actual formats of the evidence files without modifying them.
+
+Document which file types are currently supported, which are partially supported, and which remain unread.
+
+2. Expand deterministic extraction
+
+Implement reusable extraction adapters for:
+
+* JSON evidence records;
+* relational SQL snapshots;
+* structured logs;
+* plain-text files;
+* PDFs, using local text extraction where possible.
+
+For SQL snapshots:
+
+* Identify tables, columns, and records.
+* Preserve source table, record identity, and provenance.
+* Inspect actual schema relationships rather than assuming foreign keys exist.
+* Do not infer a subject-resource relationship merely because two unrelated records contain similar strings.
+
+For logs:
+
+* Preserve event timestamps and source record locations.
+* Distinguish observed outcomes from logged claims.
+* Do not treat an attempted operation as proof of success.
+
+For PDFs:
+
+* Extract usable text locally.
+* Record page numbers and source locations.
+* Explicitly flag scanned or image-only pages requiring OCR.
+
+For every extracted observation, preserve:
+
+* source file and file ID;
+* source record, table, or page;
+* evidence identifier;
+* event or observation timestamp, if present;
+* resource identifier, if supported;
+* associated subject identifiers, if supported;
+* observation type;
+* extraction method;
+* confidence or ambiguity flags.
+
+Do not assign a resource or subject when the source does not support the relationship.
+
+3. Implement corpus coverage tracking
+
+Create a module such as code/src/evidence_coverage.py.
+
+Track each inventoried file as one of:
+
+* PARSED_WITH_OBSERVATIONS
+* PARSED_NO_RELEVANT_OBSERVATIONS
+* REQUIRES_OCR
+* UNREADABLE
+* PARSER_ERROR
+
+A successfully parsed file with no matching subject is not proof that the subject’s data is absent.
+
+Track coverage at two levels:
+
+1. File-level extraction coverage.
+2. Case-level relevant evidence coverage.
+
+Case-level coverage must account for all evidence modalities that could contain relevant records.
+
+Do not declare case-level coverage complete merely because all JSON files were parsed. If the relationship between a file and a case cannot be established, preserve the uncertainty.
+
+4. Vision-model readiness report
+
+There are 11 IMAGE_ONLY administrative console screenshots.
+
+Do not call a vision API in this task.
+
+Create code/docs/vision_extraction_readiness.md documenting:
+
+* the screenshot inventory;
+* which evidence types or UI records each image may contain;
+* whether local OCR can extract useful text;
+* which images still require visual interpretation;
+* what minimum evidence schema a vision model must return;
+* how extracted claims will be validated against the original image;
+* how results will be cached by file hash and model version;
+* how API usage and token/cost data will be recorded without exposing secrets.
+
+Do not claim screenshot evidence has been extracted unless it actually has.
+
+5. Tests
+
+Add tests for:
+
+* SQL tables with and without foreign keys;
+* source provenance preservation;
+* records with identifiers that do not establish a valid relationship;
+* log events with timestamps and uncorroborated outcomes;
+* PDFs with text and PDFs requiring OCR;
+* parsed files with zero relevant observations;
+* parser errors and unreadable files;
+* deterministic repeated extraction;
+* coverage gaps preventing a false claim of complete corpus inspection;
+* no access to sample_output.csv in production extraction code.
+
+Run the full pytest suite.
+
+6. Finish
+
+Create code/docs/evidence_coverage_report.md documenting:
+
+* files inventoried by modality;
+* successful and unsuccessful parsing counts;
+* extraction limitations;
+* case-level coverage limitations;
+* remaining vision-extraction requirements;
+* tests executed.
+
+Append a truthful entry to root log.txt.
+
+Commit and push to origin main without force.
+
+Do not implement Step J or promote any case to COMPLETE.
+
+STOP summary
+
+Return:
+
+1. Exact pytest summary line.
+2. Files changed.
+3. Extraction counts by modality.
+4. Coverage status and remaining gaps.
+5. Which screenshots require vision-model processing.
+6. Commit hash and push result.
+
+Stop after this task.
+</USER_REQUEST>
+
+Agent Response Summary:
+Implemented multi-modality evidence extraction in code/src/evidence_extraction.py and corpus/case coverage tracking in code/src/evidence_coverage.py. Built reusable deterministic adapters for JSON snapshot bundles, relational SQLite SQL snapshots, structured logs, plain-text shift handover logs, and PDF documents via pypdf. Extracted 2,153 factual observations across the 94 inventoried evidence files with zero parser errors (45 parsed with observations, 38 parsed with no relevant observations, and 11 administrative console screenshots flagged as REQUIRES_OCR). Created code/docs/vision_extraction_readiness.md detailing the visual extraction architecture, JSON schema, caching, and token accounting for the 11 screenshots without invoking vision APIs. Created code/docs/evidence_coverage_report.md detailing modality breakdown and case-level coverage boundaries. Added 10 unit tests in code/tests/test_evidence_extraction.py. Confirmed all 101 pytest tests pass. In strict compliance with challenge rules, audit accuracy remains completely unmeasured against sample_output.csv.
+
+Actions:
+* Implemented code/src/evidence_extraction.py (JsonRecordExtractor, SqlSnapshotExtractor, LogRecordExtractor, PlainTextExtractor, PdfDocumentExtractor)
+* Implemented code/src/evidence_coverage.py (CorpusCoverageTracker, FileCoverageReport, CorpusCoverageSummary, CaseCoverageResult)
+* Authored code/docs/vision_extraction_readiness.md (readiness architecture, schema, caching, cost/token tracking for 11 screenshots)
+* Authored code/docs/evidence_coverage_report.md (evidence file inventory, status breakdown, case coverage limits)
+* Added code/tests/test_evidence_extraction.py (10 unit tests covering all 5 modalities, provenance, claims vs outcomes, OCR, determinism, and sample_output isolation)
+* Executed full pytest suite (101/101 passed in 8.08s)
+
+Context:
+tool=antigravity-ide
+model=Gemini 3.8 Flash (Medium)
+branch=main
+repo_root=/Users/harshitrajsingh/nullTrace/hackerrank-orchestrate-october26
+worktree=main
+parent_agent=none
+
+### Step E.1 Assessment Summary
+- Files changed / created: code/src/evidence_extraction.py, code/src/evidence_coverage.py, code/docs/vision_extraction_readiness.md, code/docs/evidence_coverage_report.md, code/tests/test_evidence_extraction.py, log.txt
+- Extraction counts: 94 files (28 JSON, 26 LOG, 24 SQL, 11 IMAGE, 4 PDF, 1 TEXT); 2,153 direct observations extracted (969 SQL, 651 LOG, 485 JSON, 41 TEXT, 7 PDF). 0 unreadable, 0 parser errors.
+- Coverage & Gaps: Case-level coverage strictly fail-closed (is_fully_covered is False) because the 11 administrative screenshots require vision interpretation.
+- Screenshots requiring vision processing: evidence_04, evidence_09, evidence_14, evidence_19, evidence_23, evidence_28, evidence_32, evidence_37, evidence_42, evidence_46, evidence_60.
+- Test Result: 101 passed in 8.08s (0 failures, 0 errors, 0 warnings).
+- Accuracy Evaluation: NO audit-accuracy score was measured; sample_output.csv was never read in production code. Audit accuracy remains unmeasured.
 
