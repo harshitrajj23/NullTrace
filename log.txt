@@ -264,5 +264,117 @@ worktree=main
 parent_agent=none
 commit=47a8ec4
 
+## 2026-10-24T21:06:00+05:30 Step D: Typed Loading, Normalization, and Source Tracing
+
+User Prompt (verbatim, secrets redacted):
+<USER_REQUEST>
+You are working in the NullTrace repository (root = the folder containing code/, AGENTS.md, CLAUDE.md, and log.txt). Remote: https://github.com/harshitrajj23/NullTrace.git
+
+GOAL
+Implement typed loading of every dataset CSV, with source tracing and normalization that preserves raw values. Write NO identity resolution, NO evidence parsing, NO policy logic, and NO LLM code.
+
+RULES
+- Follow AGENTS.md, CLAUDE.md, and agent_trace_instructions.md for the whole session.
+- Do not modify anything under dataset/. Do not overwrite output.csv.
+- Read code/docs/SPEC_EXTRACTED.md and the existing code/src/ops.py and code/src/grader_io.py first. Reuse them; do not duplicate their logic.
+- The dataset path must be a parameter, not a hardcoded path. The code.zip excludes dataset/, so the loader must accept --data-dir and default to ./dataset.
+- Hardcode nothing about case IDs, emails, or expected answers.
+
+STEP 1: LOG
+Append a dated entry to log.txt (AGENTS.md section 5 format): Step D started, planned outputs, and the decisions applied (loader takes --data-dir; raw values are always kept).
+
+STEP 2: MODELS (code/src/models.py)
+Dataclasses:
+- SourceRef(file, row_number)  -- row_number is the 1-based line number in the file, header = line 1
+- Identity(user_id, email_raw, email_norm, phone_raw, phone_norm, source)
+- AuditEvent(audit_id, user_id, field_name, old_value_raw, new_value_raw, changed_at_raw, changed_at, source) for user_audit_log.csv
+- SystemActivity(activity_id, ..., source) for system_activity.csv, with all columns of that file typed
+- DeletionRule(...) for deletion_rules.csv
+- DeletionRequest(case_id, email_raw, email_norm, requested_at, reported_status, reported_at, audit_at, request_text, source)
+- EvidenceFile(file_id, ..., source) for evidence_files.csv
+Field names come from the actual CSV headers recorded in SPEC_EXTRACTED.md. Read those headers; do not guess them.
+
+STEP 3: NORMALIZERS (code/src/normalize.py)
+- normalize_email(raw): trim, lowercase; return None for empty input. Do not strip plus-addressing here. Plus-addressing handling is an identity decision and is not made in this step.
+- normalize_phone(raw): keep digits only; return None if no digits remain. Keep the raw string.
+- normalize_timestamp(raw): parse to a timezone-aware UTC datetime. If the value has no timezone, return the parsed value with tz=None and set a flag. Never silently assume a timezone. Use the formats actually present in the data (confirm from SPEC_EXTRACTED.md); if a format is unknown, raise a typed error that names the file, row, and value.
+- Each normalizer must keep the raw input unchanged in the model.
+
+STEP 4: LOADER (code/src/loader.py)
+- load_dataset(data_dir) -> Dataset, a container with one typed list per file, plus the evidence manifest.
+- Every row gets a SourceRef.
+- Empty or malformed rows must raise a typed error with file and line number. Do not skip them silently.
+- Duplicate primary keys must be reported as a list of errors; do not dedupe silently.
+- Expose a loader report: per-file row counts, count of rows with each normalization issue, and count of timestamps without a timezone.
+
+STEP 5: CLI ENTRY (code/main.py)
+Add a subcommand "inspect" that loads the dataset and prints the loader report. Do not add any audit command yet.
+
+STEP 6: TESTS (code/tests/)
+- Row-count test: assert the counts recorded in SPEC_EXTRACTED.md for every file, read from that document or from a constant that you assert against the spec, not inferred from the files.
+- Normalization unit tests: emails with case, whitespace, and plus-addressing (plus-addressing must be preserved, not stripped); phones with spaces, dashes, and a leading plus; empty values; a timestamp with and without timezone.
+- Round-trip test: for a sample of 20 rows, raw values in the model equal the raw values in the CSV, byte for byte.
+- Source-tracing test: each row's SourceRef points to a line whose content contains that row's primary key.
+- Malformed-row test: a temporary CSV with a bad row raises the typed error with file and line number.
+
+STEP 7: RUN
+- Run pytest and fix only bugs in the code under test.
+- Run python code/main.py inspect and paste the report output into log.txt.
+
+STEP 8: COMMIT AND PUSH
+- Stage only code/src/models.py, code/src/normalize.py, code/src/loader.py, code/main.py, code/tests/, and log.txt, plus code/docs/ if updated.
+- Confirm with git status that nothing under dataset/ is staged.
+- Commit: "feat: typed loader, normalizers, and source tracing"
+- Append the commit hash to log.txt and commit it as "docs: log step C completion".
+- git push origin main. No --force.
+
+STOP CONDITION
+Print:
+1. pytest summary line
+2. the loader report (row counts per file, normalization issue counts, timestamps without timezone)
+3. any spec or data conflicts found while loading, including timestamp formats not in SPEC_EXTRACTED.md
+4. git log --oneline -3
+5. files created or changed
+
+Then stop. Do not start identity resolution.
+
+Agent Response Summary:
+Started Step D to implement typed dataset models, normalizers, source-tracing loader, and CLI inspect subcommand. Decided to keep all raw input strings verbatim alongside normalized fields, support parameterizable --data-dir defaulting to ./dataset, track 1-based SourceRefs, and detect malformed/empty/duplicate rows with typed exceptions. Implemented code/src/models.py, code/src/normalize.py, code/src/loader.py, CLI inspection in code/main.py, and comprehensive unit and round-trip tests in code/tests/.
+
+Actions:
+* Created code/src/models.py with SourceRef and typed CSV entity dataclasses
+* Created code/src/normalize.py for email, phone, and ISO-8601 UTC timestamp parsing
+* Created code/src/loader.py implementing load_dataset and loader report generation
+* Updated code/main.py with 'inspect' subcommand
+* Created code/tests/test_loader.py covering row counts, normalization, round-trip fidelity, source tracing, and malformed row errors
+* Executed pytest suite and verified inspection report
+
+Context:
+tool=antigravity-ide
+model=Gemini 3.8 Flash (Medium)
+branch=main
+repo_root=/Users/harshitrajsingh/nullTrace/hackerrank-orchestrate-october26
+worktree=main
+parent_agent=none
+
+Loader Report:
+=== DATASET LOADER REPORT ===
+Per-file Row Counts:
+  - deletion_requests.csv: 518
+  - deletion_rules.csv: 15
+  - evidence_files.csv: 94
+  - sample_deletion_requests.csv: 32
+  - sample_output.csv: 32
+  - system_activity.csv: 4011
+  - user_audit_log.csv: 306
+  - user_identities.csv: 850
+Timestamps without timezone: 0
+Normalization Issues:
+  - None
+Duplicate Primary Key Errors:
+  - None (all primary keys unique)
+
+
+
 
 
