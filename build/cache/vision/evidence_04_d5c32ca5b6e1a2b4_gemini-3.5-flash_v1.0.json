@@ -1,0 +1,110 @@
+{
+  "file_id": "evidence_04",
+  "cache_key": "evidence_04_d5c32ca5b6e1a2b4_gemini-3.5-flash_v1.0",
+  "created_at": "2026-10-24T20:29:10.230412+00:00",
+  "provider": "gemini",
+  "model_id": "gemini-3.5-flash",
+  "prompt_version": "v1.0",
+  "usage_metadata": {
+    "promptTokenCount": 1686,
+    "candidatesTokenCount": 939,
+    "totalTokenCount": 4029,
+    "promptTokensDetails": [
+      {
+        "modality": "IMAGE",
+        "tokenCount": 1080
+      },
+      {
+        "modality": "TEXT",
+        "tokenCount": 606
+      }
+    ],
+    "thoughtsTokenCount": 1404,
+    "serviceTier": "standard"
+  },
+  "model_output": {
+    "file_id": "evidence_04",
+    "screen_title": "Customer Operations / Customers / Haruka Sato",
+    "system_id": "Northstar Shop",
+    "ui_timestamp": "24 Sep 2026 09:14 JST",
+    "records": [
+      {
+        "visual_region": "Customer Header and Details Panel",
+        "resource_id": "account_5762",
+        "system_id": "Northstar Shop",
+        "identifiers": {
+          "user_id": "user_11",
+          "email": "haruka.s1838@zoho.com",
+          "phone": "+81 90 7610 2507",
+          "name": "Haruka Sato",
+          "address": "2-18-4 Kichijoji, Musashino, Tokyo 180-0004"
+        },
+        "raw_status_label": "Silver",
+        "observed_state": "PRESENT",
+        "observation_type": "Customer Record",
+        "is_direct_observation": true,
+        "visual_evidence_notes": "Customer record for Haruka Sato (user_11 / account_5762) is active and fully visible with loyalty tier Silver.",
+        "confidence": "HIGH",
+        "ambiguity_flags": []
+      },
+      {
+        "visual_region": "Overview Table - Row 1",
+        "resource_id": "ORD-20265762",
+        "system_id": "Northstar Shop",
+        "identifiers": {
+          "user_id": "user_11",
+          "email": null,
+          "phone": null,
+          "name": null,
+          "address": null
+        },
+        "raw_status_label": "Delivered \u00b7 18 Sep",
+        "observed_state": "PRESENT",
+        "observation_type": "Order Record",
+        "is_direct_observation": true,
+        "visual_evidence_notes": "Order ORD-20265762 for Ceramic coffee set visible in system with status Delivered.",
+        "confidence": "HIGH",
+        "ambiguity_flags": []
+      },
+      {
+        "visual_region": "Overview Table - Row 2",
+        "resource_id": "ORD-20265518",
+        "system_id": "Northstar Shop",
+        "identifiers": {
+          "user_id": "user_11",
+          "email": null,
+          "phone": null,
+          "name": null,
+          "address": null
+        },
+        "raw_status_label": "Returned \u00b7 03 Sep",
+        "observed_state": "PRESENT",
+        "observation_type": "Order Record",
+        "is_direct_observation": true,
+        "visual_evidence_notes": "Order ORD-20265518 for Travel backpack visible in system with status Returned.",
+        "confidence": "HIGH",
+        "ambiguity_flags": []
+      },
+      {
+        "visual_region": "Customer Details Side Panel & Activity Section",
+        "resource_id": "support_9538",
+        "system_id": "Northstar Shop",
+        "identifiers": {
+          "user_id": "user_11",
+          "email": null,
+          "phone": null,
+          "name": null,
+          "address": null
+        },
+        "raw_status_label": "CS-8538",
+        "observed_state": "PRESENT",
+        "observation_type": "Support Ticket Record",
+        "is_direct_observation": true,
+        "visual_evidence_notes": "Support ticket referenced as CS-8538 / support_9538 visible under customer details and activity history.",
+        "confidence": "HIGH",
+        "ambiguity_flags": []
+      }
+    ],
+    "unreadable_regions": []
+  }
+}

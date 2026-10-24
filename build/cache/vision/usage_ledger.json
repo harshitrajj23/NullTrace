@@ -1,0 +1,58 @@
+[
+  {
+    "timestamp": "2026-10-24T20:25:38.541883+00:00",
+    "provider": "gemini",
+    "model": "gemini-3.5-flash",
+    "file_id": "evidence_04",
+    "cache_hit": false,
+    "request_count": 1,
+    "prompt_tokens": null,
+    "candidates_tokens": null,
+    "total_tokens": null,
+    "estimated_cost_usd": null,
+    "retries": 3,
+    "error": "RuntimeError"
+  },
+  {
+    "timestamp": "2026-10-24T20:26:10.637039+00:00",
+    "provider": "gemini",
+    "model": "gemini-3.5-flash",
+    "file_id": "evidence_04",
+    "cache_hit": false,
+    "request_count": 1,
+    "prompt_tokens": null,
+    "candidates_tokens": null,
+    "total_tokens": null,
+    "estimated_cost_usd": null,
+    "retries": 3,
+    "error": "RuntimeError"
+  },
+  {
+    "timestamp": "2026-10-24T20:29:10.230412+00:00",
+    "provider": "gemini",
+    "model": "gemini-3.5-flash",
+    "file_id": "evidence_04",
+    "cache_hit": false,
+    "request_count": 1,
+    "prompt_tokens": 1686,
+    "candidates_tokens": 939,
+    "total_tokens": 4029,
+    "estimated_cost_usd": 0.000408,
+    "retries": 2,
+    "error": null
+  },
+  {
+    "timestamp": "2026-10-24T20:29:49.708164+00:00",
+    "provider": "gemini",
+    "model": "gemini-3.5-flash",
+    "file_id": "evidence_04",
+    "cache_hit": true,
+    "request_count": 0,
+    "prompt_tokens": 1686,
+    "candidates_tokens": 939,
+    "total_tokens": 4029,
+    "estimated_cost_usd": 0.0,
+    "retries": 0,
+    "error": null
+  }
+]

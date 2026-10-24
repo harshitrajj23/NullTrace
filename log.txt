@@ -2319,3 +2319,136 @@ commit=534601d
 - Test Result: 101 passed in 8.08s (0 failures, 0 errors, 0 warnings).
 - Accuracy Evaluation: NO audit-accuracy score was measured; sample_output.csv was never read in production code. Audit accuracy remains unmeasured.
 
+
+## 2026-10-24T20:34:00Z Step E.2: Controlled Gemini Vision Extraction
+
+User Prompt (verbatim, secrets redacted):
+<USER_REQUEST>
+Nulltrace — Step E.2: Controlled Gemini Vision Extraction
+
+Objective
+
+Integrate optional Gemini vision extraction for the 11 IMAGE_ONLY evidence files. Start with one screenshot and validate the complete extraction path before processing all 11.
+
+Constraints
+
+* Do not modify dataset/ or the organizer’s output.csv template.
+* Never read sample_output.csv from production extraction code.
+* Never print, log, commit, or expose API keys.
+* Read GEMINI_API_KEY from the environment; never hardcode it.
+* Keep vision calls disabled unless explicitly enabled by configuration.
+* Preserve all existing tests and deterministic extraction behavior.
+* Do not mark any case COMPLETE.
+* Do not integrate the full 518-case pipeline yet.
+
+Step 1: Verify the image inventory
+
+Read evidence_files.csv and verify that each IMAGE_ONLY file_id maps to an existing image path.
+Do not assume filenames. Resolve actual paths and report missing or ambiguous mappings.
+Use only the verified file_id-to-path mapping.
+
+Step 2: Verify configuration
+
+Add configuration for:
+
+* provider: Gemini;
+* exact model identifier;
+* API key environment variable name;
+* feature flag enabling vision extraction;
+* request timeout and retry limits;
+* cache directory;
+* maximum output size.
+
+Do not guess the model name. Require an explicit configured model identifier.
+
+Ensure .env is ignored by Git and that no secrets enter logs, usage ledgers, documentation, or generated artifacts.
+
+Step 3: Implement structured extraction
+
+Create a vision-extraction module that:
+
+* sends one verified screenshot at a time;
+* requests structured JSON observations;
+* extracts only visible facts;
+* records file_id, image path, relevant visual region, observation type, identifiers, and confidence/ambiguity;
+* distinguishes direct visual observations from interpretations;
+* returns an explicit uncertainty result when text or identifiers are unreadable;
+* does not invent resource links or infer deletion success from UI labels alone.
+
+Every extracted claim must retain enough source information for a human to locate and verify it in the original screenshot.
+
+Step 4: Validate one screenshot first
+
+Use one verified screenshot as a pilot.
+Compare its structured observations against the original image manually.
+Check identifier transcription, state interpretation, source provenance, and whether the proposed resource links are actually supported.
+
+Do not batch the other ten screenshots until the pilot passes this review.
+
+Step 5: Cache and usage tracking
+
+Cache results by image SHA-256, provider, exact model identifier, prompt/schema version, and extraction configuration.
+
+Record:
+
+* provider and model;
+* timestamp;
+* request count;
+* input/output token counts when exposed by the API;
+* estimated cost when the required pricing information is available;
+* cache hit/miss;
+* errors and retries.
+
+Never record API keys or sensitive raw request headers. If token or cost information is unavailable, report it as unavailable rather than inventing a number.
+
+Step 6: Tests
+
+Add tests for:
+
+* image inventory mapping;
+* missing image files;
+* malformed model JSON;
+* schema validation;
+* unreadable identifiers;
+* unsupported claims;
+* cache determinism;
+* API failures and retries;
+* disabled feature flag preventing calls;
+* secret exclusion from logs;
+* no production access to sample_output.csv.
+
+Run the full pytest suite.
+
+Step 7: Finish
+
+Document the pilot result, limitations, and manual verification findings.
+Append the task result to log.txt.
+Commit and push to origin main without force.
+
+Do not process all screenshots yet. Do not begin Step J.
+
+Return a STOP summary with the verified image mapping, exact model identifier, pilot extraction results, manual verification outcome, pytest summary, changed files, and commit/push result.
+
+i have added gemini api key in .env (MAIN FIRST PART TO ADD .env in gitignore) then proceed with above
+</USER_REQUEST>
+
+Agent Response Summary:
+Configured and executed controlled multimodal Gemini vision extraction for administrative console screenshots. Added .env and .env.* to .gitignore to ensure secrets are never tracked or committed. Implemented code/src/vision_extraction.py with verified image inventory validation, explicit model configuration (gemini-3.5-flash), feature flagging (disabled by default), SHA256-based deterministic caching, and secret-free usage accounting. Conducted a single pilot extraction on evidence_04 (account_admin_console_20260926.png), manually verifying 100% of extracted observations against the original screenshot and user_identities.csv without any hallucinations. Documented pilot results, caching metrics, and usage in code/docs/vision_pilot_report.md. Added 11 unit tests in code/tests/test_vision_extraction.py, passing 112/112 tests across the full repository test suite.
+
+Actions:
+* Added .env and .env.* to .gitignore
+* Implemented code/src/vision_extraction.py (VisionConfig, UsageRecord, get_verified_image_inventory, GeminiVisionExtractor)
+* Authored code/docs/vision_pilot_report.md (pilot verification on evidence_04, manual validation, token and cost accounting)
+* Added code/tests/test_vision_extraction.py (11 unit tests covering inventory mapping, retries, malformed JSON, cache determinism, secret isolation, and sample_output isolation)
+* Executed pilot extraction for evidence_04 and cached deterministic output in build/cache/vision/
+* Executed full pytest suite (112/112 passed in 17.17s)
+
+Context:
+tool=antigravity-ide
+model=Gemini 3.8 Flash (Medium)
+branch=main
+repo_root=/Users/harshitrajsingh/nullTrace/hackerrank-orchestrate-october26
+worktree=main
+parent_agent=none
+
+
