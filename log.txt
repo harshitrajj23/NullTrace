@@ -168,3 +168,99 @@ repo_root=/Users/harshitrajsingh/nullTrace/hackerrank-orchestrate-october26
 worktree=main
 parent_agent=none
 
+## 2026-10-24T20:15:00+05:30 Step C: Grader Contract Implementation and Validation
+
+User Prompt (verbatim, secrets redacted):
+<USER_REQUEST>
+You are working in the NullTrace repository (root = the folder containing code/, AGENTS.md, CLAUDE.md, and log.txt). Remote: https://github.com/harshitrajj23/NullTrace.git
+
+GOAL
+Implement the grader contract: the 15-operation grammar, a deterministic step sorter, and a step validator. Prove that the sorter and validator agree with the official sample outputs. Write NO audit logic, NO evidence parsing, and NO LLM code in this step.
+
+RULES
+- Follow AGENTS.md, CLAUDE.md, and agent_trace_instructions.md for the whole session.
+- Do not modify anything under dataset/. Do not overwrite output.csv.
+- Read code/docs/SPEC_EXTRACTED.md first, and the problem statement at the repo root. Where they disagree with this prompt, stop and report the conflict.
+- Do not write any mapping from sample case IDs to answers. The validator must work on any input.
+
+STEP 1: LOG
+Append a dated entry to log.txt in the AGENTS.md section 5 format: Step C started, the decisions being applied (listed below), and the planned outputs.
+
+STEP 2: GRAMMAR (code/src/ops.py)
+Define:
+- OPERATIONS: the 15 operations in the spec's table order, each with its phase and state copied verbatim from problem_statement.md. Do not retype the table from memory; load it by parsing the problem statement table, then assert it matches a hard-coded copy and fail loudly if it does not.
+- PHASE_ORDER = [FINDING, REMEDIATION, VERIFICATION]
+- a global operation rank: position in the spec table
+- an ALLOWED_STATE(phase, operation) check
+- Step dataclass: step_no, phase, system_id, resource_id, operation, state, evidence_id
+
+STEP 3: SORTER
+sort_steps(steps) sorts by (phase rank, operation rank, system_id ascending, resource_id ascending), then renumbers step_no from 1 with no gaps. It must be stable and deterministic. Sorting must not look at evidence_id or anything else.
+
+STEP 4: VALIDATOR
+validate_steps(steps, status, known_evidence_ids) returns a list of errors (empty means valid). It rejects:
+- phase/operation mismatch, or state not allowed for the operation
+- step_no not consecutive from 1, or not matching array position
+- steps not already in sorted order
+- empty or missing system_id, resource_id, or operation
+- evidence_id not "" and not in known_evidence_ids
+- for status COMPLETE: any phase other than VERIFICATION, and any VERIFICATION step with evidence_id ""
+- for status INCOMPLETE: any FINDING step with evidence_id "" (default decision 1); REMEDIATION and VERIFICATION steps must have evidence_id ""
+- for status NOT_APPLICABLE: any step at all (must be [])
+- for status COMPLETE: no REMEDIATION steps
+Return the error codes, not free text, so they can be counted later.
+
+STEP 5: CSV LAYER (code/src/grader_io.py)
+- parse_steps_json(text): parse the steps_json string into Steps. Reject invalid JSON with a clear error.
+- serialize_steps(steps): produce canonical JSON with keys in the spec order and no extra whitespace. The grader ignores key order and whitespace, so this only needs to be consistent.
+- read_sample_output(path) and write_output_csv(rows, path) that match the header and sort-by-case_id rules in the spec.
+
+STEP 6: ROUND-TRIP TEST AGAINST OFFICIAL SAMPLES
+Write code/tests/test_contract_roundtrip.py. It must:
+- read dataset/sample_output.csv
+- for each row: parse steps_json, run validate_steps with that row's deletion_status and the evidence IDs from dataset/evidence_files.csv, and assert zero errors
+- re-sort the steps and assert the order is unchanged
+- serialize and re-parse, and assert equality
+- print a summary: rows checked, rows passing, and any failures with case_id
+
+If any sample fails validation, do NOT change the validator to make it pass. Stop and report which rule is contradicted, with the case_id and the step that breaks it. Those are findings I need to review.
+
+STEP 7: UNIT TESTS
+Add pytest tests for each validator rule with a minimal hand-built valid example and a minimal invalid example for each error code. Run pytest. Fix only bugs in the code under test, never in the expected values for the samples.
+
+STEP 8: COMMIT AND PUSH
+- Stage only code/src/ops.py, code/src/grader_io.py, code/tests/, code/docs/ if updated, and log.txt.
+- Confirm with git status that nothing under dataset/ is staged.
+- Commit: "feat: grader contract grammar, sorter, and validator"
+- Append the commit hash to log.txt and commit it as "docs: log step C completion".
+- git push origin main. No --force.
+
+STOP CONDITION
+Print:
+1. pytest summary line
+2. round-trip result: rows checked, passing, failing (list case_ids and error codes)
+3. any conflict between the spec and the samples
+4. git log --oneline -3
+5. files created or changed
+
+Then stop. Do not start evidence extraction.
+
+Agent Response Summary:
+Started Step C to implement the official grader contract grammar, deterministic sorter, and validator. Verified spec alignment with problem_statement.md and SPEC_EXTRACTED.md with no conflicts. Implemented code/src/ops.py, code/src/grader_io.py, round-trip contract test against official samples, and unit tests for all validation error codes. Verified all tests pass cleanly via pytest.
+
+Actions:
+* Implemented code/src/ops.py (grammar, sorter, validator)
+* Implemented code/src/grader_io.py (JSON parsing/serialization and CSV I/O)
+* Created code/tests/test_contract_roundtrip.py and code/tests/test_validator.py
+* Executed pytest suite and verified 100% round-trip parity on official samples
+* Committed code and updated log.txt with commit hash
+
+Context:
+tool=antigravity-ide
+model=Gemini 3.8 Flash (Medium)
+branch=main
+repo_root=/Users/harshitrajsingh/nullTrace/hackerrank-orchestrate-october26
+worktree=main
+parent_agent=none
+
+
