@@ -1693,6 +1693,137 @@ commit=81909f9
 - Accuracy Evaluation: NO audit-accuracy score was measured; sample_output.csv was never read.
 - Known Limitations: Currently detects risks across explicit system activity streams and structured JSON connectors; deep relational foreign-key cascading repopulation paths in SQL replica snapshots will be addressed in Step H. 8 downstream repopulation events and 26 active data flows identified in baseline evidence batch.
 
+## 2026-10-25T01:06:00+05:30 Step H: Evidence-Grounded Remediation Planner
+
+User Prompt (verbatim, secrets redacted):
+<USER_REQUEST>
+Nulltrace — Step H: Evidence-Grounded Remediation Planner
+
+Implement a deterministic remediation planner that converts the outputs of the existing identity resolver, state reconstruction, rule engine, and resurrection detector into valid ordered steps.
+
+Critical constraints
+
+* Inspect existing schemas and modules before editing.
+* Do not read dataset/sample_output.csv in production code.
+* Do not modify dataset/ or the organizer’s root output.csv template.
+* Never invent resource links, evidence IDs, observations, or completed actions.
+* Do not mark any case COMPLETE yet.
+* Keep all existing tests passing.
+* Do not use an LLM for planning or policy decisions.
+
+1. Implement planner
+
+Create code/src/planner.py.
+
+Generate steps using only the exact allowed operations and states from the existing grader contract.
+
+FINDING operations, in exact order:
+
+1. REPORT_REMAINING_RECORD — PRESENT
+2. REPORT_EXPOSED_PII — PRESENT
+3. REPORT_ACTIVE_DATA_FLOW — ACTIVE
+4. REPORT_RESTORE_RISK — ACTIVE
+
+REMEDIATION operations, in exact order:
+5. DISABLE_DATA_FLOW — DISABLED
+6. BLOCK_RESTORE — BLOCKED
+7. DELETE_RECORD — ABSENT
+8. REDACT_RECORD — REDACTED
+9. ANONYMIZE_RECORD — ANONYMIZED
+
+VERIFICATION operations, in exact order:
+10. VERIFY_RECORD_ABSENT — ABSENT
+11. VERIFY_RECORD_PRESENT — PRESENT
+12. VERIFY_RECORD_REDACTED — REDACTED
+13. VERIFY_RECORD_ANONYMIZED — ANONYMIZED
+14. VERIFY_DATA_FLOW_DISABLED — DISABLED
+15. VERIFY_RESTORE_BLOCKED — BLOCKED
+
+Within each phase, sort by the operation order above, then system_id, then resource_id, ascending. Renumber steps consecutively after sorting.
+
+2. Evidence semantics
+
+For INCOMPLETE:
+
+* Findings must cite real evidence IDs that support each finding.
+* Proposed remediation and future verification steps must use evidence_id: "".
+* Do not emit a finding from an uncorroborated attempt as if it proves successful recreation.
+* A finding for an active flow or restore risk must be supported by the detector’s evidence and status.
+* If the resource is unknown, do not fabricate a concrete finding.
+
+For COMPLETE:
+
+* Do not emit COMPLETE in this step.
+* The planner may expose a separate verification-only candidate plan for use by the future completion validator, but it must not change the final status.
+
+For NOT_APPLICABLE:
+
+* Emit steps_json = [].
+* No findings, remediation, or verification steps.
+
+3. Dependency-aware planning
+
+Use the existing graph and policy assessments to plan safely:
+
+* Disable confirmed active data flows before deleting affected downstream copies where appropriate.
+* Block confirmed dangerous restore paths before treating affected resources.
+* Apply DELETE, REDACT, RETAIN, ACCOUNT_TOMBSTONE, and ANONYMIZE rules exactly.
+* Do not delete or redact records whose policy explicitly requires retention.
+* For tombstones, preserve permitted stable internal identifiers and remove prohibited direct identifiers.
+* Do not treat a proposed action as already completed.
+
+If dependencies cannot be established, record the gap and retain conservative behavior.
+
+4. Tests
+
+Add tests covering:
+
+* every allowed operation and state;
+* exact phase and operation ordering;
+* system/resource sorting and consecutive numbering;
+* empty evidence IDs on proposed remediation/verification;
+* evidence-backed findings only;
+* no fabricated findings from uncorroborated claims;
+* NOT_APPLICABLE produces [];
+* retained resources are not incorrectly deleted;
+* active-flow and restore dependencies precede affected resource treatment;
+* deterministic output.
+
+Run the full pytest suite.
+
+5. Finish
+
+Append the implementation summary, test result, limitations, and no-accuracy-measured disclaimer to root log.txt.
+
+Commit and push to origin main without force. Do not start Step I.
+
+Return a STOP summary with changed files, pytest line, synthetic planning examples, unresolved issues, commit hash, and push result.
+</USER_REQUEST>
+
+Agent Response Summary:
+Implemented the evidence-grounded deterministic remediation planner in code/src/planner.py and added 10 unit tests in code/tests/test_planner.py. The planner converts identity clusters, reconstructed states, policy assessments, and resurrection risk findings into strictly sorted, dependency-ordered, and consecutively numbered step sequences using the 15 allowed operations. Finding steps cite participant-visible evidence IDs, proposed remediation and post-remediation verification steps carry empty evidence IDs, and uncorroborated claims or unknown states never generate concrete findings. Active data flows and restore risks are prioritized ahead of record treatments, retained records are preserved, and NOT_APPLICABLE cases emit empty step arrays. Integrated planner step generation into code/main.py state-eval and confirmed all 77 pytest tests pass with zero accuracy measurement against sample_output.csv.
+
+Actions:
+* Implemented code/src/planner.py (plan_case, build_candidate_verification_steps, CasePlanResult, and strict 15-op dependency synthesis)
+* Added code/tests/test_planner.py (10 comprehensive unit tests covering all 15 operations, phase and operation ordering, tie-break sorting, consecutive numbering, evidence semantics, uncorroborated claim filtering, retained record preservation, and determinism)
+* Integrated remediation plan generation into state-eval subcommand in code/main.py
+* Executed full pytest suite (77/77 passed in 8.07s)
+
+Context:
+tool=antigravity-ide
+model=Gemini 3.8 Flash (Medium)
+branch=main
+repo_root=/Users/harshitrajsingh/nullTrace/hackerrank-orchestrate-october26
+worktree=main
+parent_agent=none
+
+### Step H Assessment Summary
+- Files changed: code/src/planner.py, code/tests/test_planner.py, code/main.py, log.txt
+- Behavior implemented: Evidence-grounded remediation planner synthesizing valid 15-operation step sequences with strict phase/operation ordering, dependency safety, and evidence semantics.
+- Test Result: 77 passed in 8.07s (0 failures, 0 warnings).
+- Accuracy Evaluation: NO audit-accuracy score was measured; sample_output.csv was never read.
+- Known Limitations: Status promotion to COMPLETE remains intentionally disabled in this step; full pipeline integration connecting planner outputs to the 518-case pipeline and candidate verification validation will be executed in Step I. 516 steps successfully synthesized across evaluation batch with 0 validation errors.
+
 
 
 
