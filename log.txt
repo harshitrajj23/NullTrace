@@ -2740,5 +2740,163 @@ commit=f78c085
 - Classification totals: 93 yes, 1 no, 0 unclear (94 total)
 - Reference: code/docs/DATA_HANDLING.md
 
+## 2026-10-25T02:51:30+05:30 Step E.4: Local Apple Vision Extraction for Remaining Screenshots
 
+User Prompt (verbatim, secrets redacted):
+<USER_REQUEST>
+Objective
 
+Complete local-only text extraction for the 10 remaining evidence screenshots and prepare the results for integration into NullTrace.
+
+Strict restrictions
+
+* Keep DECISION: MODEL_OFF.
+* Make zero network requests and zero external API calls.
+* Do not use Gemini, Mistral, or any cloud OCR service.
+* Do not access dataset/sample_output.csv.
+* Do not modify any file under dataset/.
+* Do not modify the root output.csv.
+* Do not log or print personal values.
+* Never commit API keys or secrets.
+* Preserve existing cached pilot results and unrelated work.
+* Do not start pipeline integration in this step.
+* Never force-push.
+
+Step 1 — Inspect the existing implementation
+
+Review:
+
+* code/src/vision_extraction.py
+* code/src/evidence_coverage.py
+* code/src/evidence_extraction.py
+* code/tests/test_vision_extraction.py
+* The existing cached pilot observation for evidence_04.
+* The actual screenshot inventory and evidence-file mappings.
+
+Determine how the existing cache schema represents observations, provenance, confidence, ambiguity, and usage metadata.
+
+Do not assume that an OCR result can be inserted directly into the Gemini extraction cache. Preserve provider and extraction-method distinctions.
+
+Step 2 — Implement a local Apple Vision adapter
+
+Use the existing macOS Swift runtime and Apple Vision framework if available.
+
+The adapter must:
+
+* Operate completely offline.
+* Process only the 10 screenshots that have not yet been processed.
+* Extract text blocks and bounding boxes.
+* Preserve each observation’s source evidence ID and image path.
+* Preserve spatial information so later processing can associate text with nearby fields.
+* Avoid inferring deletion success from UI text alone.
+* Mark uncertain relationships and states as ambiguous.
+* Avoid including personal values in application logs or console summaries.
+* Handle missing images, unreadable images, OCR failures, and malformed results safely.
+
+Do not install additional packages unless absolutely necessary.
+
+Step 3 — Cache local extraction results
+
+Use a deterministic cache key based on:
+
+* Image SHA-256.
+* Extraction provider/runtime.
+* Extraction configuration.
+* Prompt or schema version, where applicable.
+
+Record the method as local Apple Vision, not Gemini.
+
+Cache hits must not rerun OCR unnecessarily.
+
+Do not fabricate token counts, API calls, or model costs. Local processing should be reported separately from external model usage.
+
+Step 4 — Tests
+
+Add tests for:
+
+* Correct mapping of the remaining 10 screenshots.
+* Missing image handling.
+* Malformed OCR output.
+* Bounding-box and provenance preservation.
+* Ambiguous text associations.
+* Deterministic cache keys.
+* Cache hits.
+* No network access or external API invocation.
+* No personal values in logs.
+* No production access to dataset/sample_output.csv.
+
+Run the entire pytest suite.
+
+Step 5 — Coverage report
+
+Update the relevant evidence-coverage documentation with:
+
+* Number of screenshots successfully processed locally.
+* Number that failed or remain ambiguous.
+* Extraction method.
+* Cache behavior.
+* Known limitations.
+* Confirmation that no external API calls were made.
+
+Report aggregate counts only. Do not reproduce extracted personal values.
+
+Step 6 — Safety and Git
+
+Before committing:
+
+* Review the complete diff.
+* Confirm no dataset files were changed.
+* Confirm the root output.csv was not changed.
+* Confirm dataset/sample_output.csv was not accessed.
+* Confirm the existing Gemini pilot cache and usage ledger were preserved.
+* Confirm no secrets or personal values were added to logs or documentation.
+
+Run all tests.
+
+Commit and push only the intended source, tests, and documentation changes. Append the required entry to log.txt. Preserve unrelated changes. Never force-push.
+
+STOP
+
+Do not begin pipeline integration.
+
+Return:
+
+1. The 10 screenshot processing results by evidence ID and aggregate status only.
+2. The exact pytest summary.
+3. The files changed.
+4. The commit hash and push result.
+5. Confirmation that MODEL_OFF remained in force.
+6. Confirmation that no external API calls were made.
+7. Any screenshots or observations that remain ambiguous.
+after E.4 gimme report
+</USER_REQUEST>
+
+Agent Response Summary:
+Completed Step E.4 local-only text extraction for all 10 remaining administrative console screenshots using native Apple Vision (VNRecognizeTextRequest via /usr/bin/swift) under strict DECISION: MODEL_OFF. Implemented code/src/local_vision_extraction.py to extract text blocks, 2D bounding boxes, and cluster spatial relationships while preserving evidence provenance and flagging uncertain associations as AMBIGUOUS. Cached all 10 extraction results deterministically in build/cache/apple_vision/ (yielding 25 structured observations across 9 files with observations, and 1 file with 0 relevant customer observations: evidence_46), preserving the existing Gemini pilot cache (evidence_04) completely untouched. Added 10 unit tests in code/tests/test_local_vision.py passing the full test suite (122/122 passed in 18.70s), authored code/docs/local_vision_coverage_report.md, and maintained zero external API spend and zero network requests.
+
+Actions:
+* Implemented code/src/local_vision_extraction.py (offline Apple Vision adapter, spatial clustering, deterministic cache)
+* Processed and cached 10 remaining screenshots in build/cache/apple_vision/
+* Preserved existing Gemini pilot cache at build/cache/vision/
+* Authored code/docs/local_vision_coverage_report.md
+* Added 10 tests in code/tests/test_local_vision.py (122/122 passed in full suite)
+* Ignored compiled binary directory build/cache/apple_vision/bin/ in .gitignore
+* Committed feat: local apple vision extraction for 10 remaining screenshots (536e476)
+
+Context:
+tool=antigravity-ide
+model=Gemini 3.8 Flash (Medium)
+branch=main
+repo_root=/Users/harshitrajsingh/nullTrace/hackerrank-orchestrate-october26
+worktree=main
+parent_agent=none
+commit=536e476
+
+### Step E.4 Processing Summary
+- Model Policy: DECISION: MODEL_OFF (Strictly Preserved)
+- External API Calls: 0 ($0.00 spend)
+- Screenshots Processed Locally: 10 / 10
+- Total OCR Blocks: 840
+- Total Structured Observations Extracted: 25
+- Cache Hits Verified: 3.06 ms lookup time
+- Pytest Suite: 122 passed in 18.70s
