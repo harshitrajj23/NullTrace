@@ -534,13 +534,17 @@ def resolve_request(
     return cluster
 
 
-def resolve_all(dataset: Dataset) -> Dict[str, Cluster]:
+def resolve_all(
+    dataset: Dataset,
+    requests: Optional[List[DeletionRequest]] = None,
+) -> Dict[str, Cluster]:
     """Resolves clusters for all deletion requests in the dataset deterministically."""
     index = IdentityIndex(dataset)
     clusters: Dict[str, Cluster] = {}
 
+    target_requests = requests if requests is not None else dataset.deletion_requests
     # Sort deletion requests by case_id for strict determinism
-    sorted_requests = sorted(dataset.deletion_requests, key=lambda r: r.case_id)
+    sorted_requests = sorted(target_requests, key=lambda r: r.case_id)
     for req in sorted_requests:
         cluster = resolve_request(req, dataset, index=index)
         clusters[req.case_id] = cluster

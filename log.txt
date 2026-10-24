@@ -3111,3 +3111,251 @@ commit=827c403
 - Steps Emitted: 787
 - Step Validation Errors: 0
 - Pytest Suite: 134 passed in 20.06s
+
+## 2026-10-25T03:35:00+05:30 Step K: Pipeline Evaluation, Defect Remediation & Quality Reports
+
+User Prompt (verbatim, secrets redacted):
+<USER_REQUEST>
+OBJECTIVE
+
+Evaluate the integrated NullTrace pipeline, measure prediction quality against the authorized evaluation data, identify systematic errors, and fix important defects without breaking existing functionality.
+
+Current verified project state
+
+According to the latest Step J report:
+
+* 518 deletion requests processed.
+* Integrated predictions generated at build/nulltrace_integrated.csv.
+* 134 automated tests passing.
+* 97 COMPLETE, 411 INCOMPLETE, 10 NOT_APPLICABLE.
+* 94 evidence files processed and indexed.
+* DECISION: MODEL_OFF.
+* No external API calls.
+* No force-push.
+
+These are reported baseline results, not proof of prediction accuracy.
+
+1. NON-NEGOTIABLE SAFETY RULES
+
+1. Never modify files under dataset/.
+2. Never overwrite the organizer’s root output.csv template.
+3. Never let production code, identity resolution, evidence extraction, the planner, or the integrated pipeline read dataset/sample_output.csv.
+4. The answer key may be accessed only by a separate evaluation script, after the prediction file has been generated.
+5. Do not use answer-key information to alter production predictions during the same evaluation run.
+6. Keep DECISION: MODEL_OFF.
+7. Make zero external API calls and zero network requests.
+8. Do not print or log personal values or secrets.
+9. Preserve unrelated user changes.
+10. Never use force-push or rewrite Git history.
+11. Never report accuracy that was not actually measured.
+12. Do not claim full-dataset accuracy when ground-truth labels are available only for a subset.
+
+If the dataset’s answer-key scope is limited to the 32 public sample cases, evaluate those cases separately and clearly label the results as sample-set metrics.
+
+2. INSPECT THE CURRENT PIPELINE AND OUTPUT
+
+Inspect:
+
+* code/src/pipeline.py
+* code/src/completion_validator.py
+* code/src/planner.py
+* code/src/state_reconstruction.py
+* code/src/rule_engine.py
+* code/src/resurrection_detector.py
+* code/src/grader_io.py
+* code/tests/
+* code/docs/integration_report.md
+* build/nulltrace_integrated.csv
+
+Confirm the existing output has exactly 518 prediction rows and the expected schema.
+
+Do not regenerate predictions until the current output has been preserved and inspected.
+
+3. BUILD A SEPARATE EVALUATION SCRIPT
+
+Create a separate evaluation utility, for example:
+
+code/evaluation/evaluate_predictions.py
+
+This script may read the authorized answer key only after the prediction file exists.
+
+Requirements:
+
+* Keep evaluation code completely separate from production pipeline imports and execution.
+* Ensure the production pipeline never imports or calls the evaluator.
+* Compare predictions against ground truth by case_id.
+* Validate matching case IDs and handle missing or duplicate IDs explicitly.
+* Report status accuracy and a confusion matrix.
+* Report precision, recall, and F1 for each status where mathematically defined.
+* Report macro-F1 and overall accuracy.
+* Clearly distinguish unsupported or undefined metrics from zero.
+* Report the evaluation sample size and ground-truth coverage.
+* Do not expose personal values in evaluation output.
+* Never modify the answer key or prediction file during evaluation.
+
+If the answer key covers only 32 cases, report metrics for those 32 cases only.
+
+Do not infer that these results represent the remaining 486 cases.
+
+4. EVALUATE STEP AND EVIDENCE QUALITY
+
+In addition to deletion-status accuracy, evaluate:
+
+* Output schema validity.
+* Step numbering and phase ordering.
+* Operation/state compatibility.
+* Evidence-ID validity.
+* Whether each cited evidence item supports the corresponding finding or verification.
+* Whether COMPLETE cases satisfy all completion requirements.
+* Whether active synchronization and restore risks are handled correctly.
+* Whether retained records and account tombstones follow the rules.
+* Whether ambiguous identities and conflicting evidence fail closed.
+* Whether future remediation and verification steps have the required empty evidence IDs.
+
+Do not count a structurally valid output as semantically correct without checking its supporting evidence.
+
+Where automatic verification is possible, implement deterministic checks and tests.
+
+Where semantic verification requires manual review, document the review method and limitations.
+
+5. INVESTIGATE SYSTEMATIC ERRORS
+
+Use the evaluation results to identify the most consequential defects.
+
+Prioritize:
+
+1. False COMPLETE predictions.
+2. False INCOMPLETE predictions caused by integration defects.
+3. Incorrect NOT_APPLICABLE classifications.
+4. Unsupported evidence references.
+5. Incorrect resource identity linkage.
+6. Incorrect handling of temporal evidence.
+7. Missed synchronization, replication, or restore risks.
+8. Invalid operation sequences.
+
+Do not simply maximize the number of COMPLETE cases.
+
+A false COMPLETE result is particularly serious because it asserts that deletion has been proven.
+
+For each important error, document:
+
+* Error category.
+* Number of affected evaluated cases, if measurable.
+* Root cause.
+* Proposed correction.
+* Regression test.
+
+Do not use the answer key inside production logic or introduce case-ID-specific rules designed to memorize evaluation answers.
+
+6. ADD AT LEAST THREE TEAM-MADE TEST CASES
+
+Create at least three additional synthetic cases covering meaningful failure modes, such as:
+
+* Primary record absent but replica still contains personal data.
+* Primary deletion reported successful but an active synchronization path may recreate the record.
+* Tombstone retains a permitted internal identifier but also exposes prohibited direct personal identifiers.
+
+Use entirely synthetic values.
+
+Verify that the cases test the actual integrated pipeline, not merely isolated helper functions.
+
+Do not insert these synthetic cases into the real dataset.
+
+Document the expected outcome and actual result.
+
+7. FIX DEFECTS AND RE-RUN TESTS
+
+Make the smallest safe changes needed to correct identified defects.
+
+After each meaningful correction:
+
+* Run the relevant targeted tests.
+* Add regression coverage.
+* Preserve the existing safety restrictions.
+
+Then run the entire pytest suite.
+
+Generate a fresh development prediction file at:
+
+build/nulltrace_integrated.csv
+
+Validate all 518 rows and all output invariants.
+
+After regeneration, rerun the separate evaluator against the authorized evaluation set.
+
+Report before-and-after metrics only when both measurements were actually performed using the same evaluation set and methodology.
+
+If a defect cannot be fixed confidently within the remaining time, document it rather than introducing a risky workaround.
+
+8. REQUIRED REPORTS
+
+Create or update:
+
+code/evaluation/evaluation_report.md
+
+Include:
+
+* Evaluation methodology.
+* Ground-truth sample size and coverage.
+* Status accuracy and confusion matrix.
+* Per-class metrics and macro-F1.
+* Step and evidence validation results.
+* At least three synthetic test cases.
+* Important failure categories.
+* Fixes applied and regression tests.
+* Remaining limitations.
+* A clear statement that sample metrics do not establish full-dataset accuracy when ground truth is unavailable.
+
+Update:
+
+code/docs/integration_report.md
+
+Include the latest pipeline and validation results.
+
+Prepare the information needed for:
+code/evaluation/usage_report.md
+Record actual provider/model usage, external calls, tokens, and costs where applicable.
+For this offline run, record zero external API calls and zero API spend. Do not invent token counts or represent local OCR work as API usage.
+
+9. FINAL SAFETY AND GIT CHECK
+
+Before committing:
+
+* Confirm the root output.csv remains untouched.
+* Confirm no files under dataset/ were modified.
+* Confirm the production pipeline never reads dataset/sample_output.csv.
+* Confirm the answer key was used only by the separate evaluation utility after prediction generation.
+* Confirm no external API calls occurred.
+* Confirm no secrets or personal values appear in logs or reports.
+* Confirm DECISION: MODEL_OFF.
+* Review the complete Git diff.
+* Preserve unrelated user work.
+* Run the complete pytest suite.
+
+Append the required audit entry to log.txt.
+
+Commit and push only intended changes to origin main, without force.
+
+STOP
+</USER_REQUEST>
+
+Agent Response Summary:
+Built and executed the isolated offline evaluation suite comparing NullTrace against the 32 authorized sample ground-truth cases, discovering that multi-service JSON evidence files (service_exports and top-level records) were previously dropped by JsonRecordExtractor. Corrected JsonRecordExtractor to parse all 28 evidence JSON files across both service exports and root record collections, eliminating false COMPLETE predictions (false COMPLETE dropped to 0, precision on COMPLETE reached 100%, status accuracy rose from 75.0% to 78.12%, and macro-F1 rose to 0.6621). Created 3 end-to-end synthetic pipeline integration tests covering replication drift, active sync resurrection, and tombstone PII leakage, expanding test suite to 137 passing tests. Regenerated and validated build/nulltrace_integrated.csv across all 518 requests (10 NOT_APPLICABLE, 403 INCOMPLETE, 105 COMPLETE, 1311 steps, 0 validation errors), authored evaluation_report.md and usage_report.md, and maintained strict DECISION: MODEL_OFF with zero network requests or API spend.
+
+Actions:
+* Implemented standalone evaluator code/evaluation/evaluate_predictions.py with strict answer-key isolation
+* Diagnosed and fixed multi-service JSON extraction defect in code/src/evidence_extraction.py
+* Created code/tests/test_synthetic_pipeline_cases.py (3 realistic end-to-end synthetic failure modes)
+* Executed full test suite (137/137 passed in 20.07s)
+* Regenerated and validated build/nulltrace_integrated.csv across all 518 evaluation requests (1311 steps, 0 errors)
+* Authored code/evaluation/evaluation_report.md and code/evaluation/usage_report.md ($0.00 spend, 0 API calls)
+* Updated code/docs/integration_report.md with latest run statistics
+
+Context:
+tool=antigravity-ide
+model=Gemini 3.8 Flash (Medium)
+branch=main
+repo_root=/Users/harshitrajsingh/nullTrace/hackerrank-orchestrate-october26
+worktree=main
+parent_agent=none
+

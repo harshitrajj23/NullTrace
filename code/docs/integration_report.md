@@ -102,15 +102,15 @@ The end-to-end integrated pipeline (`code/src/pipeline.py:run_integrated_pipelin
 | Status | Case Count | Percentage | Steps Generated |
 | :--- | :---: | :---: | :---: |
 | **`NOT_APPLICABLE`** | 10 | 1.93% | 0 (all `steps_json = []`) |
-| **`INCOMPLETE`** | 411 | 79.34% | 667 |
-| **`COMPLETE`** | 97 | 18.73% | 120 |
-| **Total** | **518** | **100.0%** | **787** |
+| **`INCOMPLETE`** | 403 | 77.80% | 1175 |
+| **`COMPLETE`** | 105 | 20.27% | 136 |
+| **Total** | **518** | **100.0%** | **1311** |
 
 ### Output Validation Results (`ops.validate_steps`):
 - **Total Rows:** Exactly 518.
 - **Row Ordering:** Strictly sorted lexicographically by `case_id`.
 - **Validation Failures:** Exactly 0.
-- **Grammar Conformance:** All 787 steps strictly adhere to the 15 approved operation and state combinations.
+- **Grammar Conformance:** All 1311 steps strictly adhere to the 15 approved operation and state combinations.
 - **Evidence Reference Compliance:**
   - `COMPLETE`: Verification steps cite only verified, participant-visible evidence IDs.
   - `INCOMPLETE`: Finding steps cite real evidence IDs; future remediation and verification steps have `evidence_id: ""`.
@@ -120,7 +120,7 @@ The end-to-end integrated pipeline (`code/src/pipeline.py:run_integrated_pipelin
 
 ## 5. Test Suite Verification
 
-Targeted integration test suite created in `code/tests/test_integration_pipeline.py` (12 tests):
+Targeted integration test suite created in `code/tests/test_integration_pipeline.py` (12 tests) and `code/tests/test_synthetic_pipeline_cases.py` (3 tests):
 1. `test_confirmed_remaining_record`: PASSED
 2. `test_confirmed_deletion_with_complete_supporting_evidence`: PASSED
 3. `test_active_synchronization_flow`: PASSED
@@ -133,10 +133,13 @@ Targeted integration test suite created in `code/tests/test_integration_pipeline
 10. `test_missing_or_mismatched_screenshot_cache_data`: PASSED
 11. `test_explicitly_non_deletion_request`: PASSED
 12. `test_integrated_pipeline_full_run_and_validation`: PASSED
+13. `test_synthetic_case_replica_drift`: PASSED
+14. `test_synthetic_case_active_sync_resurrection`: PASSED
+15. `test_synthetic_case_tombstone_pii_leakage`: PASSED
 
 **Full Test Suite Summary:**
 ```text
-============================= 134 passed in 19.39s =============================
+============================= 137 passed in 20.07s =============================
 ```
 
 ---

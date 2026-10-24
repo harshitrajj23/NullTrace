@@ -340,6 +340,7 @@ def run_integrated_pipeline(
     output_path: str = "./build/nulltrace_integrated.csv",
     vision_cache_dir: Optional[str] = None,
     apple_vision_cache_dir: Optional[str] = None,
+    requests: Optional[List[Any]] = None,
 ) -> Dict[str, Any]:
     """
     Executes the fully integrated NullTrace pipeline across all evaluation requests:
@@ -361,7 +362,8 @@ def run_integrated_pipeline(
 
     # 1. Dataset loading & Identity resolution
     dataset = load_dataset(data_dir=data_dir)
-    clusters = resolve_all(dataset)
+    target_requests = requests if requests is not None else dataset.deletion_requests
+    clusters = resolve_all(dataset, requests=target_requests)
     act_index = ActivitySubjectIndex(dataset.system_activity)
 
     # 2. Evidence extraction across all modalities
@@ -441,7 +443,7 @@ def run_integrated_pipeline(
     # 5. Case-by-case execution
     results: List[Dict[str, Any]] = []
     counts = {
-        "total_requests": len(dataset.deletion_requests),
+        "total_requests": len(target_requests),
         "not_applicable": 0,
         "incomplete": 0,
         "complete": 0,
@@ -449,7 +451,7 @@ def run_integrated_pipeline(
         "validation_failures": 0,
     }
 
-    sorted_requests = sorted(dataset.deletion_requests, key=lambda r: r.case_id)
+    sorted_requests = sorted(target_requests, key=lambda r: r.case_id)
 
     for req in sorted_requests:
         cid = req.case_id

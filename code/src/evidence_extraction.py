@@ -188,6 +188,213 @@ class JsonRecordExtractor:
                     )
                 )
 
+        # 2. Top-level records array (e.g. connector_configurations, security_audit_ledger, etc.)
+        if "records" in data and isinstance(data["records"], list):
+            top_records = data["records"]
+            top_time = parse_timestamp_to_utc(data.get("captured_at") or data.get("exported_at")) or file_cap_time
+            top_origin = data.get("origin") or data.get("source")
+            coll = data.get("collection")
+            for rec_idx, rec in enumerate(top_records):
+                if not isinstance(rec, dict):
+                    continue
+                rid = rec.get("resource_id")
+                loc = f"{coll or 'records'}:{rec_idx}"
+                idents: Dict[str, str] = {}
+                for k in ("email", "owner_email", "user_email", "customer_email"):
+                    if rec.get(k):
+                        ne = normalize_email(str(rec[k]))
+                        if ne:
+                            idents["email"] = ne
+                for k in ("phone", "owner_phone", "user_phone", "mobile"):
+                    if rec.get(k):
+                        np = normalize_phone(str(rec[k]))
+                        if np:
+                            idents["phone"] = np
+                for k in ("user_id", "subject_reference", "customer_reference", "account_id"):
+                    val = rec.get(k)
+                    if val:
+                        sval = str(val).strip()
+                        if sval.startswith("user_"):
+                            idents["user_id"] = sval
+                        elif "@" in sval:
+                            ne = normalize_email(sval)
+                            if ne:
+                                idents["email"] = ne
+                        elif sval.startswith("+"):
+                            np = normalize_phone(sval)
+                            if np:
+                                idents["phone"] = np
+                if rec.get("email_hash"):
+                    idents["email_hash"] = str(rec["email_hash"]).strip().lower()
+
+                rec_time = parse_timestamp_to_utc(rec.get("recorded_at") or rec.get("created_at") or rec.get("updated_at")) or top_time
+                sys_id = rec.get("system") or top_origin
+
+                # Determine state
+                if "result" in rec:
+                    res = str(rec["result"]).upper()
+                    mapping = {
+                        "FOUND": ResourceState.PRESENT,
+                        "NOT_FOUND": ResourceState.ABSENT,
+                        "ANONYMIZED": ResourceState.ANONYMIZED,
+                        "IDENTIFIABLE": ResourceState.PRESENT,
+                        "REDACTED": ResourceState.REDACTED,
+                        "ACTIVE": ResourceState.ACTIVE,
+                        "DISABLED": ResourceState.DISABLED,
+                        "BLOCKED": ResourceState.BLOCKED,
+                    }
+                    state = mapping.get(res, ResourceState.UNKNOWN)
+                    obs_type = "OPERATIONAL_HISTORY"
+                elif "download_available" in rec:
+                    state = ResourceState.PRESENT if rec.get("download_available") else ResourceState.ABSENT
+                    obs_type = "EXPORT_JOB"
+                elif coll == "customer_analytics_reports":
+                    has_id = any(idents.values())
+                    state = ResourceState.PRESENT if has_id else ResourceState.ANONYMIZED
+                    obs_type = "ANALYTICS_REPORT"
+                else:
+                    state = ResourceState.PRESENT
+                    obs_type = "RECORD"
+
+                observations.append(
+                    ExtractedObservation(
+                        source_file=file_path,
+                        file_id=file_id,
+                        evidence_id=file_id,
+                        source_location=loc,
+                        observation_type=obs_type,
+                        extraction_method="JSON_PARSER",
+                        confidence=ObservationConfidence.HIGH,
+                        timestamp=rec_time,
+                        resource_id=rid,
+                        system_id=sys_id,
+                        associated_identifiers=idents,
+                        observed_state=state,
+                        raw_payload=rec,
+                    )
+                )
+
+        # 3. Top-level service_exports dictionary (e.g. service_resource_export_*.json)
+        if "service_exports" in data and isinstance(data["service_exports"], dict):
+            exports = data["service_exports"]
+            exp_time = parse_timestamp_to_utc(data.get("exported_at")) or file_cap_time
+            for svc_name, svc_data in exports.items():
+                if not isinstance(svc_data, dict):
+                    continue
+                for sub_key, items in svc_data.items():
+                    if not isinstance(items, list):
+                        continue
+                    for idx, item in enumerate(items):
+                        if not isinstance(item, dict):
+                            continue
+                        loc = f"{svc_name}:{sub_key}:{idx}"
+                        rid = item.get("resource_id")
+                        item_time = parse_timestamp_to_utc(item.get("observed_at") or item.get("recorded_at")) or exp_time
+                        idents: Dict[str, str] = {}
+
+                        profile = item.get("profile") if isinstance(item.get("profile"), dict) else {}
+                        hits = item.get("hits", {}).get("documents", []) if isinstance(item.get("hits"), dict) else []
+
+                        for k in ("email", "owner_email", "customer_email"):
+                            if item.get(k):
+                                ne = normalize_email(str(item[k]))
+                                if ne:
+                                    idents["email"] = ne
+                        for k in ("phone", "owner_phone", "customer_phone"):
+                            if item.get(k):
+                                np = normalize_phone(str(item[k]))
+                                if np:
+                                    idents["phone"] = np
+                        for k in ("user_id", "customer_reference", "subject_reference"):
+                            val = item.get(k)
+                            if val:
+                                sval = str(val).strip()
+                                if sval.startswith("user_"):
+                                    idents["user_id"] = sval
+                                elif "@" in sval:
+                                    ne = normalize_email(sval)
+                                    if ne:
+                                        idents["email"] = ne
+                                elif sval.startswith("+"):
+                                    np = normalize_phone(sval)
+                                    if np:
+                                        idents["phone"] = np
+
+                        if profile:
+                            for k in ("email", "user_email"):
+                                if profile.get(k):
+                                    ne = normalize_email(str(profile[k]))
+                                    if ne:
+                                        idents["email"] = ne
+                            for k in ("phone", "user_phone"):
+                                if profile.get(k):
+                                    np = normalize_phone(str(profile[k]))
+                                    if np:
+                                        idents["phone"] = np
+                            for k in ("user_id", "customer_reference"):
+                                val = profile.get(k)
+                                if val and str(val).startswith("user_"):
+                                    idents["user_id"] = str(val).strip()
+
+                        for doc in hits:
+                            if isinstance(doc, dict):
+                                if not rid and doc.get("resource_id"):
+                                    rid = doc.get("resource_id")
+                                if doc.get("email"):
+                                    ne = normalize_email(str(doc["email"]))
+                                    if ne:
+                                        idents["email"] = ne
+                                if doc.get("phone"):
+                                    np = normalize_phone(str(doc["phone"]))
+                                    if np:
+                                        idents["phone"] = np
+                                if doc.get("customer_reference") and str(doc["customer_reference"]).startswith("user_"):
+                                    idents["user_id"] = str(doc["customer_reference"]).strip()
+
+                        # State determination
+                        if "status_code" in item:
+                            status_code = item["status_code"]
+                            state = ResourceState.ABSENT if status_code == 404 else ResourceState.PRESENT
+                            obs_type = "PROFILE_LOOKUP"
+                        elif "restore_allowed" in item:
+                            state = ResourceState.ACTIVE if item.get("restore_allowed") else ResourceState.BLOCKED
+                            obs_type = "BACKUP_EXPORT"
+                        elif "enabled" in item:
+                            state = ResourceState.ACTIVE if item.get("enabled") else ResourceState.DISABLED
+                            obs_type = "CONNECTOR_EXPORT"
+                        elif "hits" in item:
+                            total_hits = item.get("hits", {}).get("total", 0) if isinstance(item.get("hits"), dict) else 0
+                            state = ResourceState.PRESENT if total_hits > 0 else ResourceState.ABSENT
+                            obs_type = "SEARCH_INDEX_EXPORT"
+                        elif svc_name == "analytics_platform":
+                            has_id = any(idents.values())
+                            state = ResourceState.PRESENT if has_id else ResourceState.ANONYMIZED
+                            obs_type = "ANALYTICS_PROFILE"
+                        elif svc_name == "export_service":
+                            state = ResourceState.PRESENT
+                            obs_type = "EXPORT_RECORD"
+                        else:
+                            state = ResourceState.PRESENT
+                            obs_type = "SERVICE_EXPORT_RECORD"
+
+                        observations.append(
+                            ExtractedObservation(
+                                source_file=file_path,
+                                file_id=file_id,
+                                evidence_id=file_id,
+                                source_location=loc,
+                                observation_type=obs_type,
+                                extraction_method="JSON_PARSER",
+                                confidence=ObservationConfidence.HIGH,
+                                timestamp=item_time,
+                                resource_id=rid,
+                                system_id=svc_name,
+                                associated_identifiers=idents,
+                                observed_state=state,
+                                raw_payload=item,
+                            )
+                        )
+
         return observations
 
 
