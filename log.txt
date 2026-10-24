@@ -864,4 +864,149 @@ commit=18bbc29
 - `audit_record_5569`: **No match found** in any allowed dataset file.
 - `audit_record_6645`: **No match found** in any allowed dataset file.
 
+## 2026-10-24T22:50:00+05:30 Step H: SQL Relational Join Key Discovery with Answer-Key Isolation
+
+User Prompt (verbatim, secrets redacted):
+<USER_REQUEST>
+You are working in the NullTrace repository (root = the folder containing code/, AGENTS.md, CLAUDE.md, and log.txt). Remote: https://github.com/harshitrajj23/NullTrace.git
+
+GOAL
+Determine whether the SQL snapshot exports under dataset/evidence/ form a relational schema whose foreign keys link a subject (user_id, email, phone, email_hash) to the resource_ids in the grader's steps_json. This is a read-only diagnostic. Do NOT write state, policy, or LLM logic. Do NOT tune any linker to raise scores.
+
+CRITICAL RULE: sample_output.csv is the answer key. Build all links WITHOUT reading it. It may be read ONLY in Step 6, after the join graph and link table are written to disk. Exclude sample_output.csv, output.csv, code/evaluation/, and code/docs/ from every search in this step.
+
+RULES
+- Follow AGENTS.md, CLAUDE.md, and agent_trace_instructions.md for the whole session.
+- Do not modify anything under dataset/. Do not overwrite output.csv.
+- Read code/docs/SPEC_EXTRACTED.md, code/evaluation/subject_resource_report.md, and code/src/resource_link.py first.
+- Hardcode no case IDs, resource IDs, table names, or expected answers. All table and column names must be discovered from the files.
+
+STEP 1: LOG
+Append a dated entry to log.txt (AGENTS.md section 5): Step H started, the goal, the answer-key rule, and the status of Step F.1 (38 of 111 expected pairs linkable by line co-occurrence; 73 not).
+
+STEP 2: SQL SCHEMA INVENTORY
+For every .sql file in dataset/evidence/:
+- parse CREATE TABLE statements: table name, column names, types, PRIMARY KEY, and FOREIGN KEY ... REFERENCES clauses
+- if a file has no CREATE TABLE, record that and parse its INSERT statements to infer the columns
+- record the file name and the number of rows inserted per table
+Write the result to code/evaluation/sql_schema_inventory.md.
+
+STEP 3: JOIN GRAPH
+- Build a directed graph of tables. Each edge is a foreign key (declared, or inferred where a column name matches another table's primary key and the value sets overlap).
+- Mark every inferred edge as INFERRED with the overlap count and the rule used. Declared edges are DECLARED.
+- Report the graph's connected components and identify which components contain a subject column (user_id, email, phone, email_hash) and which contain a resource_id-shaped column.
+
+STEP 4: PATH SEARCH
+For each table holding a subject column, find all join paths (length 1 to 4) to each table holding a resource_id-shaped column. A path is a list of (table, column) to (table, column) hops. Record every path with its edge types. Cap path length at 4 and report if the cap cuts off any path.
+
+STEP 5: LINK TABLE
+Materialize one link table, code/evaluation/sql_subject_resource_links.csv, with columns:
+case-independent subject_key (the subject identifier value and its type), resource_id, table_path, edge_types, source file, and row numbers.
+Every row must come from a path found in Step 4. Do not add any link the join graph does not support.
+Also include the line-level co-occurrence links from subject_resource_scan.py in the same file, marked with path type LINE_COOCCURRENCE, so both link sources can be compared later.
+
+STEP 6: SCORING-ONLY COMPARISON (run only after Steps 2 to 5 are on disk)
+Now read sample_output.csv. For each case in the sample, take its subject cluster from identity.py and compare the expected resource_ids with the link table. Report:
+- expected pairs reachable by a SQL join path
+- expected pairs reachable only by LINE_COOCCURRENCE
+- expected pairs reachable by neither
+- resource_ids reachable from the cluster but absent from the expected set
+- totals for each category
+Do NOT change any linking code based on these numbers in this step.
+
+STEP 7: IMAGE FILES (inventory only, no model call)
+List the 11 IMAGE_ONLY files, their file sizes, and whether any of their filenames or accompanying manifest rows (evidence_files.csv path and source_origin) suggests the system and subject they describe. Do not open or OCR them in this step. Record them as the vision step's input queue.
+
+STEP 8: REPORT
+Write code/evaluation/sql_join_report.md containing: the schema inventory summary, the join graph (declared vs inferred), the path counts by length, the Step 6 totals, the image queue from Step 7, and a paragraph stating (a) whether the SQL schema supports a deterministic subject-to-resource key, (b) what the join still cannot see, and (c) whether the vision step is needed to close the remaining gap or whether the gap is in data not yet parsed.
+
+STEP 9: TESTS
+- Fixture test: a synthetic SQL file with three tables (accounts with user_id, orders with account_id foreign key, and a resource table with order_id). Expect a two-hop path from user_id to the resource_id.
+- Fixture test: an inferred edge with no declared foreign key, flagged INFERRED with its overlap count.
+- Test that the scanner excludes sample_output.csv, output.csv, code/evaluation/, and code/docs/.
+- Run pytest and fix only bugs in the code under test.
+
+STEP 10: COMMIT AND PUSH
+- Stage only files created or changed in this step, plus log.txt.
+- Confirm with git status that nothing under dataset/ is staged.
+- Commit: "diag: sql relational join key discovery with answer-key isolation"
+- Append the commit hash to log.txt, then commit as "docs: log step H completion".
+- git push origin main. No --force.
+
+STOP CONDITION
+Print:
+1. pytest summary line
+2. SQL file count, tables per file, and whether each file has declared foreign keys
+3. join graph summary: declared vs inferred edges, and components with a subject column and a resource column
+4. path counts by length, and whether the length-4 cap cut any path
+5. Step 6 totals: reachable by join, reachable by line co-occurrence only, reachable by neither, extra
+6. the image queue from Step 7 (11 files, names and sizes)
+7. the Step 8 paragraph
+8. git log --oneline -3
+9. files created or changed
+
+Then stop. Do not start state reconstruction, the vision model, or any LLM call.
+</USER_REQUEST>
+
+Agent Response Summary:
+Completed Step H read-only diagnostic on SQL snapshot exports under dataset/evidence/ with strict Answer-Key Isolation. Parsed all 24 SQL database files, discovering 18 distinct table schemas across 127 table instances, with 0 declared foreign keys. Constructed the table join graph, identifying 20 inferred foreign key edges where column names match target primary keys and data values overlap, partitioned into 11 connected components. Conducted path search (length 1 to 4) from tables with subject columns to tables with resource columns, discovering 2 length-1 paths between failover and primary customer profiles on resource_id (with no cap truncation). Materialized code/evaluation/sql_subject_resource_links.csv with SQL join paths and line-level co-occurrences. In Step 6 isolated scoring against sample_output.csv, proved that SQL joins account for 0 sample pairs, while line co-occurrences resolve 38 pairs (34.2%), leaving 73 pairs unresolved and 4 extra resources. Inventoried the 11 IMAGE_ONLY console screenshots as the vision queue, authored code/evaluation/sql_schema_inventory.md and code/evaluation/sql_join_report.md, and added 3 unit tests passing all 42 test suite cases.
+
+Actions:
+* Inventories 24 SQL database dump files across 127 table instances in dataset/evidence/databases/
+* Extracted CREATE TABLE statements, verified 0 declared foreign keys, and mapped all primary keys
+* Built table join graph with 20 inferred edges across 11 connected components
+* Searched join paths of length 1 to 4 (found 2 length-1 paths, cap did not cut off any path)
+* Materialized code/evaluation/sql_subject_resource_links.csv containing SQL joins and line co-occurrences
+* Ran Step 6 isolated comparison on sample_output.csv (0 by join, 38 by line co-occurrence, 73 neither, 4 extra)
+* Built image input queue for the 11 IMAGE_ONLY screenshot files
+* Authored code/evaluation/sql_schema_inventory.md and code/evaluation/sql_join_report.md
+* Added code/tests/test_sql_join_scan.py (synthetic 2-hop fixture, inferred edge fixture, answer-key isolation)
+* Executed pytest test suite (42/42 passed in 7.74s)
+
+Context:
+tool=antigravity-ide
+model=Gemini 3.8 Flash (Medium)
+branch=main
+repo_root=/Users/harshitrajsingh/nullTrace/hackerrank-orchestrate-october26
+worktree=main
+parent_agent=none
+
+### Diagnostic Results Summary (Step H)
+
+#### 1. SQL Schema Inventory
+- Total SQL snapshot files: 24
+- Distinct tables defined: 18
+- Total table instances across files: 127
+- Files with declared foreign keys: 0
+
+#### 2. Join Graph & Connected Components
+- Total edges discovered: 20 (0 declared, 20 inferred)
+- Total connected components: 11
+  - Component 4 (7 tables): `customer_data_failover_replica, customer_data_primary, customer_data_read_replica, customer_data_replica_ap_south, customer_data_replica_eu_west, customer_data_reporting_replica, snapshot_scope` (resource column present; subject data stored as embedded JSON strings)
+  - Component 7 (2 tables): `customer_profiles_failover_replica, customer_profiles_primary` (subject columns user_id, email, phone present; resource_id present)
+  - Components 1-3, 5-6, 8-11: 9 isolated 1-table components (`customer_profiles`, `customer_search_documents`, `customer_analytics_profiles`, `support_records`, `customer_exports`, `connector_subscriptions`, `backup_restore_entries`, `security_audit_records`, `search_documents_primary`), each containing subject columns and resource columns but zero foreign keys.
+
+#### 3. Path Search (Length 1 to 4)
+- Length 1 paths: 2 (`customer_profiles_failover_replica.resource_id -> customer_profiles_primary.resource_id` and reverse)
+- Length 2, 3, 4 paths: 0
+- Cap cutoff: False (no paths cut off by the length-4 cap)
+
+#### 4. Step 6 Scoring-Only Comparison (32 Sample Cases, 111 Expected Pairs)
+- Reachable by SQL join path: 0
+- Reachable only by LINE_COOCCURRENCE: 38 (34.2%)
+- Reachable by neither: 73 (65.8%)
+- Extra resources reachable from cluster: 4
+
+#### 5. Image Input Queue (11 IMAGE_ONLY Files)
+- `evidence_04`: `evidence/images/account_admin_console_20260926.png` (124,989 bytes, account_admin_portal)
+- `evidence_09`: `evidence/images/search_index_inspector_20260901.png` (121,101 bytes, search_index_admin)
+- `evidence_14`: `evidence/images/connector_management_console_20260807.png` (130,271 bytes, integration_admin)
+- `evidence_19`: `evidence/images/analytics_profile_view_20260713.png` (129,362 bytes, analytics_platform)
+- `evidence_23`: `evidence/images/customer_export_console_20260618.png` (134,597 bytes, export_service)
+- `evidence_28`: `evidence/images/support_ticket_console_20260524.png` (135,008 bytes, support_platform)
+- `evidence_32`: `evidence/images/backup_restore_console_20260429.png` (155,587 bytes, backup_service)
+- `evidence_37`: `evidence/images/security_audit_explorer_20260905.png` (147,699 bytes, security_service)
+- `evidence_42`: `evidence/images/deleted_account_reference_20260310.png` (136,696 bytes, identity_service)
+- `evidence_46`: `evidence/images/object_storage_browser_20260213.png` (154,193 bytes, object_storage)
+- `evidence_60`: `evidence/images/marketing_profile_console.png` (129,711 bytes, marketing_platform)
 
