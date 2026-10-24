@@ -1,0 +1,873 @@
+{
+  "file_id": "evidence_32",
+  "cache_key": "evidence_32_2c246aa5843bec60_apple_vision_v1.0",
+  "created_at": "2026-10-24T21:11:55.111727+00:00",
+  "provider": "apple_vision",
+  "runtime": "macOS_Swift_Vision",
+  "version": "v1.0",
+  "source_file": "evidence/images/backup_restore_console_20260429.png",
+  "image_sha256": "2c246aa5843bec609b9ddfdf1154cd81e0fd61996f83954735e9856e48c18bf3",
+  "blocks_extracted": 92,
+  "observations_count": 5,
+  "execution_metrics": {
+    "network_calls": 0,
+    "api_calls": 0,
+    "cost_usd": 0.0,
+    "elapsed_seconds": 0.5849
+  },
+  "raw_blocks": [
+    {
+      "text": "Northstar Shop",
+      "confidence": 1.0,
+      "x": 0.03052325383669835,
+      "y": 0.9613636368549557,
+      "width": 0.07122093200683592,
+      "height": 0.01602766783341114
+    },
+    {
+      "text": "\u2022 Overview",
+      "confidence": 1.0,
+      "x": 0.012958043663323994,
+      "y": 0.8990029886818263,
+      "width": 0.04966530693901909,
+      "height": 0.01790311481641682
+    },
+    {
+      "text": "Recovery Manager",
+      "confidence": 1.0,
+      "x": 0.014534884901290263,
+      "y": 0.8613636368549558,
+      "width": 0.07994185553656684,
+      "height": 0.01602766783341114
+    },
+    {
+      "text": "_ Customer platforms",
+      "confidence": 1.0,
+      "x": 0.014534884702476512,
+      "y": 0.8204545454155618,
+      "width": 0.08284883287217881,
+      "height": 0.01606719390205713
+    },
+    {
+      "text": "Restore requests",
+      "confidence": 1.0,
+      "x": 0.014534888012095955,
+      "y": 0.7817391300206941,
+      "width": 0.07412790086534288,
+      "height": 0.01598814259404724
+    },
+    {
+      "text": "\u2022 Infrastructure",
+      "confidence": 1.0,
+      "x": 0.013081396000399311,
+      "y": 0.7431818184932133,
+      "width": 0.06395348866780598,
+      "height": 0.01594861652540125
+    },
+    {
+      "text": "\u2022 Reports",
+      "confidence": 1.0,
+      "x": 0.013006290666190412,
+      "y": 0.7040260481519901,
+      "width": 0.04375486161973741,
+      "height": 0.016947904669720182
+    },
+    {
+      "text": "Vault Recovery Manager",
+      "confidence": 1.0,
+      "x": 0.13517442116497339,
+      "y": 0.9659090912488951,
+      "width": 0.09447674221462674,
+      "height": 0.01590909045675526
+    },
+    {
+      "text": "o Search archives, accounts or restore requests...",
+      "confidence": 1.0,
+      "x": 0.26017442621546694,
+      "y": 0.9659090910602377,
+      "width": 0.18459301418728297,
+      "height": 0.013636363485585168
+    },
+    {
+      "text": "Northstar Shop / Vault Recovery Manager / Recovery Manager",
+      "confidence": 1.0,
+      "x": 0.1366279135985065,
+      "y": 0.9156521737630016,
+      "width": 0.19622092352973092,
+      "height": 0.013913043478260834
+    },
+    {
+      "text": "Customer-platform archives",
+      "confidence": 1.0,
+      "x": 0.13517442551813322,
+      "y": 0.8860869561830398,
+      "width": 0.17877905951605902,
+      "height": 0.02086956521739136
+    },
+    {
+      "text": "Northstar Production \u2022 weekly snapshots",
+      "confidence": 1.0,
+      "x": 0.13517442310882485,
+      "y": 0.8678260870701581,
+      "width": 0.13953487820095486,
+      "height": 0.013992094786270837
+    },
+    {
+      "text": "Healthy",
+      "confidence": 1.0,
+      "x": 0.3212209300909708,
+      "y": 0.8954545454162983,
+      "width": 0.029069766998291058,
+      "height": 0.013636363485585168
+    },
+    {
+      "text": "Archives",
+      "confidence": 1.0,
+      "x": 0.1366279084953998,
+      "y": 0.8340909095437972,
+      "width": 0.031976742214626735,
+      "height": 0.011363635685132878
+    },
+    {
+      "text": "Recent restores",
+      "confidence": 1.0,
+      "x": 0.18168604841871627,
+      "y": 0.8339130434788133,
+      "width": 0.05232557932535806,
+      "height": 0.0115415017501167
+    },
+    {
+      "text": "Infrastructure health",
+      "confidence": 1.0,
+      "x": 0.24563953755013712,
+      "y": 0.8339130434788133,
+      "width": 0.06831395043267141,
+      "height": 0.0115415017501167
+    },
+    {
+      "text": "Service health",
+      "confidence": 1.0,
+      "x": 0.14244186299036307,
+      "y": 0.7860869564092077,
+      "width": 0.04505813598632813,
+      "height": 0.011640316092449643
+    },
+    {
+      "text": "Healthy",
+      "confidence": 1.0,
+      "x": 0.14389535010860155,
+      "y": 0.7636363639761679,
+      "width": 0.03488371955023872,
+      "height": 0.01590909045675526
+    },
+    {
+      "text": "Storage growth",
+      "confidence": 1.0,
+      "x": 0.3575581389693544,
+      "y": 0.786086956727968,
+      "width": 0.04651162889268662,
+      "height": 0.011640316092449643
+    },
+    {
+      "text": "+12.4%",
+      "confidence": 1.0,
+      "x": 0.35755814080627596,
+      "y": 0.7659090910602377,
+      "width": 0.03488371955023872,
+      "height": 0.013636363485585168
+    },
+    {
+      "text": "Archives",
+      "confidence": 1.0,
+      "x": 0.14534883753508338,
+      "y": 0.700000000424479,
+      "width": 0.03197674433390299,
+      "height": 0.011363635685132878
+    },
+    {
+      "text": "Archive ID",
+      "confidence": 1.0,
+      "x": 0.14244186157549873,
+      "y": 0.665909091390388,
+      "width": 0.033430230882432715,
+      "height": 0.01148221306178887
+    },
+    {
+      "text": "Account",
+      "confidence": 1.0,
+      "x": 0.2514534888169163,
+      "y": 0.668181818288681,
+      "width": 0.026162789662679042,
+      "height": 0.004545454356981393
+    },
+    {
+      "text": "Region",
+      "confidence": 1.0,
+      "x": 0.4156976746454047,
+      "y": 0.6636363638822074,
+      "width": 0.026162789662679042,
+      "height": 0.013636363485585168
+    },
+    {
+      "text": "1] backup_9291",
+      "confidence": 1.0,
+      "x": 0.14389535026689865,
+      "y": 0.6318181820072075,
+      "width": 0.05523255666097007,
+      "height": 0.013636363485585057
+    },
+    {
+      "text": "bluepeakco@outlook.com",
+      "confidence": 1.0,
+      "x": 0.2514534898370945,
+      "y": 0.6340909093449336,
+      "width": 0.07994185553656685,
+      "height": 0.011363635685132767
+    },
+    {
+      "text": "ap-southeast-1",
+      "confidence": 1.0,
+      "x": 0.4156976764276076,
+      "y": 0.634090909393571,
+      "width": 0.04941860198974607,
+      "height": 0.013636363485585057
+    },
+    {
+      "text": "2 backup_9288",
+      "confidence": 1.0,
+      "x": 0.14389534949939717,
+      "y": 0.5973913043705685,
+      "width": 0.05668604532877605,
+      "height": 0.011699604780777695
+    },
+    {
+      "text": "miller.logistics@company.com",
+      "confidence": 1.0,
+      "x": 0.25145349093241526,
+      "y": 0.5977272731801608,
+      "width": 0.09447674221462676,
+      "height": 0.011363635685132989
+    },
+    {
+      "text": "1C-WACT7",
+      "confidence": 0.3,
+      "x": 0.417151162644095,
+      "y": 0.6022727273772945,
+      "width": 0.03197674433390302,
+      "height": 0.004545454356981282
+    },
+    {
+      "text": "3 backup_9287",
+      "confidence": 1.0,
+      "x": 0.1438953496297863,
+      "y": 0.5613636362693077,
+      "width": 0.055232556660970045,
+      "height": 0.011679842161095522
+    },
+    {
+      "text": "eu-west-1",
+      "confidence": 1.0,
+      "x": 0.4156976756899969,
+      "y": 0.5636363640892517,
+      "width": 0.03488371955023872,
+      "height": 0.011363635685132989
+    },
+    {
+      "text": "4 backup_9286",
+      "confidence": 1.0,
+      "x": 0.14389535013721078,
+      "y": 0.5250000001890256,
+      "width": 0.05668604532877605,
+      "height": 0.013636363485585168
+    },
+    {
+      "text": "summit-retail@company.com",
+      "confidence": 1.0,
+      "x": 0.25145348880854956,
+      "y": 0.5272727276972063,
+      "width": 0.09011628044976128,
+      "height": 0.011363635685132878
+    },
+    {
+      "text": "us-east-1",
+      "confidence": 1.0,
+      "x": 0.41708717155251696,
+      "y": 0.5269137976827036,
+      "width": 0.030651238759358712,
+      "height": 0.014354223168414615
+    },
+    {
+      "text": "Vault Recoveru Manager",
+      "confidence": 1.0,
+      "x": 0.01017442029376398,
+      "y": 0.06136363649501497,
+      "width": 0.07267440795898439,
+      "height": 0.006818181328151596
+    },
+    {
+      "text": "Production workspace",
+      "confidence": 1.0,
+      "x": 0.01162790646050031,
+      "y": 0.045217391314229305,
+      "width": 0.06686046600341797,
+      "height": 0.009565217391304337
+    },
+    {
+      "text": "build 2026 10 4",
+      "confidence": 1.0,
+      "x": 0.011627906411214823,
+      "y": 0.03181818202085951,
+      "width": 0.04651162889268663,
+      "height": 0.009090908713962675
+    },
+    {
+      "text": "Created",
+      "confidence": 1.0,
+      "x": 0.5116279074215675,
+      "y": 0.6659090908652673,
+      "width": 0.02616278966267893,
+      "height": 0.011363636514414854
+    },
+    {
+      "text": "26 Apr 02:00",
+      "confidence": 1.0,
+      "x": 0.5101744176807651,
+      "y": 0.6339130436661817,
+      "width": 0.043604651557074714,
+      "height": 0.011541501335475601
+    },
+    {
+      "text": "26 Apr 02:00",
+      "confidence": 1.0,
+      "x": 0.5101744182621604,
+      "y": 0.5973913041961267,
+      "width": 0.0436046515570746,
+      "height": 0.011699604366136707
+    },
+    {
+      "text": "26 Apr 02:00",
+      "confidence": 1.0,
+      "x": 0.511627907629978,
+      "y": 0.5634782610585909,
+      "width": 0.04215116288926868,
+      "height": 0.011521738715793761
+    },
+    {
+      "text": "26 Apr 02:00",
+      "confidence": 1.0,
+      "x": 0.5101744191342533,
+      "y": 0.5269565216642936,
+      "width": 0.0436046515570746,
+      "height": 0.011679841746454644
+    },
+    {
+      "text": "Restore success",
+      "confidence": 1.0,
+      "x": 0.5712209321809991,
+      "y": 0.7860869563807986,
+      "width": 0.049418601989746125,
+      "height": 0.011640316092449643
+    },
+    {
+      "text": "99.6%",
+      "confidence": 1.0,
+      "x": 0.5712043484106599,
+      "y": 0.7658177767846038,
+      "width": 0.030556420220269165,
+      "height": 0.013818992117176965
+    },
+    {
+      "text": "Size",
+      "confidence": 1.0,
+      "x": 0.5959302328143807,
+      "y": 0.6636363638026621,
+      "width": 0.014534883499145557,
+      "height": 0.013636363485584946
+    },
+    {
+      "text": "102.3 GB",
+      "confidence": 1.0,
+      "x": 0.5943912543949056,
+      "y": 0.633500329094795,
+      "width": 0.030694234636094775,
+      "height": 0.01254479657048757
+    },
+    {
+      "text": "67.1 GB",
+      "confidence": 1.0,
+      "x": 0.5944767444612962,
+      "y": 0.5973913047236676,
+      "width": 0.026162789662679042,
+      "height": 0.013972331337306798
+    },
+    {
+      "text": "84.7 GB",
+      "confidence": 1.0,
+      "x": 0.5944767442892148,
+      "y": 0.5613636362117529,
+      "width": 0.027616278330485078,
+      "height": 0.013636363485585168
+    },
+    {
+      "text": "91.4 GB",
+      "confidence": 1.0,
+      "x": 0.5944767442674977,
+      "y": 0.5269565218516619,
+      "width": 0.026162789662679042,
+      "height": 0.011679841331813767
+    },
+    {
+      "text": "Production Help",
+      "confidence": 1.0,
+      "x": 0.9084302339707013,
+      "y": 0.9678260870322793,
+      "width": 0.058139533996582005,
+      "height": 0.013992094786270726
+    },
+    {
+      "text": "Filter",
+      "confidence": 1.0,
+      "x": 0.8851744187675417,
+      "y": 0.8931818186062972,
+      "width": 0.01598837216695148,
+      "height": 0.011363635685132878
+    },
+    {
+      "text": "Export",
+      "confidence": 1.0,
+      "x": 0.9186046509915453,
+      "y": 0.8931818181443077,
+      "width": 0.021802325778537357,
+      "height": 0.011363636514414854
+    },
+    {
+      "text": "Actions",
+      "confidence": 1.0,
+      "x": 0.9549418605950171,
+      "y": 0.8931818184844802,
+      "width": 0.026162789662679042,
+      "height": 0.013636363485585057
+    },
+    {
+      "text": "Stored",
+      "confidence": 1.0,
+      "x": 0.7848837211950336,
+      "y": 0.7863636368165244,
+      "width": 0.021802325778537357,
+      "height": 0.011363635685132878
+    },
+    {
+      "text": "1.35 PB",
+      "confidence": 1.0,
+      "x": 0.7833861239449637,
+      "y": 0.7634273063942422,
+      "width": 0.03497193866305881,
+      "height": 0.018599933126698387
+    },
+    {
+      "text": "Updated moments ago \u2022 4 records",
+      "confidence": 1.0,
+      "x": 0.6758720941171572,
+      "y": 0.6999999998393834,
+      "width": 0.10174418131510421,
+      "height": 0.011363636099773866
+    },
+    {
+      "text": "Encryption",
+      "confidence": 1.0,
+      "x": 0.6584302326460648,
+      "y": 0.6636363635981166,
+      "width": 0.03633720821804476,
+      "height": 0.013636363485585057
+    },
+    {
+      "text": "AES-256",
+      "confidence": 1.0,
+      "x": 0.6584302324165521,
+      "y": 0.6340909093449336,
+      "width": 0.029069766998291002,
+      "height": 0.011363635685132767
+    },
+    {
+      "text": "AES-256",
+      "confidence": 1.0,
+      "x": 0.6584302327072498,
+      "y": 0.6000000002112005,
+      "width": 0.029069766998291002,
+      "height": 0.009090908713962675
+    },
+    {
+      "text": "AES-256",
+      "confidence": 1.0,
+      "x": 0.6584302322954281,
+      "y": 0.563636363861979,
+      "width": 0.029069766998291002,
+      "height": 0.011363635685132989
+    },
+    {
+      "text": "AES-256",
+      "confidence": 1.0,
+      "x": 0.6583530948798988,
+      "y": 0.5267692197844769,
+      "width": 0.029224041832817904,
+      "height": 0.01237065107926072
+    },
+    {
+      "text": "Tier",
+      "confidence": 1.0,
+      "x": 0.732558139403528,
+      "y": 0.6659090911347063,
+      "width": 0.014534883499145446,
+      "height": 0.011363635685132878
+    },
+    {
+      "text": "Archive",
+      "confidence": 1.0,
+      "x": 0.7325581404884279,
+      "y": 0.6340909095437972,
+      "width": 0.026162789662679042,
+      "height": 0.011363635685132767
+    },
+    {
+      "text": "Archive",
+      "confidence": 1.0,
+      "x": 0.7325581397884161,
+      "y": 0.563636363861979,
+      "width": 0.024709300994873118,
+      "height": 0.011363635685132989
+    },
+    {
+      "text": "Archive",
+      "confidence": 1.0,
+      "x": 0.7325581404884279,
+      "y": 0.5272727277256154,
+      "width": 0.026162789662679042,
+      "height": 0.011363635685132878
+    },
+    {
+      "text": "backup_9287",
+      "confidence": 1.0,
+      "x": 0.7993582897685112,
+      "y": 0.6972414234109297,
+      "width": 0.05099272410074873,
+      "height": 0.016880790047023586
+    },
+    {
+      "text": "Account",
+      "confidence": 1.0,
+      "x": 0.7994186046574319,
+      "y": 0.6590909093935711,
+      "width": 0.027616278330485078,
+      "height": 0.013636363485585168
+    },
+    {
+      "text": "Path",
+      "confidence": 1.0,
+      "x": 0.799418605362041,
+      "y": 0.629545454393571,
+      "width": 0.015988371107313437,
+      "height": 0.013636363485585168
+    },
+    {
+      "text": "Region",
+      "confidence": 1.0,
+      "x": 0.7979651158166535,
+      "y": 0.5727272730031565,
+      "width": 0.024709303114149317,
+      "height": 0.01590909045675515
+    },
+    {
+      "text": "Created",
+      "confidence": 1.0,
+      "x": 0.7979651167431024,
+      "y": 0.5454545457754103,
+      "width": 0.029069766998291002,
+      "height": 0.01590909045675515
+    },
+    {
+      "text": "Encryption",
+      "confidence": 1.0,
+      "x": 0.7979651171240203,
+      "y": 0.5159090912299557,
+      "width": 0.03633720821804476,
+      "height": 0.01590909045675526
+    },
+    {
+      "text": "Checksum",
+      "confidence": 1.0,
+      "x": 0.7994186058233186,
+      "y": 0.49090909107538927,
+      "width": 0.03343023088243269,
+      "height": 0.013636363485585168
+    },
+    {
+      "text": "Last drill",
+      "confidence": 1.0,
+      "x": 0.7993998228623879,
+      "y": 0.46352372719116586,
+      "width": 0.02765384250217018,
+      "height": 0.011588909315026319
+    },
+    {
+      "text": "Retention end",
+      "confidence": 1.0,
+      "x": 0.7994186071764096,
+      "y": 0.43636363662786704,
+      "width": 0.04505813598632813,
+      "height": 0.009090908713962786
+    },
+    {
+      "text": "Activity",
+      "confidence": 1.0,
+      "x": 0.7994186045605327,
+      "y": 0.3931818184074335,
+      "width": 0.027616278330484967,
+      "height": 0.011363635685132878
+    },
+    {
+      "text": "\u2022 25 Apr",
+      "confidence": 1.0,
+      "x": 0.7994186059225551,
+      "y": 0.3704347826471269,
+      "width": 0.03488371955023861,
+      "height": 0.013913043063619845
+    },
+    {
+      "text": "backun 9286 restored . Comnleted",
+      "confidence": 1.0,
+      "x": 0.8095930327528206,
+      "y": 0.3634782607570338,
+      "width": 0.10319766574435763,
+      "height": 0.006976284566132973
+    },
+    {
+      "text": "\u2022 24 Apr",
+      "confidence": 1.0,
+      "x": 0.7994186059225551,
+      "y": 0.3318181820450863,
+      "width": 0.03488371955023861,
+      "height": 0.013636363485585057
+    },
+    {
+      "text": "haskin ca roctaror, Comniotor",
+      "confidence": 0.5,
+      "x": 0.8110465119495166,
+      "y": 0.3250000000975305,
+      "width": 0.10029069688585068,
+      "height": 0.004565217391304333
+    },
+    {
+      "text": "\u2022 22 Apr",
+      "confidence": 1.0,
+      "x": 0.7994186057772061,
+      "y": 0.29304347837450584,
+      "width": 0.03488371955023872,
+      "height": 0.013913043478260945
+    },
+    {
+      "text": "checksum verification. Completed",
+      "confidence": 1.0,
+      "x": 0.8110465129124526,
+      "y": 0.2817391302927371,
+      "width": 0.10029069688585068,
+      "height": 0.01144268740778387
+    },
+    {
+      "text": "areed1433@gmail.com",
+      "confidence": 1.0,
+      "x": 0.8633720927670028,
+      "y": 0.6568181820072074,
+      "width": 0.07412790934244795,
+      "height": 0.013636363485585168
+    },
+    {
+      "text": "s://northstar-backups/customer-",
+      "confidence": 1.0,
+      "x": 0.8619186060570533,
+      "y": 0.6272727273570878,
+      "width": 0.11046511332194009,
+      "height": 0.013636363485585057
+    },
+    {
+      "text": "platform/weekly/segment-42-",
+      "confidence": 1.0,
+      "x": 0.8619186040572451,
+      "y": 0.6159090912117529,
+      "width": 0.09738371955023872,
+      "height": 0.013636363485585168
+    },
+    {
+      "text": "20260426.tar.zst",
+      "confidence": 1.0,
+      "x": 0.8619186055428059,
+      "y": 0.6000000003398043,
+      "width": 0.05959302266438804,
+      "height": 0.01590909045675515
+    },
+    {
+      "text": "eu-west-1",
+      "confidence": 1.0,
+      "x": 0.8633720925840999,
+      "y": 0.5749999999493143,
+      "width": 0.03488372166951492,
+      "height": 0.011363636514414965
+    },
+    {
+      "text": "26 Apr 2026 02:00 UTC",
+      "confidence": 1.0,
+      "x": 0.8633720944972154,
+      "y": 0.5452173908902592,
+      "width": 0.07848837110731333,
+      "height": 0.013913043892901933
+    },
+    {
+      "text": "AES-256",
+      "confidence": 1.0,
+      "x": 0.8633720927156433,
+      "y": 0.5181818184358427,
+      "width": 0.030523255666097038,
+      "height": 0.011363635685132989
+    },
+    {
+      "text": "Verified",
+      "confidence": 1.0,
+      "x": 0.8633720937381005,
+      "y": 0.49090909133356986,
+      "width": 0.027616278330485078,
+      "height": 0.011363635685132878
+    },
+    {
+      "text": "29 Mar 2026",
+      "confidence": 1.0,
+      "x": 0.8633720922810557,
+      "y": 0.4613636366176608,
+      "width": 0.0436046515570746,
+      "height": 0.011679841746454644
+    },
+    {
+      "text": "26 Jul 2026",
+      "confidence": 1.0,
+      "x": 0.8633720936305478,
+      "y": 0.43391304345040427,
+      "width": 0.04069767422146264,
+      "height": 0.0115415017501167
+    }
+  ],
+  "parsed_observations": [
+    {
+      "source_file": "evidence/images/backup_restore_console_20260429.png",
+      "file_id": "evidence_32",
+      "evidence_id": "evidence_32",
+      "source_location": "visual_box:x=0.144,y=0.632,w=0.055,h=0.014",
+      "observation_type": "APPLE_VISION_OCR_RECORD",
+      "extraction_method": "APPLE_VISION",
+      "confidence": "MEDIUM",
+      "timestamp": "2026-04-29T09:00:00+00:00",
+      "resource_id": "backup_9291",
+      "system_id": "backup_service",
+      "associated_identifiers": {
+        "email": "bluepeakco@outlook.com"
+      },
+      "observed_state": "PRESENT",
+      "raw_payload": {
+        "ocr_text": "1] backup_9291",
+        "confidence": 1.0
+      },
+      "ambiguity_flags": [
+        "APPLE_VISION_LOCAL_OCR"
+      ]
+    },
+    {
+      "source_file": "evidence/images/backup_restore_console_20260429.png",
+      "file_id": "evidence_32",
+      "evidence_id": "evidence_32",
+      "source_location": "visual_box:x=0.144,y=0.597,w=0.057,h=0.012",
+      "observation_type": "APPLE_VISION_OCR_RECORD",
+      "extraction_method": "APPLE_VISION",
+      "confidence": "MEDIUM",
+      "timestamp": "2026-04-29T09:00:00+00:00",
+      "resource_id": "backup_9288",
+      "system_id": "backup_service",
+      "associated_identifiers": {
+        "email": "miller.logistics@company.com"
+      },
+      "observed_state": "PRESENT",
+      "raw_payload": {
+        "ocr_text": "2 backup_9288",
+        "confidence": 1.0
+      },
+      "ambiguity_flags": [
+        "APPLE_VISION_LOCAL_OCR"
+      ]
+    },
+    {
+      "source_file": "evidence/images/backup_restore_console_20260429.png",
+      "file_id": "evidence_32",
+      "evidence_id": "evidence_32",
+      "source_location": "visual_box:x=0.144,y=0.561,w=0.055,h=0.012",
+      "observation_type": "APPLE_VISION_OCR_RECORD",
+      "extraction_method": "APPLE_VISION",
+      "confidence": "MEDIUM",
+      "timestamp": "2026-04-29T09:00:00+00:00",
+      "resource_id": "backup_9287",
+      "system_id": "backup_service",
+      "associated_identifiers": {
+        "email": "summit-retail@company.com"
+      },
+      "observed_state": "PRESENT",
+      "raw_payload": {
+        "ocr_text": "3 backup_9287",
+        "confidence": 1.0
+      },
+      "ambiguity_flags": [
+        "APPLE_VISION_LOCAL_OCR"
+      ]
+    },
+    {
+      "source_file": "evidence/images/backup_restore_console_20260429.png",
+      "file_id": "evidence_32",
+      "evidence_id": "evidence_32",
+      "source_location": "visual_box:x=0.144,y=0.525,w=0.057,h=0.014",
+      "observation_type": "APPLE_VISION_OCR_RECORD",
+      "extraction_method": "APPLE_VISION",
+      "confidence": "MEDIUM",
+      "timestamp": "2026-04-29T09:00:00+00:00",
+      "resource_id": "backup_9286",
+      "system_id": "backup_service",
+      "associated_identifiers": {
+        "email": "summit-retail@company.com"
+      },
+      "observed_state": "PRESENT",
+      "raw_payload": {
+        "ocr_text": "4 backup_9286",
+        "confidence": 1.0
+      },
+      "ambiguity_flags": [
+        "APPLE_VISION_LOCAL_OCR"
+      ]
+    },
+    {
+      "source_file": "evidence/images/backup_restore_console_20260429.png",
+      "file_id": "evidence_32",
+      "evidence_id": "evidence_32",
+      "source_location": "visual_box:x=0.799,y=0.697,w=0.051,h=0.017",
+      "observation_type": "APPLE_VISION_OCR_RECORD",
+      "extraction_method": "APPLE_VISION",
+      "confidence": "MEDIUM",
+      "timestamp": "2026-04-29T09:00:00+00:00",
+      "resource_id": "backup_9287",
+      "system_id": "backup_service",
+      "associated_identifiers": {
+        "email": "areed1433@gmail.com"
+      },
+      "observed_state": "PRESENT",
+      "raw_payload": {
+        "ocr_text": "backup_9287",
+        "confidence": 1.0
+      },
+      "ambiguity_flags": [
+        "APPLE_VISION_LOCAL_OCR"
+      ]
+    }
+  ]
+}

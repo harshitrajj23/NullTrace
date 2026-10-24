@@ -1,0 +1,682 @@
+{
+  "file_id": "evidence_28",
+  "cache_key": "evidence_28_542b7aec17e6b2f3_apple_vision_v1.0",
+  "created_at": "2026-10-24T21:11:54.557997+00:00",
+  "provider": "apple_vision",
+  "runtime": "macOS_Swift_Vision",
+  "version": "v1.0",
+  "source_file": "evidence/images/support_ticket_console_20260524.png",
+  "image_sha256": "542b7aec17e6b2f38827896e7eb52c70e4bfaaca22433621be1f80f54884e944",
+  "blocks_extracted": 74,
+  "observations_count": 3,
+  "execution_metrics": {
+    "network_calls": 0,
+    "api_calls": 0,
+    "cost_usd": 0.0,
+    "elapsed_seconds": 0.5516
+  },
+  "raw_blocks": [
+    {
+      "text": "Northstar Shop",
+      "confidence": 1.0,
+      "x": 0.030385762865909795,
+      "y": 0.9625072033289963,
+      "width": 0.07156033833821614,
+      "height": 0.015957153638203936
+    },
+    {
+      "text": "Helpline Console",
+      "confidence": 1.0,
+      "x": 0.1351744193865478,
+      "y": 0.969166667045555,
+      "width": 0.06540697309705948,
+      "height": 0.013404138882954997
+    },
+    {
+      "text": "o Search tickets, customers, orders...",
+      "confidence": 1.0,
+      "x": 0.26017442144731223,
+      "y": 0.9691666667990722,
+      "width": 0.14098837110731338,
+      "height": 0.01122548977533977
+    },
+    {
+      "text": "\u2022 Inbox",
+      "confidence": 1.0,
+      "x": 0.013081396345192755,
+      "y": 0.9016666670145371,
+      "width": 0.0363372082180447,
+      "height": 0.017723310788472557
+    },
+    {
+      "text": "My tickets",
+      "confidence": 1.0,
+      "x": 0.014534885539683242,
+      "y": 0.8671023966153022,
+      "width": 0.05087209065755209,
+      "height": 0.013071895440419534
+    },
+    {
+      "text": "Assigned to me",
+      "confidence": 1.0,
+      "x": 0.029069769001237724,
+      "y": 0.8299999998141927,
+      "width": 0.053779067993164065,
+      "height": 0.010958605607350624
+    },
+    {
+      "text": "Mentions",
+      "confidence": 1.0,
+      "x": 0.014534885998913644,
+      "y": 0.7908496733686843,
+      "width": 0.0479651133219401,
+      "height": 0.01525054454803465
+    },
+    {
+      "text": "\u2022 Customer search",
+      "confidence": 1.0,
+      "x": 0.013081394877715237,
+      "y": 0.7538126361137822,
+      "width": 0.0755813937717014,
+      "height": 0.015354030927022255
+    },
+    {
+      "text": "\u2022 Knowledge base",
+      "confidence": 1.0,
+      "x": 0.013081395221877823,
+      "y": 0.7166666664226823,
+      "width": 0.07267441643608942,
+      "height": 0.015359477202097627
+    },
+    {
+      "text": "Reports",
+      "confidence": 1.0,
+      "x": 0.014475569790005348,
+      "y": 0.6792943347049052,
+      "width": 0.04226979149712457,
+      "height": 0.013960350354512485
+    },
+    {
+      "text": "Northstar Shop / Helpline Console / Inbox",
+      "confidence": 1.0,
+      "x": 0.13662791225904514,
+      "y": 0.9215686278573237,
+      "width": 0.13081394619411896,
+      "height": 0.010931372245152837
+    },
+    {
+      "text": "CS-5034 \u2022 Where is my delivery?",
+      "confidence": 1.0,
+      "x": 0.1351744273505001,
+      "y": 0.8908333332162396,
+      "width": 0.21075580173068578,
+      "height": 0.02202069679896035
+    },
+    {
+      "text": "(SLA 01:42",
+      "confidence": 1.0,
+      "x": 0.3444767467112933,
+      "y": 0.9016666668197507,
+      "width": 0.04505813598632813,
+      "height": 0.011187363465626987
+    },
+    {
+      "text": "support_1034 \u2022 Kofi Agyeman \u2022 Normal priority",
+      "confidence": 1.0,
+      "x": 0.1366279060002448,
+      "y": 0.8733333332347895,
+      "width": 0.15697674221462674,
+      "height": 0.013376906315485715
+    },
+    {
+      "text": "Conversation",
+      "confidence": 1.0,
+      "x": 0.13662790937835925,
+      "y": 0.8409586060980645,
+      "width": 0.04651162465413411,
+      "height": 0.010893245538075802
+    },
+    {
+      "text": "Internal notes",
+      "confidence": 1.0,
+      "x": 0.19622093125586698,
+      "y": 0.840833333208818,
+      "width": 0.04505813598632813,
+      "height": 0.011018518209457318
+    },
+    {
+      "text": "Activity",
+      "confidence": 1.0,
+      "x": 0.25571331426990085,
+      "y": 0.8404212769668303,
+      "width": 0.024910581376817453,
+      "height": 0.011967903772989952
+    },
+    {
+      "text": "Customer",
+      "confidence": 1.0,
+      "x": 0.14242003237910203,
+      "y": 0.7950611445744555,
+      "width": 0.03202040142483181,
+      "height": 0.011184900601704961
+    },
+    {
+      "text": "Kofi Agyeman",
+      "confidence": 0.5,
+      "x": 0.1438953500025076,
+      "y": 0.7733333335045974,
+      "width": 0.06104651133219399,
+      "height": 0.015337690512339242
+    },
+    {
+      "text": "Email",
+      "confidence": 1.0,
+      "x": 0.35755813941613074,
+      "y": 0.7952069715553249,
+      "width": 0.01744186083475746,
+      "height": 0.010893246332804307
+    },
+    {
+      "text": "kagyeman8947@fastmail.com",
+      "confidence": 1.0,
+      "x": 0.3575581402515973,
+      "y": 0.773420479468902,
+      "width": 0.13081395467122392,
+      "height": 0.01525054454803465
+    },
+    {
+      "text": "Conversation",
+      "confidence": 1.0,
+      "x": 0.14534883928743111,
+      "y": 0.7124183010599381,
+      "width": 0.04796511332194009,
+      "height": 0.010893245538075802
+    },
+    {
+      "text": "Time",
+      "confidence": 1.0,
+      "x": 0.14244186035547776,
+      "y": 0.6819172112799574,
+      "width": 0.01598837216695148,
+      "height": 0.004357298612594596
+    },
+    {
+      "text": "1 | 09:12",
+      "confidence": 1.0,
+      "x": 0.14389534948377192,
+      "y": 0.6466666664643848,
+      "width": 0.031976742214626735,
+      "height": 0.013464051882425832
+    },
+    {
+      "text": "209:13",
+      "confidence": 1.0,
+      "x": 0.14389534883249477,
+      "y": 0.6143790848686637,
+      "width": 0.03197674433390299,
+      "height": 0.010893246332804418
+    },
+    {
+      "text": "3 09:28",
+      "confidence": 1.0,
+      "x": 0.1438953484821881,
+      "y": 0.5791666664746007,
+      "width": 0.033430233001709,
+      "height": 0.011247276862462408
+    },
+    {
+      "text": "4 09:35",
+      "confidence": 1.0,
+      "x": 0.1438047743463977,
+      "y": 0.5441208541073999,
+      "width": 0.03361138237847222,
+      "height": 0.014154806137084863
+    },
+    {
+      "text": "Sender",
+      "confidence": 1.0,
+      "x": 0.2267441863484937,
+      "y": 0.6797385625977014,
+      "width": 0.024709300994873062,
+      "height": 0.010893245538075802
+    },
+    {
+      "text": "Kofi Agyeman",
+      "confidence": 0.5,
+      "x": 0.2267441853043115,
+      "y": 0.649166666665479,
+      "width": 0.04360465155707466,
+      "height": 0.010964051882425996
+    },
+    {
+      "text": "Northstar Bot",
+      "confidence": 1.0,
+      "x": 0.22674418592455173,
+      "y": 0.6183333333953861,
+      "width": 0.04215116288926865,
+      "height": 0.0050000000000000044
+    },
+    {
+      "text": "Maya Chen",
+      "confidence": 1.0,
+      "x": 0.22674418717255504,
+      "y": 0.5816666667769347,
+      "width": 0.034883719550238695,
+      "height": 0.010925925572713213
+    },
+    {
+      "text": "Kofi Agyeman",
+      "confidence": 0.5,
+      "x": 0.22674418639442775,
+      "y": 0.5466666666860344,
+      "width": 0.04360465155707463,
+      "height": 0.011067537864049348
+    },
+    {
+      "text": "Message",
+      "confidence": 1.0,
+      "x": 0.3270348840016132,
+      "y": 0.6775599131709817,
+      "width": 0.03343023088243269,
+      "height": 0.013071894645690918
+    },
+    {
+      "text": "Could you let me know where my order is and when it is expected to arrive?",
+      "confidence": 1.0,
+      "x": 0.32848837774326994,
+      "y": 0.6491666668561109,
+      "width": 0.23255813598632807,
+      "height": 0.010964051882425885
+    },
+    {
+      "text": "We received your message and are checking the order details",
+      "confidence": 1.0,
+      "x": 0.327034886620527,
+      "y": 0.616557734707194,
+      "width": 0.19040695190429685,
+      "height": 0.006775598724683141
+    },
+    {
+      "text": "The parcel reached the regional hub and is on track for delivery on 26 May.",
+      "confidence": 1.0,
+      "x": 0.3299418676547106,
+      "y": 0.5816666667769347,
+      "width": 0.22819766574435768,
+      "height": 0.010925925572713213
+    },
+    {
+      "text": "Thanks for the update.",
+      "confidence": 1.0,
+      "x": 0.3284883700188689,
+      "y": 0.5466666665680242,
+      "width": 0.07122093200683594,
+      "height": 0.011067537864049237
+    },
+    {
+      "text": "Helpline Console",
+      "confidence": 1.0,
+      "x": 0.010174418767553553,
+      "y": 0.05664488039000348,
+      "width": 0.05232557932535807,
+      "height": 0.010893245538075802
+    },
+    {
+      "text": "Procliation workenacel",
+      "confidence": 0.5,
+      "x": 0.010174419056611315,
+      "y": 0.045751634116785844,
+      "width": 0.06686045752631294,
+      "height": 0.004357298215230343
+    },
+    {
+      "text": "build 2026.10.4",
+      "confidence": 1.0,
+      "x": 0.011627908021770163,
+      "y": 0.02832244033009068,
+      "width": 0.046511624654134116,
+      "height": 0.010893245538075802
+    },
+    {
+      "text": "Assigned",
+      "confidence": 1.0,
+      "x": 0.5712209309388391,
+      "y": 0.7952069721111363,
+      "width": 0.029069766998291002,
+      "height": 0.010893245538075802
+    },
+    {
+      "text": "Maya Chen",
+      "confidence": 1.0,
+      "x": 0.57122093238691,
+      "y": 0.7755991290024995,
+      "width": 0.049418601989746125,
+      "height": 0.013071894645690918
+    },
+    {
+      "text": "Production Help",
+      "confidence": 1.0,
+      "x": 0.9084302339707013,
+      "y": 0.9691666669003117,
+      "width": 0.058139533996582005,
+      "height": 0.013404138882954886
+    },
+    {
+      "text": "HC",
+      "confidence": 0.3,
+      "x": 0.9723837209709582,
+      "y": 0.9716775601285657,
+      "width": 0.013081394831339521,
+      "height": 0.010893245538075691
+    },
+    {
+      "text": "Filter",
+      "confidence": 1.0,
+      "x": 0.8851744184950127,
+      "y": 0.8976034858155745,
+      "width": 0.01598837216695148,
+      "height": 0.010893246332804307
+    },
+    {
+      "text": "Export",
+      "confidence": 1.0,
+      "x": 0.9186046509915453,
+      "y": 0.8976034858023705,
+      "width": 0.021802325778537357,
+      "height": 0.010893246332804418
+    },
+    {
+      "text": "Actions",
+      "confidence": 1.0,
+      "x": 0.9549418613096489,
+      "y": 0.8976034862451233,
+      "width": 0.026162789662679042,
+      "height": 0.010893245538075802
+    },
+    {
+      "text": "Updated moments ago \u2022 4 records",
+      "confidence": 1.0,
+      "x": 0.6758720941171572,
+      "y": 0.7124183008965395,
+      "width": 0.10174418131510421,
+      "height": 0.010915032625198329
+    },
+    {
+      "text": "Tags",
+      "confidence": 1.0,
+      "x": 0.7848837210931231,
+      "y": 0.7930283225412281,
+      "width": 0.01598837216695148,
+      "height": 0.013071895440419534
+    },
+    {
+      "text": "Delivery \u2022 Tracking \u2022 Order update",
+      "confidence": 1.0,
+      "x": 0.7834302352300978,
+      "y": 0.7708333332867325,
+      "width": 0.14680231730143234,
+      "height": 0.020016339619954415
+    },
+    {
+      "text": "Order ORD-20265034",
+      "confidence": 1.0,
+      "x": 0.8008720945769869,
+      "y": 0.7124183010871712,
+      "width": 0.08139534844292529,
+      "height": 0.010915032227834187
+    },
+    {
+      "text": "Product",
+      "confidence": 1.0,
+      "x": 0.7994186047810635,
+      "y": 0.6732026149865228,
+      "width": 0.026162789662679042,
+      "height": 0.013071894645690918
+    },
+    {
+      "text": "Running shoes",
+      "confidence": 1.0,
+      "x": 0.8648035784824669,
+      "y": 0.6708400508649086,
+      "width": 0.048009122212727795,
+      "height": 0.0134397236506143
+    },
+    {
+      "text": "STATUS",
+      "confidence": 1.0,
+      "x": 0.7994186046277739,
+      "y": 0.6492374727136218,
+      "width": 0.02034883711073132,
+      "height": 0.004357298612594596
+    },
+    {
+      "text": "In transit",
+      "confidence": 1.0,
+      "x": 0.86337209347602,
+      "y": 0.6448801745076506,
+      "width": 0.03197674221462676,
+      "height": 0.010953158934911111
+    },
+    {
+      "text": "Carrier",
+      "confidence": 1.0,
+      "x": 0.7994186055733851,
+      "y": 0.6209150331405482,
+      "width": 0.023255812327067082,
+      "height": 0.010893245538075691
+    },
+    {
+      "text": "SwiftShip",
+      "confidence": 1.0,
+      "x": 0.8633299430176026,
+      "y": 0.6184379475825628,
+      "width": 0.03351453145345051,
+      "height": 0.011490117708842007
+    },
+    {
+      "text": "Tracking",
+      "confidence": 1.0,
+      "x": 0.7994186052363196,
+      "y": 0.5904139434562607,
+      "width": 0.029069766998291002,
+      "height": 0.013071895440419534
+    },
+    {
+      "text": "SWF-884103",
+      "confidence": 1.0,
+      "x": 0.8633285676834487,
+      "y": 0.590068020410166,
+      "width": 0.04514519161648223,
+      "height": 0.013763740857442253
+    },
+    {
+      "text": "Expected",
+      "confidence": 1.0,
+      "x": 0.7993856078461422,
+      "y": 0.5640864006215222,
+      "width": 0.03204273859659834,
+      "height": 0.013439399401346863
+    },
+    {
+      "text": "26 May 2026",
+      "confidence": 1.0,
+      "x": 0.8633720922810557,
+      "y": 0.564166666766768,
+      "width": 0.0436046515570746,
+      "height": 0.010996731519699043
+    },
+    {
+      "text": "Assigned agent",
+      "confidence": 1.0,
+      "x": 0.7994186057880726,
+      "y": 0.5358333332635061,
+      "width": 0.049418601989746125,
+      "height": 0.01333333373069756
+    },
+    {
+      "text": "Maya Chen",
+      "confidence": 1.0,
+      "x": 0.8633437990096154,
+      "y": 0.5357614103633599,
+      "width": 0.03784728580051,
+      "height": 0.013444499969482382
+    },
+    {
+      "text": "Activity",
+      "confidence": 1.0,
+      "x": 0.8008720937381005,
+      "y": 0.49673202624493196,
+      "width": 0.027616278330485078,
+      "height": 0.013071895440419423
+    },
+    {
+      "text": "\u2022 22 May",
+      "confidence": 1.0,
+      "x": 0.7994186049207742,
+      "y": 0.4749455336355687,
+      "width": 0.03633720821804465,
+      "height": 0.01525054454803465
+    },
+    {
+      "text": "Arror contirmor",
+      "confidence": 1.0,
+      "x": 0.8124999994344706,
+      "y": 0.47058823523210147,
+      "width": 0.046511628892686674,
+      "height": 0.0044117647409438465
+    },
+    {
+      "text": "\u2022 23 May",
+      "confidence": 1.0,
+      "x": 0.7994186056475183,
+      "y": 0.44000000010633533,
+      "width": 0.03633720821804465,
+      "height": 0.013333332935968945
+    },
+    {
+      "text": "Dispatched",
+      "confidence": 1.0,
+      "x": 0.8110465122452294,
+      "y": 0.42919389997061363,
+      "width": 0.03488371955023872,
+      "height": 0.010893245538075691
+    },
+    {
+      "text": "\u2022 24 May 07:46",
+      "confidence": 1.0,
+      "x": 0.7994186048817242,
+      "y": 0.40305010876127156,
+      "width": 0.055232556660970045,
+      "height": 0.013071895440419534
+    },
+    {
+      "text": "Reached regional hub",
+      "confidence": 1.0,
+      "x": 0.8110465125334354,
+      "y": 0.39215686296080965,
+      "width": 0.06395348442925353,
+      "height": 0.011176470518112214
+    },
+    {
+      "text": "\u2022 24 May 08:15",
+      "confidence": 1.0,
+      "x": 0.7994186049686247,
+      "y": 0.3681917214174336,
+      "width": 0.0537790637546115,
+      "height": 0.006808278759320663
+    },
+    {
+      "text": "in transit",
+      "confidence": 1.0,
+      "x": 0.8110465116763725,
+      "y": 0.35729847507539136,
+      "width": 0.027616276211208768,
+      "height": 0.00436819156010948
+    },
+    {
+      "text": "\u2022 26 May",
+      "confidence": 1.0,
+      "x": 0.7994186056752918,
+      "y": 0.3266666668119099,
+      "width": 0.03779069688585068,
+      "height": 0.013333333333333308
+    },
+    {
+      "text": "Delivery exnected",
+      "confidence": 1.0,
+      "x": 0.8110465121658997,
+      "y": 0.3199999999467583,
+      "width": 0.052325575086805576,
+      "height": 0.0050000000000000044
+    }
+  ],
+  "parsed_observations": [
+    {
+      "source_file": "evidence/images/support_ticket_console_20260524.png",
+      "file_id": "evidence_28",
+      "evidence_id": "evidence_28",
+      "source_location": "visual_box:x=0.135,y=0.891,w=0.211,h=0.022",
+      "observation_type": "APPLE_VISION_OCR_RECORD",
+      "extraction_method": "APPLE_VISION",
+      "confidence": "HIGH",
+      "timestamp": "2026-05-24T07:00:00+00:00",
+      "resource_id": "CS-5034",
+      "system_id": "support_platform",
+      "associated_identifiers": {
+        "email": "kagyeman8947@fastmail.com"
+      },
+      "observed_state": "PRESENT",
+      "raw_payload": {
+        "ocr_text": "CS-5034 \u2022 Where is my delivery?",
+        "confidence": 1.0
+      },
+      "ambiguity_flags": [
+        "APPLE_VISION_LOCAL_OCR"
+      ]
+    },
+    {
+      "source_file": "evidence/images/support_ticket_console_20260524.png",
+      "file_id": "evidence_28",
+      "evidence_id": "evidence_28",
+      "source_location": "visual_box:x=0.137,y=0.873,w=0.157,h=0.013",
+      "observation_type": "APPLE_VISION_OCR_RECORD",
+      "extraction_method": "APPLE_VISION",
+      "confidence": "HIGH",
+      "timestamp": "2026-05-24T07:00:00+00:00",
+      "resource_id": "support_1034",
+      "system_id": "support_platform",
+      "associated_identifiers": {
+        "email": "kagyeman8947@fastmail.com"
+      },
+      "observed_state": "PRESENT",
+      "raw_payload": {
+        "ocr_text": "support_1034 \u2022 Kofi Agyeman \u2022 Normal priority",
+        "confidence": 1.0
+      },
+      "ambiguity_flags": [
+        "APPLE_VISION_LOCAL_OCR"
+      ]
+    },
+    {
+      "source_file": "evidence/images/support_ticket_console_20260524.png",
+      "file_id": "evidence_28",
+      "evidence_id": "evidence_28",
+      "source_location": "visual_box:x=0.801,y=0.712,w=0.081,h=0.011",
+      "observation_type": "APPLE_VISION_OCR_RECORD",
+      "extraction_method": "APPLE_VISION",
+      "confidence": "AMBIGUOUS",
+      "timestamp": "2026-05-24T07:00:00+00:00",
+      "resource_id": "ORD-20265034",
+      "system_id": "support_platform",
+      "associated_identifiers": {},
+      "observed_state": "PRESENT",
+      "raw_payload": {
+        "ocr_text": "Order ORD-20265034",
+        "confidence": 1.0
+      },
+      "ambiguity_flags": [
+        "APPLE_VISION_LOCAL_OCR",
+        "AMBIGUOUS_STATE_OR_IDENTITY_ASSOCIATION"
+      ]
+    }
+  ]
+}

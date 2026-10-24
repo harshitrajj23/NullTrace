@@ -1,0 +1,785 @@
+{
+  "file_id": "evidence_23",
+  "cache_key": "evidence_23_18b95c1bd8b8956e_apple_vision_v1.0",
+  "created_at": "2026-10-24T21:11:54.025476+00:00",
+  "provider": "apple_vision",
+  "runtime": "macOS_Swift_Vision",
+  "version": "v1.0",
+  "source_file": "evidence/images/customer_export_console_20260618.png",
+  "image_sha256": "18b95c1bd8b8956e40216df935498a9f3c181ea2a69b5cd6d3c0841a816d5557",
+  "blocks_extracted": 81,
+  "observations_count": 5,
+  "execution_metrics": {
+    "network_calls": 0,
+    "api_calls": 0,
+    "cost_usd": 0.0,
+    "elapsed_seconds": 0.5307
+  },
+  "raw_blocks": [
+    {
+      "text": "Northstar Shop",
+      "confidence": 1.0,
+      "x": 0.03052325581707619,
+      "y": 0.9596199529641108,
+      "width": 0.07122093200683594,
+      "height": 0.016743683381514107
+    },
+    {
+      "text": "Customer Download Center",
+      "confidence": 1.0,
+      "x": 0.135174416687548,
+      "y": 0.9663636366423526,
+      "width": 0.10610465155707466,
+      "height": 0.014633988033641465
+    },
+    {
+      "text": "\u2022 Search exports...",
+      "confidence": 1.0,
+      "x": 0.2601744228958168,
+      "y": 0.9643705466620899,
+      "width": 0.07412790086534288,
+      "height": 0.014251780943437042
+    },
+    {
+      "text": "\u2022 Home",
+      "confidence": 1.0,
+      "x": 0.013081396215504873,
+      "y": 0.8954545452223641,
+      "width": 0.0377906968858507,
+      "height": 0.016659468737515448
+    },
+    {
+      "text": "Orders",
+      "confidence": 1.0,
+      "x": 0.014534884457910017,
+      "y": 0.8551068887444335,
+      "width": 0.03924418555365668,
+      "height": 0.014251780943437042
+    },
+    {
+      "text": "Customers",
+      "confidence": 1.0,
+      "x": 0.027616279846632983,
+      "y": 0.8147268411221432,
+      "width": 0.040697674221462685,
+      "height": 0.011876484264026987
+    },
+    {
+      "text": "\u2022 Data exports",
+      "confidence": 1.0,
+      "x": 0.01296410747451917,
+      "y": 0.7709075491720674,
+      "width": 0.06128108554416233,
+      "height": 0.021130270524458483
+    },
+    {
+      "text": "\u2022Products",
+      "confidence": 1.0,
+      "x": 0.01301247736320104,
+      "y": 0.7310431688676025,
+      "width": 0.048102951049804686,
+      "height": 0.01772363836115054
+    },
+    {
+      "text": "\u2022 Marketing",
+      "confidence": 1.0,
+      "x": 0.012926366596244911,
+      "y": 0.6898343679384904,
+      "width": 0.051182149251302086,
+      "height": 0.019381145130504374
+    },
+    {
+      "text": "Analytics",
+      "confidence": 1.0,
+      "x": 0.013042325324418742,
+      "y": 0.6505249441587835,
+      "width": 0.04804325527615017,
+      "height": 0.017239898334849846
+    },
+    {
+      "text": "\u2022 Settings",
+      "confidence": 1.0,
+      "x": 0.013081394513286434,
+      "y": 0.6099999997053627,
+      "width": 0.04505814022488064,
+      "height": 0.01727272727272733
+    },
+    {
+      "text": "Northstar Shop / Customer Download Center / Data exports",
+      "confidence": 1.0,
+      "x": 0.13662790932049418,
+      "y": 0.9144893114012407,
+      "width": 0.1875,
+      "height": 0.011876484264026987
+    },
+    {
+      "text": "Data exports",
+      "confidence": 1.0,
+      "x": 0.1350709482690309,
+      "y": 0.8802299363318641,
+      "width": 0.08305577596028646,
+      "height": 0.02576340588656334
+    },
+    {
+      "text": "Create and manage customer download packages",
+      "confidence": 1.0,
+      "x": 0.1366279115853242,
+      "y": 0.8618181821032911,
+      "width": 0.1700581359863281,
+      "height": 0.014666378281333214
+    },
+    {
+      "text": "4 jobs",
+      "confidence": 1.0,
+      "x": 0.3154069777184065,
+      "y": 0.8907363423667612,
+      "width": 0.024709300994873062,
+      "height": 0.014251780943437042
+    },
+    {
+      "text": "All exports",
+      "confidence": 1.0,
+      "x": 0.1366279078772414,
+      "y": 0.8263636365493293,
+      "width": 0.03924418555365669,
+      "height": 0.012116173397411
+    },
+    {
+      "text": "Ready",
+      "confidence": 1.0,
+      "x": 0.1875000007062808,
+      "y": 0.8266033256827133,
+      "width": 0.029069766998291002,
+      "height": 0.011876484264026987
+    },
+    {
+      "text": "Processing",
+      "confidence": 1.0,
+      "x": 0.22238372179690022,
+      "y": 0.8266033256530221,
+      "width": 0.03779069688585071,
+      "height": 0.011876484264027098
+    },
+    {
+      "text": "Expired",
+      "confidence": 1.0,
+      "x": 0.27323837461935846,
+      "y": 0.8264998886606412,
+      "width": 0.02619766871134438,
+      "height": 0.012083357897671787
+    },
+    {
+      "text": "Ready",
+      "confidence": 1.0,
+      "x": 0.1424418601752545,
+      "y": 0.7767220902907894,
+      "width": 0.02034883711073135,
+      "height": 0.011876484264026876
+    },
+    {
+      "text": "2",
+      "confidence": 0.5,
+      "x": 0.14389534898349848,
+      "y": 0.7553444184356449,
+      "width": 0.007267441749572751,
+      "height": 0.014251780943437042
+    },
+    {
+      "text": "All exports",
+      "confidence": 1.0,
+      "x": 0.1453488379462821,
+      "y": 0.6863636362282433,
+      "width": 0.03924418555365669,
+      "height": 0.011973655874078948
+    },
+    {
+      "text": "Export ID",
+      "confidence": 1.0,
+      "x": 0.1424418604663701,
+      "y": 0.6481818180143056,
+      "width": 0.030523255666096982,
+      "height": 0.014545454545454528
+    },
+    {
+      "text": "Filename",
+      "confidence": 1.0,
+      "x": 0.25581395394384104,
+      "y": 0.6508313541565851,
+      "width": 0.030523255666096982,
+      "height": 0.011876484264026987
+    },
+    {
+      "text": "1] export_1261",
+      "confidence": 1.0,
+      "x": 0.14389534965668904,
+      "y": 0.6152019003596354,
+      "width": 0.05087209065755208,
+      "height": 0.014251780943437042
+    },
+    {
+      "text": "customer_export_1261.zip",
+      "confidence": 1.0,
+      "x": 0.25581395232892495,
+      "y": 0.6175771971791504,
+      "width": 0.08139534844292534,
+      "height": 0.011876484264027098
+    },
+    {
+      "text": "| 2 export_1260",
+      "confidence": 1.0,
+      "x": 0.1424418604559374,
+      "y": 0.5795724465853263,
+      "width": 0.053779067993164065,
+      "height": 0.0122457352551546
+    },
+    {
+      "text": "customer_export_1260.zip",
+      "confidence": 1.0,
+      "x": 0.2558139546213234,
+      "y": 0.5795724466150174,
+      "width": 0.08284883287217881,
+      "height": 0.011876484264026876
+    },
+    {
+      "text": "[3 export_1259",
+      "confidence": 1.0,
+      "x": 0.14244186202449352,
+      "y": 0.5415676963453836,
+      "width": 0.053779067993164065,
+      "height": 0.014251780943437042
+    },
+    {
+      "text": "customer_export_1259.zip",
+      "confidence": 1.0,
+      "x": 0.25581395698929815,
+      "y": 0.5415676959890892,
+      "width": 0.08284883287217881,
+      "height": 0.014251780943437042
+    },
+    {
+      "text": "4 export_1258",
+      "confidence": 1.0,
+      "x": 0.14233956960661076,
+      "y": 0.5026284959586544,
+      "width": 0.05398365020751955,
+      "height": 0.018495977575128664
+    },
+    {
+      "text": "customer_export_1258.zip",
+      "confidence": 1.0,
+      "x": 0.25581395703774773,
+      "y": 0.5059382425473214,
+      "width": 0.08284883287217881,
+      "height": 0.011876484264026987
+    },
+    {
+      "text": "Processing",
+      "confidence": 1.0,
+      "x": 0.35753257596148574,
+      "y": 0.7765268486523378,
+      "width": 0.03348136054144968,
+      "height": 0.012266967946832796
+    },
+    {
+      "text": "2",
+      "confidence": 1.0,
+      "x": 0.35610465118994106,
+      "y": 0.7553444182377035,
+      "width": 0.00872092988755968,
+      "height": 0.014251780943437042
+    },
+    {
+      "text": "Customer Download Center",
+      "confidence": 1.0,
+      "x": 0.011627910526119847,
+      "y": 0.06175771998200075,
+      "width": 0.08284883287217881,
+      "height": 0.01187864346937706
+    },
+    {
+      "text": "Production workspace",
+      "confidence": 1.0,
+      "x": 0.011627909766792044,
+      "y": 0.04727272742547117,
+      "width": 0.06686046176486546,
+      "height": 0.01210969534787254
+    },
+    {
+      "text": "Owner",
+      "confidence": 1.0,
+      "x": 0.42005814009373393,
+      "y": 0.6508313542159674,
+      "width": 0.023255812327067027,
+      "height": 0.011876484264027098
+    },
+    {
+      "text": "marcus.lee@northstar.shop",
+      "confidence": 1.0,
+      "x": 0.42005813997846897,
+      "y": 0.6175771971791504,
+      "width": 0.08575581020779077,
+      "height": 0.011876484264027098
+    },
+    {
+      "text": "ingrid.dahl@outlook.com",
+      "confidence": 1.0,
+      "x": 0.4200581384431276,
+      "y": 0.5819477436958117,
+      "width": 0.07703487820095484,
+      "height": 0.00950118671764033
+    },
+    {
+      "text": "sara.kim@northstar.shop",
+      "confidence": 1.0,
+      "x": 0.4215116316299005,
+      "y": 0.5439429931114544,
+      "width": 0.07703487820095484,
+      "height": 0.011876484264026987
+    },
+    {
+      "text": "daniel.park@northstar.shop",
+      "confidence": 1.0,
+      "x": 0.4215116267546267,
+      "y": 0.5059382423394829,
+      "width": 0.08430232577853736,
+      "height": 0.011876484264027098
+    },
+    {
+      "text": "Created today",
+      "confidence": 1.0,
+      "x": 0.5712209307101622,
+      "y": 0.7763636364012269,
+      "width": 0.04215116288926868,
+      "height": 0.012234938361427972
+    },
+    {
+      "text": "Status",
+      "confidence": 1.0,
+      "x": 0.5915697679159237,
+      "y": 0.648456057509279,
+      "width": 0.023255812327067082,
+      "height": 0.014251780943437042
+    },
+    {
+      "text": "Collecting",
+      "confidence": 1.0,
+      "x": 0.591479573358074,
+      "y": 0.6168573328198228,
+      "width": 0.03361062155829542,
+      "height": 0.01331621343439271
+    },
+    {
+      "text": "Ready",
+      "confidence": 1.0,
+      "x": 0.5915697675333424,
+      "y": 0.5819477439357543,
+      "width": 0.020348834991455123,
+      "height": 0.007125890038230054
+    },
+    {
+      "text": "Packaging",
+      "confidence": 1.0,
+      "x": 0.5915697677225433,
+      "y": 0.5439429929036159,
+      "width": 0.0334302308824328,
+      "height": 0.011876484264027098
+    },
+    {
+      "text": "Ready",
+      "confidence": 1.0,
+      "x": 0.5915697676158185,
+      "y": 0.5059382425176302,
+      "width": 0.021802325778537357,
+      "height": 0.011876484264027098
+    },
+    {
+      "text": "Production Help",
+      "confidence": 1.0,
+      "x": 0.908430233716426,
+      "y": 0.9663636364998348,
+      "width": 0.05668604532877597,
+      "height": 0.014633988033641465
+    },
+    {
+      "text": "Filter",
+      "confidence": 1.0,
+      "x": 0.8851744184950127,
+      "y": 0.888361045332897,
+      "width": 0.01598837216695148,
+      "height": 0.011876484264026876
+    },
+    {
+      "text": "Export",
+      "confidence": 1.0,
+      "x": 0.9186046509915453,
+      "y": 0.8883610453185011,
+      "width": 0.021802325778537357,
+      "height": 0.011876484264026987
+    },
+    {
+      "text": "Actions",
+      "confidence": 1.0,
+      "x": 0.9549418605950171,
+      "y": 0.8883610456327945,
+      "width": 0.026162789662679042,
+      "height": 0.014251780943437042
+    },
+    {
+      "text": "Downloads today",
+      "confidence": 1.0,
+      "x": 0.784883722837321,
+      "y": 0.7763636364309181,
+      "width": 0.052325579325357974,
+      "height": 0.012234938361427972
+    },
+    {
+      "text": "Updated moments ago \u2022 4 records",
+      "confidence": 1.0,
+      "x": 0.675872097084696,
+      "y": 0.6863636362579346,
+      "width": 0.10174418131510421,
+      "height": 0.011973655874078837
+    },
+    {
+      "text": "Created",
+      "confidence": 1.0,
+      "x": 0.6700581403647963,
+      "y": 0.6484560574301026,
+      "width": 0.027616278330485078,
+      "height": 0.014251780943437042
+    },
+    {
+      "text": "20 Jun 14:18 UTC",
+      "confidence": 1.0,
+      "x": 0.6700581394020731,
+      "y": 0.6172727271560527,
+      "width": 0.055232556660970045,
+      "height": 0.014556251439181267
+    },
+    {
+      "text": "18 Jun 06:42 UTC",
+      "confidence": 1.0,
+      "x": 0.6700581392299918,
+      "y": 0.5818181819564028,
+      "width": 0.05668604532877608,
+      "height": 0.012006046121770586
+    },
+    {
+      "text": "17 Jun 11:03 UTC",
+      "confidence": 1.0,
+      "x": 0.6686046528226158,
+      "y": 0.5436363634400514,
+      "width": 0.055232556660970045,
+      "height": 0.012183113965121173
+    },
+    {
+      "text": "16 Jun 09:27 UTC",
+      "confidence": 1.0,
+      "x": 0.6686046507342672,
+      "y": 0.5059382427824382,
+      "width": 0.058139533996582005,
+      "height": 0.014251780943437042
+    },
+    {
+      "text": "export_1260",
+      "confidence": 1.0,
+      "x": 0.7994091523676419,
+      "y": 0.6840026464468011,
+      "width": 0.04653053283691411,
+      "height": 0.014417509599165546
+    },
+    {
+      "text": "Owner",
+      "confidence": 1.0,
+      "x": 0.7994186044799173,
+      "y": 0.646080760158602,
+      "width": 0.021802325778537357,
+      "height": 0.009501187584616932
+    },
+    {
+      "text": "Created",
+      "confidence": 1.0,
+      "x": 0.7994028906626166,
+      "y": 0.6151087827920783,
+      "width": 0.026194218529595248,
+      "height": 0.01206271951848814
+    },
+    {
+      "text": "Expires",
+      "confidence": 1.0,
+      "x": 0.7994186056253832,
+      "y": 0.5866983375295067,
+      "width": 0.024709300994873007,
+      "height": 0.011876484264026987
+    },
+    {
+      "text": "Size",
+      "confidence": 1.0,
+      "x": 0.7994186054104906,
+      "y": 0.5558194777017157,
+      "width": 0.015988371107313326,
+      "height": 0.011876484264026987
+    },
+    {
+      "text": "Checksum",
+      "confidence": 1.0,
+      "x": 0.7993390906777346,
+      "y": 0.5266570241043579,
+      "width": 0.03504275004069013,
+      "height": 0.013194265365600644
+    },
+    {
+      "text": "Download count",
+      "confidence": 1.0,
+      "x": 0.7994186065582511,
+      "y": 0.49636363628161684,
+      "width": 0.052325579325358085,
+      "height": 0.01194990288127551
+    },
+    {
+      "text": "Included",
+      "confidence": 1.0,
+      "x": 0.7994186053574437,
+      "y": 0.4679334919534972,
+      "width": 0.029069766998291002,
+      "height": 0.011876484264026987
+    },
+    {
+      "text": "Activity",
+      "confidence": 1.0,
+      "x": 0.8008720936134279,
+      "y": 0.42280285047157584,
+      "width": 0.026162789662679042,
+      "height": 0.011876484264026987
+    },
+    {
+      "text": "\u2022 06:46",
+      "confidence": 1.0,
+      "x": 0.7994186058523883,
+      "y": 0.39904988189324786,
+      "width": 0.03343023088243269,
+      "height": 0.016627077622847097
+    },
+    {
+      "text": "Ready for download",
+      "confidence": 1.0,
+      "x": 0.8110465129168369,
+      "y": 0.3895486938537347,
+      "width": 0.05959302266438804,
+      "height": 0.012269487814469793
+    },
+    {
+      "text": "\u2022 06:45",
+      "confidence": 1.0,
+      "x": 0.7994186043359395,
+      "y": 0.3609090907974877,
+      "width": 0.033430233001709,
+      "height": 0.012012524171309047
+    },
+    {
+      "text": "Dockano crostod",
+      "confidence": 1.0,
+      "x": 0.8110465175488215,
+      "y": 0.35154394346069484,
+      "width": 0.049418597751193505,
+      "height": 0.007546965425664798
+    },
+    {
+      "text": "\u2022 06:43",
+      "confidence": 1.0,
+      "x": 0.7994186052528244,
+      "y": 0.3181818182394638,
+      "width": 0.03343023088243269,
+      "height": 0.014545454111966283
+    },
+    {
+      "text": "Collecting customer records",
+      "confidence": 1.0,
+      "x": 0.8110465119938345,
+      "y": 0.3087885990402298,
+      "width": 0.08139533996582027,
+      "height": 0.00950118671764022
+    },
+    {
+      "text": "\u2022 06:42",
+      "confidence": 1.0,
+      "x": 0.7994186060461868,
+      "y": 0.27790973914031636,
+      "width": 0.03343023088243269,
+      "height": 0.014251780943437042
+    },
+    {
+      "text": "cunart ronnastadi",
+      "confidence": 0.5,
+      "x": 0.8110465123864308,
+      "y": 0.2707838482137016,
+      "width": 0.05087208641899954,
+      "height": 0.00475059335882011
+    },
+    {
+      "text": "ingrid.dahl@outlook.com",
+      "confidence": 1.0,
+      "x": 0.8633720964868038,
+      "y": 0.6413301666541722,
+      "width": 0.07994185553656685,
+      "height": 0.014251780943437042
+    },
+    {
+      "text": "18 Jun 2026 06:42 UTC",
+      "confidence": 1.0,
+      "x": 0.8633720948203075,
+      "y": 0.6127272725692117,
+      "width": 0.07703487820095489,
+      "height": 0.011975815079428909
+    },
+    {
+      "text": "25 Jun 2026 06:42 UTC",
+      "confidence": 1.0,
+      "x": 0.863372094339754,
+      "y": 0.5843230408822007,
+      "width": 0.07848837110731344,
+      "height": 0.014251780943437042
+    },
+    {
+      "text": "18.4 MB",
+      "confidence": 1.0,
+      "x": 0.8633720929326258,
+      "y": 0.5554545453172467,
+      "width": 0.027616278330484967,
+      "height": 0.012241416410966321
+    },
+    {
+      "text": "SHA-256 - 41ca09...",
+      "confidence": 1.0,
+      "x": 0.8648255835121174,
+      "y": 0.5245454548900692,
+      "width": 0.06395348442925353,
+      "height": 0.014646944132718165
+    },
+    {
+      "text": "Profile . Orders \u2022 Saved addresses",
+      "confidence": 1.0,
+      "x": 0.8633720921085803,
+      "y": 0.46793349175939014,
+      "width": 0.10755813598632813,
+      "height": 0.007521053877743822
+    }
+  ],
+  "parsed_observations": [
+    {
+      "source_file": "evidence/images/customer_export_console_20260618.png",
+      "file_id": "evidence_23",
+      "evidence_id": "evidence_23",
+      "source_location": "visual_box:x=0.144,y=0.615,w=0.051,h=0.014",
+      "observation_type": "APPLE_VISION_OCR_RECORD",
+      "extraction_method": "APPLE_VISION",
+      "confidence": "MEDIUM",
+      "timestamp": "2026-06-18T12:00:00+00:00",
+      "resource_id": "export_1261",
+      "system_id": "export_service",
+      "associated_identifiers": {
+        "email": "marcus.lee@northstar.shop"
+      },
+      "observed_state": "PRESENT",
+      "raw_payload": {
+        "ocr_text": "1] export_1261",
+        "confidence": 1.0
+      },
+      "ambiguity_flags": [
+        "APPLE_VISION_LOCAL_OCR"
+      ]
+    },
+    {
+      "source_file": "evidence/images/customer_export_console_20260618.png",
+      "file_id": "evidence_23",
+      "evidence_id": "evidence_23",
+      "source_location": "visual_box:x=0.142,y=0.580,w=0.054,h=0.012",
+      "observation_type": "APPLE_VISION_OCR_RECORD",
+      "extraction_method": "APPLE_VISION",
+      "confidence": "MEDIUM",
+      "timestamp": "2026-06-18T12:00:00+00:00",
+      "resource_id": "export_1260",
+      "system_id": "export_service",
+      "associated_identifiers": {
+        "email": "ingrid.dahl@outlook.com"
+      },
+      "observed_state": "PRESENT",
+      "raw_payload": {
+        "ocr_text": "| 2 export_1260",
+        "confidence": 1.0
+      },
+      "ambiguity_flags": [
+        "APPLE_VISION_LOCAL_OCR"
+      ]
+    },
+    {
+      "source_file": "evidence/images/customer_export_console_20260618.png",
+      "file_id": "evidence_23",
+      "evidence_id": "evidence_23",
+      "source_location": "visual_box:x=0.142,y=0.542,w=0.054,h=0.014",
+      "observation_type": "APPLE_VISION_OCR_RECORD",
+      "extraction_method": "APPLE_VISION",
+      "confidence": "MEDIUM",
+      "timestamp": "2026-06-18T12:00:00+00:00",
+      "resource_id": "export_1259",
+      "system_id": "export_service",
+      "associated_identifiers": {
+        "email": "sara.kim@northstar.shop"
+      },
+      "observed_state": "PRESENT",
+      "raw_payload": {
+        "ocr_text": "[3 export_1259",
+        "confidence": 1.0
+      },
+      "ambiguity_flags": [
+        "APPLE_VISION_LOCAL_OCR"
+      ]
+    },
+    {
+      "source_file": "evidence/images/customer_export_console_20260618.png",
+      "file_id": "evidence_23",
+      "evidence_id": "evidence_23",
+      "source_location": "visual_box:x=0.142,y=0.503,w=0.054,h=0.018",
+      "observation_type": "APPLE_VISION_OCR_RECORD",
+      "extraction_method": "APPLE_VISION",
+      "confidence": "MEDIUM",
+      "timestamp": "2026-06-18T12:00:00+00:00",
+      "resource_id": "export_1258",
+      "system_id": "export_service",
+      "associated_identifiers": {
+        "email": "daniel.park@northstar.shop"
+      },
+      "observed_state": "PRESENT",
+      "raw_payload": {
+        "ocr_text": "4 export_1258",
+        "confidence": 1.0
+      },
+      "ambiguity_flags": [
+        "APPLE_VISION_LOCAL_OCR"
+      ]
+    },
+    {
+      "source_file": "evidence/images/customer_export_console_20260618.png",
+      "file_id": "evidence_23",
+      "evidence_id": "evidence_23",
+      "source_location": "visual_box:x=0.799,y=0.684,w=0.047,h=0.014",
+      "observation_type": "APPLE_VISION_OCR_RECORD",
+      "extraction_method": "APPLE_VISION",
+      "confidence": "MEDIUM",
+      "timestamp": "2026-06-18T12:00:00+00:00",
+      "resource_id": "export_1260",
+      "system_id": "export_service",
+      "associated_identifiers": {
+        "email": "ingrid.dahl@outlook.com"
+      },
+      "observed_state": "PRESENT",
+      "raw_payload": {
+        "ocr_text": "export_1260",
+        "confidence": 1.0
+      },
+      "ambiguity_flags": [
+        "APPLE_VISION_LOCAL_OCR"
+      ]
+    }
+  ]
+}
