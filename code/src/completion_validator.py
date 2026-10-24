@@ -88,11 +88,13 @@ def build_evidence_backed_verification_steps(
     policy_assessments: Dict[str, PolicyAssessment],
     flow_risks: List[ResurrectionRiskFinding],
     known_evidence_ids: Optional[Set[str]] = None,
+    resource_evidence_map: Optional[Dict[str, Set[str]]] = None,
 ) -> Tuple[List[Step], List[str]]:
     """
     Builds the verification step sequence for a COMPLETE case:
     - Only verification operations.
     - Every step cites a real, verified evidence ID.
+    - Enforces evidence-to-resource consistency when resource_evidence_map is provided.
     - Returns (steps, errors).
     """
     steps: List[Step] = []
@@ -109,6 +111,11 @@ def build_evidence_backed_verification_steps(
         if known_evidence_ids is not None and ev_id not in known_evidence_ids:
             errors.append(f"Resource {rid} cites unknown evidence ID: {ev_id}")
             continue
+        if resource_evidence_map is not None:
+            supported = resource_evidence_map.get(rid, set())
+            if ev_id not in supported:
+                errors.append(f"Resource {rid} cites arbitrary evidence ID {ev_id} not mapped to this resource")
+                continue
 
         if assess.required_action == "DELETE":
             steps.append(
@@ -141,6 +148,14 @@ def build_evidence_backed_verification_steps(
         if not ev_id:
             errors.append(f"Flow {rid} lacks evidence ID for verification")
             continue
+        if known_evidence_ids is not None and ev_id not in known_evidence_ids:
+            errors.append(f"Flow {rid} cites unknown evidence ID: {ev_id}")
+            continue
+        if resource_evidence_map is not None:
+            supported = resource_evidence_map.get(rid, set()) | resource_evidence_map.get(sys_id, set())
+            if ev_id not in supported:
+                errors.append(f"Flow {rid} cites arbitrary evidence ID {ev_id} not mapped to this flow")
+                continue
 
         if fr.risk_category == RiskCategory.ACTIVE_DATA_FLOW and fr.flow_status == FlowStatus.DISABLED:
             steps.append(
@@ -171,6 +186,7 @@ def validate_case_completion(
     flow_risks: Optional[List[ResurrectionRiskFinding]] = None,
     identity_cluster: Optional[Cluster] = None,
     known_evidence_ids: Optional[Set[str]] = None,
+    resource_evidence_map: Optional[Dict[str, Set[str]]] = None,
 ) -> ValidationDecision:
     """
     Evaluates whether a deletion case legitimately qualifies for COMPLETE status:
@@ -178,6 +194,7 @@ def validate_case_completion(
     - Fail-closed: any failure, unknown state, or uncorroborated claim produces INCOMPLETE.
     - A lack of findings is not evidence of deletion (empty resources -> INCOMPLETE).
     - If non-deletion inquiry -> NOT_APPLICABLE with steps = [].
+    - Validates evidence existence and evidence-to-resource consistency.
     - Returns ValidationDecision with machine-readable reasons.
     """
     reasons_incomplete: List[str] = []
@@ -232,11 +249,18 @@ def validate_case_completion(
         if not assess.supporting_evidence_ids or not assess.supporting_evidence_ids[0]:
             if IncompleteReasonCode.MISSING_VERIFICATION_EVIDENCE.value not in reasons_incomplete:
                 reasons_incomplete.append(IncompleteReasonCode.MISSING_VERIFICATION_EVIDENCE.value)
-        elif known_evidence_ids is not None:
-            for evid in assess.supporting_evidence_ids:
-                if evid not in known_evidence_ids:
-                    if IncompleteReasonCode.MISSING_VERIFICATION_EVIDENCE.value not in reasons_incomplete:
-                        reasons_incomplete.append(IncompleteReasonCode.MISSING_VERIFICATION_EVIDENCE.value)
+        else:
+            if known_evidence_ids is not None:
+                for evid in assess.supporting_evidence_ids:
+                    if evid not in known_evidence_ids:
+                        if IncompleteReasonCode.MISSING_VERIFICATION_EVIDENCE.value not in reasons_incomplete:
+                            reasons_incomplete.append(IncompleteReasonCode.MISSING_VERIFICATION_EVIDENCE.value)
+            if resource_evidence_map is not None:
+                supported_evs = resource_evidence_map.get(rid, set())
+                for evid in assess.supporting_evidence_ids:
+                    if evid not in supported_evs:
+                        if IncompleteReasonCode.MISSING_VERIFICATION_EVIDENCE.value not in reasons_incomplete:
+                            reasons_incomplete.append(IncompleteReasonCode.MISSING_VERIFICATION_EVIDENCE.value)
 
     # 5. Flow and restore risk checks
     for fr in risks:
@@ -256,6 +280,13 @@ def validate_case_completion(
             if IncompleteReasonCode.ACTIVE_DATA_FLOW.value not in reasons_incomplete:
                 reasons_incomplete.append(IncompleteReasonCode.ACTIVE_DATA_FLOW.value)
 
+        if resource_evidence_map is not None and fr.evidence_ids:
+            supported_evs = resource_evidence_map.get(fr.implicated_resource, set()) | resource_evidence_map.get(fr.source_system, set())
+            for evid in fr.evidence_ids:
+                if evid not in supported_evs:
+                    if IncompleteReasonCode.MISSING_VERIFICATION_EVIDENCE.value not in reasons_incomplete:
+                        reasons_incomplete.append(IncompleteReasonCode.MISSING_VERIFICATION_EVIDENCE.value)
+
     # 6. Evaluation of Completion
     if not reasons_incomplete:
         # All 10 criteria pass! Attempt to build evidence-backed verification steps
@@ -263,6 +294,7 @@ def validate_case_completion(
             policy_assessments=policy_assessments,
             flow_risks=risks,
             known_evidence_ids=known_evidence_ids,
+            resource_evidence_map=resource_evidence_map,
         )
 
         if verif_errors or not verif_steps:

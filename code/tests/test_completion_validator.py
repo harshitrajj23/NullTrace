@@ -490,3 +490,61 @@ def test_deterministic_repeated_execution(synthetic_complete_assessments, synthe
     assert len(d1.steps) == len(d2.steps)
     for s1, s2 in zip(d1.steps, d2.steps):
         assert s1.to_dict() == s2.to_dict()
+
+
+def test_arbitrary_evidence_id_not_supporting_resource_blocks_complete(
+    synthetic_complete_assessments, synthetic_benign_flows, known_evidence
+):
+    """
+    Regression test for Step I.1 audit:
+    An evidence ID that exists in known_evidence_ids but does NOT support the specific
+    resource/flow being assessed must be rejected, preventing false COMPLETE promotion.
+    """
+    valid_map = {
+        "account_01": {"evidence_01"},
+        "tombstone_02": {"evidence_02"},
+        "audit_03": {"evidence_03"},
+        "backup_04": {"evidence_04"},
+        "sync_flow_01": {"evidence_05"},
+        "restore_job_02": {"evidence_06"},
+    }
+
+    # 1. Valid map produces COMPLETE
+    clean_dec = validate_case_completion(
+        case_id="case_synth_01",
+        is_non_deletion=False,
+        policy_assessments=synthetic_complete_assessments,
+        flow_risks=synthetic_benign_flows,
+        known_evidence_ids=known_evidence,
+        resource_evidence_map=valid_map,
+    )
+    assert clean_dec.is_complete is True
+    assert clean_dec.deletion_status == "COMPLETE"
+
+    # 2. Tampered assessment: account_01 cites evidence_06 (which exists in known_evidence, but belongs to restore_job_02)
+    tampered_assessments = dict(synthetic_complete_assessments)
+    tampered_assessments["account_01"] = PolicyAssessment(
+        resource_id="account_01",
+        system_id="account_service",
+        data_category="USER_PROFILE",
+        applicable_rule_id="rule_01",
+        required_action="DELETE",
+        observed_state=ResourceState.ABSENT,
+        policy_satisfied=True,
+        rationale="Arbitrary evidence ID attached",
+        supporting_evidence_ids=["evidence_06"],
+    )
+
+    tampered_dec = validate_case_completion(
+        case_id="case_synth_01",
+        is_non_deletion=False,
+        policy_assessments=tampered_assessments,
+        flow_risks=synthetic_benign_flows,
+        known_evidence_ids=known_evidence,
+        resource_evidence_map=valid_map,
+    )
+
+    assert tampered_dec.is_complete is False
+    assert tampered_dec.deletion_status == "INCOMPLETE"
+    assert IncompleteReasonCode.MISSING_VERIFICATION_EVIDENCE.value in tampered_dec.reasons_incomplete
+
