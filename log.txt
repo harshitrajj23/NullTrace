@@ -734,3 +734,133 @@ commit=13d5260
 - Matched Resources: 0
 - Missed Resources: 111 (full miss list documented in code/evaluation/resource_link_report.md)
 - Extra Candidates: 2 (case_07: object_19, case_17: tombstone_17)
+
+## 2026-10-24T22:35:00+05:30 Step F.1: Subject-to-Resource Key Scan with Answer-Key Isolation
+
+User Prompt (verbatim, secrets redacted):
+<USER_REQUEST>
+You are working in the NullTrace repository (root = the folder containing code/, AGENTS.md, CLAUDE.md, and log.txt). Remote: https://github.com/harshitrajj23/NullTrace.git
+
+GOAL
+Find the data source that links a subject (user_id, email, phone, or email_hash) to the resource_ids named in the grader's steps_json. This is a read-only diagnostic. Do NOT write state, policy, or LLM logic. Do NOT tune the linker to improve scores.
+
+CRITICAL RULE: sample_output.csv is the answer key. The linker and locator must NEVER read it to build links. It may be read ONLY by the final scoring function, which compares outputs after linking is done. Exclude sample_output.csv, output.csv, and any file under code/evaluation/ or code/docs/ from every search in this step. Any earlier result that came from those files is invalid and must be discarded.
+
+RULES
+- Follow AGENTS.md, CLAUDE.md, and agent_trace_instructions.md for the whole session.
+- Do not modify anything under dataset/. Do not overwrite output.csv.
+- Read code/docs/SPEC_EXTRACTED.md and code/src/resource_link.py first.
+- Hardcode no case IDs, resource IDs, or expected answers.
+
+STEP 1: LOG
+Append a dated entry to log.txt (AGENTS.md section 5): Step F.1 started, the goal, the answer-key exclusion rule, and the note that the previous "4 unfound IDs" search included sample_output.csv and is discarded.
+
+STEP 2: MANIFEST SCHEMA
+Print the full header of evidence_files.csv and of every other dataset CSV except sample_output.csv and output.csv. For each column, report whether it can carry a subject identifier (user_id, email, phone, hash) or a resource_id. Print the distinct-value counts for any column with five or fewer distinct values.
+
+STEP 3: EVIDENCE CONTENT SCAN (code/evaluation/subject_resource_scan.py)
+For each file in dataset/evidence/ (and any other file in dataset/ except the excluded ones):
+- Extract text. Use native parsers for .json, .csv, .log, .sql, and .txt. For .pdf, use pdfplumber or pypdf. Record a status for each file: TEXT_OK, PDF_NO_TEXT, IMAGE_ONLY, BINARY, or ERROR. Do not call any model in this step.
+- Find every subject identifier (email, user_id, phone digits, email_hash) and every resource_id-shaped token (prefix_digits pattern) in each file.
+- For each file, record every pair of (subject identifier, resource_id) that co-occurs in the same record or line, with the file name and line or record number.
+
+STEP 4: FILE STATUS REPORT
+Count files by status. List every PDF_NO_TEXT, IMAGE_ONLY, and ERROR file by name. These will need OCR or the vision model in a later step. Do not treat them as having no data.
+
+STEP 5: CO-OCCURRENCE TABLE
+Write code/evaluation/subject_resource_cooccurrence.md with:
+- for each distinct resource_id found in the evidence content, the subject identifiers it co-occurs with and the file and line where that happened
+- a count of resource_ids that appear with at least one subject identifier, and the count with none
+
+STEP 6: SCORING-ONLY COMPARISON (run after Steps 2 to 5 are written to disk)
+Only now read sample_output.csv. For each case in the sample, compare its expected resource_ids with the co-occurrence table, using the subject identifiers from that case's cluster. Report:
+- expected resource_ids that co-occur with the cluster's subject in some evidence file
+- expected resource_ids that do not co-occur with the cluster's subject anywhere
+- resource_ids that co-occur with the cluster's subject but are not in the expected output
+Report totals. Do NOT change any linking code based on these numbers in this step.
+
+STEP 7: RE-CHECK THE 4 PREVIOUSLY "UNFOUND" IDs
+For account_004, support_001, audit_record_5569, and audit_record_6645, search the allowed files only (the answer-key exclusion rule applies). Show the file, line, and context for each match. If there is no match, say so. Do not infer an explanation.
+
+STEP 8: REPORT
+Write code/evaluation/subject_resource_report.md containing: the manifest schema findings, the file-status counts, the co-occurrence summary, the scoring-only comparison totals, the 4 re-checked IDs, and a paragraph stating which data source is the most likely subject-to-resource key and what the linker still cannot see.
+
+STEP 9: TESTS
+- Fixture test: a small synthetic evidence file with one subject, two resource_ids on separate lines, and one unrelated resource_id. Expect exactly the two correct co-occurrences.
+- Test that the scan excludes sample_output.csv, output.csv, and code/evaluation/ and code/docs/ paths.
+- Run pytest and fix only bugs in the code under test.
+
+STEP 10: COMMIT AND PUSH
+- Stage only the files created or changed in this step, plus log.txt.
+- Confirm with git status that nothing under dataset/ is staged.
+- Commit: "diag: subject-to-resource key scan with answer-key isolation"
+- Append the commit hash to log.txt, then commit as "docs: log step F.1 completion".
+- git push origin main. No --force.
+
+STOP CONDITION
+Print:
+1. pytest summary line
+2. the evidence_files.csv header and the subject/resource column findings
+3. file status counts (TEXT_OK, PDF_NO_TEXT, IMAGE_ONLY, BINARY, ERROR), with the names of the non-text files
+4. number of resource_ids with a subject co-occurrence, and number without
+5. scoring-only totals: expected pairs linkable, not linkable, and extra co-occurring resources
+6. results for the 4 re-checked IDs, with file and line if found
+7. the most likely subject-to-resource key, in one paragraph
+8. git log --oneline -3
+9. files created or changed
+
+Then stop. Do not start state reconstruction or LLM extraction.
+</USER_REQUEST>
+
+Agent Response Summary:
+Completed Step F.1 read-only diagnostic to identify the primary data source linking subjects to resource_ids under strict Answer-Key Isolation. Excluded sample_output.csv, output.csv, code/evaluation/, and code/docs/ from all linking and discovery scans. Analyzed manifest schema (evidence_files.csv contains file metadata only, no direct subject/resource identifiers). Implemented code/evaluation/subject_resource_scan.py to extract text across 101 dataset files, indexing 2,412 line-level co-occurrences across 4,129 distinct resource IDs (1,248 with subject co-occurrences, 2,881 without). Performed scoring-only evaluation against sample_output.csv (38 linkable on same line, 73 not directly co-occurring, 4 extra). Re-checked 4 previously unfound IDs: support_001 was discovered on Page 1 of dataset/evidence/documents/delivery_correction_attachment.pdf co-occurring with priya.raman@gmail.com, while account_004, audit_record_5569, and audit_record_6645 have no matches anywhere in allowed dataset files outside the answer key. Authored code/evaluation/subject_resource_cooccurrence.md, code/evaluation/subject_resource_report.md, and validated unit tests in code/tests/test_subject_resource_scan.py.
+
+Actions:
+* Analyzed manifest and dataset schemas for subject and resource columns
+* Implemented code/evaluation/subject_resource_scan.py (text extraction, co-occurrence indexing, isolated scoring)
+* Scanned 101 dataset files (90 TEXT_OK, 11 IMAGE_ONLY, 0 PDF_NO_TEXT, 0 BINARY, 0 ERROR)
+* Generated code/evaluation/subject_resource_cooccurrence.md
+* Generated code/evaluation/subject_resource_report.md
+* Re-checked 4 previously unfound IDs under strict isolation (found support_001 in delivery_correction_attachment.pdf)
+* Created code/tests/test_subject_resource_scan.py (answer-key isolation, synthetic fixture, unfound IDs tests)
+* Executed pytest test suite (39/39 passed)
+
+Context:
+tool=antigravity-ide
+model=Gemini 3.8 Flash (Medium)
+branch=main
+repo_root=/Users/harshitrajsingh/nullTrace/hackerrank-orchestrate-october26
+worktree=main
+parent_agent=none
+
+### Diagnostic Results Summary (Step F.1)
+
+#### 1. Evidence Manifest Schema & Column Analysis
+- `evidence_files.csv` Columns: `file_id`, `path`, `source_origin`, `captured_at`.
+- Analysis: No column in the manifest carries a subject identifier or a resource_id. The manifest provides only storage paths and timestamps; subject-resource relationships exist solely within the content of evidence files or through activity streams.
+
+#### 2. File Status Breakdown (101 Files Scanned)
+- `TEXT_OK`: 90 files
+- `IMAGE_ONLY`: 11 files (console screenshots requiring vision/OCR: `agent_desktop_view.png`, `archived_chat_session.png`, `audit_tool_terminal.png`, `backup_console_status.png`, `data_flow_monitor.png`, `delivery_record_screenshot.png`, `export_queue_manager.png`, `index_rebuild_status.png`, `ops_dashboard_alert.png`, `sync_status_offline.png`, `tombstone_verification_view.png`)
+- `PDF_NO_TEXT`: 0
+- `BINARY`: 0
+- `ERROR`: 0
+
+#### 3. Co-occurrence Summary
+- Distinct Resource IDs found in content: 4,129
+- Resource IDs with at least one subject co-occurrence: 1,248 (30.2%)
+- Resource IDs with no subject co-occurrence: 2,881 (69.8%)
+- Total subject-resource co-occurrence pairs: 2,412
+
+#### 4. Scoring-Only Comparison (32 Sample Cases, 111 Expected Pairs)
+- Expected pairs linkable via co-occurrence: 38 (34.2%)
+- Expected pairs not linkable on same line: 73 (65.8%)
+- Extra co-occurring resources for sample subjects: 4 (`account_177`, `account_549`, `account_598`, `account_935`)
+
+#### 5. Re-check of 4 Previously "Unfound" IDs
+- `support_001`: **FOUND** at `dataset/evidence/documents/delivery_correction_attachment.pdf`, Page 1, co-occurring with `priya.raman@gmail.com`.
+- `account_004`: **No match found** in any allowed dataset file.
+- `audit_record_5569`: **No match found** in any allowed dataset file.
+- `audit_record_6645`: **No match found** in any allowed dataset file.
+
+
