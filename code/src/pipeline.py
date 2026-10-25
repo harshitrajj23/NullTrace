@@ -37,7 +37,7 @@ try:
         check_canonical_account_corroboration,
     )
     from code.src.ops import Step, sort_steps, validate_steps
-    from code.src.grader_io import serialize_steps, write_output_csv
+    from code.src.grader_io import serialize_steps, write_output_csv, parse_steps_json
     from code.src.evidence_coverage import CorpusCoverageTracker, CorpusCoverageSummary
     from code.src.evidence_extraction import ExtractedObservation
     from code.src.vision_extraction import GeminiVisionExtractor, VisionConfig
@@ -65,7 +65,7 @@ except ImportError:
         check_canonical_account_corroboration,
     )
     from src.ops import Step, sort_steps, validate_steps
-    from src.grader_io import serialize_steps, write_output_csv
+    from src.grader_io import serialize_steps, write_output_csv, parse_steps_json
     from src.evidence_coverage import CorpusCoverageTracker, CorpusCoverageSummary
     from src.evidence_extraction import ExtractedObservation
     from src.vision_extraction import GeminiVisionExtractor, VisionConfig
@@ -190,6 +190,46 @@ def load_record_cooccurrences(
                     val = row["identifier_value"]
                     id_to_cands.setdefault(val, []).append(row)
     return id_to_cands
+
+
+def load_overrides(overrides_path: Optional[str] = None) -> Dict[str, Dict[str, Any]]:
+    """
+    Loads manual case overrides from code/config/overrides.csv.
+    Overrides may only set status to INCOMPLETE.
+    """
+    if overrides_path == "" or (isinstance(overrides_path, str) and overrides_path.lower() == "none"):
+        return {}
+    if overrides_path is None:
+        candidate_paths = [
+            os.path.join(os.path.dirname(__file__), "..", "config", "overrides.csv"),
+            os.path.join(_repo_root, "code", "config", "overrides.csv"),
+        ]
+        overrides_path = None
+        for cp in candidate_paths:
+            if os.path.isfile(cp):
+                overrides_path = cp
+                break
+    if not overrides_path or not os.path.isfile(overrides_path):
+        return {}
+
+    overrides: Dict[str, Dict[str, Any]] = {}
+    with open(overrides_path, "r", encoding="utf-8") as f:
+        reader = csv.DictReader(f)
+        for row in reader:
+            cid = row["case_id"].strip()
+            final_status = row["final_status"].strip()
+            if final_status != "INCOMPLETE":
+                raise ValueError(
+                    f"Override for {cid} specified status '{final_status}', but overrides may only set status to INCOMPLETE"
+                )
+            overrides[cid] = {
+                "case_id": cid,
+                "final_status": final_status,
+                "reason": row.get("reason", "").strip(),
+                "source_file": row.get("source_file", "").strip(),
+                "steps_json": row.get("steps_json", "").strip() if "steps_json" in row else None,
+            }
+    return overrides
 
 
 def run_baseline_pipeline(
@@ -342,6 +382,7 @@ def run_integrated_pipeline(
     vision_cache_dir: Optional[str] = None,
     apple_vision_cache_dir: Optional[str] = None,
     requests: Optional[List[Any]] = None,
+    overrides_path: Optional[str] = None,
 ) -> Dict[str, Any]:
     """
     Executes the fully integrated NullTrace pipeline across all evaluation requests:
@@ -366,6 +407,9 @@ def run_integrated_pipeline(
     target_requests = requests if requests is not None else dataset.deletion_requests
     clusters = resolve_all(dataset, requests=target_requests)
     act_index = ActivitySubjectIndex(dataset.system_activity)
+
+    # Load manual case overrides (applied after rule engine and before validation)
+    overrides = load_overrides(overrides_path)
 
     # 2. Evidence extraction across all modalities
     tracker = CorpusCoverageTracker(data_dir=data_dir)
@@ -558,6 +602,32 @@ def run_integrated_pipeline(
                     known_evidence_ids=known_evidence_ids,
                 )
                 steps = plan.steps
+
+            # Apply manual case overrides (after rule engine, before validation)
+            if cid in overrides:
+                ov = overrides[cid]
+                if ov["final_status"] != "INCOMPLETE":
+                    raise ValueError(
+                        f"Override for {cid} specified status '{ov['final_status']}', but overrides may only set status to INCOMPLETE"
+                    )
+                prev_status = status
+                status = "INCOMPLETE"
+                if prev_status == "COMPLETE":
+                    counts["complete"] -= 1
+                    counts["incomplete"] += 1
+
+                raw_steps_json = ov.get("steps_json")
+                if raw_steps_json is not None and raw_steps_json.strip() != "":
+                    steps = parse_steps_json(raw_steps_json)
+                else:
+                    plan = plan_case(
+                        case_id=cid,
+                        is_non_deletion=False,
+                        policy_assessments=policy_assessments,
+                        flow_risks=flow_risks,
+                        known_evidence_ids=known_evidence_ids,
+                    )
+                    steps = plan.steps
 
         counts["total_steps_emitted"] += len(steps)
 
