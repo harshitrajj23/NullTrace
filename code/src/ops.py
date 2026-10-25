@@ -159,6 +159,7 @@ ERR_EMPTY_SYSTEM_ID = "ERR_EMPTY_SYSTEM_ID"
 ERR_EMPTY_RESOURCE_ID = "ERR_EMPTY_RESOURCE_ID"
 ERR_EMPTY_OPERATION = "ERR_EMPTY_OPERATION"
 ERR_UNKNOWN_EVIDENCE_ID = "ERR_UNKNOWN_EVIDENCE_ID"
+ERR_INCOMPLETE_EMPTY = "INCOMPLETE_EMPTY"
 
 
 def validate_steps(
@@ -181,6 +182,10 @@ def validate_steps(
         if len(steps) > 0:
             errors.append(ERR_NOT_APPLICABLE_NON_EMPTY_STEPS)
         return errors
+
+    # 2. INCOMPLETE rule: must not have 0 steps (findings + remediation + verification required)
+    if status == "INCOMPLETE" and len(steps) == 0:
+        errors.append(ERR_INCOMPLETE_EMPTY)
 
     # Check for empty / missing basic fields and grammar conformance per step
     for idx, s in enumerate(steps):

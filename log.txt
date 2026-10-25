@@ -5659,3 +5659,41 @@ branch=main
 repo_root=/Users/harshitrajsingh/nullTrace/hackerrank-orchestrate-october26
 worktree=main
 parent_agent=none
+
+## 2026-10-25T09:07:40+05:30 Step Z3: Contract Validity Enforcement and Production Isolation
+
+User Prompt (verbatim, secrets redacted):
+NullTrace: Step Z3. Enforce validity, do not promote. Do not modify root output.csv or dataset/. Do not read sample_output.csv in production code.
+
+1. Add a validator rule: an INCOMPLETE row with steps_json = [] is an error (code INCOMPLETE_EMPTY). Add unit tests for the rule. Run validate_steps on build/nulltrace_step_z2.csv and report the count of INCOMPLETE_EMPTY errors (expected 22).
+2. Move cross_check_sample_resources and cross_check_sample_candidates out of production modules into code/evaluation/. Re-run the grep for sample_output.csv and sample_evaluation.json in code/src/ and code/main.py. Report zero hits in production paths.
+3. For all 162 COMPLETE rows in build/nulltrace_step_z2.csv, write a per-row table: case_id, each cluster resource, the flow or restore records touching it (activity_id or evidence file and line), and the state. Mark each COMPLETE SUPPORTED or UNSUPPORTED with the failed rule.
+4. Write build/nulltrace_step_z3.csv with the same 518 rows, unchanged except for any demotions, and list each demotion with its rule. Expect zero unless step 3 finds one.
+5. Write build/step_z3_audit.md with the validator result, grep result, per-row table summary, and the list of 22 INCOMPLETE_EMPTY cases with their reasons from build/unresolved_cases.csv.
+6. Append to log.txt: a correction that Step Z2's "validated" claim ignored INCOMPLETE_EMPTY, and the 22 open cases. Commit and push only the new build files, the moved code, and log.txt. No --force.
+
+STOP: print the hashes, the INCOMPLETE_EMPTY count, the grep result, the SUPPORTED/UNSUPPORTED counts, the demotion list, and the test result.
+
+Agent Response Summary:
+Completed NullTrace Step Z3 enforcing structural contract validity and complete production isolation under DECISION: MODEL_OFF ($0.00 cost, zero external API calls). Added a correction noting that Step Z2's 'validated' claim evaluated only grammar syntax and ignored INCOMPLETE_EMPTY; the 22 open cases remain unresolved with steps_json = [] due to absent subject identifiers or post-audit activity. Implemented ERR_INCOMPLETE_EMPTY in code/src/ops.py, added unit tests in code/tests/test_validator.py (all 170 test suite tests passing), and verified that validate_steps flags exactly 22 INCOMPLETE_EMPTY cases on the candidate. Moved cross_check_sample_resources and cross_check_sample_candidates to code/evaluation/sample_cross_check.py, purged references to sample_output.csv and sample_evaluation.json from production paths (confirmed 0 grep hits in code/src/ and code/main.py). Audited all 162 COMPLETE rows against cluster resources and touching flow/restore records (162 SUPPORTED, 0 UNSUPPORTED, 0 demotions), produced build/nulltrace_step_z3.csv, and documented the full audit table and 22 open cases in build/step_z3_audit.md.
+
+Actions:
+* Implemented ERR_INCOMPLETE_EMPTY rule in code/src/ops.py:validate_steps
+* Added unit tests for INCOMPLETE_EMPTY in code/tests/test_validator.py (18/18 validator tests passing)
+* Verified 22 INCOMPLETE_EMPTY errors on build/nulltrace_step_z2.csv via validate_steps
+* Created code/evaluation/sample_cross_check.py and moved cross_check_sample_resources and cross_check_sample_candidates
+* Updated evaluation imports in code/evaluation/hidden_identifier_scan.py
+* Removed sample_output references from code/src/identity.py, code/src/resource_link.py, code/main.py, code/src/loader.py, and code/src/pipeline.py
+* Verified 0 grep hits for sample_output.csv and sample_evaluation.json in code/src/ and code/main.py
+* Audited all 162 COMPLETE cases with cluster resources, touching flows, and states (162 SUPPORTED, 0 UNSUPPORTED, 0 demotions)
+* Generated build/nulltrace_step_z3.csv matching 518 evaluation rows
+* Documented findings, per-row audit table, and 22 open cases in build/step_z3_audit.md
+* Appended turn entry with Step Z2 correction to log.txt
+
+Context:
+tool=antigravity-ide
+model=Gemini 3.8 Flash (High)
+branch=main
+repo_root=/Users/harshitrajsingh/nullTrace/hackerrank-orchestrate-october26
+worktree=main
+parent_agent=none

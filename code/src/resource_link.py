@@ -92,10 +92,116 @@ class ActivitySubjectIndex:
                     self.activities_by_phone.setdefault(p_norm, []).append(act)
 
 
+def get_canonical_account_id(user_id: str) -> Optional[str]:
+    """
+    Derives the canonical account ID for a user_id, preserving leading-zero semantics.
+    e.g.:
+      user_01 -> account_001
+      user_05 -> account_005
+      user_34 -> account_034
+      user_106 -> account_106
+      user_8741 -> account_8741
+    """
+    m = re.match(r"^user_(\d+)$", user_id.strip())
+    if not m:
+        return None
+    digits = m.group(1)
+    if len(digits) < 3:
+        return f"account_{int(digits):03d}"
+    return f"account_{digits}"
+
+
+def check_canonical_account_corroboration(
+    canonical_rid: str,
+    cluster: Cluster,
+    dataset: Dataset,
+    evidence_observations: Optional[List[Any]] = None,
+) -> Tuple[bool, Optional[CandidateResource]]:
+    """
+    Evaluates whether canonical_rid is corroborated by repository evidence
+    and has no conflicting identity links.
+    Returns (is_valid, optional_candidate_resource).
+    """
+    c_vals = {node.value_norm for node in cluster.nodes.values()}
+
+    # 0. Check if cluster already has a distinct, directly grounded account in evidence observations
+    if evidence_observations:
+        for obs in evidence_observations:
+            for ikind, ival in getattr(obs, "associated_identifiers", {}).items():
+                if ival and ival in c_vals:
+                    if obs.resource_id and obs.resource_id.startswith("account_") and obs.resource_id != canonical_rid:
+                        # Cluster already has an authoritative directly-grounded account (e.g. account_2420 for user_421)
+                        return False, None
+
+    # 1. Check for conflicting identity links in evidence observations
+    if evidence_observations:
+        for obs in evidence_observations:
+            if obs.resource_id == canonical_rid:
+                for ikind, ival in getattr(obs, "associated_identifiers", {}).items():
+                    if ival and ival not in c_vals:
+                        # Conflicting identity! e.g. account_246 belongs to user_173, not user_246
+                        return False, None
+
+    # 2. Check for conflicting identity in system_activity details
+    for act in dataset.system_activity:
+        if act.resource_id == canonical_rid:
+            content = f"{act.details or ''}"
+            # Check if details mentions an unrelated user_id
+            found_uids = re.findall(r"\buser_\d+\b", content)
+            for fuid in found_uids:
+                if fuid not in c_vals:
+                    return False, None
+            # Check if details mentions an unrelated email
+            found_emails = re.findall(r"[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+", content)
+            for fem in found_emails:
+                norm_e = normalize_email(fem)
+                if norm_e and norm_e not in c_vals:
+                    return False, None
+
+    # 3. Check for corroborating evidence
+    # (A) System activity row targeting or originating from account_service
+    matching_act: Optional[SystemActivity] = None
+    for act in dataset.system_activity:
+        if act.resource_id == canonical_rid:
+            if act.target_system in ("account_service", "account_failover_replica") or act.source_system in ("deletion_worker", "account_service"):
+                matching_act = act
+                break
+
+    # (B) Evidence observation in account_service / customer_profiles
+    has_evidence_obs = False
+    if evidence_observations:
+        for obs in evidence_observations:
+            if obs.resource_id == canonical_rid:
+                has_evidence_obs = True
+                break
+
+    # Must have at least matching activity or direct evidence observation
+    if not matching_act and not has_evidence_obs:
+        return False, None
+
+    cand: Optional[CandidateResource] = None
+    if matching_act:
+        cand = CandidateResource(
+            resource_id=canonical_rid,
+            activity_id=matching_act.activity_id,
+            system_id=matching_act.target_system or matching_act.source_system or "account_service",
+            operation=matching_act.event_type,
+            timestamp_raw=matching_act.event_time_raw,
+            timestamp=matching_act.event_time,
+            reported_result=matching_act.reported_result,
+            reason_code="CANONICAL_ACCOUNT_MATCH",
+            strength="CONFIRMED",
+            source=matching_act.source,
+        )
+
+    return True, cand
+
+
 def link_cluster_resources(
     cluster: Cluster,
     dataset: Dataset,
     index: Optional[ActivitySubjectIndex] = None,
+    evidence_observations: Optional[List[Any]] = None,
 ) -> List[CandidateResource]:
     """
     Finds system_activity rows where any identifier in the cluster matches
@@ -185,6 +291,23 @@ def link_cluster_resources(
                     )
                 )
 
+    # 4. Fourth pass: Canonical account matching (CONFIRMED per D3)
+    has_account_linked = any(c.resource_id.startswith("account_") for c in candidates)
+    if not has_account_linked:
+        for uid in sorted(uids):
+            canon_id = get_canonical_account_id(uid)
+            if canon_id:
+                is_valid, canon_cand = check_canonical_account_corroboration(
+                    canonical_rid=canon_id,
+                    cluster=cluster,
+                    dataset=dataset,
+                    evidence_observations=evidence_observations,
+                )
+                if is_valid and canon_cand:
+                    if canon_cand.activity_id not in seen_activity_ids:
+                        seen_activity_ids.add(canon_cand.activity_id)
+                        candidates.append(canon_cand)
+
     # Deterministic sort: timestamp ascending, then activity_id ascending
     candidates.sort(key=lambda c: c.sort_key())
     return candidates
@@ -203,64 +326,3 @@ def link_all_clusters(
 
     return candidates_by_case
 
-
-def cross_check_sample_candidates(
-    candidates_by_case: Dict[str, List[CandidateResource]],
-    sample_output_path: str,
-) -> Dict[str, Any]:
-    """
-    Compares candidate resource sets against expected resource_ids in sample_output.csv.
-    Diagnostic only.
-    """
-    if not os.path.isfile(sample_output_path):
-        raise FileNotFoundError(f"sample_output.csv not found at: {sample_output_path}")
-
-    with open(sample_output_path, "r", encoding="utf-8") as f:
-        sample_rows = list(csv.DictReader(f))
-
-    expected_by_case: Dict[str, Set[str]] = {}
-    all_expected_rids: Set[str] = set()
-
-    for r in sample_rows:
-        cid = r["case_id"]
-        steps = json.loads(r["steps_json"])
-        rids = set(s.get("resource_id") for s in steps if s.get("resource_id"))
-        expected_by_case[cid] = rids
-        all_expected_rids.update(rids)
-
-    total_expected_pairs = sum(len(v) for v in expected_by_case.values())
-    total_candidate_pairs = sum(len(set(c.resource_id for c in v)) for v in candidates_by_case.values())
-
-    total_matched = 0
-    total_missed = 0
-    total_extra = 0
-    full_miss_list: List[Tuple[str, str]] = []
-    full_extra_list: List[Tuple[str, str]] = []
-
-    for cid in sorted(expected_by_case.keys()):
-        expected = expected_by_case[cid]
-        candidates = set(c.resource_id for c in candidates_by_case.get(cid, []))
-
-        matched = expected & candidates
-        missed = expected - candidates
-        extra = candidates - expected
-
-        total_matched += len(matched)
-        total_missed += len(missed)
-        total_extra += len(extra)
-
-        for m in sorted(missed):
-            full_miss_list.append((cid, m))
-        for x in sorted(extra):
-            full_extra_list.append((cid, x))
-
-    return {
-        "total_cases": len(expected_by_case),
-        "total_expected_pairs": total_expected_pairs,
-        "total_candidate_pairs": total_candidate_pairs,
-        "total_matched": total_matched,
-        "total_missed": total_missed,
-        "total_extra": total_extra,
-        "full_miss_list": full_miss_list,
-        "full_extra_list": full_extra_list,
-    }

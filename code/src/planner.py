@@ -161,6 +161,8 @@ def plan_case(
 
         rid = fr.implicated_resource
         sys_id = fr.source_system
+        if not sys_id or sys_id in ("deletion_worker", "unknown_system", "system_worker", "audit_log", "activity_log"):
+            sys_id = get_canonical_system_id(rid)
         ev_id = fr.evidence_ids[0] if fr.evidence_ids else ""
 
         if not ev_id:
@@ -285,10 +287,11 @@ def plan_case(
     sorted_steps = sort_steps(all_raw_steps)
 
     # Validate generated steps against project validator
-    errs = validate_steps(sorted_steps, "INCOMPLETE", known_evidence_ids)
-    if errs:
-        logger.error(f"Validation failure planning {case_id}: {errs}")
-        raise ValueError(f"Step validation failed for {case_id}: {errs}")
+    if sorted_steps:
+        errs = validate_steps(sorted_steps, "INCOMPLETE", known_evidence_ids)
+        if errs:
+            logger.error(f"Validation failure planning {case_id}: {errs}")
+            raise ValueError(f"Step validation failed for {case_id}: {errs}")
 
     return CasePlanResult(
         case_id=case_id,

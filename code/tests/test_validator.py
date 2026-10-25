@@ -36,6 +36,7 @@ try:
         ERR_EMPTY_RESOURCE_ID,
         ERR_EMPTY_OPERATION,
         ERR_UNKNOWN_EVIDENCE_ID,
+        ERR_INCOMPLETE_EMPTY,
     )
 except ImportError:
     from src.ops import (
@@ -58,6 +59,7 @@ except ImportError:
         ERR_EMPTY_RESOURCE_ID,
         ERR_EMPTY_OPERATION,
         ERR_UNKNOWN_EVIDENCE_ID,
+        ERR_INCOMPLETE_EMPTY,
     )
 
 KNOWN_EVIDENCE: Set[str] = {"evidence_01", "evidence_02"}
@@ -336,3 +338,23 @@ def test_err_unknown_evidence_id():
     ]
     errs = validate_steps(steps, "COMPLETE", KNOWN_EVIDENCE)
     assert ERR_UNKNOWN_EVIDENCE_ID in errs
+
+
+def test_err_incomplete_empty():
+    """An INCOMPLETE case with steps_json=[] must return ERR_INCOMPLETE_EMPTY."""
+    errs = validate_steps([], "INCOMPLETE", KNOWN_EVIDENCE)
+    assert ERR_INCOMPLETE_EMPTY in errs
+    assert "INCOMPLETE_EMPTY" in errs
+
+
+def test_incomplete_with_steps_valid():
+    """An INCOMPLETE case with valid steps must not return ERR_INCOMPLETE_EMPTY."""
+    steps = [
+        Step(1, "FINDING", "sys", "res", "REPORT_REMAINING_RECORD", "PRESENT", "evidence_01"),
+        Step(2, "REMEDIATION", "sys", "res", "DELETE_RECORD", "ABSENT", ""),
+        Step(3, "VERIFICATION", "sys", "res", "VERIFY_RECORD_ABSENT", "ABSENT", ""),
+    ]
+    errs = validate_steps(steps, "INCOMPLETE", KNOWN_EVIDENCE)
+    assert ERR_INCOMPLETE_EMPTY not in errs
+    assert errs == []
+

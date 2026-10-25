@@ -600,51 +600,6 @@ def build_identity_report(clusters: Dict[str, Cluster], dataset: Dataset) -> str
     else:
         report_lines.append("- None (all cases resolved cleanly without unhandled conditions).")
 
+
     return "\n".join(report_lines)
 
-
-def cross_check_sample_resources(
-    clusters: Dict[str, Cluster],
-    sample_output_path: str,
-) -> Tuple[int, List[Tuple[str, str]]]:
-    """
-    Diagnostic cross-check against dataset/sample_output.csv.
-    Checks whether each step's resource_id matches an identifier in that case's cluster.
-    Returns (count_of_fully_covered_cases, list_of_uncovered_(case_id, resource_id)).
-    """
-    import csv
-    import json
-
-    if not os.path.isfile(sample_output_path):
-        return (0, [])
-
-    with open(sample_output_path, "r", encoding="utf-8") as f:
-        reader = csv.DictReader(f)
-        sample_rows = list(reader)
-
-    fully_covered = 0
-    uncovered: List[Tuple[str, str]] = []
-
-    for r in sample_rows:
-        cid = r["case_id"]
-        steps = json.loads(r["steps_json"])
-        cluster = clusters.get(cid)
-
-        # Collect all values present in cluster nodes
-        cluster_values: Set[str] = set()
-        if cluster:
-            for node in cluster.nodes.values():
-                cluster_values.add(node.value_raw)
-                cluster_values.add(node.value_norm)
-
-        case_uncovered = []
-        for s in steps:
-            rid = s["resource_id"]
-            if rid not in cluster_values:
-                case_uncovered.append(rid)
-                uncovered.append((cid, rid))
-
-        if not case_uncovered:
-            fully_covered += 1
-
-    return fully_covered, uncovered

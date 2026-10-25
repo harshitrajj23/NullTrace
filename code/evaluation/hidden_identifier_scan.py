@@ -32,13 +32,15 @@ if "code" in sys.modules and not hasattr(sys.modules["code"], "src"):
 try:
     from code.src.loader import load_dataset, Dataset
     from code.src.identity import resolve_request
-    from code.src.resource_link import link_all_clusters, cross_check_sample_candidates
+    from code.src.resource_link import link_all_clusters
+    from code.evaluation.sample_cross_check import cross_check_sample_candidates
     from code.evaluation.subject_resource_scan import scan_evidence_files, score_sample_comparison, is_path_excluded
     from code.evaluation.sql_join_scan import run_sql_join_scan
 except ImportError:
     from src.loader import load_dataset, Dataset
     from src.identity import resolve_request
-    from src.resource_link import link_all_clusters, cross_check_sample_candidates
+    from src.resource_link import link_all_clusters
+    from evaluation.sample_cross_check import cross_check_sample_candidates
     from evaluation.subject_resource_scan import scan_evidence_files, score_sample_comparison, is_path_excluded
     from evaluation.sql_join_scan import run_sql_join_scan
 

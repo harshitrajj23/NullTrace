@@ -19,14 +19,12 @@ try:
     from code.src.identity import (
         resolve_all,
         build_identity_report,
-        cross_check_sample_resources,
     )
 except ImportError:
     from src.loader import load_dataset
     from src.identity import (
         resolve_all,
         build_identity_report,
-        cross_check_sample_resources,
     )
 
 
@@ -39,8 +37,23 @@ def main() -> None:
         default="./dataset",
         help="Path to participant-facing dataset folder (default: ./dataset)",
     )
+    parser.add_argument(
+        "--output",
+        default="./output.csv",
+        help="Path to output CSV (default: ./output.csv)",
+    )
 
     subparsers = parser.add_subparsers(dest="subcommand", help="Available subcommands")
+
+    # run subcommand (default)
+    run_parser = subparsers.add_parser(
+        "run", help="Run full integrated deletion-audit pipeline and write output"
+    )
+    run_parser.add_argument(
+        "--output",
+        default="./output.csv",
+        help="Path to write output CSV (default: ./output.csv)",
+    )
 
     # inspect subcommand
     subparsers.add_parser(
@@ -109,18 +122,6 @@ def main() -> None:
             f.write(report_md)
         print(f"Identity report written to {report_path}\n")
         print(report_md)
-
-        # Cross-check against sample output
-        sample_path = os.path.join(data_dir, "sample_output.csv")
-        if os.path.isfile(sample_path):
-            fully_covered, uncovered = cross_check_sample_resources(clusters, sample_path)
-            print("\n=== SAMPLE RESOURCE_ID CROSS-CHECK ===")
-            print(f"Cases with all resource_ids covered: {fully_covered} / 32")
-            print(f"Total uncovered resource_id occurrences: {len(uncovered)}")
-            if uncovered:
-                print("Uncovered resource_ids (case_id -> resource_id):")
-                for cid, rid in uncovered:
-                    print(f"  - {cid}: {rid}")
     elif args.subcommand == "state-eval":
         try:
             from code.src.state_reconstruction import (
@@ -214,7 +215,22 @@ def main() -> None:
         print(f"Total Planned Steps: {len(plan_res.steps)}")
         for ph_name, count in sorted(phase_counts.items()):
             print(f"  - {ph_name}: {count}")
-        print("Plan Validation: PASSED (0 errors)")
+    elif args.subcommand in (None, "run"):
+        try:
+            from code.src.pipeline import run_integrated_pipeline
+        except ImportError:
+            from src.pipeline import run_integrated_pipeline
+        out_path = getattr(args, "output", "./output.csv")
+        res = run_integrated_pipeline(data_dir=data_dir, output_path=out_path)
+        counts = res["counts"]
+        print("Integrated deletion-audit pipeline completed successfully!")
+        print(f"Total Requests Processed: {counts['total_requests']}")
+        print(f"NOT_APPLICABLE: {counts.get('not_applicable', 0)}")
+        print(f"INCOMPLETE: {counts.get('incomplete', 0)}")
+        print(f"COMPLETE: {counts.get('complete', 0)}")
+        print(f"Total Steps Emitted: {counts['total_steps_emitted']}")
+        print(f"Validation Failures: {counts['validation_failures']}")
+        print(f"Output File: {res['output_path']}")
     else:
         parser.print_help()
 

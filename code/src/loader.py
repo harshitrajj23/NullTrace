@@ -26,7 +26,6 @@ from .normalize import (
     normalize_timestamp,
     TimestampFormatError,
 )
-from .grader_io import read_sample_output
 
 
 class LoaderError(Exception):
@@ -370,12 +369,16 @@ def load_dataset(data_dir: str = "./dataset") -> Dataset:
                 )
             )
 
-    # 8. sample_output.csv
-    sample_out_path = os.path.join(data_dir, "sample_output.csv")
+    # Record row counts for any remaining dataset files without reading sample output in production
+    for fname in sorted(os.listdir(data_dir)):
+        if fname.endswith(".csv") and fname not in report.row_counts:
+            fpath = os.path.join(data_dir, fname)
+            if os.path.isfile(fpath):
+                with open(fpath, "r", encoding="utf-8") as f:
+                    cnt = sum(1 for line in f if line.strip()) - 1
+                    report.row_counts[fname] = max(0, cnt)
+
     sample_output: List[Dict[str, Any]] = []
-    if os.path.isfile(sample_out_path):
-        sample_output = read_sample_output(sample_out_path)
-        report.row_counts["sample_output.csv"] = len(sample_output)
 
     return Dataset(
         data_dir=data_dir,
