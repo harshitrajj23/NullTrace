@@ -14,30 +14,36 @@ Read [`problem_statement.md`](./problem_statement.md) for the complete challenge
 
 ## Quick Start
 
-Clone the repository and move into the project directory:
+### 1. Execution Policy (`DECISION: MODEL_OFF`)
+NullTrace operates in full adherence to the `MODEL_OFF` policy:
+* **Zero External API / LLM Calls**: Operates 100% offline using deterministic graph-matching, schema parsing, and policy rule engines.
+* **No API Keys or Secrets Required**: No environment variables, tokens, or credentials needed.
+* **Deterministic & Bitwise Reproducible**: Produces identical predictions on every execution.
+* **Zero Cost**: Model cost is $0.00 and token consumption is 0.
 
-```bash
-git clone https://github.com/interviewstreet/hackerrank-orchestrate-october26.git
-cd hackerrank-orchestrate-october26
-```
-
-Start your AI coding tool from the **repository root** so it automatically reads [`AGENTS.md`](./AGENTS.md) and logs your session turns to `log.txt` in the root directory.
-
-Build your solution in `code/main.py`, or use another language and document its setup and run command clearly in your README.
-
-Your solution must:
-
-- Read the input files from `dataset/`
-- Generate one prediction row for every request in `dataset/deletion_requests.csv`
-- Write the final predictions to `output.csv` in the repository root
-
-Run the starter Python entry point with:
+### 2. How to Run the Pipeline
+Generate predictions across all 518 evaluation requests:
 
 ```bash
 python3 code/main.py
 ```
+This reads from `dataset/` and writes `output.csv` to the repository root.
 
-The blank template at `dataset/output.csv` is provided as a reference. Your final generated file for submission must be the root-level `output.csv`.
+### 3. How to Run the Unit Tests
+Validate the step ordering, grader grammar contract, and validator rules:
+
+```bash
+# Run validator unit tests (20 passed)
+cd code && python3 -m pytest tests/test_validator.py -v
+```
+
+### 4. How to Run the Evaluator
+Run the isolated evaluator against the authorized public sample ground truth (`dataset/sample_output.csv`):
+
+```bash
+python3 code/evaluation/evaluate_predictions.py --predictions build/candidate_sample_preds.csv --ground-truth dataset/sample_output.csv
+```
+The evaluator reports status accuracy, per-class metrics, step precision/recall/F1, and sequence accuracy. Note that evaluation code is strictly physically isolated from production pipeline code.
 
 
 ## Dataset

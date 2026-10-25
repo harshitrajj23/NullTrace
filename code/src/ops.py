@@ -45,7 +45,7 @@ def load_operations_from_spec(spec_path: Optional[str] = None) -> List[Tuple[str
                 spec_path = os.path.abspath(c)
                 break
         if spec_path is None:
-            raise FileNotFoundError("Could not find problem_statement.md to load Allowed Operations table")
+            return list(HARDCODED_OPERATIONS)
 
     with open(spec_path, "r", encoding="utf-8") as f:
         text = f.read()
@@ -160,6 +160,7 @@ ERR_EMPTY_RESOURCE_ID = "ERR_EMPTY_RESOURCE_ID"
 ERR_EMPTY_OPERATION = "ERR_EMPTY_OPERATION"
 ERR_UNKNOWN_EVIDENCE_ID = "ERR_UNKNOWN_EVIDENCE_ID"
 ERR_INCOMPLETE_EMPTY = "INCOMPLETE_EMPTY"
+ERR_INCOMPLETE_NO_FINDING = "INCOMPLETE_NO_FINDING"
 
 
 def validate_steps(
@@ -186,6 +187,12 @@ def validate_steps(
     # 2. INCOMPLETE rule: must not have 0 steps (findings + remediation + verification required)
     if status == "INCOMPLETE" and len(steps) == 0:
         errors.append(ERR_INCOMPLETE_EMPTY)
+
+    # 3. INCOMPLETE rule: non-empty steps must include at least one FINDING
+    if status == "INCOMPLETE" and len(steps) > 0:
+        has_finding = any(s.phase == "FINDING" for s in steps)
+        if not has_finding:
+            errors.append(ERR_INCOMPLETE_NO_FINDING)
 
     # Check for empty / missing basic fields and grammar conformance per step
     for idx, s in enumerate(steps):

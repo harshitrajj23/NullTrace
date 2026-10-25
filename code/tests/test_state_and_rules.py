@@ -433,3 +433,16 @@ def test_deterministic_repeated_results(sample_deletion_rules):
 
     assert state1 == state2
     assert assessment1 == assessment2
+
+
+# 8. parse_timestamp_to_utc supports datetime and iso
+def test_parse_timestamp_to_utc_supports_datetime_and_iso():
+    from code.src.state_reconstruction import parse_timestamp_to_utc
+    dt_now = datetime(2026, 8, 15, 12, 0, 0, tzinfo=timezone.utc)
+    res_dt = parse_timestamp_to_utc(dt_now)
+    assert res_dt == dt_now
+    assert res_dt.tzinfo == timezone.utc
+
+    res_str = parse_timestamp_to_utc("2026-08-15T12:00:00Z")
+    assert res_str == dt_now
+    assert parse_timestamp_to_utc(None) is None

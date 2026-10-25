@@ -37,6 +37,7 @@ try:
         ERR_EMPTY_OPERATION,
         ERR_UNKNOWN_EVIDENCE_ID,
         ERR_INCOMPLETE_EMPTY,
+        ERR_INCOMPLETE_NO_FINDING,
     )
 except ImportError:
     from src.ops import (
@@ -60,6 +61,7 @@ except ImportError:
         ERR_EMPTY_OPERATION,
         ERR_UNKNOWN_EVIDENCE_ID,
         ERR_INCOMPLETE_EMPTY,
+        ERR_INCOMPLETE_NO_FINDING,
     )
 
 KNOWN_EVIDENCE: Set[str] = {"evidence_01", "evidence_02"}
@@ -358,3 +360,24 @@ def test_incomplete_with_steps_valid():
     assert ERR_INCOMPLETE_EMPTY not in errs
     assert errs == []
 
+
+def test_err_incomplete_no_finding():
+    """An INCOMPLETE case with steps but no FINDING phase must return ERR_INCOMPLETE_NO_FINDING."""
+    steps = [
+        Step(1, "REMEDIATION", "sys", "res", "DELETE_RECORD", "ABSENT", ""),
+        Step(2, "VERIFICATION", "sys", "res", "VERIFY_RECORD_ABSENT", "ABSENT", ""),
+    ]
+    errs = validate_steps(steps, "INCOMPLETE", KNOWN_EVIDENCE)
+    assert ERR_INCOMPLETE_NO_FINDING in errs
+
+
+def test_incomplete_with_finding_no_err_no_finding():
+    """An INCOMPLETE case with a FINDING phase must NOT return ERR_INCOMPLETE_NO_FINDING."""
+    steps = [
+        Step(1, "FINDING", "sys", "res", "REPORT_REMAINING_RECORD", "PRESENT", "evidence_01"),
+        Step(2, "REMEDIATION", "sys", "res", "DELETE_RECORD", "ABSENT", ""),
+        Step(3, "VERIFICATION", "sys", "res", "VERIFY_RECORD_ABSENT", "ABSENT", ""),
+    ]
+    errs = validate_steps(steps, "INCOMPLETE", KNOWN_EVIDENCE)
+    assert ERR_INCOMPLETE_NO_FINDING not in errs
+    assert errs == []

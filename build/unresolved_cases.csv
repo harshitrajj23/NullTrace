@@ -1,0 +1,27 @@
+case_id,reason
+case_44,activity_3856 mentions backup_6266 with zero subject identifiers
+case_51,activity_3738 mentions backup_7809 with zero subject identifiers
+case_60,account_058 activity (activity_3966) is post-audit cutoff; no pre-audit evidence exists
+case_73,cited evidence_07 captured post-audit cutoff; zero pre-audit evidence supports a finding
+case_127,activity_3113 mentions account_6805 with zero subject identifiers; snapshot is post-audit cutoff
+case_168,activity_2811 mentions export_4102 with zero subject identifiers
+case_170,search_3619 trace log is post-audit cutoff; no pre-audit evidence exists
+case_175,activity_2642 mentions account_246 with zero subject identifiers
+case_226,cited evidence_22 captured post-audit cutoff; zero pre-audit evidence supports a finding
+case_264,"activity_2116, 2117, 2118 mention support_9996, data_flow_4885, backup_3250 with zero subject identifiers"
+case_288,activity_1909 mentions export_7906 with zero subject identifiers
+case_292,activity_1848 mentions backup_1825 with zero subject identifiers
+case_345,account_343 activity (activity_2093) is post-audit cutoff; no pre-audit evidence exists
+case_372,activity_1239 mentions export_5081 with zero subject identifiers
+case_408,account_406 activity (activity_3055) is post-audit cutoff; no pre-audit evidence exists
+case_412,account_410 activity (activity_3662) is post-audit cutoff; no pre-audit evidence exists
+case_413,activity_858 mentions analytics_4523 with zero subject identifiers
+case_414,activity_859 mentions support_3768 with zero subject identifiers
+case_416,Keiko Sato: zero resources in activity or evidence (only ephemeral debug lookup logs with resource_id=None)
+case_417,Soo-jin Kim: zero resources in activity or evidence (only ephemeral debug lookup logs with resource_id=None)
+case_418,activity_815 mentions support_9464 with zero subject identifiers
+case_420,activity_753 mentions export_389 with zero subject identifiers
+case_423,cited evidence_40 captured post-audit cutoff; zero pre-audit evidence supports a finding
+case_520,activity_50 mentions support_9251 with zero subject identifiers
+case_522,activity_296 mentions support_8538 with zero subject identifiers
+case_530,cited evidence_49 captured post-audit cutoff; zero pre-audit evidence supports a finding
