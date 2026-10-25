@@ -1,0 +1,2439 @@
+[
+  {
+    "case_id": "case_113",
+    "base_status": "INCOMPLETE",
+    "cand_status": "COMPLETE",
+    "verdict": "VERIFIED",
+    "email": "sami-elsayed@gmail.com",
+    "user_id": [
+      "user_111"
+    ],
+    "audit_at": "2026-08-22T11:00:00+00:00",
+    "candidate_resources": [
+      "account_6697",
+      "audit_record_1127"
+    ],
+    "evidence_files": [
+      "resource_lookup_trace_20260822_103910.log",
+      "syslog_archive_us_east_20260824.log"
+    ],
+    "states": {
+      "account_6697": "ABSENT",
+      "audit_record_1127": "PRESENT"
+    },
+    "actions": {
+      "account_6697": "DELETE",
+      "audit_record_1127": "RETAIN"
+    },
+    "policy_satisfied": {
+      "account_6697": true,
+      "audit_record_1127": true
+    },
+    "supporting_ev": {
+      "account_6697": [
+        "evidence_11"
+      ],
+      "audit_record_1127": [
+        "evidence_11"
+      ]
+    },
+    "flow_risks": [],
+    "reasons_incomplete": [],
+    "cand_steps": [
+      {
+        "step_no": 1,
+        "phase": "VERIFICATION",
+        "system_id": "account_service",
+        "resource_id": "account_6697",
+        "operation": "VERIFY_RECORD_ABSENT",
+        "state": "ABSENT",
+        "evidence_id": "evidence_11"
+      },
+      {
+        "step_no": 2,
+        "phase": "VERIFICATION",
+        "system_id": "security_service",
+        "resource_id": "audit_record_1127",
+        "operation": "VERIFY_RECORD_PRESENT",
+        "state": "PRESENT",
+        "evidence_id": "evidence_11"
+      }
+    ]
+  },
+  {
+    "case_id": "case_117",
+    "base_status": "INCOMPLETE",
+    "cand_status": "COMPLETE",
+    "verdict": "VERIFIED",
+    "email": "r.suzuki14@yahoo.com",
+    "user_id": [
+      "user_115"
+    ],
+    "audit_at": "2026-08-22T11:00:00+00:00",
+    "candidate_resources": [
+      "account_1220",
+      "audit_record_1598"
+    ],
+    "evidence_files": [
+      "resource_lookup_trace_20260822_103910.log",
+      "syslog_archive_us_east_20260824.log"
+    ],
+    "states": {
+      "account_1220": "ABSENT",
+      "audit_record_1598": "PRESENT"
+    },
+    "actions": {
+      "account_1220": "DELETE",
+      "audit_record_1598": "RETAIN"
+    },
+    "policy_satisfied": {
+      "account_1220": true,
+      "audit_record_1598": true
+    },
+    "supporting_ev": {
+      "account_1220": [
+        "evidence_11"
+      ],
+      "audit_record_1598": [
+        "evidence_11"
+      ]
+    },
+    "flow_risks": [],
+    "reasons_incomplete": [],
+    "cand_steps": [
+      {
+        "step_no": 1,
+        "phase": "VERIFICATION",
+        "system_id": "account_service",
+        "resource_id": "account_1220",
+        "operation": "VERIFY_RECORD_ABSENT",
+        "state": "ABSENT",
+        "evidence_id": "evidence_11"
+      },
+      {
+        "step_no": 2,
+        "phase": "VERIFICATION",
+        "system_id": "security_service",
+        "resource_id": "audit_record_1598",
+        "operation": "VERIFY_RECORD_PRESENT",
+        "state": "PRESENT",
+        "evidence_id": "evidence_11"
+      }
+    ]
+  },
+  {
+    "case_id": "case_121",
+    "base_status": "INCOMPLETE",
+    "cand_status": "COMPLETE",
+    "verdict": "VERIFIED",
+    "email": "nicolas.n7090@zoho.com",
+    "user_id": [
+      "user_119"
+    ],
+    "audit_at": "2026-08-22T11:00:00+00:00",
+    "candidate_resources": [
+      "account_081",
+      "audit_record_2103"
+    ],
+    "evidence_files": [
+      "resource_lookup_trace_20260822_103910.log",
+      "syslog_archive_us_east_20260824.log"
+    ],
+    "states": {
+      "account_081": "ABSENT",
+      "audit_record_2103": "PRESENT"
+    },
+    "actions": {
+      "account_081": "DELETE",
+      "audit_record_2103": "RETAIN"
+    },
+    "policy_satisfied": {
+      "account_081": true,
+      "audit_record_2103": true
+    },
+    "supporting_ev": {
+      "account_081": [
+        "evidence_11"
+      ],
+      "audit_record_2103": [
+        "evidence_11"
+      ]
+    },
+    "flow_risks": [],
+    "reasons_incomplete": [],
+    "cand_steps": [
+      {
+        "step_no": 1,
+        "phase": "VERIFICATION",
+        "system_id": "account_service",
+        "resource_id": "account_081",
+        "operation": "VERIFY_RECORD_ABSENT",
+        "state": "ABSENT",
+        "evidence_id": "evidence_11"
+      },
+      {
+        "step_no": 2,
+        "phase": "VERIFICATION",
+        "system_id": "security_service",
+        "resource_id": "audit_record_2103",
+        "operation": "VERIFY_RECORD_PRESENT",
+        "state": "PRESENT",
+        "evidence_id": "evidence_11"
+      }
+    ]
+  },
+  {
+    "case_id": "case_164",
+    "base_status": "INCOMPLETE",
+    "cand_status": "COMPLETE",
+    "verdict": "VERIFIED",
+    "email": "tomasz.stojanovic@outlook.com",
+    "user_id": [
+      "user_162"
+    ],
+    "audit_at": "2026-07-28T06:00:00+00:00",
+    "candidate_resources": [
+      "account_9549",
+      "audit_record_6780"
+    ],
+    "evidence_files": [
+      "application_trace_ap_northeast_20260730.log",
+      "resource_lookup_trace_20260728_054417.log"
+    ],
+    "states": {
+      "account_9549": "ABSENT",
+      "audit_record_6780": "PRESENT"
+    },
+    "actions": {
+      "account_9549": "DELETE",
+      "audit_record_6780": "RETAIN"
+    },
+    "policy_satisfied": {
+      "account_9549": true,
+      "audit_record_6780": true
+    },
+    "supporting_ev": {
+      "account_9549": [
+        "evidence_16"
+      ],
+      "audit_record_6780": [
+        "evidence_16"
+      ]
+    },
+    "flow_risks": [],
+    "reasons_incomplete": [],
+    "cand_steps": [
+      {
+        "step_no": 1,
+        "phase": "VERIFICATION",
+        "system_id": "account_service",
+        "resource_id": "account_9549",
+        "operation": "VERIFY_RECORD_ABSENT",
+        "state": "ABSENT",
+        "evidence_id": "evidence_16"
+      },
+      {
+        "step_no": 2,
+        "phase": "VERIFICATION",
+        "system_id": "security_service",
+        "resource_id": "audit_record_6780",
+        "operation": "VERIFY_RECORD_PRESENT",
+        "state": "PRESENT",
+        "evidence_id": "evidence_16"
+      }
+    ]
+  },
+  {
+    "case_id": "case_167",
+    "base_status": "INCOMPLETE",
+    "cand_status": "COMPLETE",
+    "verdict": "VERIFIED",
+    "email": "abena-frimpong@proton.me",
+    "user_id": [
+      "user_165"
+    ],
+    "audit_at": "2026-07-28T06:00:00+00:00",
+    "candidate_resources": [
+      "account_5284",
+      "audit_record_3088"
+    ],
+    "evidence_files": [
+      "application_trace_ap_northeast_20260730.log",
+      "resource_lookup_trace_20260728_054417.log"
+    ],
+    "states": {
+      "account_5284": "ABSENT",
+      "audit_record_3088": "PRESENT"
+    },
+    "actions": {
+      "account_5284": "DELETE",
+      "audit_record_3088": "RETAIN"
+    },
+    "policy_satisfied": {
+      "account_5284": true,
+      "audit_record_3088": true
+    },
+    "supporting_ev": {
+      "account_5284": [
+        "evidence_16"
+      ],
+      "audit_record_3088": [
+        "evidence_16"
+      ]
+    },
+    "flow_risks": [],
+    "reasons_incomplete": [],
+    "cand_steps": [
+      {
+        "step_no": 1,
+        "phase": "VERIFICATION",
+        "system_id": "account_service",
+        "resource_id": "account_5284",
+        "operation": "VERIFY_RECORD_ABSENT",
+        "state": "ABSENT",
+        "evidence_id": "evidence_16"
+      },
+      {
+        "step_no": 2,
+        "phase": "VERIFICATION",
+        "system_id": "security_service",
+        "resource_id": "audit_record_3088",
+        "operation": "VERIFY_RECORD_PRESENT",
+        "state": "PRESENT",
+        "evidence_id": "evidence_16"
+      }
+    ]
+  },
+  {
+    "case_id": "case_169",
+    "base_status": "COMPLETE",
+    "cand_status": "INCOMPLETE",
+    "verdict": "VERIFIED_DEFECT_DISCOVERED",
+    "email": "yuki.k7202@zoho.com",
+    "user_id": [
+      "user_167"
+    ],
+    "audit_at": "2026-07-28T06:00:00+00:00",
+    "candidate_resources": [
+      "account_7268",
+      "audit_record_5374",
+      "data_flow_7004",
+      "search_2126"
+    ],
+    "evidence_files": [
+      "application_trace_ap_northeast_20260730.log",
+      "resource_lookup_trace_20260728_054417.log"
+    ],
+    "states": {
+      "account_7268": "ABSENT",
+      "audit_record_5374": "PRESENT",
+      "data_flow_7004": "ACTIVE",
+      "search_2126": "PRESENT"
+    },
+    "actions": {
+      "account_7268": "DELETE",
+      "audit_record_5374": "RETAIN",
+      "data_flow_7004": "DISABLE_DATA_FLOW",
+      "search_2126": "DELETE"
+    },
+    "policy_satisfied": {
+      "account_7268": true,
+      "audit_record_5374": true,
+      "data_flow_7004": false,
+      "search_2126": false
+    },
+    "supporting_ev": {
+      "account_7268": [
+        "evidence_16"
+      ],
+      "audit_record_5374": [
+        "evidence_16"
+      ],
+      "data_flow_7004": [
+        "evidence_16"
+      ],
+      "search_2126": [
+        "evidence_16"
+      ]
+    },
+    "flow_risks": [
+      {
+        "resource": "data_flow_7004",
+        "cat": "REPOPULATED_DOWNSTREAM",
+        "reason": "Active connector data_flow_7004 repopulated downstream resource search_2126"
+      }
+    ],
+    "reasons_incomplete": [
+      "UNSATISFIED_POLICY",
+      "ACTIVE_DATA_FLOW"
+    ],
+    "cand_steps": [
+      {
+        "step_no": 1,
+        "phase": "FINDING",
+        "system_id": "search_service",
+        "resource_id": "search_2126",
+        "operation": "REPORT_REMAINING_RECORD",
+        "state": "PRESENT",
+        "evidence_id": "evidence_16"
+      },
+      {
+        "step_no": 2,
+        "phase": "FINDING",
+        "system_id": "integration_service",
+        "resource_id": "data_flow_7004",
+        "operation": "REPORT_ACTIVE_DATA_FLOW",
+        "state": "ACTIVE",
+        "evidence_id": "evidence_16"
+      },
+      {
+        "step_no": 3,
+        "phase": "REMEDIATION",
+        "system_id": "integration_service",
+        "resource_id": "data_flow_7004",
+        "operation": "DISABLE_DATA_FLOW",
+        "state": "DISABLED",
+        "evidence_id": ""
+      },
+      {
+        "step_no": 4,
+        "phase": "REMEDIATION",
+        "system_id": "search_service",
+        "resource_id": "search_2126",
+        "operation": "DELETE_RECORD",
+        "state": "ABSENT",
+        "evidence_id": ""
+      },
+      {
+        "step_no": 5,
+        "phase": "VERIFICATION",
+        "system_id": "search_service",
+        "resource_id": "search_2126",
+        "operation": "VERIFY_RECORD_ABSENT",
+        "state": "ABSENT",
+        "evidence_id": ""
+      },
+      {
+        "step_no": 6,
+        "phase": "VERIFICATION",
+        "system_id": "integration_service",
+        "resource_id": "data_flow_7004",
+        "operation": "VERIFY_DATA_FLOW_DISABLED",
+        "state": "DISABLED",
+        "evidence_id": ""
+      }
+    ]
+  },
+  {
+    "case_id": "case_193",
+    "base_status": "INCOMPLETE",
+    "cand_status": "COMPLETE",
+    "verdict": "VERIFIED",
+    "email": "kojo.m7258@zoho.com",
+    "user_id": [
+      "user_191"
+    ],
+    "audit_at": "2026-07-13T10:00:00+00:00",
+    "candidate_resources": [
+      "account_1065",
+      "audit_record_1839"
+    ],
+    "evidence_files": [
+      "resource_lookup_trace_20260713_093359.log"
+    ],
+    "states": {
+      "account_1065": "ABSENT",
+      "audit_record_1839": "PRESENT"
+    },
+    "actions": {
+      "account_1065": "DELETE",
+      "audit_record_1839": "RETAIN"
+    },
+    "policy_satisfied": {
+      "account_1065": true,
+      "audit_record_1839": true
+    },
+    "supporting_ev": {
+      "account_1065": [
+        "evidence_82"
+      ],
+      "audit_record_1839": [
+        "evidence_82"
+      ]
+    },
+    "flow_risks": [],
+    "reasons_incomplete": [],
+    "cand_steps": [
+      {
+        "step_no": 1,
+        "phase": "VERIFICATION",
+        "system_id": "account_service",
+        "resource_id": "account_1065",
+        "operation": "VERIFY_RECORD_ABSENT",
+        "state": "ABSENT",
+        "evidence_id": "evidence_82"
+      },
+      {
+        "step_no": 2,
+        "phase": "VERIFICATION",
+        "system_id": "security_service",
+        "resource_id": "audit_record_1839",
+        "operation": "VERIFY_RECORD_PRESENT",
+        "state": "PRESENT",
+        "evidence_id": "evidence_82"
+      }
+    ]
+  },
+  {
+    "case_id": "case_195",
+    "base_status": "INCOMPLETE",
+    "cand_status": "COMPLETE",
+    "verdict": "VERIFIED",
+    "email": "a.sato96@gmail.com",
+    "user_id": [
+      "user_193"
+    ],
+    "audit_at": "2026-07-13T10:00:00+00:00",
+    "candidate_resources": [
+      "account_4320",
+      "audit_record_1524"
+    ],
+    "evidence_files": [
+      "resource_lookup_trace_20260713_093359.log"
+    ],
+    "states": {
+      "account_4320": "ABSENT",
+      "audit_record_1524": "PRESENT"
+    },
+    "actions": {
+      "account_4320": "DELETE",
+      "audit_record_1524": "RETAIN"
+    },
+    "policy_satisfied": {
+      "account_4320": true,
+      "audit_record_1524": true
+    },
+    "supporting_ev": {
+      "account_4320": [
+        "evidence_82"
+      ],
+      "audit_record_1524": [
+        "evidence_82"
+      ]
+    },
+    "flow_risks": [],
+    "reasons_incomplete": [],
+    "cand_steps": [
+      {
+        "step_no": 1,
+        "phase": "VERIFICATION",
+        "system_id": "account_service",
+        "resource_id": "account_4320",
+        "operation": "VERIFY_RECORD_ABSENT",
+        "state": "ABSENT",
+        "evidence_id": "evidence_82"
+      },
+      {
+        "step_no": 2,
+        "phase": "VERIFICATION",
+        "system_id": "security_service",
+        "resource_id": "audit_record_1524",
+        "operation": "VERIFY_RECORD_PRESENT",
+        "state": "PRESENT",
+        "evidence_id": "evidence_82"
+      }
+    ]
+  },
+  {
+    "case_id": "case_196",
+    "base_status": "INCOMPLETE",
+    "cand_status": "COMPLETE",
+    "verdict": "VERIFIED",
+    "email": "kim.hyunwoo@gmail.com",
+    "user_id": [
+      "user_194"
+    ],
+    "audit_at": "2026-07-13T10:00:00+00:00",
+    "candidate_resources": [
+      "account_5599",
+      "audit_record_6389"
+    ],
+    "evidence_files": [
+      "resource_lookup_trace_20260713_093359.log"
+    ],
+    "states": {
+      "account_5599": "ABSENT",
+      "audit_record_6389": "PRESENT"
+    },
+    "actions": {
+      "account_5599": "DELETE",
+      "audit_record_6389": "RETAIN"
+    },
+    "policy_satisfied": {
+      "account_5599": true,
+      "audit_record_6389": true
+    },
+    "supporting_ev": {
+      "account_5599": [
+        "evidence_82"
+      ],
+      "audit_record_6389": [
+        "evidence_82"
+      ]
+    },
+    "flow_risks": [],
+    "reasons_incomplete": [],
+    "cand_steps": [
+      {
+        "step_no": 1,
+        "phase": "VERIFICATION",
+        "system_id": "account_service",
+        "resource_id": "account_5599",
+        "operation": "VERIFY_RECORD_ABSENT",
+        "state": "ABSENT",
+        "evidence_id": "evidence_82"
+      },
+      {
+        "step_no": 2,
+        "phase": "VERIFICATION",
+        "system_id": "security_service",
+        "resource_id": "audit_record_6389",
+        "operation": "VERIFY_RECORD_PRESENT",
+        "state": "PRESENT",
+        "evidence_id": "evidence_82"
+      }
+    ]
+  },
+  {
+    "case_id": "case_202",
+    "base_status": "INCOMPLETE",
+    "cand_status": "COMPLETE",
+    "verdict": "VERIFIED",
+    "email": "dahl.astrid@icloud.com",
+    "user_id": [
+      "user_200"
+    ],
+    "audit_at": "2026-07-13T10:00:00+00:00",
+    "candidate_resources": [
+      "account_5547",
+      "audit_record_5401"
+    ],
+    "evidence_files": [
+      "resource_lookup_trace_20260713_093359.log"
+    ],
+    "states": {
+      "account_5547": "ABSENT",
+      "audit_record_5401": "PRESENT"
+    },
+    "actions": {
+      "account_5547": "DELETE",
+      "audit_record_5401": "RETAIN"
+    },
+    "policy_satisfied": {
+      "account_5547": true,
+      "audit_record_5401": true
+    },
+    "supporting_ev": {
+      "account_5547": [
+        "evidence_82"
+      ],
+      "audit_record_5401": [
+        "evidence_82"
+      ]
+    },
+    "flow_risks": [],
+    "reasons_incomplete": [],
+    "cand_steps": [
+      {
+        "step_no": 1,
+        "phase": "VERIFICATION",
+        "system_id": "account_service",
+        "resource_id": "account_5547",
+        "operation": "VERIFY_RECORD_ABSENT",
+        "state": "ABSENT",
+        "evidence_id": "evidence_82"
+      },
+      {
+        "step_no": 2,
+        "phase": "VERIFICATION",
+        "system_id": "security_service",
+        "resource_id": "audit_record_5401",
+        "operation": "VERIFY_RECORD_PRESENT",
+        "state": "PRESENT",
+        "evidence_id": "evidence_82"
+      }
+    ]
+  },
+  {
+    "case_id": "case_233",
+    "base_status": "INCOMPLETE",
+    "cand_status": "COMPLETE",
+    "verdict": "VERIFIED",
+    "email": "mandla-masuku@gmail.com",
+    "user_id": [
+      "user_231"
+    ],
+    "audit_at": "2026-06-23T06:00:00+00:00",
+    "candidate_resources": [
+      "account_5264",
+      "audit_record_8350",
+      "backup_8162",
+      "data_flow_6754",
+      "support_9670"
+    ],
+    "evidence_files": [
+      "customer_data_snapshot_bundle_20260630.json",
+      "resource_lookup_trace_20260623_053726.log"
+    ],
+    "states": {
+      "account_5264": "ABSENT",
+      "audit_record_8350": "PRESENT",
+      "backup_8162": "BLOCKED",
+      "data_flow_6754": "DISABLED",
+      "support_9670": "REDACTED"
+    },
+    "actions": {
+      "account_5264": "DELETE",
+      "audit_record_8350": "RETAIN",
+      "backup_8162": "RETAIN",
+      "data_flow_6754": "DISABLE_DATA_FLOW",
+      "support_9670": "REDACT"
+    },
+    "policy_satisfied": {
+      "account_5264": true,
+      "audit_record_8350": true,
+      "backup_8162": true,
+      "data_flow_6754": true,
+      "support_9670": true
+    },
+    "supporting_ev": {
+      "account_5264": [
+        "evidence_22"
+      ],
+      "audit_record_8350": [
+        "evidence_22"
+      ],
+      "backup_8162": [
+        "evidence_22"
+      ],
+      "data_flow_6754": [
+        "evidence_22"
+      ],
+      "support_9670": [
+        "evidence_22"
+      ]
+    },
+    "flow_risks": [],
+    "reasons_incomplete": [],
+    "cand_steps": [
+      {
+        "step_no": 1,
+        "phase": "VERIFICATION",
+        "system_id": "account_service",
+        "resource_id": "account_5264",
+        "operation": "VERIFY_RECORD_ABSENT",
+        "state": "ABSENT",
+        "evidence_id": "evidence_22"
+      },
+      {
+        "step_no": 2,
+        "phase": "VERIFICATION",
+        "system_id": "security_service",
+        "resource_id": "audit_record_8350",
+        "operation": "VERIFY_RECORD_PRESENT",
+        "state": "PRESENT",
+        "evidence_id": "evidence_22"
+      },
+      {
+        "step_no": 3,
+        "phase": "VERIFICATION",
+        "system_id": "support_platform",
+        "resource_id": "support_9670",
+        "operation": "VERIFY_RECORD_REDACTED",
+        "state": "REDACTED",
+        "evidence_id": "evidence_22"
+      },
+      {
+        "step_no": 4,
+        "phase": "VERIFICATION",
+        "system_id": "backup_service",
+        "resource_id": "backup_8162",
+        "operation": "VERIFY_RESTORE_BLOCKED",
+        "state": "BLOCKED",
+        "evidence_id": "evidence_22"
+      }
+    ]
+  },
+  {
+    "case_id": "case_235",
+    "base_status": "INCOMPLETE",
+    "cand_status": "COMPLETE",
+    "verdict": "VERIFIED",
+    "email": "haeun.h9856@outlook.com",
+    "user_id": [
+      "user_233"
+    ],
+    "audit_at": "2026-06-23T06:00:00+00:00",
+    "candidate_resources": [
+      "account_886",
+      "audit_record_7103",
+      "backup_2775",
+      "data_flow_593",
+      "support_9391"
+    ],
+    "evidence_files": [
+      "customer_data_snapshot_bundle_20260630.json",
+      "resource_lookup_trace_20260623_053726.log"
+    ],
+    "states": {
+      "account_886": "ABSENT",
+      "audit_record_7103": "PRESENT",
+      "backup_2775": "BLOCKED",
+      "data_flow_593": "DISABLED",
+      "support_9391": "REDACTED"
+    },
+    "actions": {
+      "account_886": "DELETE",
+      "audit_record_7103": "RETAIN",
+      "backup_2775": "RETAIN",
+      "data_flow_593": "DISABLE_DATA_FLOW",
+      "support_9391": "REDACT"
+    },
+    "policy_satisfied": {
+      "account_886": true,
+      "audit_record_7103": true,
+      "backup_2775": true,
+      "data_flow_593": true,
+      "support_9391": true
+    },
+    "supporting_ev": {
+      "account_886": [
+        "evidence_22"
+      ],
+      "audit_record_7103": [
+        "evidence_22"
+      ],
+      "backup_2775": [
+        "evidence_22"
+      ],
+      "data_flow_593": [
+        "evidence_22"
+      ],
+      "support_9391": [
+        "evidence_22"
+      ]
+    },
+    "flow_risks": [],
+    "reasons_incomplete": [],
+    "cand_steps": [
+      {
+        "step_no": 1,
+        "phase": "VERIFICATION",
+        "system_id": "account_service",
+        "resource_id": "account_886",
+        "operation": "VERIFY_RECORD_ABSENT",
+        "state": "ABSENT",
+        "evidence_id": "evidence_22"
+      },
+      {
+        "step_no": 2,
+        "phase": "VERIFICATION",
+        "system_id": "security_service",
+        "resource_id": "audit_record_7103",
+        "operation": "VERIFY_RECORD_PRESENT",
+        "state": "PRESENT",
+        "evidence_id": "evidence_22"
+      },
+      {
+        "step_no": 3,
+        "phase": "VERIFICATION",
+        "system_id": "support_platform",
+        "resource_id": "support_9391",
+        "operation": "VERIFY_RECORD_REDACTED",
+        "state": "REDACTED",
+        "evidence_id": "evidence_22"
+      },
+      {
+        "step_no": 4,
+        "phase": "VERIFICATION",
+        "system_id": "backup_service",
+        "resource_id": "backup_2775",
+        "operation": "VERIFY_RESTORE_BLOCKED",
+        "state": "BLOCKED",
+        "evidence_id": "evidence_22"
+      }
+    ]
+  },
+  {
+    "case_id": "case_238",
+    "base_status": "INCOMPLETE",
+    "cand_status": "COMPLETE",
+    "verdict": "VERIFIED",
+    "email": "romero.valeria94@icloud.com",
+    "user_id": [
+      "user_236"
+    ],
+    "audit_at": "2026-06-23T06:00:00+00:00",
+    "candidate_resources": [
+      "account_945",
+      "audit_record_6797"
+    ],
+    "evidence_files": [
+      "customer_data_snapshot_bundle_20260630.json",
+      "resource_lookup_trace_20260623_053726.log"
+    ],
+    "states": {
+      "account_945": "ABSENT",
+      "audit_record_6797": "PRESENT"
+    },
+    "actions": {
+      "account_945": "DELETE",
+      "audit_record_6797": "RETAIN"
+    },
+    "policy_satisfied": {
+      "account_945": true,
+      "audit_record_6797": true
+    },
+    "supporting_ev": {
+      "account_945": [
+        "evidence_22"
+      ],
+      "audit_record_6797": [
+        "evidence_22"
+      ]
+    },
+    "flow_risks": [],
+    "reasons_incomplete": [],
+    "cand_steps": [
+      {
+        "step_no": 1,
+        "phase": "VERIFICATION",
+        "system_id": "account_service",
+        "resource_id": "account_945",
+        "operation": "VERIFY_RECORD_ABSENT",
+        "state": "ABSENT",
+        "evidence_id": "evidence_22"
+      },
+      {
+        "step_no": 2,
+        "phase": "VERIFICATION",
+        "system_id": "security_service",
+        "resource_id": "audit_record_6797",
+        "operation": "VERIFY_RECORD_PRESENT",
+        "state": "PRESENT",
+        "evidence_id": "evidence_22"
+      }
+    ]
+  },
+  {
+    "case_id": "case_239",
+    "base_status": "INCOMPLETE",
+    "cand_status": "COMPLETE",
+    "verdict": "VERIFIED",
+    "email": "daniel-parker@proton.me",
+    "user_id": [
+      "user_237"
+    ],
+    "audit_at": "2026-06-23T06:00:00+00:00",
+    "candidate_resources": [
+      "account_2838",
+      "audit_record_4940"
+    ],
+    "evidence_files": [
+      "customer_data_snapshot_bundle_20260630.json",
+      "resource_lookup_trace_20260623_053726.log"
+    ],
+    "states": {
+      "account_2838": "ABSENT",
+      "audit_record_4940": "PRESENT"
+    },
+    "actions": {
+      "account_2838": "DELETE",
+      "audit_record_4940": "RETAIN"
+    },
+    "policy_satisfied": {
+      "account_2838": true,
+      "audit_record_4940": true
+    },
+    "supporting_ev": {
+      "account_2838": [
+        "evidence_22"
+      ],
+      "audit_record_4940": [
+        "evidence_22"
+      ]
+    },
+    "flow_risks": [],
+    "reasons_incomplete": [],
+    "cand_steps": [
+      {
+        "step_no": 1,
+        "phase": "VERIFICATION",
+        "system_id": "account_service",
+        "resource_id": "account_2838",
+        "operation": "VERIFY_RECORD_ABSENT",
+        "state": "ABSENT",
+        "evidence_id": "evidence_22"
+      },
+      {
+        "step_no": 2,
+        "phase": "VERIFICATION",
+        "system_id": "security_service",
+        "resource_id": "audit_record_4940",
+        "operation": "VERIFY_RECORD_PRESENT",
+        "state": "PRESENT",
+        "evidence_id": "evidence_22"
+      }
+    ]
+  },
+  {
+    "case_id": "case_265",
+    "base_status": "INCOMPLETE",
+    "cand_status": "COMPLETE",
+    "verdict": "VERIFIED",
+    "email": "oliver.w7426@zoho.com",
+    "user_id": [
+      "user_263"
+    ],
+    "audit_at": "2026-06-08T10:00:00+00:00",
+    "candidate_resources": [
+      "account_5015",
+      "audit_record_6378"
+    ],
+    "evidence_files": [
+      "cloud_runtime_export_us_west_20260608.log"
+    ],
+    "states": {
+      "account_5015": "ABSENT",
+      "audit_record_6378": "PRESENT"
+    },
+    "actions": {
+      "account_5015": "DELETE",
+      "audit_record_6378": "RETAIN"
+    },
+    "policy_satisfied": {
+      "account_5015": true,
+      "audit_record_6378": true
+    },
+    "supporting_ev": {
+      "account_5015": [
+        "evidence_25"
+      ],
+      "audit_record_6378": [
+        "evidence_25"
+      ]
+    },
+    "flow_risks": [],
+    "reasons_incomplete": [],
+    "cand_steps": [
+      {
+        "step_no": 1,
+        "phase": "VERIFICATION",
+        "system_id": "account_service",
+        "resource_id": "account_5015",
+        "operation": "VERIFY_RECORD_ABSENT",
+        "state": "ABSENT",
+        "evidence_id": "evidence_25"
+      },
+      {
+        "step_no": 2,
+        "phase": "VERIFICATION",
+        "system_id": "security_service",
+        "resource_id": "audit_record_6378",
+        "operation": "VERIFY_RECORD_PRESENT",
+        "state": "PRESENT",
+        "evidence_id": "evidence_25"
+      }
+    ]
+  },
+  {
+    "case_id": "case_267",
+    "base_status": "INCOMPLETE",
+    "cand_status": "COMPLETE",
+    "verdict": "VERIFIED",
+    "email": "j.nystrom64@gmail.com",
+    "user_id": [
+      "user_265"
+    ],
+    "audit_at": "2026-06-08T10:00:00+00:00",
+    "candidate_resources": [
+      "account_8384",
+      "audit_record_6621"
+    ],
+    "evidence_files": [
+      "cloud_runtime_export_us_west_20260608.log"
+    ],
+    "states": {
+      "account_8384": "ABSENT",
+      "audit_record_6621": "PRESENT"
+    },
+    "actions": {
+      "account_8384": "DELETE",
+      "audit_record_6621": "RETAIN"
+    },
+    "policy_satisfied": {
+      "account_8384": true,
+      "audit_record_6621": true
+    },
+    "supporting_ev": {
+      "account_8384": [
+        "evidence_25"
+      ],
+      "audit_record_6621": [
+        "evidence_25"
+      ]
+    },
+    "flow_risks": [],
+    "reasons_incomplete": [],
+    "cand_steps": [
+      {
+        "step_no": 1,
+        "phase": "VERIFICATION",
+        "system_id": "account_service",
+        "resource_id": "account_8384",
+        "operation": "VERIFY_RECORD_ABSENT",
+        "state": "ABSENT",
+        "evidence_id": "evidence_25"
+      },
+      {
+        "step_no": 2,
+        "phase": "VERIFICATION",
+        "system_id": "security_service",
+        "resource_id": "audit_record_6621",
+        "operation": "VERIFY_RECORD_PRESENT",
+        "state": "PRESENT",
+        "evidence_id": "evidence_25"
+      }
+    ]
+  },
+  {
+    "case_id": "case_283",
+    "base_status": "INCOMPLETE",
+    "cand_status": "COMPLETE",
+    "verdict": "VERIFIED",
+    "email": "amara.o9968@outlook.com",
+    "user_id": [
+      "user_281"
+    ],
+    "audit_at": "2026-05-29T08:00:00+00:00",
+    "candidate_resources": [
+      "account_947",
+      "audit_record_5680"
+    ],
+    "evidence_files": [
+      "resource_lookup_trace_20260529_074313.log"
+    ],
+    "states": {
+      "account_947": "ABSENT",
+      "audit_record_5680": "PRESENT"
+    },
+    "actions": {
+      "account_947": "DELETE",
+      "audit_record_5680": "RETAIN"
+    },
+    "policy_satisfied": {
+      "account_947": true,
+      "audit_record_5680": true
+    },
+    "supporting_ev": {
+      "account_947": [
+        "evidence_76"
+      ],
+      "audit_record_5680": [
+        "evidence_76"
+      ]
+    },
+    "flow_risks": [],
+    "reasons_incomplete": [],
+    "cand_steps": [
+      {
+        "step_no": 1,
+        "phase": "VERIFICATION",
+        "system_id": "account_service",
+        "resource_id": "account_947",
+        "operation": "VERIFY_RECORD_ABSENT",
+        "state": "ABSENT",
+        "evidence_id": "evidence_76"
+      },
+      {
+        "step_no": 2,
+        "phase": "VERIFICATION",
+        "system_id": "security_service",
+        "resource_id": "audit_record_5680",
+        "operation": "VERIFY_RECORD_PRESENT",
+        "state": "PRESENT",
+        "evidence_id": "evidence_76"
+      }
+    ]
+  },
+  {
+    "case_id": "case_286",
+    "base_status": "INCOMPLETE",
+    "cand_status": "COMPLETE",
+    "verdict": "VERIFIED",
+    "email": "yamamoto.keiko@icloud.com",
+    "user_id": [
+      "user_284"
+    ],
+    "audit_at": "2026-05-29T08:00:00+00:00",
+    "candidate_resources": [
+      "account_2016",
+      "audit_record_1714"
+    ],
+    "evidence_files": [
+      "resource_lookup_trace_20260529_074313.log"
+    ],
+    "states": {
+      "account_2016": "ABSENT",
+      "audit_record_1714": "PRESENT"
+    },
+    "actions": {
+      "account_2016": "DELETE",
+      "audit_record_1714": "RETAIN"
+    },
+    "policy_satisfied": {
+      "account_2016": true,
+      "audit_record_1714": true
+    },
+    "supporting_ev": {
+      "account_2016": [
+        "evidence_76"
+      ],
+      "audit_record_1714": [
+        "evidence_76"
+      ]
+    },
+    "flow_risks": [],
+    "reasons_incomplete": [],
+    "cand_steps": [
+      {
+        "step_no": 1,
+        "phase": "VERIFICATION",
+        "system_id": "account_service",
+        "resource_id": "account_2016",
+        "operation": "VERIFY_RECORD_ABSENT",
+        "state": "ABSENT",
+        "evidence_id": "evidence_76"
+      },
+      {
+        "step_no": 2,
+        "phase": "VERIFICATION",
+        "system_id": "security_service",
+        "resource_id": "audit_record_1714",
+        "operation": "VERIFY_RECORD_PRESENT",
+        "state": "PRESENT",
+        "evidence_id": "evidence_76"
+      }
+    ]
+  },
+  {
+    "case_id": "case_325",
+    "base_status": "COMPLETE",
+    "cand_status": "INCOMPLETE",
+    "verdict": "VERIFIED_DEFECT_DISCOVERED",
+    "email": "aoi.i256693@zoho.com",
+    "user_id": [
+      "user_323"
+    ],
+    "audit_at": "2026-05-09T11:00:00+00:00",
+    "candidate_resources": [
+      "audit_record_2236",
+      "data_flow_9962",
+      "search_4054"
+    ],
+    "evidence_files": [
+      "customer_data_snapshot_bundle_20260511.json",
+      "resource_lookup_trace_20260509_104353.log"
+    ],
+    "states": {
+      "audit_record_2236": "PRESENT",
+      "data_flow_9962": "ACTIVE",
+      "search_4054": "PRESENT"
+    },
+    "actions": {
+      "audit_record_2236": "RETAIN",
+      "data_flow_9962": "DISABLE_DATA_FLOW",
+      "search_4054": "DELETE"
+    },
+    "policy_satisfied": {
+      "audit_record_2236": true,
+      "data_flow_9962": false,
+      "search_4054": false
+    },
+    "supporting_ev": {
+      "audit_record_2236": [
+        "evidence_31"
+      ],
+      "data_flow_9962": [
+        "evidence_31"
+      ],
+      "search_4054": [
+        "evidence_31"
+      ]
+    },
+    "flow_risks": [
+      {
+        "resource": "data_flow_9962",
+        "cat": "REPOPULATED_DOWNSTREAM",
+        "reason": "Active connector data_flow_9962 repopulated downstream resource search_4054"
+      }
+    ],
+    "reasons_incomplete": [
+      "UNSATISFIED_POLICY",
+      "ACTIVE_DATA_FLOW"
+    ],
+    "cand_steps": [
+      {
+        "step_no": 1,
+        "phase": "FINDING",
+        "system_id": "search_service",
+        "resource_id": "search_4054",
+        "operation": "REPORT_REMAINING_RECORD",
+        "state": "PRESENT",
+        "evidence_id": "evidence_31"
+      },
+      {
+        "step_no": 2,
+        "phase": "FINDING",
+        "system_id": "integration_service",
+        "resource_id": "data_flow_9962",
+        "operation": "REPORT_ACTIVE_DATA_FLOW",
+        "state": "ACTIVE",
+        "evidence_id": "evidence_31"
+      },
+      {
+        "step_no": 3,
+        "phase": "REMEDIATION",
+        "system_id": "integration_service",
+        "resource_id": "data_flow_9962",
+        "operation": "DISABLE_DATA_FLOW",
+        "state": "DISABLED",
+        "evidence_id": ""
+      },
+      {
+        "step_no": 4,
+        "phase": "REMEDIATION",
+        "system_id": "search_service",
+        "resource_id": "search_4054",
+        "operation": "DELETE_RECORD",
+        "state": "ABSENT",
+        "evidence_id": ""
+      },
+      {
+        "step_no": 5,
+        "phase": "VERIFICATION",
+        "system_id": "search_service",
+        "resource_id": "search_4054",
+        "operation": "VERIFY_RECORD_ABSENT",
+        "state": "ABSENT",
+        "evidence_id": ""
+      },
+      {
+        "step_no": 6,
+        "phase": "VERIFICATION",
+        "system_id": "integration_service",
+        "resource_id": "data_flow_9962",
+        "operation": "VERIFY_DATA_FLOW_DISABLED",
+        "state": "DISABLED",
+        "evidence_id": ""
+      }
+    ]
+  },
+  {
+    "case_id": "case_326",
+    "base_status": "INCOMPLETE",
+    "cand_status": "COMPLETE",
+    "verdict": "VERIFIED",
+    "email": "hyunwoo.kang94@gmail.com",
+    "user_id": [
+      "user_324"
+    ],
+    "audit_at": "2026-05-09T11:00:00+00:00",
+    "candidate_resources": [
+      "account_3785",
+      "audit_record_1219",
+      "backup_2894",
+      "data_flow_2468",
+      "support_305"
+    ],
+    "evidence_files": [
+      "customer_data_snapshot_bundle_20260511.json",
+      "resource_lookup_trace_20260509_104353.log"
+    ],
+    "states": {
+      "account_3785": "ABSENT",
+      "audit_record_1219": "PRESENT",
+      "backup_2894": "BLOCKED",
+      "data_flow_2468": "DISABLED",
+      "support_305": "REDACTED"
+    },
+    "actions": {
+      "account_3785": "DELETE",
+      "audit_record_1219": "RETAIN",
+      "backup_2894": "RETAIN",
+      "data_flow_2468": "DISABLE_DATA_FLOW",
+      "support_305": "REDACT"
+    },
+    "policy_satisfied": {
+      "account_3785": true,
+      "audit_record_1219": true,
+      "backup_2894": true,
+      "data_flow_2468": true,
+      "support_305": true
+    },
+    "supporting_ev": {
+      "account_3785": [
+        "evidence_73"
+      ],
+      "audit_record_1219": [
+        "evidence_31"
+      ],
+      "backup_2894": [
+        "evidence_31"
+      ],
+      "data_flow_2468": [
+        "evidence_31"
+      ],
+      "support_305": [
+        "evidence_31"
+      ]
+    },
+    "flow_risks": [],
+    "reasons_incomplete": [],
+    "cand_steps": [
+      {
+        "step_no": 1,
+        "phase": "VERIFICATION",
+        "system_id": "account_service",
+        "resource_id": "account_3785",
+        "operation": "VERIFY_RECORD_ABSENT",
+        "state": "ABSENT",
+        "evidence_id": "evidence_73"
+      },
+      {
+        "step_no": 2,
+        "phase": "VERIFICATION",
+        "system_id": "security_service",
+        "resource_id": "audit_record_1219",
+        "operation": "VERIFY_RECORD_PRESENT",
+        "state": "PRESENT",
+        "evidence_id": "evidence_31"
+      },
+      {
+        "step_no": 3,
+        "phase": "VERIFICATION",
+        "system_id": "support_platform",
+        "resource_id": "support_305",
+        "operation": "VERIFY_RECORD_REDACTED",
+        "state": "REDACTED",
+        "evidence_id": "evidence_31"
+      },
+      {
+        "step_no": 4,
+        "phase": "VERIFICATION",
+        "system_id": "backup_service",
+        "resource_id": "backup_2894",
+        "operation": "VERIFY_RESTORE_BLOCKED",
+        "state": "BLOCKED",
+        "evidence_id": "evidence_31"
+      }
+    ]
+  },
+  {
+    "case_id": "case_327",
+    "base_status": "INCOMPLETE",
+    "cand_status": "COMPLETE",
+    "verdict": "VERIFIED",
+    "email": "r.costa04@gmail.com",
+    "user_id": [
+      "user_325"
+    ],
+    "audit_at": "2026-05-09T11:00:00+00:00",
+    "candidate_resources": [
+      "account_4606",
+      "audit_record_461"
+    ],
+    "evidence_files": [
+      "customer_data_snapshot_bundle_20260511.json",
+      "resource_lookup_trace_20260509_104353.log"
+    ],
+    "states": {
+      "account_4606": "ABSENT",
+      "audit_record_461": "PRESENT"
+    },
+    "actions": {
+      "account_4606": "DELETE",
+      "audit_record_461": "RETAIN"
+    },
+    "policy_satisfied": {
+      "account_4606": true,
+      "audit_record_461": true
+    },
+    "supporting_ev": {
+      "account_4606": [
+        "evidence_73"
+      ],
+      "audit_record_461": [
+        "evidence_31"
+      ]
+    },
+    "flow_risks": [],
+    "reasons_incomplete": [],
+    "cand_steps": [
+      {
+        "step_no": 1,
+        "phase": "VERIFICATION",
+        "system_id": "account_service",
+        "resource_id": "account_4606",
+        "operation": "VERIFY_RECORD_ABSENT",
+        "state": "ABSENT",
+        "evidence_id": "evidence_73"
+      },
+      {
+        "step_no": 2,
+        "phase": "VERIFICATION",
+        "system_id": "security_service",
+        "resource_id": "audit_record_461",
+        "operation": "VERIFY_RECORD_PRESENT",
+        "state": "PRESENT",
+        "evidence_id": "evidence_31"
+      }
+    ]
+  },
+  {
+    "case_id": "case_369",
+    "base_status": "INCOMPLETE",
+    "cand_status": "COMPLETE",
+    "verdict": "VERIFIED",
+    "email": "d.bennett02@yahoo.com",
+    "user_id": [
+      "user_367"
+    ],
+    "audit_at": "2026-04-19T07:00:00+00:00",
+    "candidate_resources": [
+      "account_8590",
+      "audit_record_337"
+    ],
+    "evidence_files": [
+      "structured_service_events_ca_central_20260419.log"
+    ],
+    "states": {
+      "account_8590": "ABSENT",
+      "audit_record_337": "PRESENT"
+    },
+    "actions": {
+      "account_8590": "DELETE",
+      "audit_record_337": "RETAIN"
+    },
+    "policy_satisfied": {
+      "account_8590": true,
+      "audit_record_337": true
+    },
+    "supporting_ev": {
+      "account_8590": [
+        "evidence_34"
+      ],
+      "audit_record_337": [
+        "evidence_34"
+      ]
+    },
+    "flow_risks": [],
+    "reasons_incomplete": [],
+    "cand_steps": [
+      {
+        "step_no": 1,
+        "phase": "VERIFICATION",
+        "system_id": "account_service",
+        "resource_id": "account_8590",
+        "operation": "VERIFY_RECORD_ABSENT",
+        "state": "ABSENT",
+        "evidence_id": "evidence_34"
+      },
+      {
+        "step_no": 2,
+        "phase": "VERIFICATION",
+        "system_id": "security_service",
+        "resource_id": "audit_record_337",
+        "operation": "VERIFY_RECORD_PRESENT",
+        "state": "PRESENT",
+        "evidence_id": "evidence_34"
+      }
+    ]
+  },
+  {
+    "case_id": "case_373",
+    "base_status": "COMPLETE",
+    "cand_status": "INCOMPLETE",
+    "verdict": "VERIFIED_DEFECT_DISCOVERED",
+    "email": "sami.h267897@zoho.com",
+    "user_id": [
+      "user_371"
+    ],
+    "audit_at": "2026-04-14T06:00:00+00:00",
+    "candidate_resources": [
+      "audit_record_9163",
+      "data_flow_2984",
+      "search_7859"
+    ],
+    "evidence_files": [
+      "customer_data_snapshot_bundle_20260416.json",
+      "resource_lookup_trace_20260414_054007.log"
+    ],
+    "states": {
+      "audit_record_9163": "PRESENT",
+      "data_flow_2984": "ACTIVE",
+      "search_7859": "PRESENT"
+    },
+    "actions": {
+      "audit_record_9163": "RETAIN",
+      "data_flow_2984": "DISABLE_DATA_FLOW",
+      "search_7859": "DELETE"
+    },
+    "policy_satisfied": {
+      "audit_record_9163": true,
+      "data_flow_2984": false,
+      "search_7859": false
+    },
+    "supporting_ev": {
+      "audit_record_9163": [
+        "evidence_35"
+      ],
+      "data_flow_2984": [
+        "evidence_35"
+      ],
+      "search_7859": [
+        "evidence_35"
+      ]
+    },
+    "flow_risks": [
+      {
+        "resource": "data_flow_2984",
+        "cat": "REPOPULATED_DOWNSTREAM",
+        "reason": "Active connector data_flow_2984 repopulated downstream resource search_7859"
+      }
+    ],
+    "reasons_incomplete": [
+      "UNSATISFIED_POLICY",
+      "ACTIVE_DATA_FLOW"
+    ],
+    "cand_steps": [
+      {
+        "step_no": 1,
+        "phase": "FINDING",
+        "system_id": "search_service",
+        "resource_id": "search_7859",
+        "operation": "REPORT_REMAINING_RECORD",
+        "state": "PRESENT",
+        "evidence_id": "evidence_35"
+      },
+      {
+        "step_no": 2,
+        "phase": "FINDING",
+        "system_id": "integration_service",
+        "resource_id": "data_flow_2984",
+        "operation": "REPORT_ACTIVE_DATA_FLOW",
+        "state": "ACTIVE",
+        "evidence_id": "evidence_35"
+      },
+      {
+        "step_no": 3,
+        "phase": "REMEDIATION",
+        "system_id": "integration_service",
+        "resource_id": "data_flow_2984",
+        "operation": "DISABLE_DATA_FLOW",
+        "state": "DISABLED",
+        "evidence_id": ""
+      },
+      {
+        "step_no": 4,
+        "phase": "REMEDIATION",
+        "system_id": "search_service",
+        "resource_id": "search_7859",
+        "operation": "DELETE_RECORD",
+        "state": "ABSENT",
+        "evidence_id": ""
+      },
+      {
+        "step_no": 5,
+        "phase": "VERIFICATION",
+        "system_id": "search_service",
+        "resource_id": "search_7859",
+        "operation": "VERIFY_RECORD_ABSENT",
+        "state": "ABSENT",
+        "evidence_id": ""
+      },
+      {
+        "step_no": 6,
+        "phase": "VERIFICATION",
+        "system_id": "integration_service",
+        "resource_id": "data_flow_2984",
+        "operation": "VERIFY_DATA_FLOW_DISABLED",
+        "state": "DISABLED",
+        "evidence_id": ""
+      }
+    ]
+  },
+  {
+    "case_id": "case_374",
+    "base_status": "INCOMPLETE",
+    "cand_status": "COMPLETE",
+    "verdict": "VERIFIED",
+    "email": "obinna.okafor@gmail.com",
+    "user_id": [
+      "user_372"
+    ],
+    "audit_at": "2026-04-14T06:00:00+00:00",
+    "candidate_resources": [
+      "account_8598",
+      "audit_record_5137"
+    ],
+    "evidence_files": [
+      "customer_data_snapshot_bundle_20260416.json",
+      "resource_lookup_trace_20260414_054007.log"
+    ],
+    "states": {
+      "account_8598": "ABSENT",
+      "audit_record_5137": "PRESENT"
+    },
+    "actions": {
+      "account_8598": "DELETE",
+      "audit_record_5137": "RETAIN"
+    },
+    "policy_satisfied": {
+      "account_8598": true,
+      "audit_record_5137": true
+    },
+    "supporting_ev": {
+      "account_8598": [
+        "evidence_70"
+      ],
+      "audit_record_5137": [
+        "evidence_35"
+      ]
+    },
+    "flow_risks": [],
+    "reasons_incomplete": [],
+    "cand_steps": [
+      {
+        "step_no": 1,
+        "phase": "VERIFICATION",
+        "system_id": "account_service",
+        "resource_id": "account_8598",
+        "operation": "VERIFY_RECORD_ABSENT",
+        "state": "ABSENT",
+        "evidence_id": "evidence_70"
+      },
+      {
+        "step_no": 2,
+        "phase": "VERIFICATION",
+        "system_id": "security_service",
+        "resource_id": "audit_record_5137",
+        "operation": "VERIFY_RECORD_PRESENT",
+        "state": "PRESENT",
+        "evidence_id": "evidence_35"
+      }
+    ]
+  },
+  {
+    "case_id": "case_375",
+    "base_status": "INCOMPLETE",
+    "cand_status": "COMPLETE",
+    "verdict": "VERIFIED",
+    "email": "n.mensah16@gmail.com",
+    "user_id": [
+      "user_373"
+    ],
+    "audit_at": "2026-04-14T06:00:00+00:00",
+    "candidate_resources": [
+      "account_2854",
+      "audit_record_6359"
+    ],
+    "evidence_files": [
+      "customer_data_snapshot_bundle_20260416.json",
+      "resource_lookup_trace_20260414_054007.log"
+    ],
+    "states": {
+      "account_2854": "ABSENT",
+      "audit_record_6359": "PRESENT"
+    },
+    "actions": {
+      "account_2854": "DELETE",
+      "audit_record_6359": "RETAIN"
+    },
+    "policy_satisfied": {
+      "account_2854": true,
+      "audit_record_6359": true
+    },
+    "supporting_ev": {
+      "account_2854": [
+        "evidence_70"
+      ],
+      "audit_record_6359": [
+        "evidence_35"
+      ]
+    },
+    "flow_risks": [],
+    "reasons_incomplete": [],
+    "cand_steps": [
+      {
+        "step_no": 1,
+        "phase": "VERIFICATION",
+        "system_id": "account_service",
+        "resource_id": "account_2854",
+        "operation": "VERIFY_RECORD_ABSENT",
+        "state": "ABSENT",
+        "evidence_id": "evidence_70"
+      },
+      {
+        "step_no": 2,
+        "phase": "VERIFICATION",
+        "system_id": "security_service",
+        "resource_id": "audit_record_6359",
+        "operation": "VERIFY_RECORD_PRESENT",
+        "state": "PRESENT",
+        "evidence_id": "evidence_35"
+      }
+    ]
+  },
+  {
+    "case_id": "case_486",
+    "base_status": "INCOMPLETE",
+    "cand_status": "COMPLETE",
+    "verdict": "VERIFIED",
+    "email": "swalker752578@gmail.com",
+    "user_id": [
+      "user_484"
+    ],
+    "audit_at": "2026-02-18T09:00:00+00:00",
+    "candidate_resources": [
+      "account_9031",
+      "audit_record_5451"
+    ],
+    "evidence_files": [
+      "customer_data_snapshot_bundle_20260223.json",
+      "resource_lookup_trace_20260218_083911.log"
+    ],
+    "states": {
+      "account_9031": "ABSENT",
+      "audit_record_5451": "PRESENT"
+    },
+    "actions": {
+      "account_9031": "DELETE",
+      "audit_record_5451": "RETAIN"
+    },
+    "policy_satisfied": {
+      "account_9031": true,
+      "audit_record_5451": true
+    },
+    "supporting_ev": {
+      "account_9031": [
+        "evidence_45"
+      ],
+      "audit_record_5451": [
+        "evidence_45"
+      ]
+    },
+    "flow_risks": [],
+    "reasons_incomplete": [],
+    "cand_steps": [
+      {
+        "step_no": 1,
+        "phase": "VERIFICATION",
+        "system_id": "account_service",
+        "resource_id": "account_9031",
+        "operation": "VERIFY_RECORD_ABSENT",
+        "state": "ABSENT",
+        "evidence_id": "evidence_45"
+      },
+      {
+        "step_no": 2,
+        "phase": "VERIFICATION",
+        "system_id": "security_service",
+        "resource_id": "audit_record_5451",
+        "operation": "VERIFY_RECORD_PRESENT",
+        "state": "PRESENT",
+        "evidence_id": "evidence_45"
+      }
+    ]
+  },
+  {
+    "case_id": "case_491",
+    "base_status": "INCOMPLETE",
+    "cand_status": "COMPLETE",
+    "verdict": "VERIFIED",
+    "email": "chioma-oladipo@proton.me",
+    "user_id": [
+      "user_489"
+    ],
+    "audit_at": "2026-02-18T09:00:00+00:00",
+    "candidate_resources": [
+      "account_7455",
+      "audit_record_7073"
+    ],
+    "evidence_files": [
+      "customer_data_snapshot_bundle_20260223.json",
+      "resource_lookup_trace_20260218_083911.log"
+    ],
+    "states": {
+      "account_7455": "ABSENT",
+      "audit_record_7073": "PRESENT"
+    },
+    "actions": {
+      "account_7455": "DELETE",
+      "audit_record_7073": "RETAIN"
+    },
+    "policy_satisfied": {
+      "account_7455": true,
+      "audit_record_7073": true
+    },
+    "supporting_ev": {
+      "account_7455": [
+        "evidence_45"
+      ],
+      "audit_record_7073": [
+        "evidence_45"
+      ]
+    },
+    "flow_risks": [],
+    "reasons_incomplete": [],
+    "cand_steps": [
+      {
+        "step_no": 1,
+        "phase": "VERIFICATION",
+        "system_id": "account_service",
+        "resource_id": "account_7455",
+        "operation": "VERIFY_RECORD_ABSENT",
+        "state": "ABSENT",
+        "evidence_id": "evidence_45"
+      },
+      {
+        "step_no": 2,
+        "phase": "VERIFICATION",
+        "system_id": "security_service",
+        "resource_id": "audit_record_7073",
+        "operation": "VERIFY_RECORD_PRESENT",
+        "state": "PRESENT",
+        "evidence_id": "evidence_45"
+      }
+    ]
+  },
+  {
+    "case_id": "case_516",
+    "base_status": "INCOMPLETE",
+    "cand_status": "COMPLETE",
+    "verdict": "VERIFIED",
+    "email": "yelsayed5095@fastmail.com",
+    "user_id": [
+      "user_514"
+    ],
+    "audit_at": "2026-02-03T06:00:00+00:00",
+    "candidate_resources": [
+      "account_141",
+      "audit_record_3777"
+    ],
+    "evidence_files": [
+      "operations_stream_me_central_20260203.log"
+    ],
+    "states": {
+      "account_141": "ABSENT",
+      "audit_record_3777": "PRESENT"
+    },
+    "actions": {
+      "account_141": "DELETE",
+      "audit_record_3777": "RETAIN"
+    },
+    "policy_satisfied": {
+      "account_141": true,
+      "audit_record_3777": true
+    },
+    "supporting_ev": {
+      "account_141": [
+        "evidence_48"
+      ],
+      "audit_record_3777": [
+        "evidence_48"
+      ]
+    },
+    "flow_risks": [],
+    "reasons_incomplete": [],
+    "cand_steps": [
+      {
+        "step_no": 1,
+        "phase": "VERIFICATION",
+        "system_id": "account_service",
+        "resource_id": "account_141",
+        "operation": "VERIFY_RECORD_ABSENT",
+        "state": "ABSENT",
+        "evidence_id": "evidence_48"
+      },
+      {
+        "step_no": 2,
+        "phase": "VERIFICATION",
+        "system_id": "security_service",
+        "resource_id": "audit_record_3777",
+        "operation": "VERIFY_RECORD_PRESENT",
+        "state": "PRESENT",
+        "evidence_id": "evidence_48"
+      }
+    ]
+  },
+  {
+    "case_id": "case_521",
+    "base_status": "INCOMPLETE",
+    "cand_status": "COMPLETE",
+    "verdict": "VERIFIED",
+    "email": "yuna-lee@gmail.com",
+    "user_id": [
+      "user_519"
+    ],
+    "audit_at": "2026-02-03T06:00:00+00:00",
+    "candidate_resources": [
+      "account_1482",
+      "audit_record_3567"
+    ],
+    "evidence_files": [
+      "operations_stream_me_central_20260203.log"
+    ],
+    "states": {
+      "account_1482": "ABSENT",
+      "audit_record_3567": "PRESENT"
+    },
+    "actions": {
+      "account_1482": "DELETE",
+      "audit_record_3567": "RETAIN"
+    },
+    "policy_satisfied": {
+      "account_1482": true,
+      "audit_record_3567": true
+    },
+    "supporting_ev": {
+      "account_1482": [
+        "evidence_48"
+      ],
+      "audit_record_3567": [
+        "evidence_48"
+      ]
+    },
+    "flow_risks": [],
+    "reasons_incomplete": [],
+    "cand_steps": [
+      {
+        "step_no": 1,
+        "phase": "VERIFICATION",
+        "system_id": "account_service",
+        "resource_id": "account_1482",
+        "operation": "VERIFY_RECORD_ABSENT",
+        "state": "ABSENT",
+        "evidence_id": "evidence_48"
+      },
+      {
+        "step_no": 2,
+        "phase": "VERIFICATION",
+        "system_id": "security_service",
+        "resource_id": "audit_record_3567",
+        "operation": "VERIFY_RECORD_PRESENT",
+        "state": "PRESENT",
+        "evidence_id": "evidence_48"
+      }
+    ]
+  },
+  {
+    "case_id": "case_74",
+    "base_status": "COMPLETE",
+    "cand_status": "INCOMPLETE",
+    "verdict": "VERIFIED_DEFECT_DISCOVERED",
+    "email": "salma.mansour@gmail.com",
+    "user_id": [
+      "user_72"
+    ],
+    "audit_at": "2026-09-11T08:00:00+00:00",
+    "candidate_resources": [
+      "audit_record_7778",
+      "data_flow_4595"
+    ],
+    "evidence_files": [
+      "customer_data_snapshot_bundle_20260913.json",
+      "resource_lookup_trace_20260911_074253.log"
+    ],
+    "states": {
+      "audit_record_7778": "PRESENT",
+      "data_flow_4595": "ACTIVE"
+    },
+    "actions": {
+      "audit_record_7778": "RETAIN",
+      "data_flow_4595": "DISABLE_DATA_FLOW"
+    },
+    "policy_satisfied": {
+      "audit_record_7778": true,
+      "data_flow_4595": false
+    },
+    "supporting_ev": {
+      "audit_record_7778": [
+        "evidence_07"
+      ],
+      "data_flow_4595": [
+        "evidence_07"
+      ]
+    },
+    "flow_risks": [
+      {
+        "resource": "data_flow_4595",
+        "cat": "ACTIVE_DATA_FLOW",
+        "reason": "Data flow data_flow_4595 confirmed active at audit cutoff; can replicate or copy user data"
+      }
+    ],
+    "reasons_incomplete": [
+      "UNSATISFIED_POLICY",
+      "ACTIVE_DATA_FLOW"
+    ],
+    "cand_steps": [
+      {
+        "step_no": 1,
+        "phase": "FINDING",
+        "system_id": "integration_service",
+        "resource_id": "data_flow_4595",
+        "operation": "REPORT_ACTIVE_DATA_FLOW",
+        "state": "ACTIVE",
+        "evidence_id": "activity_3368"
+      },
+      {
+        "step_no": 2,
+        "phase": "REMEDIATION",
+        "system_id": "integration_service",
+        "resource_id": "data_flow_4595",
+        "operation": "DISABLE_DATA_FLOW",
+        "state": "DISABLED",
+        "evidence_id": ""
+      },
+      {
+        "step_no": 3,
+        "phase": "VERIFICATION",
+        "system_id": "integration_service",
+        "resource_id": "data_flow_4595",
+        "operation": "VERIFY_DATA_FLOW_DISABLED",
+        "state": "DISABLED",
+        "evidence_id": ""
+      }
+    ]
+  },
+  {
+    "case_id": "case_75",
+    "base_status": "COMPLETE",
+    "cand_status": "INCOMPLETE",
+    "verdict": "VERIFIED_DEFECT_DISCOVERED",
+    "email": "n.nwosu16@gmail.com",
+    "user_id": [
+      "user_73"
+    ],
+    "audit_at": "2026-09-11T08:00:00+00:00",
+    "candidate_resources": [
+      "audit_record_7491",
+      "backup_8673"
+    ],
+    "evidence_files": [
+      "customer_data_snapshot_bundle_20260913.json",
+      "resource_lookup_trace_20260911_074253.log"
+    ],
+    "states": {
+      "audit_record_7491": "PRESENT",
+      "backup_8673": "ACTIVE"
+    },
+    "actions": {
+      "audit_record_7491": "RETAIN",
+      "backup_8673": "RETAIN"
+    },
+    "policy_satisfied": {
+      "audit_record_7491": true,
+      "backup_8673": false
+    },
+    "supporting_ev": {
+      "audit_record_7491": [
+        "evidence_07"
+      ],
+      "backup_8673": [
+        "evidence_07"
+      ]
+    },
+    "flow_risks": [
+      {
+        "resource": "backup_8673",
+        "cat": "RESTORE_RISK",
+        "reason": "Backup archive backup_8673 has unblocked restore access at audit cutoff; can recreate deleted data"
+      }
+    ],
+    "reasons_incomplete": [
+      "UNSATISFIED_POLICY",
+      "ACTIVE_RESTORE_RISK"
+    ],
+    "cand_steps": [
+      {
+        "step_no": 1,
+        "phase": "FINDING",
+        "system_id": "backup_service",
+        "resource_id": "backup_8673",
+        "operation": "REPORT_RESTORE_RISK",
+        "state": "ACTIVE",
+        "evidence_id": "activity_3365"
+      },
+      {
+        "step_no": 2,
+        "phase": "REMEDIATION",
+        "system_id": "backup_service",
+        "resource_id": "backup_8673",
+        "operation": "BLOCK_RESTORE",
+        "state": "BLOCKED",
+        "evidence_id": ""
+      },
+      {
+        "step_no": 3,
+        "phase": "VERIFICATION",
+        "system_id": "backup_service",
+        "resource_id": "backup_8673",
+        "operation": "VERIFY_RESTORE_BLOCKED",
+        "state": "BLOCKED",
+        "evidence_id": ""
+      }
+    ]
+  },
+  {
+    "case_id": "case_79",
+    "base_status": "INCOMPLETE",
+    "cand_status": "COMPLETE",
+    "verdict": "VERIFIED",
+    "email": "jieun.p449289@outlook.com",
+    "user_id": [
+      "user_77"
+    ],
+    "audit_at": "2026-09-11T08:00:00+00:00",
+    "candidate_resources": [
+      "account_5186",
+      "audit_record_1734"
+    ],
+    "evidence_files": [
+      "customer_data_snapshot_bundle_20260913.json",
+      "resource_lookup_trace_20260911_074253.log"
+    ],
+    "states": {
+      "account_5186": "ABSENT",
+      "audit_record_1734": "PRESENT"
+    },
+    "actions": {
+      "account_5186": "DELETE",
+      "audit_record_1734": "RETAIN"
+    },
+    "policy_satisfied": {
+      "account_5186": true,
+      "audit_record_1734": true
+    },
+    "supporting_ev": {
+      "account_5186": [
+        "evidence_91"
+      ],
+      "audit_record_1734": [
+        "evidence_07"
+      ]
+    },
+    "flow_risks": [],
+    "reasons_incomplete": [],
+    "cand_steps": [
+      {
+        "step_no": 1,
+        "phase": "VERIFICATION",
+        "system_id": "account_service",
+        "resource_id": "account_5186",
+        "operation": "VERIFY_RECORD_ABSENT",
+        "state": "ABSENT",
+        "evidence_id": "evidence_91"
+      },
+      {
+        "step_no": 2,
+        "phase": "VERIFICATION",
+        "system_id": "security_service",
+        "resource_id": "audit_record_1734",
+        "operation": "VERIFY_RECORD_PRESENT",
+        "state": "PRESENT",
+        "evidence_id": "evidence_07"
+      }
+    ]
+  },
+  {
+    "case_id": "case_83",
+    "base_status": "INCOMPLETE",
+    "cand_status": "COMPLETE",
+    "verdict": "VERIFIED",
+    "email": "liam-walker@proton.me",
+    "user_id": [
+      "user_81"
+    ],
+    "audit_at": "2026-09-06T07:00:00+00:00",
+    "candidate_resources": [
+      "account_2449",
+      "audit_record_2636"
+    ],
+    "evidence_files": [
+      "search_index_diagnostic_20260906.log"
+    ],
+    "states": {
+      "account_2449": "ABSENT",
+      "audit_record_2636": "PRESENT"
+    },
+    "actions": {
+      "account_2449": "DELETE",
+      "audit_record_2636": "RETAIN"
+    },
+    "policy_satisfied": {
+      "account_2449": true,
+      "audit_record_2636": true
+    },
+    "supporting_ev": {
+      "account_2449": [
+        "evidence_08"
+      ],
+      "audit_record_2636": [
+        "evidence_08"
+      ]
+    },
+    "flow_risks": [],
+    "reasons_incomplete": [],
+    "cand_steps": [
+      {
+        "step_no": 1,
+        "phase": "VERIFICATION",
+        "system_id": "account_service",
+        "resource_id": "account_2449",
+        "operation": "VERIFY_RECORD_ABSENT",
+        "state": "ABSENT",
+        "evidence_id": "evidence_08"
+      },
+      {
+        "step_no": 2,
+        "phase": "VERIFICATION",
+        "system_id": "security_service",
+        "resource_id": "audit_record_2636",
+        "operation": "VERIFY_RECORD_PRESENT",
+        "state": "PRESENT",
+        "evidence_id": "evidence_08"
+      }
+    ]
+  },
+  {
+    "case_id": "case_84",
+    "base_status": "INCOMPLETE",
+    "cand_status": "COMPLETE",
+    "verdict": "VERIFIED",
+    "email": "cchevalier408794@fastmail.com",
+    "user_id": [
+      "user_82"
+    ],
+    "audit_at": "2026-09-06T07:00:00+00:00",
+    "candidate_resources": [
+      "account_2387",
+      "audit_record_3787"
+    ],
+    "evidence_files": [
+      "search_index_diagnostic_20260906.log"
+    ],
+    "states": {
+      "account_2387": "ABSENT",
+      "audit_record_3787": "PRESENT"
+    },
+    "actions": {
+      "account_2387": "DELETE",
+      "audit_record_3787": "RETAIN"
+    },
+    "policy_satisfied": {
+      "account_2387": true,
+      "audit_record_3787": true
+    },
+    "supporting_ev": {
+      "account_2387": [
+        "evidence_08"
+      ],
+      "audit_record_3787": [
+        "evidence_08"
+      ]
+    },
+    "flow_risks": [],
+    "reasons_incomplete": [],
+    "cand_steps": [
+      {
+        "step_no": 1,
+        "phase": "VERIFICATION",
+        "system_id": "account_service",
+        "resource_id": "account_2387",
+        "operation": "VERIFY_RECORD_ABSENT",
+        "state": "ABSENT",
+        "evidence_id": "evidence_08"
+      },
+      {
+        "step_no": 2,
+        "phase": "VERIFICATION",
+        "system_id": "security_service",
+        "resource_id": "audit_record_3787",
+        "operation": "VERIFY_RECORD_PRESENT",
+        "state": "PRESENT",
+        "evidence_id": "evidence_08"
+      }
+    ]
+  },
+  {
+    "case_id": "case_86",
+    "base_status": "INCOMPLETE",
+    "cand_status": "COMPLETE",
+    "verdict": "VERIFIED",
+    "email": "marek.zielinski@gmail.com",
+    "user_id": [
+      "user_84"
+    ],
+    "audit_at": "2026-09-06T07:00:00+00:00",
+    "candidate_resources": [
+      "account_8473",
+      "audit_record_5580"
+    ],
+    "evidence_files": [
+      "search_index_diagnostic_20260906.log"
+    ],
+    "states": {
+      "account_8473": "ABSENT",
+      "audit_record_5580": "PRESENT"
+    },
+    "actions": {
+      "account_8473": "DELETE",
+      "audit_record_5580": "RETAIN"
+    },
+    "policy_satisfied": {
+      "account_8473": true,
+      "audit_record_5580": true
+    },
+    "supporting_ev": {
+      "account_8473": [
+        "evidence_08"
+      ],
+      "audit_record_5580": [
+        "evidence_08"
+      ]
+    },
+    "flow_risks": [],
+    "reasons_incomplete": [],
+    "cand_steps": [
+      {
+        "step_no": 1,
+        "phase": "VERIFICATION",
+        "system_id": "account_service",
+        "resource_id": "account_8473",
+        "operation": "VERIFY_RECORD_ABSENT",
+        "state": "ABSENT",
+        "evidence_id": "evidence_08"
+      },
+      {
+        "step_no": 2,
+        "phase": "VERIFICATION",
+        "system_id": "security_service",
+        "resource_id": "audit_record_5580",
+        "operation": "VERIFY_RECORD_PRESENT",
+        "state": "PRESENT",
+        "evidence_id": "evidence_08"
+      }
+    ]
+  }
+]

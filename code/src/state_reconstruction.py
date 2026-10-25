@@ -62,16 +62,18 @@ def ensure_utc(dt: Optional[datetime]) -> Optional[datetime]:
     return dt.astimezone(timezone.utc)
 
 
-def parse_timestamp_to_utc(ts_str: Optional[str]) -> Optional[datetime]:
-    """Parses an ISO timestamp string to UTC datetime."""
+def parse_timestamp_to_utc(ts_str: Optional[Any]) -> Optional[datetime]:
+    """Parses an ISO timestamp string or datetime to UTC datetime."""
     if not ts_str:
         return None
+    if isinstance(ts_str, datetime):
+        return ensure_utc(ts_str)
     try:
-        dt, _ = normalize_timestamp(ts_str)
+        dt, _ = normalize_timestamp(str(ts_str))
         return ensure_utc(dt)
     except Exception:
         # Fallback to standard fromisoformat
-        clean = ts_str.strip()
+        clean = str(ts_str).strip()
         if clean.endswith("Z") or clean.endswith("z"):
             clean = clean[:-1] + "+00:00"
         try:
@@ -207,7 +209,20 @@ def load_all_evidence_observations(data_dir: str = "./dataset") -> Dict[str, Lis
                     )
                     state = ResourceState.PRESENT if is_identifiable else ResourceState.ANONYMIZED
                     rec_time = snap_time
-                # 6. Standard record collections
+                # 6. Support records / conversations
+                elif "support" in str(coll) or str(rid).startswith("support_"):
+                    msg = str(rec.get("message_text", "") or "")
+                    has_pii = any(bool(rec.get(k)) for k in ("email", "phone", "requester_email", "requester_phone", "requester_name"))
+                    if ("@" in msg and "[REDACTED]" not in msg) or has_pii:
+                        state = ResourceState.PRESENT
+                    elif msg == "[REDACTED]" or "[REDACTED]" in msg:
+                        state = ResourceState.REDACTED
+                    elif any(k in rec for k in ("requester_email", "requester_phone", "requester_name")):
+                        state = ResourceState.REDACTED
+                    else:
+                        state = ResourceState.PRESENT
+                    rec_time = snap_time
+                # 7. Standard record collections
                 else:
                     state = ResourceState.PRESENT
                     rec_time = snap_time

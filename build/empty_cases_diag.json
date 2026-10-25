@@ -1,0 +1,1143 @@
+[
+  {
+    "case_id": "case_127",
+    "email": "yetunde.o4604@outlook.com",
+    "user_ids": [
+      "user_125"
+    ],
+    "is_complete": false,
+    "reasons": [
+      "UNKNOWN_RESOURCE_STATE",
+      "UNSATISFIED_POLICY",
+      "MISSING_VERIFICATION_EVIDENCE"
+    ],
+    "candidate_rids": [
+      "audit_record_9649",
+      "account_6805"
+    ],
+    "assessments": {
+      "account_6805": {
+        "obs_state": "ResourceState.UNKNOWN",
+        "req_action": "DELETE",
+        "sat": false,
+        "ev": [
+          "activity_3113"
+        ]
+      },
+      "audit_record_9649": {
+        "obs_state": "ResourceState.PRESENT",
+        "req_action": "RETAIN",
+        "sat": true,
+        "ev": [
+          "evidence_12"
+        ]
+      }
+    },
+    "plan_steps": 0,
+    "gaps": [
+      "Resource account_6805 observed state is UNKNOWN; concrete finding not emitted"
+    ]
+  },
+  {
+    "case_id": "case_168",
+    "email": "stshabalala9283@fastmail.com",
+    "user_ids": [
+      "user_166"
+    ],
+    "is_complete": false,
+    "reasons": [
+      "MISSING_VERIFICATION_EVIDENCE",
+      "UNKNOWN_RESOURCE_STATE",
+      "UNSATISFIED_POLICY"
+    ],
+    "candidate_rids": [
+      "account_8748",
+      "audit_record_2503",
+      "export_4102"
+    ],
+    "assessments": {
+      "account_8748": {
+        "obs_state": "ResourceState.ABSENT",
+        "req_action": "DELETE",
+        "sat": true,
+        "ev": [
+          "evidence_16"
+        ]
+      },
+      "audit_record_2503": {
+        "obs_state": "ResourceState.PRESENT",
+        "req_action": "RETAIN",
+        "sat": true,
+        "ev": [
+          "evidence_16"
+        ]
+      },
+      "export_4102": {
+        "obs_state": "ResourceState.UNKNOWN",
+        "req_action": "DELETE",
+        "sat": false,
+        "ev": [
+          "activity_2811"
+        ]
+      }
+    },
+    "plan_steps": 0,
+    "gaps": [
+      "Resource export_4102 observed state is UNKNOWN; concrete finding not emitted"
+    ]
+  },
+  {
+    "case_id": "case_170",
+    "email": "jihoon.jang@gmail.com",
+    "user_ids": [
+      "user_168"
+    ],
+    "is_complete": false,
+    "reasons": [
+      "MISSING_VERIFICATION_EVIDENCE",
+      "UNKNOWN_RESOURCE_STATE",
+      "UNSATISFIED_POLICY"
+    ],
+    "candidate_rids": [
+      "audit_record_4443",
+      "account_665",
+      "search_3619"
+    ],
+    "assessments": {
+      "account_665": {
+        "obs_state": "ResourceState.ABSENT",
+        "req_action": "DELETE",
+        "sat": true,
+        "ev": [
+          "evidence_16"
+        ]
+      },
+      "audit_record_4443": {
+        "obs_state": "ResourceState.PRESENT",
+        "req_action": "RETAIN",
+        "sat": true,
+        "ev": [
+          "evidence_16"
+        ]
+      },
+      "search_3619": {
+        "obs_state": "ResourceState.UNKNOWN",
+        "req_action": "DELETE",
+        "sat": false,
+        "ev": []
+      }
+    },
+    "plan_steps": 0,
+    "gaps": [
+      "Resource search_3619 observed state is UNKNOWN; concrete finding not emitted"
+    ]
+  },
+  {
+    "case_id": "case_175",
+    "email": "louis.l471697@outlook.com",
+    "user_ids": [
+      "user_173"
+    ],
+    "is_complete": false,
+    "reasons": [
+      "UNKNOWN_RESOURCE_STATE",
+      "UNSATISFIED_POLICY",
+      "MISSING_VERIFICATION_EVIDENCE"
+    ],
+    "candidate_rids": [
+      "backup_549",
+      "support_8164",
+      "account_246",
+      "data_flow_4319",
+      "audit_record_7166"
+    ],
+    "assessments": {
+      "account_246": {
+        "obs_state": "ResourceState.UNKNOWN",
+        "req_action": "DELETE",
+        "sat": false,
+        "ev": [
+          "activity_2642"
+        ]
+      },
+      "audit_record_7166": {
+        "obs_state": "ResourceState.PRESENT",
+        "req_action": "RETAIN",
+        "sat": true,
+        "ev": [
+          "evidence_17"
+        ]
+      },
+      "backup_549": {
+        "obs_state": "ResourceState.BLOCKED",
+        "req_action": "RETAIN",
+        "sat": true,
+        "ev": [
+          "evidence_17"
+        ]
+      },
+      "data_flow_4319": {
+        "obs_state": "ResourceState.DISABLED",
+        "req_action": "DISABLE_DATA_FLOW",
+        "sat": true,
+        "ev": [
+          "evidence_17"
+        ]
+      },
+      "support_8164": {
+        "obs_state": "ResourceState.REDACTED",
+        "req_action": "REDACT",
+        "sat": true,
+        "ev": [
+          "evidence_17"
+        ]
+      }
+    },
+    "plan_steps": 0,
+    "gaps": [
+      "Resource account_246 observed state is UNKNOWN; concrete finding not emitted"
+    ]
+  },
+  {
+    "case_id": "case_264",
+    "email": "mrios950798@fastmail.com",
+    "user_ids": [
+      "user_262"
+    ],
+    "is_complete": false,
+    "reasons": [
+      "MISSING_VERIFICATION_EVIDENCE",
+      "UNKNOWN_RESOURCE_STATE",
+      "UNSATISFIED_POLICY"
+    ],
+    "candidate_rids": [
+      "audit_record_6711",
+      "account_8316",
+      "support_9996",
+      "data_flow_4885",
+      "backup_3250"
+    ],
+    "assessments": {
+      "account_8316": {
+        "obs_state": "ResourceState.ABSENT",
+        "req_action": "DELETE",
+        "sat": true,
+        "ev": [
+          "evidence_25"
+        ]
+      },
+      "audit_record_6711": {
+        "obs_state": "ResourceState.PRESENT",
+        "req_action": "RETAIN",
+        "sat": true,
+        "ev": [
+          "evidence_25"
+        ]
+      },
+      "backup_3250": {
+        "obs_state": "ResourceState.UNKNOWN",
+        "req_action": "RETAIN",
+        "sat": false,
+        "ev": [
+          "activity_2118"
+        ]
+      },
+      "data_flow_4885": {
+        "obs_state": "ResourceState.UNKNOWN",
+        "req_action": "DISABLE_DATA_FLOW",
+        "sat": false,
+        "ev": [
+          "activity_2117"
+        ]
+      },
+      "support_9996": {
+        "obs_state": "ResourceState.UNKNOWN",
+        "req_action": "REDACT",
+        "sat": false,
+        "ev": [
+          "activity_2116"
+        ]
+      }
+    },
+    "plan_steps": 0,
+    "gaps": [
+      "Resource backup_3250 observed state is UNKNOWN; concrete finding not emitted",
+      "Resource data_flow_4885 observed state is UNKNOWN; concrete finding not emitted",
+      "Resource support_9996 observed state is UNKNOWN; concrete finding not emitted"
+    ]
+  },
+  {
+    "case_id": "case_288",
+    "email": "mrodrigues956378@fastmail.com",
+    "user_ids": [
+      "user_286"
+    ],
+    "is_complete": false,
+    "reasons": [
+      "UNKNOWN_RESOURCE_STATE",
+      "UNSATISFIED_POLICY",
+      "MISSING_VERIFICATION_EVIDENCE"
+    ],
+    "candidate_rids": [
+      "export_7906"
+    ],
+    "assessments": {
+      "export_7906": {
+        "obs_state": "ResourceState.UNKNOWN",
+        "req_action": "DELETE",
+        "sat": false,
+        "ev": [
+          "activity_1909"
+        ]
+      }
+    },
+    "plan_steps": 0,
+    "gaps": [
+      "Resource export_7906 observed state is UNKNOWN; concrete finding not emitted"
+    ]
+  },
+  {
+    "case_id": "case_292",
+    "email": "laurent.camille@gmail.com",
+    "user_ids": [
+      "user_290"
+    ],
+    "is_complete": false,
+    "reasons": [
+      "MISSING_VERIFICATION_EVIDENCE",
+      "UNKNOWN_RESOURCE_STATE",
+      "UNSATISFIED_POLICY"
+    ],
+    "candidate_rids": [
+      "backup_1825",
+      "support_1526",
+      "account_1125",
+      "audit_record_3432",
+      "data_flow_5598"
+    ],
+    "assessments": {
+      "account_1125": {
+        "obs_state": "ResourceState.ABSENT",
+        "req_action": "DELETE",
+        "sat": true,
+        "ev": [
+          "evidence_76"
+        ]
+      },
+      "audit_record_3432": {
+        "obs_state": "ResourceState.PRESENT",
+        "req_action": "RETAIN",
+        "sat": true,
+        "ev": [
+          "evidence_76"
+        ]
+      },
+      "backup_1825": {
+        "obs_state": "ResourceState.UNKNOWN",
+        "req_action": "RETAIN",
+        "sat": false,
+        "ev": [
+          "activity_1848"
+        ]
+      },
+      "data_flow_5598": {
+        "obs_state": "ResourceState.DISABLED",
+        "req_action": "DISABLE_DATA_FLOW",
+        "sat": true,
+        "ev": [
+          "evidence_76"
+        ]
+      },
+      "support_1526": {
+        "obs_state": "ResourceState.REDACTED",
+        "req_action": "REDACT",
+        "sat": true,
+        "ev": [
+          "evidence_76"
+        ]
+      }
+    },
+    "plan_steps": 0,
+    "gaps": [
+      "Resource backup_1825 observed state is UNKNOWN; concrete finding not emitted"
+    ]
+  },
+  {
+    "case_id": "case_311",
+    "email": "naledi-mahlangu79@proton.me",
+    "user_ids": [
+      "user_309"
+    ],
+    "is_complete": false,
+    "reasons": [
+      "UNKNOWN_RESOURCE_STATE",
+      "UNSATISFIED_POLICY",
+      "MISSING_VERIFICATION_EVIDENCE"
+    ],
+    "candidate_rids": [
+      "account_309",
+      "audit_record_6245"
+    ],
+    "assessments": {
+      "account_309": {
+        "obs_state": "ResourceState.UNKNOWN",
+        "req_action": "DELETE",
+        "sat": false,
+        "ev": []
+      },
+      "audit_record_6245": {
+        "obs_state": "ResourceState.PRESENT",
+        "req_action": "RETAIN",
+        "sat": true,
+        "ev": [
+          "evidence_29"
+        ]
+      }
+    },
+    "plan_steps": 0,
+    "gaps": [
+      "Resource account_309 observed state is UNKNOWN; concrete finding not emitted"
+    ]
+  },
+  {
+    "case_id": "case_345",
+    "email": "n.holm46@yahoo.com",
+    "user_ids": [
+      "user_343"
+    ],
+    "is_complete": false,
+    "reasons": [
+      "UNKNOWN_RESOURCE_STATE",
+      "UNSATISFIED_POLICY",
+      "MISSING_VERIFICATION_EVIDENCE"
+    ],
+    "candidate_rids": [
+      "audit_record_454",
+      "account_343"
+    ],
+    "assessments": {
+      "account_343": {
+        "obs_state": "ResourceState.UNKNOWN",
+        "req_action": "DELETE",
+        "sat": false,
+        "ev": []
+      },
+      "audit_record_454": {
+        "obs_state": "ResourceState.PRESENT",
+        "req_action": "RETAIN",
+        "sat": true,
+        "ev": [
+          "evidence_71"
+        ]
+      }
+    },
+    "plan_steps": 0,
+    "gaps": [
+      "Resource account_343 observed state is UNKNOWN; concrete finding not emitted"
+    ]
+  },
+  {
+    "case_id": "case_372",
+    "email": "ppetrescu4759@fastmail.com",
+    "user_ids": [
+      "user_370"
+    ],
+    "is_complete": false,
+    "reasons": [
+      "MISSING_VERIFICATION_EVIDENCE",
+      "UNKNOWN_RESOURCE_STATE",
+      "UNSATISFIED_POLICY"
+    ],
+    "candidate_rids": [
+      "account_2062",
+      "export_5081",
+      "audit_record_5705"
+    ],
+    "assessments": {
+      "account_2062": {
+        "obs_state": "ResourceState.ABSENT",
+        "req_action": "DELETE",
+        "sat": true,
+        "ev": [
+          "evidence_34"
+        ]
+      },
+      "audit_record_5705": {
+        "obs_state": "ResourceState.PRESENT",
+        "req_action": "RETAIN",
+        "sat": true,
+        "ev": [
+          "evidence_34"
+        ]
+      },
+      "export_5081": {
+        "obs_state": "ResourceState.UNKNOWN",
+        "req_action": "DELETE",
+        "sat": false,
+        "ev": [
+          "activity_1239"
+        ]
+      }
+    },
+    "plan_steps": 0,
+    "gaps": [
+      "Resource export_5081 observed state is UNKNOWN; concrete finding not emitted"
+    ]
+  },
+  {
+    "case_id": "case_408",
+    "email": "abennett9843@fastmail.com",
+    "user_ids": [
+      "user_406"
+    ],
+    "is_complete": false,
+    "reasons": [
+      "UNKNOWN_RESOURCE_STATE",
+      "UNSATISFIED_POLICY",
+      "MISSING_VERIFICATION_EVIDENCE"
+    ],
+    "candidate_rids": [
+      "audit_record_4216",
+      "account_406"
+    ],
+    "assessments": {
+      "account_406": {
+        "obs_state": "ResourceState.UNKNOWN",
+        "req_action": "DELETE",
+        "sat": false,
+        "ev": []
+      },
+      "audit_record_4216": {
+        "obs_state": "ResourceState.PRESENT",
+        "req_action": "RETAIN",
+        "sat": true,
+        "ev": [
+          "evidence_38"
+        ]
+      }
+    },
+    "plan_steps": 0,
+    "gaps": [
+      "Resource account_406 observed state is UNKNOWN; concrete finding not emitted"
+    ]
+  },
+  {
+    "case_id": "case_412",
+    "email": "haddad.omar@gmail.com",
+    "user_ids": [
+      "user_410"
+    ],
+    "is_complete": false,
+    "reasons": [
+      "UNKNOWN_RESOURCE_STATE",
+      "UNSATISFIED_POLICY",
+      "MISSING_VERIFICATION_EVIDENCE"
+    ],
+    "candidate_rids": [
+      "account_410",
+      "audit_record_5637"
+    ],
+    "assessments": {
+      "account_410": {
+        "obs_state": "ResourceState.UNKNOWN",
+        "req_action": "DELETE",
+        "sat": false,
+        "ev": []
+      },
+      "audit_record_5637": {
+        "obs_state": "ResourceState.PRESENT",
+        "req_action": "RETAIN",
+        "sat": true,
+        "ev": [
+          "evidence_38"
+        ]
+      }
+    },
+    "plan_steps": 0,
+    "gaps": [
+      "Resource account_410 observed state is UNKNOWN; concrete finding not emitted"
+    ]
+  },
+  {
+    "case_id": "case_413",
+    "email": "amara-okafor@gmail.com",
+    "user_ids": [
+      "user_411"
+    ],
+    "is_complete": false,
+    "reasons": [
+      "UNKNOWN_RESOURCE_STATE",
+      "UNSATISFIED_POLICY",
+      "MISSING_VERIFICATION_EVIDENCE"
+    ],
+    "candidate_rids": [
+      "analytics_4523"
+    ],
+    "assessments": {
+      "analytics_4523": {
+        "obs_state": "ResourceState.UNKNOWN",
+        "req_action": "ANONYMIZE",
+        "sat": false,
+        "ev": [
+          "activity_858"
+        ]
+      }
+    },
+    "plan_steps": 0,
+    "gaps": [
+      "Resource analytics_4523 observed state is UNKNOWN; concrete finding not emitted"
+    ]
+  },
+  {
+    "case_id": "case_414",
+    "email": "kmensah735794@gmail.com",
+    "user_ids": [
+      "user_412"
+    ],
+    "is_complete": false,
+    "reasons": [
+      "MISSING_VERIFICATION_EVIDENCE",
+      "UNKNOWN_RESOURCE_STATE",
+      "UNSATISFIED_POLICY"
+    ],
+    "candidate_rids": [
+      "account_5260",
+      "support_3768"
+    ],
+    "assessments": {
+      "account_5260": {
+        "obs_state": "ResourceState.ABSENT",
+        "req_action": "DELETE",
+        "sat": true,
+        "ev": [
+          "evidence_39"
+        ]
+      },
+      "support_3768": {
+        "obs_state": "ResourceState.UNKNOWN",
+        "req_action": "REDACT",
+        "sat": false,
+        "ev": [
+          "activity_859"
+        ]
+      }
+    },
+    "plan_steps": 0,
+    "gaps": [
+      "Resource support_3768 observed state is UNKNOWN; concrete finding not emitted"
+    ]
+  },
+  {
+    "case_id": "case_416",
+    "email": "keiko.sato@outlook.com",
+    "user_ids": [
+      "user_414"
+    ],
+    "is_complete": false,
+    "reasons": [
+      "NO_RESOURCES_IDENTIFIED"
+    ],
+    "candidate_rids": [],
+    "assessments": {},
+    "plan_steps": 0,
+    "gaps": []
+  },
+  {
+    "case_id": "case_417",
+    "email": "s.kim14@yahoo.com",
+    "user_ids": [
+      "user_415"
+    ],
+    "is_complete": false,
+    "reasons": [
+      "NO_RESOURCES_IDENTIFIED"
+    ],
+    "candidate_rids": [],
+    "assessments": {},
+    "plan_steps": 0,
+    "gaps": []
+  },
+  {
+    "case_id": "case_418",
+    "email": "silva.mariana@icloud.com",
+    "user_ids": [
+      "user_416"
+    ],
+    "is_complete": false,
+    "reasons": [
+      "MISSING_VERIFICATION_EVIDENCE",
+      "UNKNOWN_RESOURCE_STATE",
+      "UNSATISFIED_POLICY"
+    ],
+    "candidate_rids": [
+      "audit_record_5493",
+      "support_9464"
+    ],
+    "assessments": {
+      "audit_record_5493": {
+        "obs_state": "ResourceState.PRESENT",
+        "req_action": "RETAIN",
+        "sat": true,
+        "ev": [
+          "evidence_39"
+        ]
+      },
+      "support_9464": {
+        "obs_state": "ResourceState.UNKNOWN",
+        "req_action": "REDACT",
+        "sat": false,
+        "ev": [
+          "activity_815"
+        ]
+      }
+    },
+    "plan_steps": 0,
+    "gaps": [
+      "Resource support_9464 observed state is UNKNOWN; concrete finding not emitted"
+    ]
+  },
+  {
+    "case_id": "case_420",
+    "email": "storres487178@fastmail.com",
+    "user_ids": [
+      "user_418"
+    ],
+    "is_complete": false,
+    "reasons": [
+      "MISSING_VERIFICATION_EVIDENCE",
+      "UNKNOWN_RESOURCE_STATE",
+      "UNSATISFIED_POLICY"
+    ],
+    "candidate_rids": [
+      "account_7606",
+      "export_389"
+    ],
+    "assessments": {
+      "account_7606": {
+        "obs_state": "ResourceState.ABSENT",
+        "req_action": "DELETE",
+        "sat": true,
+        "ev": [
+          "evidence_39"
+        ]
+      },
+      "export_389": {
+        "obs_state": "ResourceState.UNKNOWN",
+        "req_action": "DELETE",
+        "sat": false,
+        "ev": [
+          "activity_753"
+        ]
+      }
+    },
+    "plan_steps": 0,
+    "gaps": [
+      "Resource export_389 observed state is UNKNOWN; concrete finding not emitted"
+    ]
+  },
+  {
+    "case_id": "case_44",
+    "email": "charlotte.wright@outlook.com",
+    "user_ids": [
+      "user_42"
+    ],
+    "is_complete": false,
+    "reasons": [
+      "MISSING_VERIFICATION_EVIDENCE",
+      "UNKNOWN_RESOURCE_STATE",
+      "UNSATISFIED_POLICY"
+    ],
+    "candidate_rids": [
+      "backup_6266",
+      "account_2064",
+      "data_flow_223",
+      "audit_record_1105",
+      "support_1066"
+    ],
+    "assessments": {
+      "account_2064": {
+        "obs_state": "ResourceState.ABSENT",
+        "req_action": "DELETE",
+        "sat": true,
+        "ev": [
+          "evidence_94"
+        ]
+      },
+      "audit_record_1105": {
+        "obs_state": "ResourceState.PRESENT",
+        "req_action": "RETAIN",
+        "sat": true,
+        "ev": [
+          "evidence_94"
+        ]
+      },
+      "backup_6266": {
+        "obs_state": "ResourceState.UNKNOWN",
+        "req_action": "RETAIN",
+        "sat": false,
+        "ev": [
+          "activity_3856"
+        ]
+      },
+      "data_flow_223": {
+        "obs_state": "ResourceState.DISABLED",
+        "req_action": "DISABLE_DATA_FLOW",
+        "sat": true,
+        "ev": [
+          "evidence_94"
+        ]
+      },
+      "support_1066": {
+        "obs_state": "ResourceState.REDACTED",
+        "req_action": "REDACT",
+        "sat": true,
+        "ev": [
+          "evidence_94"
+        ]
+      }
+    },
+    "plan_steps": 0,
+    "gaps": [
+      "Resource backup_6266 observed state is UNKNOWN; concrete finding not emitted"
+    ]
+  },
+  {
+    "case_id": "case_46",
+    "email": "leonie.g9352@outlook.com",
+    "user_ids": [
+      "user_17"
+    ],
+    "is_complete": false,
+    "reasons": [
+      "UNKNOWN_RESOURCE_STATE",
+      "UNSATISFIED_POLICY",
+      "MISSING_VERIFICATION_EVIDENCE",
+      "MISSING_RETAINED_RECORD"
+    ],
+    "candidate_rids": [
+      "tombstone_17",
+      "backup_3245",
+      "account_6523",
+      "audit_record_1797",
+      "account_4092"
+    ],
+    "assessments": {
+      "account_4092": {
+        "obs_state": "ResourceState.UNKNOWN",
+        "req_action": "DELETE",
+        "sat": false,
+        "ev": []
+      },
+      "account_6523": {
+        "obs_state": "ResourceState.ABSENT",
+        "req_action": "DELETE",
+        "sat": true,
+        "ev": [
+          "evidence_67"
+        ]
+      },
+      "audit_record_1797": {
+        "obs_state": "ResourceState.UNKNOWN",
+        "req_action": "RETAIN",
+        "sat": false,
+        "ev": []
+      },
+      "backup_3245": {
+        "obs_state": "ResourceState.UNKNOWN",
+        "req_action": "RETAIN",
+        "sat": false,
+        "ev": []
+      },
+      "tombstone_17": {
+        "obs_state": "ResourceState.UNKNOWN",
+        "req_action": "REDACT",
+        "sat": false,
+        "ev": [
+          "activity_4011"
+        ]
+      }
+    },
+    "plan_steps": 0,
+    "gaps": [
+      "Resource account_4092 observed state is UNKNOWN; concrete finding not emitted",
+      "Resource audit_record_1797 observed state is UNKNOWN; concrete finding not emitted",
+      "Resource backup_3245 observed state is UNKNOWN; concrete finding not emitted",
+      "Resource tombstone_17 observed state is UNKNOWN; concrete finding not emitted"
+    ]
+  },
+  {
+    "case_id": "case_51",
+    "email": "n.masuku60@gmail.com",
+    "user_ids": [
+      "user_49"
+    ],
+    "is_complete": false,
+    "reasons": [
+      "MISSING_VERIFICATION_EVIDENCE",
+      "UNKNOWN_RESOURCE_STATE",
+      "UNSATISFIED_POLICY"
+    ],
+    "candidate_rids": [
+      "data_flow_4713",
+      "backup_7809",
+      "audit_record_3308",
+      "account_3610",
+      "support_1097"
+    ],
+    "assessments": {
+      "account_3610": {
+        "obs_state": "ResourceState.ABSENT",
+        "req_action": "DELETE",
+        "sat": true,
+        "ev": [
+          "evidence_94"
+        ]
+      },
+      "audit_record_3308": {
+        "obs_state": "ResourceState.PRESENT",
+        "req_action": "RETAIN",
+        "sat": true,
+        "ev": [
+          "evidence_94"
+        ]
+      },
+      "backup_7809": {
+        "obs_state": "ResourceState.UNKNOWN",
+        "req_action": "RETAIN",
+        "sat": false,
+        "ev": [
+          "activity_3738"
+        ]
+      },
+      "data_flow_4713": {
+        "obs_state": "ResourceState.DISABLED",
+        "req_action": "DISABLE_DATA_FLOW",
+        "sat": true,
+        "ev": [
+          "evidence_94"
+        ]
+      },
+      "support_1097": {
+        "obs_state": "ResourceState.REDACTED",
+        "req_action": "REDACT",
+        "sat": true,
+        "ev": [
+          "evidence_94"
+        ]
+      }
+    },
+    "plan_steps": 0,
+    "gaps": [
+      "Resource backup_7809 observed state is UNKNOWN; concrete finding not emitted"
+    ]
+  },
+  {
+    "case_id": "case_520",
+    "email": "suzuki.daichi90@gmail.com",
+    "user_ids": [
+      "user_518"
+    ],
+    "is_complete": false,
+    "reasons": [
+      "MISSING_VERIFICATION_EVIDENCE",
+      "UNKNOWN_RESOURCE_STATE",
+      "UNSATISFIED_POLICY"
+    ],
+    "candidate_rids": [
+      "support_9251",
+      "account_4979",
+      "audit_record_9504"
+    ],
+    "assessments": {
+      "account_4979": {
+        "obs_state": "ResourceState.ABSENT",
+        "req_action": "DELETE",
+        "sat": true,
+        "ev": [
+          "evidence_48"
+        ]
+      },
+      "audit_record_9504": {
+        "obs_state": "ResourceState.PRESENT",
+        "req_action": "RETAIN",
+        "sat": true,
+        "ev": [
+          "evidence_48"
+        ]
+      },
+      "support_9251": {
+        "obs_state": "ResourceState.UNKNOWN",
+        "req_action": "REDACT",
+        "sat": false,
+        "ev": [
+          "activity_50"
+        ]
+      }
+    },
+    "plan_steps": 0,
+    "gaps": [
+      "Resource support_9251 observed state is UNKNOWN; concrete finding not emitted"
+    ]
+  },
+  {
+    "case_id": "case_522",
+    "email": "csantos2609@gmail.com",
+    "user_ids": [
+      "user_520"
+    ],
+    "is_complete": false,
+    "reasons": [
+      "MISSING_VERIFICATION_EVIDENCE",
+      "UNKNOWN_RESOURCE_STATE",
+      "UNSATISFIED_POLICY"
+    ],
+    "candidate_rids": [
+      "audit_record_5513",
+      "support_8538",
+      "account_1096"
+    ],
+    "assessments": {
+      "account_1096": {
+        "obs_state": "ResourceState.ABSENT",
+        "req_action": "DELETE",
+        "sat": true,
+        "ev": [
+          "evidence_48"
+        ]
+      },
+      "audit_record_5513": {
+        "obs_state": "ResourceState.PRESENT",
+        "req_action": "RETAIN",
+        "sat": true,
+        "ev": [
+          "evidence_48"
+        ]
+      },
+      "support_8538": {
+        "obs_state": "ResourceState.UNKNOWN",
+        "req_action": "REDACT",
+        "sat": false,
+        "ev": [
+          "activity_296"
+        ]
+      }
+    },
+    "plan_steps": 0,
+    "gaps": [
+      "Resource support_8538 observed state is UNKNOWN; concrete finding not emitted"
+    ]
+  },
+  {
+    "case_id": "case_60",
+    "email": "anowak4031@fastmail.com",
+    "user_ids": [
+      "user_58"
+    ],
+    "is_complete": false,
+    "reasons": [
+      "UNKNOWN_RESOURCE_STATE",
+      "UNSATISFIED_POLICY",
+      "MISSING_VERIFICATION_EVIDENCE"
+    ],
+    "candidate_rids": [
+      "audit_record_629",
+      "account_058"
+    ],
+    "assessments": {
+      "account_058": {
+        "obs_state": "ResourceState.UNKNOWN",
+        "req_action": "DELETE",
+        "sat": false,
+        "ev": []
+      },
+      "audit_record_629": {
+        "obs_state": "ResourceState.PRESENT",
+        "req_action": "RETAIN",
+        "sat": true,
+        "ev": [
+          "evidence_05"
+        ]
+      }
+    },
+    "plan_steps": 0,
+    "gaps": [
+      "Resource account_058 observed state is UNKNOWN; concrete finding not emitted"
+    ]
+  },
+  {
+    "case_id": "case_61",
+    "email": "priya.raman@gmail.com",
+    "user_ids": [
+      "user_07"
+    ],
+    "is_complete": false,
+    "reasons": [
+      "UNKNOWN_RESOURCE_STATE",
+      "UNSATISFIED_POLICY",
+      "MISSING_VERIFICATION_EVIDENCE"
+    ],
+    "candidate_rids": [
+      "support_001",
+      "object_19",
+      "account_007"
+    ],
+    "assessments": {
+      "account_007": {
+        "obs_state": "ResourceState.UNKNOWN",
+        "req_action": "DELETE",
+        "sat": false,
+        "ev": []
+      },
+      "object_19": {
+        "obs_state": "ResourceState.UNKNOWN",
+        "req_action": "UNKNOWN",
+        "sat": false,
+        "ev": [
+          "activity_4007"
+        ]
+      },
+      "support_001": {
+        "obs_state": "ResourceState.UNKNOWN",
+        "req_action": "REDACT",
+        "sat": false,
+        "ev": []
+      }
+    },
+    "plan_steps": 0,
+    "gaps": [
+      "Resource account_007 observed state is UNKNOWN; concrete finding not emitted",
+      "Resource object_19 observed state is UNKNOWN; concrete finding not emitted",
+      "Resource support_001 observed state is UNKNOWN; concrete finding not emitted"
+    ]
+  },
+  {
+    "case_id": "case_63",
+    "email": "kwame-mensah@proton.me",
+    "user_ids": [
+      "user_09"
+    ],
+    "is_complete": false,
+    "reasons": [
+      "UNKNOWN_RESOURCE_STATE",
+      "UNSATISFIED_POLICY",
+      "MISSING_VERIFICATION_EVIDENCE"
+    ],
+    "candidate_rids": [
+      "marketing_001"
+    ],
+    "assessments": {
+      "marketing_001": {
+        "obs_state": "ResourceState.UNKNOWN",
+        "req_action": "DELETE",
+        "sat": false,
+        "ev": [
+          "activity_4008"
+        ]
+      }
+    },
+    "plan_steps": 0,
+    "gaps": [
+      "Resource marketing_001 observed state is UNKNOWN; concrete finding not emitted"
+    ]
+  }
+]

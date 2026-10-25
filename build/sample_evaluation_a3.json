@@ -1,0 +1,25 @@
+{
+  "status_metrics": {
+    "error": "No common case IDs between predictions and ground truth"
+  },
+  "step_metrics": {
+    "total_truth_steps": 0,
+    "total_pred_steps": 0,
+    "matched_steps": 0,
+    "step_precision": 0.0,
+    "step_recall": 0.0,
+    "step_f1": 0.0,
+    "exact_sequence_matches": 0,
+    "sequence_accuracy": 0.0,
+    "field_accuracies": {
+      "phase": 0.0,
+      "system_id": 0.0,
+      "resource_id": 0.0,
+      "operation": 0.0,
+      "state": 0.0,
+      "evidence_id": 0.0
+    },
+    "diagnostic_differences_count": 0
+  },
+  "diagnostics": []
+}

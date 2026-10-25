@@ -1,0 +1,1298 @@
+[
+  {
+    "case_id": "case_103",
+    "cluster_resources": "audit_record_9522",
+    "resource_states": "audit_record_9522: PRESENT",
+    "touching_flows": "audit_record_9522 -> None",
+    "status": "SUPPORTED",
+    "failed_rule": "None"
+  },
+  {
+    "case_id": "case_106",
+    "cluster_resources": "audit_record_8723",
+    "resource_states": "audit_record_8723: PRESENT",
+    "touching_flows": "audit_record_8723 -> None",
+    "status": "SUPPORTED",
+    "failed_rule": "None"
+  },
+  {
+    "case_id": "case_107",
+    "cluster_resources": "audit_record_7572",
+    "resource_states": "audit_record_7572: PRESENT",
+    "touching_flows": "audit_record_7572 -> None",
+    "status": "SUPPORTED",
+    "failed_rule": "None"
+  },
+  {
+    "case_id": "case_108",
+    "cluster_resources": "audit_record_1469",
+    "resource_states": "audit_record_1469: PRESENT",
+    "touching_flows": "audit_record_1469 -> None",
+    "status": "SUPPORTED",
+    "failed_rule": "None"
+  },
+  {
+    "case_id": "case_109",
+    "cluster_resources": "audit_record_2718",
+    "resource_states": "audit_record_2718: PRESENT",
+    "touching_flows": "audit_record_2718 -> None",
+    "status": "SUPPORTED",
+    "failed_rule": "None"
+  },
+  {
+    "case_id": "case_110",
+    "cluster_resources": "audit_record_9268",
+    "resource_states": "audit_record_9268: PRESENT",
+    "touching_flows": "audit_record_9268 -> None",
+    "status": "SUPPORTED",
+    "failed_rule": "None"
+  },
+  {
+    "case_id": "case_111",
+    "cluster_resources": "audit_record_8933",
+    "resource_states": "audit_record_8933: PRESENT",
+    "touching_flows": "audit_record_8933 -> None",
+    "status": "SUPPORTED",
+    "failed_rule": "None"
+  },
+  {
+    "case_id": "case_113",
+    "cluster_resources": "account_6697, audit_record_1127",
+    "resource_states": "account_6697: ABSENT; audit_record_1127: PRESENT",
+    "touching_flows": "account_6697 -> None; audit_record_1127 -> None",
+    "status": "SUPPORTED",
+    "failed_rule": "None"
+  },
+  {
+    "case_id": "case_117",
+    "cluster_resources": "account_1220, audit_record_1598",
+    "resource_states": "account_1220: ABSENT; audit_record_1598: PRESENT",
+    "touching_flows": "account_1220 -> None; audit_record_1598 -> None",
+    "status": "SUPPORTED",
+    "failed_rule": "None"
+  },
+  {
+    "case_id": "case_121",
+    "cluster_resources": "account_081, audit_record_2103",
+    "resource_states": "account_081: ABSENT; audit_record_2103: PRESENT",
+    "touching_flows": "account_081 -> None; audit_record_2103 -> None",
+    "status": "SUPPORTED",
+    "failed_rule": "None"
+  },
+  {
+    "case_id": "case_135",
+    "cluster_resources": "account_1417, audit_record_5140",
+    "resource_states": "account_1417: ABSENT; audit_record_5140: PRESENT",
+    "touching_flows": "account_1417 -> None; audit_record_5140 -> None",
+    "status": "SUPPORTED",
+    "failed_rule": "None"
+  },
+  {
+    "case_id": "case_137",
+    "cluster_resources": "account_3734, audit_record_6779",
+    "resource_states": "account_3734: ABSENT; audit_record_6779: PRESENT",
+    "touching_flows": "account_3734 -> None; audit_record_6779 -> None",
+    "status": "SUPPORTED",
+    "failed_rule": "None"
+  },
+  {
+    "case_id": "case_150",
+    "cluster_resources": "audit_record_1584",
+    "resource_states": "audit_record_1584: PRESENT",
+    "touching_flows": "audit_record_1584 -> None",
+    "status": "SUPPORTED",
+    "failed_rule": "None"
+  },
+  {
+    "case_id": "case_151",
+    "cluster_resources": "audit_record_8905, backup_9557, data_flow_2437, support_5400",
+    "resource_states": "audit_record_8905: PRESENT; backup_9557: BLOCKED; data_flow_2437: DISABLED; support_5400: REDACTED",
+    "touching_flows": "audit_record_8905 -> None; backup_9557 -> activity_2911 (BLOCK_RESTORE, SUCCESS); data_flow_2437 -> activity_2909 (DISABLE_DATA_FLOW, SUCCESS); support_5400 -> None",
+    "status": "SUPPORTED",
+    "failed_rule": "None"
+  },
+  {
+    "case_id": "case_152",
+    "cluster_resources": "audit_record_3579",
+    "resource_states": "audit_record_3579: PRESENT",
+    "touching_flows": "audit_record_3579 -> None",
+    "status": "SUPPORTED",
+    "failed_rule": "None"
+  },
+  {
+    "case_id": "case_154",
+    "cluster_resources": "audit_record_2580",
+    "resource_states": "audit_record_2580: PRESENT",
+    "touching_flows": "audit_record_2580 -> None",
+    "status": "SUPPORTED",
+    "failed_rule": "None"
+  },
+  {
+    "case_id": "case_156",
+    "cluster_resources": "audit_record_5890",
+    "resource_states": "audit_record_5890: PRESENT",
+    "touching_flows": "audit_record_5890 -> None",
+    "status": "SUPPORTED",
+    "failed_rule": "None"
+  },
+  {
+    "case_id": "case_157",
+    "cluster_resources": "audit_record_8821",
+    "resource_states": "audit_record_8821: PRESENT",
+    "touching_flows": "audit_record_8821 -> None",
+    "status": "SUPPORTED",
+    "failed_rule": "None"
+  },
+  {
+    "case_id": "case_158",
+    "cluster_resources": "audit_record_9665",
+    "resource_states": "audit_record_9665: PRESENT",
+    "touching_flows": "audit_record_9665 -> None",
+    "status": "SUPPORTED",
+    "failed_rule": "None"
+  },
+  {
+    "case_id": "case_162",
+    "cluster_resources": "audit_record_6362",
+    "resource_states": "audit_record_6362: PRESENT",
+    "touching_flows": "audit_record_6362 -> None",
+    "status": "SUPPORTED",
+    "failed_rule": "None"
+  },
+  {
+    "case_id": "case_164",
+    "cluster_resources": "account_9549, audit_record_6780",
+    "resource_states": "account_9549: ABSENT; audit_record_6780: PRESENT",
+    "touching_flows": "account_9549 -> None; audit_record_6780 -> None",
+    "status": "SUPPORTED",
+    "failed_rule": "None"
+  },
+  {
+    "case_id": "case_167",
+    "cluster_resources": "account_5284, audit_record_3088",
+    "resource_states": "account_5284: ABSENT; audit_record_3088: PRESENT",
+    "touching_flows": "account_5284 -> None; audit_record_3088 -> None",
+    "status": "SUPPORTED",
+    "failed_rule": "None"
+  },
+  {
+    "case_id": "case_178",
+    "cluster_resources": "audit_record_8521",
+    "resource_states": "audit_record_8521: PRESENT",
+    "touching_flows": "audit_record_8521 -> None",
+    "status": "SUPPORTED",
+    "failed_rule": "None"
+  },
+  {
+    "case_id": "case_183",
+    "cluster_resources": "audit_record_3262",
+    "resource_states": "audit_record_3262: PRESENT",
+    "touching_flows": "audit_record_3262 -> None",
+    "status": "SUPPORTED",
+    "failed_rule": "None"
+  },
+  {
+    "case_id": "case_190",
+    "cluster_resources": "audit_record_4417",
+    "resource_states": "audit_record_4417: PRESENT",
+    "touching_flows": "audit_record_4417 -> None",
+    "status": "SUPPORTED",
+    "failed_rule": "None"
+  },
+  {
+    "case_id": "case_191",
+    "cluster_resources": "audit_record_7493, backup_3010, data_flow_1611, support_5049",
+    "resource_states": "audit_record_7493: PRESENT; backup_3010: BLOCKED; data_flow_1611: DISABLED; support_5049: REDACTED",
+    "touching_flows": "audit_record_7493 -> None; backup_3010 -> activity_2597 (BLOCK_RESTORE, SUCCESS); data_flow_1611 -> activity_2595 (DISABLE_DATA_FLOW, SUCCESS); support_5049 -> None",
+    "status": "SUPPORTED",
+    "failed_rule": "None"
+  },
+  {
+    "case_id": "case_193",
+    "cluster_resources": "account_1065, audit_record_1839",
+    "resource_states": "account_1065: ABSENT; audit_record_1839: PRESENT",
+    "touching_flows": "account_1065 -> None; audit_record_1839 -> None",
+    "status": "SUPPORTED",
+    "failed_rule": "None"
+  },
+  {
+    "case_id": "case_195",
+    "cluster_resources": "account_4320, audit_record_1524",
+    "resource_states": "account_4320: ABSENT; audit_record_1524: PRESENT",
+    "touching_flows": "account_4320 -> None; audit_record_1524 -> None",
+    "status": "SUPPORTED",
+    "failed_rule": "None"
+  },
+  {
+    "case_id": "case_196",
+    "cluster_resources": "account_5599, audit_record_6389",
+    "resource_states": "account_5599: ABSENT; audit_record_6389: PRESENT",
+    "touching_flows": "account_5599 -> None; audit_record_6389 -> None",
+    "status": "SUPPORTED",
+    "failed_rule": "None"
+  },
+  {
+    "case_id": "case_202",
+    "cluster_resources": "account_5547, audit_record_5401",
+    "resource_states": "account_5547: ABSENT; audit_record_5401: PRESENT",
+    "touching_flows": "account_5547 -> None; audit_record_5401 -> None",
+    "status": "SUPPORTED",
+    "failed_rule": "None"
+  },
+  {
+    "case_id": "case_203",
+    "cluster_resources": "audit_record_1159",
+    "resource_states": "audit_record_1159: PRESENT",
+    "touching_flows": "audit_record_1159 -> None",
+    "status": "SUPPORTED",
+    "failed_rule": "None"
+  },
+  {
+    "case_id": "case_205",
+    "cluster_resources": "audit_record_5023",
+    "resource_states": "audit_record_5023: PRESENT",
+    "touching_flows": "audit_record_5023 -> None",
+    "status": "SUPPORTED",
+    "failed_rule": "None"
+  },
+  {
+    "case_id": "case_206",
+    "cluster_resources": "audit_record_9878",
+    "resource_states": "audit_record_9878: PRESENT",
+    "touching_flows": "audit_record_9878 -> None",
+    "status": "SUPPORTED",
+    "failed_rule": "None"
+  },
+  {
+    "case_id": "case_212",
+    "cluster_resources": "audit_record_3261",
+    "resource_states": "audit_record_3261: PRESENT",
+    "touching_flows": "audit_record_3261 -> None",
+    "status": "SUPPORTED",
+    "failed_rule": "None"
+  },
+  {
+    "case_id": "case_213",
+    "cluster_resources": "account_6674, audit_record_4413, backup_5626, data_flow_5279, support_1360",
+    "resource_states": "account_6674: ABSENT; audit_record_4413: PRESENT; backup_5626: BLOCKED; data_flow_5279: DISABLED; support_1360: REDACTED",
+    "touching_flows": "account_6674 -> None; audit_record_4413 -> None; backup_5626 -> activity_2361 (BLOCK_RESTORE, SUCCESS); data_flow_5279 -> activity_2359 (DISABLE_DATA_FLOW, SUCCESS); support_1360 -> None",
+    "status": "SUPPORTED",
+    "failed_rule": "None"
+  },
+  {
+    "case_id": "case_215",
+    "cluster_resources": "account_1956, audit_record_1718",
+    "resource_states": "account_1956: ABSENT; audit_record_1718: PRESENT",
+    "touching_flows": "account_1956 -> None; audit_record_1718 -> None",
+    "status": "SUPPORTED",
+    "failed_rule": "None"
+  },
+  {
+    "case_id": "case_218",
+    "cluster_resources": "account_4066, audit_record_8792",
+    "resource_states": "account_4066: ABSENT; audit_record_8792: PRESENT",
+    "touching_flows": "account_4066 -> None; audit_record_8792 -> None",
+    "status": "SUPPORTED",
+    "failed_rule": "None"
+  },
+  {
+    "case_id": "case_219",
+    "cluster_resources": "account_4678, audit_record_3382",
+    "resource_states": "account_4678: ABSENT; audit_record_3382: PRESENT",
+    "touching_flows": "account_4678 -> None; audit_record_3382 -> None",
+    "status": "SUPPORTED",
+    "failed_rule": "None"
+  },
+  {
+    "case_id": "case_221",
+    "cluster_resources": "account_4512, audit_record_3880",
+    "resource_states": "account_4512: ABSENT; audit_record_3880: PRESENT",
+    "touching_flows": "account_4512 -> None; audit_record_3880 -> None",
+    "status": "SUPPORTED",
+    "failed_rule": "None"
+  },
+  {
+    "case_id": "case_225",
+    "cluster_resources": "audit_record_9389",
+    "resource_states": "audit_record_9389: PRESENT",
+    "touching_flows": "audit_record_9389 -> None",
+    "status": "SUPPORTED",
+    "failed_rule": "None"
+  },
+  {
+    "case_id": "case_226",
+    "cluster_resources": "audit_record_9964",
+    "resource_states": "audit_record_9964: PRESENT",
+    "touching_flows": "audit_record_9964 -> None",
+    "status": "SUPPORTED",
+    "failed_rule": "None"
+  },
+  {
+    "case_id": "case_231",
+    "cluster_resources": "account_7324, audit_record_4425, backup_6564, data_flow_2576, support_3964",
+    "resource_states": "account_7324: ABSENT; audit_record_4425: PRESENT; backup_6564: BLOCKED; data_flow_2576: DISABLED; support_3964: REDACTED",
+    "touching_flows": "account_7324 -> None; audit_record_4425 -> None; backup_6564 -> activity_2305 (BLOCK_RESTORE, SUCCESS); data_flow_2576 -> activity_2303 (DISABLE_DATA_FLOW, SUCCESS); support_3964 -> None",
+    "status": "SUPPORTED",
+    "failed_rule": "None"
+  },
+  {
+    "case_id": "case_233",
+    "cluster_resources": "account_5264, audit_record_8350, backup_8162, data_flow_6754, support_9670",
+    "resource_states": "account_5264: ABSENT; audit_record_8350: PRESENT; backup_8162: BLOCKED; data_flow_6754: DISABLED; support_9670: REDACTED",
+    "touching_flows": "account_5264 -> None; audit_record_8350 -> None; backup_8162 -> activity_2192 (BLOCK_RESTORE, SUCCESS); data_flow_6754 -> activity_2189 (DISABLE_DATA_FLOW, SUCCESS); support_9670 -> None",
+    "status": "SUPPORTED",
+    "failed_rule": "None"
+  },
+  {
+    "case_id": "case_235",
+    "cluster_resources": "account_886, audit_record_7103, backup_2775, data_flow_593, support_9391",
+    "resource_states": "account_886: ABSENT; audit_record_7103: PRESENT; backup_2775: BLOCKED; data_flow_593: DISABLED; support_9391: REDACTED",
+    "touching_flows": "account_886 -> None; audit_record_7103 -> None; backup_2775 -> activity_2191 (BLOCK_RESTORE, SUCCESS); data_flow_593 -> activity_2190 (DISABLE_DATA_FLOW, SUCCESS); support_9391 -> None",
+    "status": "SUPPORTED",
+    "failed_rule": "None"
+  },
+  {
+    "case_id": "case_238",
+    "cluster_resources": "account_945, audit_record_6797",
+    "resource_states": "account_945: ABSENT; audit_record_6797: PRESENT",
+    "touching_flows": "account_945 -> None; audit_record_6797 -> None",
+    "status": "SUPPORTED",
+    "failed_rule": "None"
+  },
+  {
+    "case_id": "case_239",
+    "cluster_resources": "account_2838, audit_record_4940",
+    "resource_states": "account_2838: ABSENT; audit_record_4940: PRESENT",
+    "touching_flows": "account_2838 -> None; audit_record_4940 -> None",
+    "status": "SUPPORTED",
+    "failed_rule": "None"
+  },
+  {
+    "case_id": "case_243",
+    "cluster_resources": "audit_record_7202",
+    "resource_states": "audit_record_7202: PRESENT",
+    "touching_flows": "audit_record_7202 -> None",
+    "status": "SUPPORTED",
+    "failed_rule": "None"
+  },
+  {
+    "case_id": "case_244",
+    "cluster_resources": "audit_record_9314",
+    "resource_states": "audit_record_9314: PRESENT",
+    "touching_flows": "audit_record_9314 -> None",
+    "status": "SUPPORTED",
+    "failed_rule": "None"
+  },
+  {
+    "case_id": "case_253",
+    "cluster_resources": "audit_record_2927",
+    "resource_states": "audit_record_2927: PRESENT",
+    "touching_flows": "audit_record_2927 -> None",
+    "status": "SUPPORTED",
+    "failed_rule": "None"
+  },
+  {
+    "case_id": "case_254",
+    "cluster_resources": "audit_record_9256",
+    "resource_states": "audit_record_9256: PRESENT",
+    "touching_flows": "audit_record_9256 -> None",
+    "status": "SUPPORTED",
+    "failed_rule": "None"
+  },
+  {
+    "case_id": "case_255",
+    "cluster_resources": "audit_record_2513",
+    "resource_states": "audit_record_2513: PRESENT",
+    "touching_flows": "audit_record_2513 -> None",
+    "status": "SUPPORTED",
+    "failed_rule": "None"
+  },
+  {
+    "case_id": "case_257",
+    "cluster_resources": "audit_record_7193",
+    "resource_states": "audit_record_7193: PRESENT",
+    "touching_flows": "audit_record_7193 -> None",
+    "status": "SUPPORTED",
+    "failed_rule": "None"
+  },
+  {
+    "case_id": "case_260",
+    "cluster_resources": "audit_record_1876",
+    "resource_states": "audit_record_1876: PRESENT",
+    "touching_flows": "audit_record_1876 -> None",
+    "status": "SUPPORTED",
+    "failed_rule": "None"
+  },
+  {
+    "case_id": "case_262",
+    "cluster_resources": "audit_record_4812",
+    "resource_states": "audit_record_4812: PRESENT",
+    "touching_flows": "audit_record_4812 -> None",
+    "status": "SUPPORTED",
+    "failed_rule": "None"
+  },
+  {
+    "case_id": "case_265",
+    "cluster_resources": "account_5015, audit_record_6378",
+    "resource_states": "account_5015: ABSENT; audit_record_6378: PRESENT",
+    "touching_flows": "account_5015 -> None; audit_record_6378 -> None",
+    "status": "SUPPORTED",
+    "failed_rule": "None"
+  },
+  {
+    "case_id": "case_267",
+    "cluster_resources": "account_8384, audit_record_6621",
+    "resource_states": "account_8384: ABSENT; audit_record_6621: PRESENT",
+    "touching_flows": "account_8384 -> None; audit_record_6621 -> None",
+    "status": "SUPPORTED",
+    "failed_rule": "None"
+  },
+  {
+    "case_id": "case_274",
+    "cluster_resources": "audit_record_6398",
+    "resource_states": "audit_record_6398: PRESENT",
+    "touching_flows": "audit_record_6398 -> None",
+    "status": "SUPPORTED",
+    "failed_rule": "None"
+  },
+  {
+    "case_id": "case_276",
+    "cluster_resources": "audit_record_8323",
+    "resource_states": "audit_record_8323: PRESENT",
+    "touching_flows": "audit_record_8323 -> None",
+    "status": "SUPPORTED",
+    "failed_rule": "None"
+  },
+  {
+    "case_id": "case_277",
+    "cluster_resources": "audit_record_8228, backup_9728, data_flow_2439, support_2036",
+    "resource_states": "audit_record_8228: PRESENT; backup_9728: BLOCKED; data_flow_2439: DISABLED; support_2036: REDACTED",
+    "touching_flows": "audit_record_8228 -> None; backup_9728 -> activity_1856 (BLOCK_RESTORE, SUCCESS); data_flow_2439 -> activity_1855 (DISABLE_DATA_FLOW, SUCCESS); support_2036 -> None",
+    "status": "SUPPORTED",
+    "failed_rule": "None"
+  },
+  {
+    "case_id": "case_283",
+    "cluster_resources": "account_947, audit_record_5680",
+    "resource_states": "account_947: ABSENT; audit_record_5680: PRESENT",
+    "touching_flows": "account_947 -> None; audit_record_5680 -> None",
+    "status": "SUPPORTED",
+    "failed_rule": "None"
+  },
+  {
+    "case_id": "case_286",
+    "cluster_resources": "account_2016, audit_record_1714",
+    "resource_states": "account_2016: ABSENT; audit_record_1714: PRESENT",
+    "touching_flows": "account_2016 -> None; audit_record_1714 -> None",
+    "status": "SUPPORTED",
+    "failed_rule": "None"
+  },
+  {
+    "case_id": "case_294",
+    "cluster_resources": "audit_record_4387",
+    "resource_states": "audit_record_4387: PRESENT",
+    "touching_flows": "audit_record_4387 -> None",
+    "status": "SUPPORTED",
+    "failed_rule": "None"
+  },
+  {
+    "case_id": "case_295",
+    "cluster_resources": "audit_record_1269",
+    "resource_states": "audit_record_1269: PRESENT",
+    "touching_flows": "audit_record_1269 -> None",
+    "status": "SUPPORTED",
+    "failed_rule": "None"
+  },
+  {
+    "case_id": "case_297",
+    "cluster_resources": "audit_record_7878, backup_7308, data_flow_3391, support_1983",
+    "resource_states": "audit_record_7878: PRESENT; backup_7308: BLOCKED; data_flow_3391: DISABLED; support_1983: REDACTED",
+    "touching_flows": "audit_record_7878 -> None; backup_7308 -> activity_1676 (BLOCK_RESTORE, SUCCESS); data_flow_3391 -> activity_1674 (DISABLE_DATA_FLOW, SUCCESS); support_1983 -> None",
+    "status": "SUPPORTED",
+    "failed_rule": "None"
+  },
+  {
+    "case_id": "case_299",
+    "cluster_resources": "audit_record_5194",
+    "resource_states": "audit_record_5194: PRESENT",
+    "touching_flows": "audit_record_5194 -> None",
+    "status": "SUPPORTED",
+    "failed_rule": "None"
+  },
+  {
+    "case_id": "case_304",
+    "cluster_resources": "audit_record_4759",
+    "resource_states": "audit_record_4759: PRESENT",
+    "touching_flows": "audit_record_4759 -> None",
+    "status": "SUPPORTED",
+    "failed_rule": "None"
+  },
+  {
+    "case_id": "case_309",
+    "cluster_resources": "audit_record_1945",
+    "resource_states": "audit_record_1945: PRESENT",
+    "touching_flows": "audit_record_1945 -> None",
+    "status": "SUPPORTED",
+    "failed_rule": "None"
+  },
+  {
+    "case_id": "case_312",
+    "cluster_resources": "audit_record_6559",
+    "resource_states": "audit_record_6559: PRESENT",
+    "touching_flows": "audit_record_6559 -> None",
+    "status": "SUPPORTED",
+    "failed_rule": "None"
+  },
+  {
+    "case_id": "case_313",
+    "cluster_resources": "account_8264, audit_record_7020",
+    "resource_states": "account_8264: ABSENT; audit_record_7020: PRESENT",
+    "touching_flows": "account_8264 -> None; audit_record_7020 -> None",
+    "status": "SUPPORTED",
+    "failed_rule": "None"
+  },
+  {
+    "case_id": "case_314",
+    "cluster_resources": "account_591, audit_record_7893",
+    "resource_states": "account_591: ABSENT; audit_record_7893: PRESENT",
+    "touching_flows": "account_591 -> None; audit_record_7893 -> None",
+    "status": "SUPPORTED",
+    "failed_rule": "None"
+  },
+  {
+    "case_id": "case_319",
+    "cluster_resources": "account_2088, audit_record_7337",
+    "resource_states": "account_2088: ABSENT; audit_record_7337: PRESENT",
+    "touching_flows": "account_2088 -> None; audit_record_7337 -> None",
+    "status": "SUPPORTED",
+    "failed_rule": "None"
+  },
+  {
+    "case_id": "case_322",
+    "cluster_resources": "account_9354, audit_record_3201",
+    "resource_states": "account_9354: ABSENT; audit_record_3201: PRESENT",
+    "touching_flows": "account_9354 -> None; audit_record_3201 -> None",
+    "status": "SUPPORTED",
+    "failed_rule": "None"
+  },
+  {
+    "case_id": "case_323",
+    "cluster_resources": "account_2917, audit_record_3338",
+    "resource_states": "account_2917: ABSENT; audit_record_3338: PRESENT",
+    "touching_flows": "account_2917 -> None; audit_record_3338 -> None",
+    "status": "SUPPORTED",
+    "failed_rule": "None"
+  },
+  {
+    "case_id": "case_324",
+    "cluster_resources": "account_1242, audit_record_4466, backup_6458, data_flow_4769, support_7249",
+    "resource_states": "account_1242: ABSENT; audit_record_4466: PRESENT; backup_6458: BLOCKED; data_flow_4769: DISABLED; support_7249: REDACTED",
+    "touching_flows": "account_1242 -> None; audit_record_4466 -> None; backup_6458 -> activity_1646 (BLOCK_RESTORE, SUCCESS); data_flow_4769 -> activity_1645 (DISABLE_DATA_FLOW, SUCCESS); support_7249 -> None",
+    "status": "SUPPORTED",
+    "failed_rule": "None"
+  },
+  {
+    "case_id": "case_326",
+    "cluster_resources": "account_3785, audit_record_1219, backup_2894, data_flow_2468, support_305",
+    "resource_states": "account_3785: ABSENT; audit_record_1219: PRESENT; backup_2894: BLOCKED; data_flow_2468: DISABLED; support_305: REDACTED",
+    "touching_flows": "account_3785 -> None; audit_record_1219 -> None; backup_2894 -> activity_1601 (BLOCK_RESTORE, SUCCESS); data_flow_2468 -> activity_1599 (DISABLE_DATA_FLOW, SUCCESS); support_305 -> None",
+    "status": "SUPPORTED",
+    "failed_rule": "None"
+  },
+  {
+    "case_id": "case_327",
+    "cluster_resources": "account_4606, audit_record_461",
+    "resource_states": "account_4606: ABSENT; audit_record_461: PRESENT",
+    "touching_flows": "account_4606 -> None; audit_record_461 -> None",
+    "status": "SUPPORTED",
+    "failed_rule": "None"
+  },
+  {
+    "case_id": "case_331",
+    "cluster_resources": "account_6814, audit_record_6731, backup_9376, data_flow_8534, support_1403",
+    "resource_states": "account_6814: ABSENT; audit_record_6731: PRESENT; backup_9376: BLOCKED; data_flow_8534: DISABLED; support_1403: REDACTED",
+    "touching_flows": "account_6814 -> None; audit_record_6731 -> None; backup_9376 -> activity_1561 (BLOCK_RESTORE, SUCCESS); data_flow_8534 -> activity_1560 (DISABLE_DATA_FLOW, SUCCESS); support_1403 -> None",
+    "status": "SUPPORTED",
+    "failed_rule": "None"
+  },
+  {
+    "case_id": "case_335",
+    "cluster_resources": "audit_record_711, backup_3136, data_flow_7452, support_4712",
+    "resource_states": "audit_record_711: PRESENT; backup_3136: BLOCKED; data_flow_7452: DISABLED; support_4712: REDACTED",
+    "touching_flows": "audit_record_711 -> None; backup_3136 -> activity_1411 (BLOCK_RESTORE, SUCCESS); data_flow_7452 -> activity_1409 (DISABLE_DATA_FLOW, SUCCESS); support_4712 -> None",
+    "status": "SUPPORTED",
+    "failed_rule": "None"
+  },
+  {
+    "case_id": "case_336",
+    "cluster_resources": "audit_record_5022",
+    "resource_states": "audit_record_5022: PRESENT",
+    "touching_flows": "audit_record_5022 -> None",
+    "status": "SUPPORTED",
+    "failed_rule": "None"
+  },
+  {
+    "case_id": "case_339",
+    "cluster_resources": "audit_record_2922",
+    "resource_states": "audit_record_2922: PRESENT",
+    "touching_flows": "audit_record_2922 -> None",
+    "status": "SUPPORTED",
+    "failed_rule": "None"
+  },
+  {
+    "case_id": "case_343",
+    "cluster_resources": "audit_record_9233",
+    "resource_states": "audit_record_9233: PRESENT",
+    "touching_flows": "audit_record_9233 -> None",
+    "status": "SUPPORTED",
+    "failed_rule": "None"
+  },
+  {
+    "case_id": "case_346",
+    "cluster_resources": "audit_record_1700",
+    "resource_states": "audit_record_1700: PRESENT",
+    "touching_flows": "audit_record_1700 -> None",
+    "status": "SUPPORTED",
+    "failed_rule": "None"
+  },
+  {
+    "case_id": "case_351",
+    "cluster_resources": "audit_record_8787, backup_024, data_flow_4323, support_7137",
+    "resource_states": "audit_record_8787: PRESENT; backup_024: BLOCKED; data_flow_4323: DISABLED; support_7137: REDACTED",
+    "touching_flows": "audit_record_8787 -> None; backup_024 -> activity_1404 (BLOCK_RESTORE, SUCCESS); data_flow_4323 -> activity_1402 (DISABLE_DATA_FLOW, SUCCESS); support_7137 -> None",
+    "status": "SUPPORTED",
+    "failed_rule": "None"
+  },
+  {
+    "case_id": "case_354",
+    "cluster_resources": "audit_record_9286",
+    "resource_states": "audit_record_9286: PRESENT",
+    "touching_flows": "audit_record_9286 -> None",
+    "status": "SUPPORTED",
+    "failed_rule": "None"
+  },
+  {
+    "case_id": "case_359",
+    "cluster_resources": "audit_record_2641",
+    "resource_states": "audit_record_2641: PRESENT",
+    "touching_flows": "audit_record_2641 -> None",
+    "status": "SUPPORTED",
+    "failed_rule": "None"
+  },
+  {
+    "case_id": "case_360",
+    "cluster_resources": "audit_record_2605",
+    "resource_states": "audit_record_2605: PRESENT",
+    "touching_flows": "audit_record_2605 -> None",
+    "status": "SUPPORTED",
+    "failed_rule": "None"
+  },
+  {
+    "case_id": "case_361",
+    "cluster_resources": "audit_record_7587",
+    "resource_states": "audit_record_7587: PRESENT",
+    "touching_flows": "audit_record_7587 -> None",
+    "status": "SUPPORTED",
+    "failed_rule": "None"
+  },
+  {
+    "case_id": "case_362",
+    "cluster_resources": "audit_record_8638",
+    "resource_states": "audit_record_8638: PRESENT",
+    "touching_flows": "audit_record_8638 -> None",
+    "status": "SUPPORTED",
+    "failed_rule": "None"
+  },
+  {
+    "case_id": "case_369",
+    "cluster_resources": "account_8590, audit_record_337",
+    "resource_states": "account_8590: ABSENT; audit_record_337: PRESENT",
+    "touching_flows": "account_8590 -> None; audit_record_337 -> None",
+    "status": "SUPPORTED",
+    "failed_rule": "None"
+  },
+  {
+    "case_id": "case_374",
+    "cluster_resources": "account_8598, audit_record_5137",
+    "resource_states": "account_8598: ABSENT; audit_record_5137: PRESENT",
+    "touching_flows": "account_8598 -> None; audit_record_5137 -> None",
+    "status": "SUPPORTED",
+    "failed_rule": "None"
+  },
+  {
+    "case_id": "case_375",
+    "cluster_resources": "account_2854, audit_record_6359",
+    "resource_states": "account_2854: ABSENT; audit_record_6359: PRESENT",
+    "touching_flows": "account_2854 -> None; audit_record_6359 -> None",
+    "status": "SUPPORTED",
+    "failed_rule": "None"
+  },
+  {
+    "case_id": "case_378",
+    "cluster_resources": "account_976, audit_record_7312",
+    "resource_states": "account_976: ABSENT; audit_record_7312: PRESENT",
+    "touching_flows": "account_976 -> None; audit_record_7312 -> None",
+    "status": "SUPPORTED",
+    "failed_rule": "None"
+  },
+  {
+    "case_id": "case_380",
+    "cluster_resources": "account_4001, audit_record_4489",
+    "resource_states": "account_4001: ABSENT; audit_record_4489: PRESENT",
+    "touching_flows": "account_4001 -> None; audit_record_4489 -> None",
+    "status": "SUPPORTED",
+    "failed_rule": "None"
+  },
+  {
+    "case_id": "case_383",
+    "cluster_resources": "account_5043, audit_record_989",
+    "resource_states": "account_5043: ABSENT; audit_record_989: PRESENT",
+    "touching_flows": "account_5043 -> None; audit_record_989 -> None",
+    "status": "SUPPORTED",
+    "failed_rule": "None"
+  },
+  {
+    "case_id": "case_390",
+    "cluster_resources": "account_7618, audit_record_101, backup_5165, data_flow_5737, legal_hold_8049, support_5720",
+    "resource_states": "account_7618: ABSENT; audit_record_101: PRESENT; backup_5165: BLOCKED; data_flow_5737: DISABLED; legal_hold_8049: PRESENT; support_5720: REDACTED",
+    "touching_flows": "account_7618 -> None; audit_record_101 -> None; backup_5165 -> activity_1124 (BLOCK_RESTORE, SUCCESS); data_flow_5737 -> activity_1123 (DISABLE_DATA_FLOW, SUCCESS); legal_hold_8049 -> None; support_5720 -> None",
+    "status": "SUPPORTED",
+    "failed_rule": "None"
+  },
+  {
+    "case_id": "case_392",
+    "cluster_resources": "account_1718, audit_record_7510",
+    "resource_states": "account_1718: ABSENT; audit_record_7510: PRESENT",
+    "touching_flows": "account_1718 -> None; audit_record_7510 -> None",
+    "status": "SUPPORTED",
+    "failed_rule": "None"
+  },
+  {
+    "case_id": "case_393",
+    "cluster_resources": "audit_record_7330",
+    "resource_states": "audit_record_7330: PRESENT",
+    "touching_flows": "audit_record_7330 -> None",
+    "status": "SUPPORTED",
+    "failed_rule": "None"
+  },
+  {
+    "case_id": "case_395",
+    "cluster_resources": "audit_record_2839",
+    "resource_states": "audit_record_2839: PRESENT",
+    "touching_flows": "audit_record_2839 -> None",
+    "status": "SUPPORTED",
+    "failed_rule": "None"
+  },
+  {
+    "case_id": "case_398",
+    "cluster_resources": "audit_record_7361",
+    "resource_states": "audit_record_7361: PRESENT",
+    "touching_flows": "audit_record_7361 -> None",
+    "status": "SUPPORTED",
+    "failed_rule": "None"
+  },
+  {
+    "case_id": "case_403",
+    "cluster_resources": "audit_record_4733",
+    "resource_states": "audit_record_4733: PRESENT",
+    "touching_flows": "audit_record_4733 -> None",
+    "status": "SUPPORTED",
+    "failed_rule": "None"
+  },
+  {
+    "case_id": "case_409",
+    "cluster_resources": "audit_record_2559",
+    "resource_states": "audit_record_2559: PRESENT",
+    "touching_flows": "audit_record_2559 -> None",
+    "status": "SUPPORTED",
+    "failed_rule": "None"
+  },
+  {
+    "case_id": "case_41",
+    "cluster_resources": "account_4051, audit_record_7814, backup_706, data_flow_2901, support_2667",
+    "resource_states": "account_4051: ABSENT; audit_record_7814: PRESENT; backup_706: BLOCKED; data_flow_2901: DISABLED; support_2667: REDACTED",
+    "touching_flows": "account_4051 -> None; audit_record_7814 -> None; backup_706 -> activity_3623 (BLOCK_RESTORE, SUCCESS); data_flow_2901 -> activity_3622 (DISABLE_DATA_FLOW, SUCCESS); support_2667 -> None",
+    "status": "SUPPORTED",
+    "failed_rule": "None"
+  },
+  {
+    "case_id": "case_410",
+    "cluster_resources": "audit_record_896",
+    "resource_states": "audit_record_896: PRESENT",
+    "touching_flows": "audit_record_896 -> None",
+    "status": "SUPPORTED",
+    "failed_rule": "None"
+  },
+  {
+    "case_id": "case_411",
+    "cluster_resources": "audit_record_4330",
+    "resource_states": "audit_record_4330: PRESENT",
+    "touching_flows": "audit_record_4330 -> None",
+    "status": "SUPPORTED",
+    "failed_rule": "None"
+  },
+  {
+    "case_id": "case_423",
+    "cluster_resources": "account_2420, audit_record_8082",
+    "resource_states": "account_2420: ABSENT; audit_record_8082: PRESENT",
+    "touching_flows": "account_2420 -> None; audit_record_8082 -> None",
+    "status": "SUPPORTED",
+    "failed_rule": "None"
+  },
+  {
+    "case_id": "case_424",
+    "cluster_resources": "audit_record_1474",
+    "resource_states": "audit_record_1474: PRESENT",
+    "touching_flows": "audit_record_1474 -> None",
+    "status": "SUPPORTED",
+    "failed_rule": "None"
+  },
+  {
+    "case_id": "case_427",
+    "cluster_resources": "audit_record_999",
+    "resource_states": "audit_record_999: PRESENT",
+    "touching_flows": "audit_record_999 -> None",
+    "status": "SUPPORTED",
+    "failed_rule": "None"
+  },
+  {
+    "case_id": "case_430",
+    "cluster_resources": "account_6006, audit_record_5292",
+    "resource_states": "account_6006: ABSENT; audit_record_5292: PRESENT",
+    "touching_flows": "account_6006 -> None; audit_record_5292 -> None",
+    "status": "SUPPORTED",
+    "failed_rule": "None"
+  },
+  {
+    "case_id": "case_448",
+    "cluster_resources": "audit_record_753",
+    "resource_states": "audit_record_753: PRESENT",
+    "touching_flows": "audit_record_753 -> None",
+    "status": "SUPPORTED",
+    "failed_rule": "None"
+  },
+  {
+    "case_id": "case_45",
+    "cluster_resources": "audit_record_003",
+    "resource_states": "audit_record_003: PRESENT",
+    "touching_flows": "audit_record_003 -> None",
+    "status": "SUPPORTED",
+    "failed_rule": "None"
+  },
+  {
+    "case_id": "case_452",
+    "cluster_resources": "audit_record_8608",
+    "resource_states": "audit_record_8608: PRESENT",
+    "touching_flows": "audit_record_8608 -> None",
+    "status": "SUPPORTED",
+    "failed_rule": "None"
+  },
+  {
+    "case_id": "case_454",
+    "cluster_resources": "audit_record_2775",
+    "resource_states": "audit_record_2775: PRESENT",
+    "touching_flows": "audit_record_2775 -> None",
+    "status": "SUPPORTED",
+    "failed_rule": "None"
+  },
+  {
+    "case_id": "case_455",
+    "cluster_resources": "audit_record_2788",
+    "resource_states": "audit_record_2788: PRESENT",
+    "touching_flows": "audit_record_2788 -> None",
+    "status": "SUPPORTED",
+    "failed_rule": "None"
+  },
+  {
+    "case_id": "case_456",
+    "cluster_resources": "audit_record_8176",
+    "resource_states": "audit_record_8176: PRESENT",
+    "touching_flows": "audit_record_8176 -> None",
+    "status": "SUPPORTED",
+    "failed_rule": "None"
+  },
+  {
+    "case_id": "case_457",
+    "cluster_resources": "audit_record_1171",
+    "resource_states": "audit_record_1171: PRESENT",
+    "touching_flows": "audit_record_1171 -> None",
+    "status": "SUPPORTED",
+    "failed_rule": "None"
+  },
+  {
+    "case_id": "case_458",
+    "cluster_resources": "audit_record_6750",
+    "resource_states": "audit_record_6750: PRESENT",
+    "touching_flows": "audit_record_6750 -> None",
+    "status": "SUPPORTED",
+    "failed_rule": "None"
+  },
+  {
+    "case_id": "case_462",
+    "cluster_resources": "audit_record_641",
+    "resource_states": "audit_record_641: PRESENT",
+    "touching_flows": "audit_record_641 -> None",
+    "status": "SUPPORTED",
+    "failed_rule": "None"
+  },
+  {
+    "case_id": "case_463",
+    "cluster_resources": "account_1698, audit_record_8444, backup_2005, data_flow_8024, support_2659",
+    "resource_states": "account_1698: ABSENT; audit_record_8444: PRESENT; backup_2005: BLOCKED; data_flow_8024: DISABLED; support_2659: REDACTED",
+    "touching_flows": "account_1698 -> None; audit_record_8444 -> None; backup_2005 -> activity_662 (BLOCK_RESTORE, SUCCESS); data_flow_8024 -> activity_661 (DISABLE_DATA_FLOW, SUCCESS); support_2659 -> None",
+    "status": "SUPPORTED",
+    "failed_rule": "None"
+  },
+  {
+    "case_id": "case_464",
+    "cluster_resources": "account_2480, audit_record_5183, backup_7400, data_flow_1344, support_5586",
+    "resource_states": "account_2480: ABSENT; audit_record_5183: PRESENT; backup_7400: BLOCKED; data_flow_1344: DISABLED; support_5586: REDACTED",
+    "touching_flows": "account_2480 -> None; audit_record_5183 -> None; backup_7400 -> activity_609 (BLOCK_RESTORE, SUCCESS); data_flow_1344 -> activity_608 (DISABLE_DATA_FLOW, SUCCESS); support_5586 -> None",
+    "status": "SUPPORTED",
+    "failed_rule": "None"
+  },
+  {
+    "case_id": "case_467",
+    "cluster_resources": "account_2437, audit_record_8992",
+    "resource_states": "account_2437: ABSENT; audit_record_8992: PRESENT",
+    "touching_flows": "account_2437 -> None; audit_record_8992 -> None",
+    "status": "SUPPORTED",
+    "failed_rule": "None"
+  },
+  {
+    "case_id": "case_470",
+    "cluster_resources": "account_7023, audit_record_2706",
+    "resource_states": "account_7023: ABSENT; audit_record_2706: PRESENT",
+    "touching_flows": "account_7023 -> None; audit_record_2706 -> None",
+    "status": "SUPPORTED",
+    "failed_rule": "None"
+  },
+  {
+    "case_id": "case_476",
+    "cluster_resources": "audit_record_4197",
+    "resource_states": "audit_record_4197: PRESENT",
+    "touching_flows": "audit_record_4197 -> None",
+    "status": "SUPPORTED",
+    "failed_rule": "None"
+  },
+  {
+    "case_id": "case_479",
+    "cluster_resources": "audit_record_5745",
+    "resource_states": "audit_record_5745: PRESENT",
+    "touching_flows": "audit_record_5745 -> None",
+    "status": "SUPPORTED",
+    "failed_rule": "None"
+  },
+  {
+    "case_id": "case_480",
+    "cluster_resources": "audit_record_7742, backup_7706, support_5854",
+    "resource_states": "audit_record_7742: PRESENT; backup_7706: BLOCKED; support_5854: REDACTED",
+    "touching_flows": "audit_record_7742 -> None; backup_7706 -> activity_323 (BLOCK_RESTORE, SUCCESS); support_5854 -> None",
+    "status": "SUPPORTED",
+    "failed_rule": "None"
+  },
+  {
+    "case_id": "case_481",
+    "cluster_resources": "audit_record_9025",
+    "resource_states": "audit_record_9025: PRESENT",
+    "touching_flows": "audit_record_9025 -> None",
+    "status": "SUPPORTED",
+    "failed_rule": "None"
+  },
+  {
+    "case_id": "case_482",
+    "cluster_resources": "audit_record_2180",
+    "resource_states": "audit_record_2180: PRESENT",
+    "touching_flows": "audit_record_2180 -> None",
+    "status": "SUPPORTED",
+    "failed_rule": "None"
+  },
+  {
+    "case_id": "case_486",
+    "cluster_resources": "account_9031, audit_record_5451",
+    "resource_states": "account_9031: ABSENT; audit_record_5451: PRESENT",
+    "touching_flows": "account_9031 -> None; audit_record_5451 -> None",
+    "status": "SUPPORTED",
+    "failed_rule": "None"
+  },
+  {
+    "case_id": "case_491",
+    "cluster_resources": "account_7455, audit_record_7073",
+    "resource_states": "account_7455: ABSENT; audit_record_7073: PRESENT",
+    "touching_flows": "account_7455 -> None; audit_record_7073 -> None",
+    "status": "SUPPORTED",
+    "failed_rule": "None"
+  },
+  {
+    "case_id": "case_493",
+    "cluster_resources": "audit_record_730",
+    "resource_states": "audit_record_730: PRESENT",
+    "touching_flows": "audit_record_730 -> None",
+    "status": "SUPPORTED",
+    "failed_rule": "None"
+  },
+  {
+    "case_id": "case_494",
+    "cluster_resources": "audit_record_1112",
+    "resource_states": "audit_record_1112: PRESENT",
+    "touching_flows": "audit_record_1112 -> None",
+    "status": "SUPPORTED",
+    "failed_rule": "None"
+  },
+  {
+    "case_id": "case_497",
+    "cluster_resources": "audit_record_9796",
+    "resource_states": "audit_record_9796: PRESENT",
+    "touching_flows": "audit_record_9796 -> None",
+    "status": "SUPPORTED",
+    "failed_rule": "None"
+  },
+  {
+    "case_id": "case_502",
+    "cluster_resources": "audit_record_5238",
+    "resource_states": "audit_record_5238: PRESENT",
+    "touching_flows": "audit_record_5238 -> None",
+    "status": "SUPPORTED",
+    "failed_rule": "None"
+  },
+  {
+    "case_id": "case_503",
+    "cluster_resources": "audit_record_5454",
+    "resource_states": "audit_record_5454: PRESENT",
+    "touching_flows": "audit_record_5454 -> None",
+    "status": "SUPPORTED",
+    "failed_rule": "None"
+  },
+  {
+    "case_id": "case_504",
+    "cluster_resources": "audit_record_3733",
+    "resource_states": "audit_record_3733: PRESENT",
+    "touching_flows": "audit_record_3733 -> None",
+    "status": "SUPPORTED",
+    "failed_rule": "None"
+  },
+  {
+    "case_id": "case_505",
+    "cluster_resources": "audit_record_3441, legal_hold_2227",
+    "resource_states": "audit_record_3441: PRESENT; legal_hold_2227: PRESENT",
+    "touching_flows": "audit_record_3441 -> None; legal_hold_2227 -> None",
+    "status": "SUPPORTED",
+    "failed_rule": "None"
+  },
+  {
+    "case_id": "case_506",
+    "cluster_resources": "audit_record_1361",
+    "resource_states": "audit_record_1361: PRESENT",
+    "touching_flows": "audit_record_1361 -> None",
+    "status": "SUPPORTED",
+    "failed_rule": "None"
+  },
+  {
+    "case_id": "case_512",
+    "cluster_resources": "audit_record_4219",
+    "resource_states": "audit_record_4219: PRESENT",
+    "touching_flows": "audit_record_4219 -> None",
+    "status": "SUPPORTED",
+    "failed_rule": "None"
+  },
+  {
+    "case_id": "case_516",
+    "cluster_resources": "account_141, audit_record_3777",
+    "resource_states": "account_141: ABSENT; audit_record_3777: PRESENT",
+    "touching_flows": "account_141 -> None; audit_record_3777 -> None",
+    "status": "SUPPORTED",
+    "failed_rule": "None"
+  },
+  {
+    "case_id": "case_521",
+    "cluster_resources": "account_1482, audit_record_3567",
+    "resource_states": "account_1482: ABSENT; audit_record_3567: PRESENT",
+    "touching_flows": "account_1482 -> None; audit_record_3567 -> None",
+    "status": "SUPPORTED",
+    "failed_rule": "None"
+  },
+  {
+    "case_id": "case_524",
+    "cluster_resources": "audit_record_5429",
+    "resource_states": "audit_record_5429: PRESENT",
+    "touching_flows": "audit_record_5429 -> None",
+    "status": "SUPPORTED",
+    "failed_rule": "None"
+  },
+  {
+    "case_id": "case_530",
+    "cluster_resources": "audit_record_2152",
+    "resource_states": "audit_record_2152: PRESENT",
+    "touching_flows": "audit_record_2152 -> None",
+    "status": "SUPPORTED",
+    "failed_rule": "None"
+  },
+  {
+    "case_id": "case_532",
+    "cluster_resources": "audit_record_4828, backup_6344, data_flow_6987, support_7724",
+    "resource_states": "audit_record_4828: PRESENT; backup_6344: BLOCKED; data_flow_6987: DISABLED; support_7724: REDACTED",
+    "touching_flows": "audit_record_4828 -> None; backup_6344 -> activity_96 (BLOCK_RESTORE, SUCCESS); data_flow_6987 -> activity_95 (DISABLE_DATA_FLOW, SUCCESS); support_7724 -> None",
+    "status": "SUPPORTED",
+    "failed_rule": "None"
+  },
+  {
+    "case_id": "case_543",
+    "cluster_resources": "audit_record_6244, tombstone_205",
+    "resource_states": "audit_record_6244: PRESENT; tombstone_205: REDACTED",
+    "touching_flows": "audit_record_6244 -> None; tombstone_205 -> None",
+    "status": "SUPPORTED",
+    "failed_rule": "None"
+  },
+  {
+    "case_id": "case_545",
+    "cluster_resources": "audit_record_5041, tombstone_946",
+    "resource_states": "audit_record_5041: PRESENT; tombstone_946: REDACTED",
+    "touching_flows": "audit_record_5041 -> None; tombstone_946 -> None",
+    "status": "SUPPORTED",
+    "failed_rule": "None"
+  },
+  {
+    "case_id": "case_547",
+    "cluster_resources": "audit_record_7352, tombstone_8774",
+    "resource_states": "audit_record_7352: PRESENT; tombstone_8774: REDACTED",
+    "touching_flows": "audit_record_7352 -> None; tombstone_8774 -> None",
+    "status": "SUPPORTED",
+    "failed_rule": "None"
+  },
+  {
+    "case_id": "case_549",
+    "cluster_resources": "audit_record_1491, tombstone_3963",
+    "resource_states": "audit_record_1491: PRESENT; tombstone_3963: REDACTED",
+    "touching_flows": "audit_record_1491 -> None; tombstone_3963 -> None",
+    "status": "SUPPORTED",
+    "failed_rule": "None"
+  },
+  {
+    "case_id": "case_56",
+    "cluster_resources": "audit_record_4078",
+    "resource_states": "audit_record_4078: PRESENT",
+    "touching_flows": "audit_record_4078 -> None",
+    "status": "SUPPORTED",
+    "failed_rule": "None"
+  },
+  {
+    "case_id": "case_58",
+    "cluster_resources": "audit_record_8465",
+    "resource_states": "audit_record_8465: PRESENT",
+    "touching_flows": "audit_record_8465 -> None",
+    "status": "SUPPORTED",
+    "failed_rule": "None"
+  },
+  {
+    "case_id": "case_59",
+    "cluster_resources": "audit_record_962",
+    "resource_states": "audit_record_962: PRESENT",
+    "touching_flows": "audit_record_962 -> None",
+    "status": "SUPPORTED",
+    "failed_rule": "None"
+  },
+  {
+    "case_id": "case_64",
+    "cluster_resources": "account_565, audit_record_1892, backup_3933, data_flow_6846, support_6334",
+    "resource_states": "account_565: ABSENT; audit_record_1892: PRESENT; backup_3933: BLOCKED; data_flow_6846: DISABLED; support_6334: REDACTED",
+    "touching_flows": "account_565 -> None; audit_record_1892 -> None; backup_3933 -> activity_3708 (BLOCK_RESTORE, SUCCESS); data_flow_6846 -> activity_3707 (DISABLE_DATA_FLOW, SUCCESS); support_6334 -> None",
+    "status": "SUPPORTED",
+    "failed_rule": "None"
+  },
+  {
+    "case_id": "case_69",
+    "cluster_resources": "account_6138, audit_record_9011",
+    "resource_states": "account_6138: ABSENT; audit_record_9011: PRESENT",
+    "touching_flows": "account_6138 -> None; audit_record_9011 -> None",
+    "status": "SUPPORTED",
+    "failed_rule": "None"
+  },
+  {
+    "case_id": "case_70",
+    "cluster_resources": "account_6633, audit_record_1738",
+    "resource_states": "account_6633: ABSENT; audit_record_1738: PRESENT",
+    "touching_flows": "account_6633 -> None; audit_record_1738 -> None",
+    "status": "SUPPORTED",
+    "failed_rule": "None"
+  },
+  {
+    "case_id": "case_73",
+    "cluster_resources": "account_6070, audit_record_5710",
+    "resource_states": "account_6070: ABSENT; audit_record_5710: PRESENT",
+    "touching_flows": "account_6070 -> None; audit_record_5710 -> None",
+    "status": "SUPPORTED",
+    "failed_rule": "None"
+  },
+  {
+    "case_id": "case_77",
+    "cluster_resources": "account_9334, audit_record_5425, backup_7303, data_flow_7773, support_008",
+    "resource_states": "account_9334: ABSENT; audit_record_5425: PRESENT; backup_7303: BLOCKED; data_flow_7773: DISABLED; support_008: REDACTED",
+    "touching_flows": "account_9334 -> None; audit_record_5425 -> None; backup_7303 -> activity_3309 (BLOCK_RESTORE, SUCCESS); data_flow_7773 -> activity_3307 (DISABLE_DATA_FLOW, SUCCESS); support_008 -> None",
+    "status": "SUPPORTED",
+    "failed_rule": "None"
+  },
+  {
+    "case_id": "case_79",
+    "cluster_resources": "account_5186, audit_record_1734",
+    "resource_states": "account_5186: ABSENT; audit_record_1734: PRESENT",
+    "touching_flows": "account_5186 -> None; audit_record_1734 -> None",
+    "status": "SUPPORTED",
+    "failed_rule": "None"
+  },
+  {
+    "case_id": "case_80",
+    "cluster_resources": "account_4006, audit_record_5681",
+    "resource_states": "account_4006: ABSENT; audit_record_5681: PRESENT",
+    "touching_flows": "account_4006 -> None; audit_record_5681 -> None",
+    "status": "SUPPORTED",
+    "failed_rule": "None"
+  },
+  {
+    "case_id": "case_81",
+    "cluster_resources": "account_9832, audit_record_9645, backup_3332, data_flow_3255, support_5953",
+    "resource_states": "account_9832: ABSENT; audit_record_9645: PRESENT; backup_3332: BLOCKED; data_flow_3255: DISABLED; support_5953: REDACTED",
+    "touching_flows": "account_9832 -> None; audit_record_9645 -> None; backup_3332 -> activity_3261 (BLOCK_RESTORE, SUCCESS); data_flow_3255 -> activity_3260 (DISABLE_DATA_FLOW, SUCCESS); support_5953 -> None",
+    "status": "SUPPORTED",
+    "failed_rule": "None"
+  },
+  {
+    "case_id": "case_82",
+    "cluster_resources": "account_4156, audit_record_3747, backup_317, data_flow_9666, support_9166",
+    "resource_states": "account_4156: ABSENT; audit_record_3747: PRESENT; backup_317: BLOCKED; data_flow_9666: DISABLED; support_9166: REDACTED",
+    "touching_flows": "account_4156 -> None; audit_record_3747 -> None; backup_317 -> activity_3637 (BLOCK_RESTORE, SUCCESS); data_flow_9666 -> activity_3636 (DISABLE_DATA_FLOW, SUCCESS); support_9166 -> None",
+    "status": "SUPPORTED",
+    "failed_rule": "None"
+  },
+  {
+    "case_id": "case_83",
+    "cluster_resources": "account_2449, audit_record_2636",
+    "resource_states": "account_2449: ABSENT; audit_record_2636: PRESENT",
+    "touching_flows": "account_2449 -> None; audit_record_2636 -> None",
+    "status": "SUPPORTED",
+    "failed_rule": "None"
+  },
+  {
+    "case_id": "case_84",
+    "cluster_resources": "account_2387, audit_record_3787",
+    "resource_states": "account_2387: ABSENT; audit_record_3787: PRESENT",
+    "touching_flows": "account_2387 -> None; audit_record_3787 -> None",
+    "status": "SUPPORTED",
+    "failed_rule": "None"
+  },
+  {
+    "case_id": "case_86",
+    "cluster_resources": "account_8473, audit_record_5580",
+    "resource_states": "account_8473: ABSENT; audit_record_5580: PRESENT",
+    "touching_flows": "account_8473 -> None; audit_record_5580 -> None",
+    "status": "SUPPORTED",
+    "failed_rule": "None"
+  },
+  {
+    "case_id": "case_97",
+    "cluster_resources": "audit_record_8778",
+    "resource_states": "audit_record_8778: PRESENT",
+    "touching_flows": "audit_record_8778 -> None",
+    "status": "SUPPORTED",
+    "failed_rule": "None"
+  }
+]

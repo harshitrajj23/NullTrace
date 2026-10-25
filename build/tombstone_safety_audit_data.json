@@ -1,0 +1,215 @@
+{
+  "unique_tombstones_count": 10,
+  "compliance_results": {
+    "tombstone_205": {
+      "subject_reference": "user_543",
+      "account_status": "DELETED",
+      "has_pii": false,
+      "is_compliant": true,
+      "files": [
+        "customer_data_failover_replica_20260920.sql"
+      ],
+      "raw_record": {
+        "resource_id": "tombstone_205",
+        "subject_reference": "user_543",
+        "name": null,
+        "email": null,
+        "phone": null,
+        "email_hash": null,
+        "account_status": "DELETED"
+      },
+      "case_id": "case_543",
+      "dataset_split": "eval",
+      "email": "thandiwe-molefe@gmail.com"
+    },
+    "tombstone_3745": {
+      "subject_reference": "user_548",
+      "account_status": "DELETED",
+      "has_pii": true,
+      "is_compliant": false,
+      "files": [
+        "customer_data_failover_replica_20260920.sql"
+      ],
+      "raw_record": {
+        "resource_id": "tombstone_3745",
+        "subject_reference": "user_548",
+        "name": "Sof\u00eda Fern\u00e1ndez",
+        "email": "fernandez.sofia@icloud.com",
+        "phone": "+34 668 324 642",
+        "email_hash": "33f407a3689b1b57bdb15b492e565867a507c27ce066c1d6a584f03f4dbb5565",
+        "account_status": "DELETED"
+      },
+      "case_id": "case_548",
+      "dataset_split": "eval",
+      "email": "fernandez.sofia@icloud.com"
+    },
+    "tombstone_3963": {
+      "subject_reference": "user_549",
+      "account_status": "DELETED",
+      "has_pii": false,
+      "is_compliant": true,
+      "files": [
+        "customer_data_failover_replica_20260920.sql"
+      ],
+      "raw_record": {
+        "resource_id": "tombstone_3963",
+        "subject_reference": "user_549",
+        "name": null,
+        "email": null,
+        "phone": null,
+        "email_hash": null,
+        "account_status": "DELETED"
+      },
+      "case_id": "case_549",
+      "dataset_split": "eval",
+      "email": "noah-carter@proton.me"
+    },
+    "tombstone_440": {
+      "subject_reference": "user_541",
+      "account_status": "DELETED",
+      "has_pii": false,
+      "is_compliant": true,
+      "files": [
+        "customer_data_snapshot_bundle_20260915.json"
+      ],
+      "raw_record": {
+        "resource_id": "tombstone_440",
+        "subject_reference": "user_541",
+        "name": null,
+        "email": null,
+        "phone": null,
+        "email_hash": null,
+        "account_status": "DELETED"
+      },
+      "case_id": "case_31",
+      "dataset_split": "sample",
+      "email": "a.eze08@gmail.com"
+    },
+    "tombstone_7389": {
+      "subject_reference": "user_550",
+      "account_status": "DELETED",
+      "has_pii": true,
+      "is_compliant": false,
+      "files": [
+        "customer_data_failover_replica_20260920.sql"
+      ],
+      "raw_record": {
+        "resource_id": "tombstone_7389",
+        "subject_reference": "user_550",
+        "name": "Camille Moreau",
+        "email": "cmoreau0179@fastmail.com",
+        "phone": null,
+        "email_hash": "2a2f4423e4c6bf31171176c97fc49139a90fbd3832c244fea3a92b50735bee2f",
+        "account_status": "DELETED"
+      },
+      "case_id": "case_550",
+      "dataset_split": "eval",
+      "email": "cmoreau0179@fastmail.com"
+    },
+    "tombstone_8095": {
+      "subject_reference": "user_546",
+      "account_status": "DELETED",
+      "has_pii": true,
+      "is_compliant": false,
+      "files": [
+        "customer_data_failover_replica_20260920.sql"
+      ],
+      "raw_record": {
+        "resource_id": "tombstone_8095",
+        "subject_reference": "user_546",
+        "name": "Mariana Costa",
+        "email": null,
+        "phone": "+55 61 95778-4447",
+        "email_hash": "855010087865241c4a93cb954acae137c02d94f0e56485b1c7f09cfaf8611efd",
+        "account_status": "DELETED"
+      },
+      "case_id": "case_546",
+      "dataset_split": "eval",
+      "email": "mariana.costa@outlook.com"
+    },
+    "tombstone_8648": {
+      "subject_reference": "user_544",
+      "account_status": "DELETED",
+      "has_pii": true,
+      "is_compliant": false,
+      "files": [
+        "customer_data_failover_replica_20260920.sql"
+      ],
+      "raw_record": {
+        "resource_id": "tombstone_8648",
+        "subject_reference": "user_544",
+        "name": "Keiko Ito",
+        "email": "kito2665@gmail.com",
+        "phone": null,
+        "email_hash": "12f0c41e4faf4f4d18810fd065ef28922c6f12332472f88d1854725bad3ea76b",
+        "account_status": "DELETED"
+      },
+      "case_id": "case_544",
+      "dataset_split": "eval",
+      "email": "kito2665@gmail.com"
+    },
+    "tombstone_8774": {
+      "subject_reference": "user_547",
+      "account_status": "DELETED",
+      "has_pii": false,
+      "is_compliant": true,
+      "files": [
+        "customer_data_failover_replica_20260920.sql"
+      ],
+      "raw_record": {
+        "resource_id": "tombstone_8774",
+        "subject_reference": "user_547",
+        "name": null,
+        "email": null,
+        "phone": null,
+        "email_hash": null,
+        "account_status": "DELETED"
+      },
+      "case_id": "case_547",
+      "dataset_split": "eval",
+      "email": "a.patel22@yahoo.com"
+    },
+    "tombstone_9178": {
+      "subject_reference": "user_542",
+      "account_status": "DELETED",
+      "has_pii": true,
+      "is_compliant": false,
+      "files": [
+        "customer_data_snapshot_bundle_20260915.json"
+      ],
+      "raw_record": {
+        "resource_id": "tombstone_9178",
+        "subject_reference": "user_542",
+        "name": "Kofi Addo",
+        "email": "addo.kofi@gmail.com",
+        "phone": "+233 24 991 1328",
+        "email_hash": "4f4b9c98a05a2dad20e52313cce7809d18c3da544754dcd46d728b0173174b26",
+        "account_status": "DELETED"
+      },
+      "case_id": "case_32",
+      "dataset_split": "sample",
+      "email": "addo.kofi@gmail.com"
+    },
+    "tombstone_946": {
+      "subject_reference": "user_545",
+      "account_status": "DELETED",
+      "has_pii": false,
+      "is_compliant": true,
+      "files": [
+        "customer_data_failover_replica_20260920.sql"
+      ],
+      "raw_record": {
+        "resource_id": "tombstone_946",
+        "subject_reference": "user_545",
+        "name": null,
+        "email": null,
+        "phone": null,
+        "email_hash": null,
+        "account_status": "DELETED"
+      },
+      "case_id": "case_545",
+      "dataset_split": "eval",
+      "email": "soojin.k584@outlook.com"
+    }
+  }
+}

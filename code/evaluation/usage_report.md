@@ -3,57 +3,60 @@
 **Date**: 2026-10-25  
 **Challenge**: HackerRank Orchestrate (October 2026) — *Ghost Data Still Exists*  
 **Repository**: `https://github.com/harshitrajj23/NullTrace.git`  
-**Pipeline Run**: Integrated NullTrace Pipeline (`build/nulltrace_integrated.csv`)  
+**Pipeline Run**: Frozen Submission Candidate (`output.csv` / `build/nulltrace_candidate_a3.csv`)  
 **Scope**: 518 Evaluation Requests  
-**Execution Policy**: `DECISION: MODEL_OFF`
+**Execution Policy**: `DECISION: MODEL_OFF`  
 
 ---
 
 ## 1. Executive Summary
 
-This report documents the resource consumption, API call volume, token metrics, and financial expenditure associated with the full-dataset execution of the NullTrace deletion-audit pipeline that produced `build/nulltrace_integrated.csv`.
+This report documents the resource consumption, API call volume, token metrics, and financial expenditure associated with the final full-dataset execution of the NullTrace deletion-audit pipeline that produced `output.csv`.
 
 In strict adherence to the project policy (`DECISION: MODEL_OFF`) and zero-cost constraints:
-* **External API Calls**: **0**
-* **Network Requests**: **0**
-* **External Token Consumption**: **0 input tokens, 0 output tokens**
-* **Financial Expenditure**: **$0.00 (Zero Cost)**
-
-All evidence processing, multi-modality document parsing, SQL snapshot analysis, system activity tracing, resurrection graph detection, and completion validation executed using local, deterministic algorithms.
-
----
-
-## 2. Model and Provider Accounting
-
-| Category | Specification |
-|:---|:---|
-| **Primary Model Provider** | Offline Deterministic Runtime |
-| **Model Name** | None (`DECISION: MODEL_OFF`) |
-| **Model Invocations / Calls** | 0 |
-| **Input Tokens** | 0 |
-| **Output Tokens** | 0 |
-| **Total Tokens** | 0 |
-| **Average Tokens per Request** | 0.0 |
-| **Per-Model Cost** | $0.00 |
-| **Total API Spend** | **$0.00** |
+* **Model Providers**: **None**
+* **Model Names**: **None**
+* **Model Invocations / Calls**: **0**
+* **Input Tokens**: **0**
+* **Output Tokens**: **0**
+* **Total Tokens**: **0**
+* **Average Tokens per Request**: **0.0**
+* **Estimated Total Cost**: **$0.00**
+* **Estimated Per-Request Cost**: **$0.00**
 
 ---
 
-## 3. Local Computation Accounting
+## 2. Model & Provider Accounting Table
 
-Evidence extraction across all 94 evidence files was conducted locally:
+| Field | Value | Notes |
+|:---|:---|:---|
+| **Model Providers** | None | Zero external cloud APIs utilized |
+| **Model Names** | None | `DECISION: MODEL_OFF` |
+| **Model Invocations** | 0 | Deterministic local rule engine |
+| **Input Tokens** | 0 | No LLM / VLM calls |
+| **Output Tokens** | 0 | No LLM / VLM calls |
+| **Total Tokens** | 0 | Zero token overhead |
+| **Average Tokens / Request** | 0.0 | Pure local computation |
+| **Total Cost** | **$0.00** | Completely free execution |
+| **Per-Request Cost** | **$0.00** | Completely free execution |
+
+---
+
+## 3. Rationale for `MODEL_OFF` Policy
+
+As documented in `code/docs/DATA_HANDLING.md`:
+1. **Privacy & Data Security**: Privacy audit pipelines often process sensitive personal data (names, emails, phone numbers, hashes). Sending personal identifiers to external third-party model providers introduces significant data leakage and compliance risks.
+2. **Determinism & Reproducibility**: LLM generation exhibits stochastic variance, temperature fluctuations, and nondeterministic ordering that undermines strict evidentiary verification. Deterministic parsing guarantees identical bitwise outputs on every run.
+3. **Auditability & Speed**: The entire 518-case audit suite executes locally in ~2.5 seconds on commodity hardware, enabling continuous verification without latency, network failures, or API rate limits.
+4. **Zero Financial Overhead**: Ensures the submission is 100% runnable without API keys, credits, or cloud dependencies.
+
+---
+
+## 4. Local Computation Accounting
+
+Evidence extraction across participant-facing files was conducted locally:
 * **Relational SQL Snapshots**: In-memory SQLite parser (`sqlite3`).
 * **Structured JSON Snapshots & Exports**: Native JSON parser (`json`).
-* **Structured Logs & CSVs**: Built-in CSV and regex parsers.
-* **PDF Documents**: Local Python extraction libraries (`pypdf`, `pdfplumber`).
-* **Image Evidence (Screenshots)**: Local macOS Vision framework (`VNRecognizeTextRequest`) with cached provenance in `build/cache/vision/`. Local OCR computation is not external API usage and incurred zero token or cloud cost.
-
----
-
-## 4. Pipeline Execution Metrics
-
-* **Evaluation Requests Processed**: 518
-* **Elapsed Wall-Clock Time**: ~2.5 seconds
-* **Throughput**: ~207 requests / second
-* **Memory Footprint**: < 150 MB RSS
-* **Output Artifact**: `build/nulltrace_integrated.csv` (518 valid prediction rows)
+* **Structured Logs & CSVs**: Built-in Python CSV and regular expression parsers.
+* **Text Records**: Native file streaming.
+* **Zero Keys or Secrets**: No credentials, API tokens, or external authorization headers are stored or required.

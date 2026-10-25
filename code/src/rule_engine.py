@@ -27,10 +27,12 @@ if "code" in sys.modules and not hasattr(sys.modules["code"], "src"):
 
 try:
     from code.src.models import DeletionRule
-    from code.src.state_reconstruction import ReconstructedState, ResourceState
+    from code.src.state_reconstruction import ReconstructedState, ResourceState, ensure_utc
+    from code.src.resource_link import get_canonical_account_id
 except ImportError:
     from src.models import DeletionRule
-    from src.state_reconstruction import ReconstructedState, ResourceState
+    from src.state_reconstruction import ReconstructedState, ResourceState, ensure_utc
+    from src.resource_link import get_canonical_account_id
 
 logger = logging.getLogger("nulltrace.rule_engine")
 
@@ -431,3 +433,125 @@ def assess_case_policies(
         )
 
     return assessments
+
+
+def apply_account_tombstone_resolution(
+    policy_assessments: Dict[str, PolicyAssessment],
+    reconstructed_states: Dict[str, ReconstructedState],
+    activity_by_res: Dict[str, List[Any]],
+    obs_by_res: Dict[str, List[Any]],
+    cluster: Any = None,
+    resource_evidence_map: Optional[Dict[str, Set[str]]] = None,
+) -> None:
+    """
+    Applies the ACCOUNT_TOMBSTONE resolution rule.
+    When a compliant ACCOUNT_TOMBSTONE is established at or before audit_at cutoff:
+    - Verifies explicit link between tombstone and subject reference.
+    - Verifies direct personal information is demonstrably removed (tombstone_direct_pii_removed is True).
+    - Verifies tombstone observed state is REDACTED and policy_satisfied is True.
+    - Checks associated primary account (e.g. account_<id>).
+    - Ensures no conflicting post-tombstone evidence exists:
+      1. Zero direct evidence observations showing the account PRESENT at or after tombstone.
+      2. Zero account activity events occurring after tombstone.
+    - If satisfied, establishes primary account as ABSENT (deleted and replaced by tombstone),
+      citing the tombstone's supporting evidence ID and updating resource_evidence_map.
+    """
+    cluster_user_ids: Set[str] = set()
+    if cluster and hasattr(cluster, "nodes"):
+        cluster_user_ids = {
+            node.value_norm for node in cluster.nodes.values() if getattr(node, "kind", None) == "user_id"
+        }
+
+    for t_rid, t_assess in list(policy_assessments.items()):
+        is_tombstone = (
+            getattr(t_assess, "is_tombstone", False)
+            or t_rid.startswith("tombstone_")
+            or getattr(t_assess, "data_category", "") == "ACCOUNT_TOMBSTONE"
+        )
+        if not is_tombstone:
+            continue
+
+        # Strict compliance requirements
+        if (
+            not t_assess.policy_satisfied
+            or t_assess.observed_state != ResourceState.REDACTED
+            or getattr(t_assess, "tombstone_direct_pii_removed", None) is not True
+        ):
+            continue
+
+        if not t_assess.supporting_evidence_ids:
+            continue
+        t_ev_id = t_assess.supporting_evidence_ids[0]
+
+        t_recon = reconstructed_states.get(t_rid)
+        subj_ref = None
+        if t_recon and t_recon.raw_details:
+            subj_ref = t_recon.raw_details.get("subject_reference") or t_recon.raw_details.get("user_id")
+
+        if not subj_ref and t_rid in obs_by_res:
+            for o in obs_by_res[t_rid]:
+                if hasattr(o, "associated_identifiers") and "user_id" in o.associated_identifiers:
+                    subj_ref = o.associated_identifiers["user_id"]
+                    break
+
+        if subj_ref and cluster_user_ids and subj_ref not in cluster_user_ids:
+            continue
+
+        t_time = ensure_utc(t_recon.timestamp) if t_recon else None
+
+        # Check associated primary accounts in policy_assessments
+        for a_rid in list(policy_assessments.keys()):
+            if not a_rid.startswith("account_"):
+                continue
+
+            a_suffix = a_rid.replace("account_", "")
+            is_matched = False
+            if subj_ref:
+                if subj_ref.replace("user_", "") == a_suffix:
+                    is_matched = True
+            if not is_matched and cluster_user_ids:
+                for uid in cluster_user_ids:
+                    if uid.replace("user_", "") == a_suffix or a_rid == get_canonical_account_id(uid):
+                        is_matched = True
+                        break
+
+            if not is_matched:
+                continue
+
+            # Check for conflicting post-tombstone evidence on the account
+            a_dir_obs = obs_by_res.get(a_rid, [])
+            has_conflicting_obs = False
+            for obs in a_dir_obs:
+                obs_dt = ensure_utc(getattr(obs, "observed_at", None) or getattr(obs, "timestamp", None))
+                if t_time and obs_dt and obs_dt >= t_time:
+                    has_conflicting_obs = True
+                    break
+            if has_conflicting_obs:
+                continue
+
+            a_acts = activity_by_res.get(a_rid, [])
+            has_post_acts = False
+            for act in a_acts:
+                act_dt = ensure_utc(getattr(act, "event_time", None))
+                if t_time and act_dt and act_dt > t_time:
+                    has_post_acts = True
+                    break
+            if has_post_acts:
+                continue
+
+            # Account is safely established as ABSENT via tombstone
+            a_assess = policy_assessments[a_rid]
+            policy_assessments[a_rid] = PolicyAssessment(
+                resource_id=a_rid,
+                system_id=a_assess.system_id or "account_service",
+                data_category=a_assess.data_category,
+                applicable_rule_id=a_assess.applicable_rule_id,
+                required_action="DELETE",
+                observed_state=ResourceState.ABSENT,
+                policy_satisfied=True,
+                rationale=f"Primary account confirmed absent via compliant tombstone {t_rid}",
+                supporting_evidence_ids=[t_ev_id],
+            )
+            if resource_evidence_map is not None:
+                resource_evidence_map.setdefault(a_rid, set()).add(t_ev_id)
+

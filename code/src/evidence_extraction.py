@@ -132,7 +132,7 @@ class JsonRecordExtractor:
                         norm_p = normalize_phone(str(rec[k]))
                         if norm_p:
                             idents["phone"] = norm_p
-                for k in ("user_id", "subject_reference", "subject_id", "account_id"):
+                for k in ("user_id", "customer_reference", "subject_reference", "subject_id", "account_id"):
                     if rec.get(k) and str(rec[k]).startswith("user_"):
                         idents["user_id"] = str(rec[k]).strip()
                 if rec.get("email_hash"):
@@ -166,6 +166,18 @@ class JsonRecordExtractor:
                     has_direct_pii = any(bool(rec.get(k)) for k in ("name", "email", "phone", "email_hash"))
                     state = ResourceState.PRESENT if has_direct_pii else ResourceState.REDACTED
                     obs_type = "TOMBSTONE_RECORD"
+                elif "support" in str(coll) or str(rid).startswith("support_"):
+                    msg = str(rec.get("message_text", "") or "")
+                    has_pii = any(bool(rec.get(k)) for k in ("email", "phone", "requester_email", "requester_phone", "requester_name"))
+                    if ("@" in msg and "[REDACTED]" not in msg) or has_pii:
+                        state = ResourceState.PRESENT
+                    elif msg == "[REDACTED]" or "[REDACTED]" in msg:
+                        state = ResourceState.REDACTED
+                    elif any(k in rec for k in ("requester_email", "requester_phone", "requester_name")):
+                        state = ResourceState.REDACTED
+                    else:
+                        state = ResourceState.PRESENT
+                    obs_type = "SUPPORT_RECORD"
                 else:
                     state = ResourceState.PRESENT
                     obs_type = "DATA_RECORD"
@@ -373,6 +385,16 @@ class JsonRecordExtractor:
                         elif svc_name == "export_service":
                             state = ResourceState.PRESENT
                             obs_type = "EXPORT_RECORD"
+                        elif svc_name == "support_platform" or str(rid).startswith("support_"):
+                            has_pii = any(bool(item.get(k)) for k in ("requester_email", "requester_phone", "requester_name"))
+                            msg_exc = str(item.get("message_excerpt", "") or "")
+                            if has_pii or ("@" in msg_exc and "[REDACTED]" not in msg_exc):
+                                state = ResourceState.PRESENT
+                            elif any(k in item for k in ("requester_email", "requester_phone", "requester_name")):
+                                state = ResourceState.REDACTED
+                            else:
+                                state = ResourceState.PRESENT
+                            obs_type = "SUPPORT_EXPORT"
                         else:
                             state = ResourceState.PRESENT
                             obs_type = "SERVICE_EXPORT_RECORD"
@@ -455,16 +477,31 @@ class SqlSnapshotExtractor:
                         ambiguity.append("NO_DECLARED_FOREIGN_KEY")
 
                     # Check for direct columns
-                    if row_dict.get("email"):
-                        norm_e = normalize_email(str(row_dict["email"]))
-                        if norm_e:
-                            idents["email"] = norm_e
-                    if row_dict.get("phone"):
-                        norm_p = normalize_phone(str(row_dict["phone"]))
-                        if norm_p:
-                            idents["phone"] = norm_p
-                    if row_dict.get("user_id"):
-                        idents["user_id"] = str(row_dict["user_id"]).strip()
+                    for em_col in ("email", "customer_email", "owner_email", "requester_email"):
+                        if row_dict.get(em_col):
+                            norm_e = normalize_email(str(row_dict[em_col]))
+                            if norm_e:
+                                idents["email"] = norm_e
+                                break
+                    for ph_col in ("phone", "owner_phone", "requester_phone"):
+                        if row_dict.get(ph_col):
+                            norm_p = normalize_phone(str(row_dict[ph_col]))
+                            if norm_p:
+                                idents["phone"] = norm_p
+                                break
+                    for uid_col in ("user_id", "subject_reference", "customer_reference"):
+                        val = row_dict.get(uid_col)
+                        if val:
+                            sval = str(val).strip()
+                            if sval.startswith("user_"):
+                                idents["user_id"] = sval
+                                break
+                            elif "@" in sval and "email" not in idents:
+                                norm_e = normalize_email(sval)
+                                if norm_e:
+                                    idents["email"] = norm_e
+                    if row_dict.get("email_hash"):
+                        idents["email_hash"] = str(row_dict["email_hash"]).strip().lower()
 
                     row_ts = parse_timestamp_to_utc(row_dict.get("updated_at") or row_dict.get("created_at")) or snap_time
                     sys_id = row_dict.get("origin_system")
@@ -477,6 +514,8 @@ class SqlSnapshotExtractor:
                                 rid = nested.get("resource_id")
                             if nested.get("subject_reference"):
                                 idents["user_id"] = str(nested["subject_reference"]).strip()
+                            elif nested.get("customer_reference") and str(nested["customer_reference"]).startswith("user_"):
+                                idents["user_id"] = str(nested["customer_reference"]).strip()
                             if nested.get("email"):
                                 norm_e = normalize_email(str(nested["email"]))
                                 if norm_e:
@@ -494,6 +533,16 @@ class SqlSnapshotExtractor:
                                 has_pii = any(bool(nested.get(k)) for k in ("name", "email", "phone", "email_hash"))
                                 st = ResourceState.PRESENT if has_pii else ResourceState.REDACTED
                                 obs_type = "SQL_TOMBSTONE_RECORD"
+                            elif "support" in str(rid) or "support" in coll_name or "support" in str(tbl):
+                                msg = str(nested.get("message_text", "") or row_dict.get("details", ""))
+                                has_pii = any(bool(nested.get(k) or row_dict.get(k)) for k in ("email", "phone", "requester_email", "requester_phone", "requester_name"))
+                                if ("@" in msg and "[REDACTED]" not in msg) or (has_pii and "@" in str(row_dict.get("email", ""))):
+                                    st = ResourceState.PRESENT
+                                elif msg == "[REDACTED]" or "[REDACTED]" in msg:
+                                    st = ResourceState.REDACTED
+                                else:
+                                    st = ResourceState.PRESENT
+                                obs_type = "SQL_SUPPORT_RECORD"
                             else:
                                 st = ResourceState.PRESENT
                                 obs_type = "SQL_JSON_RECORD"
@@ -503,8 +552,25 @@ class SqlSnapshotExtractor:
                             st = ResourceState.PRESENT
                             obs_type = "SQL_RECORD"
                     else:
-                        st = ResourceState.PRESENT
-                        obs_type = "SQL_TABLE_ROW"
+                        if tbl == "backup_restore_entries":
+                            st = ResourceState.ACTIVE if row_dict.get("restore_allowed") else ResourceState.BLOCKED
+                            obs_type = "SQL_BACKUP_ENTRY"
+                        elif tbl == "connector_subscriptions":
+                            st = ResourceState.ACTIVE if row_dict.get("enabled") else ResourceState.DISABLED
+                            obs_type = "SQL_CONNECTOR_ENTRY"
+                        elif "support" in str(tbl) or str(rid).startswith("support_"):
+                            msg = str(row_dict.get("message_excerpt", "") or "")
+                            has_pii = any(bool(row_dict.get(k)) for k in ("requester_email", "requester_phone", "requester_name", "email", "phone"))
+                            if ("@" in msg and "[REDACTED]" not in msg) or (has_pii and not ("[REDACTED]" in msg or msg == "[REDACTED]")):
+                                st = ResourceState.PRESENT
+                            elif msg == "[REDACTED]" or "[REDACTED]" in msg or any(k in row_dict for k in ("requester_email", "requester_phone", "requester_name")):
+                                st = ResourceState.REDACTED
+                            else:
+                                st = ResourceState.PRESENT
+                            obs_type = "SQL_SUPPORT_RECORD"
+                        else:
+                            st = ResourceState.PRESENT
+                            obs_type = "SQL_TABLE_ROW"
 
                     observations.append(
                         ExtractedObservation(
@@ -536,22 +602,33 @@ class SqlSnapshotExtractor:
 class LogRecordExtractor:
     """Extractor for structured application and platform event logs in evidence/logs/*.log."""
 
-    # Regex for standard bracketed log format
+    _RE_TS = re.compile(r"^(\d{4}-\d{2}-\d{2}T\S+)")
+    _RE_KV = re.compile(r"(\b[\w\-]+)=(?:\"([^\"]*)\"|'([^']*)'|(\S+))")
     _RE_BRACKET = re.compile(
         r"^(\S+)\s+\[(\w+)\]\s+\[([\w\-]+)\]\s+\[([\w\-]+)\]\s+([\w\-]+):\s*(.*)$"
     )
-    # Regex for key-value runtime export format
-    _RE_KV = re.compile(
+    _RE_PIPE = re.compile(
+        r"^(\S+)\s*\|\s*(\w+)\s*\|\s*([\w\-]+)\s*\|\s*([\w\-]+)\s*\|\s*([\w\-]+)\s*\|\s*(.*)$"
+    )
+    _RE_REQ_KV = re.compile(
         r"^(\S+)\s+requestId=([\w\-]+)\s+level=(\w+)\s+function=([\w\-]+)\s+message=\"(.*)\"$"
     )
-    # Key-value pair extractor inside message strings
-    _RE_FIELDS = re.compile(r'(\w+)="([^"]*)"')
+    _RE_TRACE_ID = re.compile(r"trace_id=([\w\-]+)|requestId=([\w\-]+)")
 
-    @staticmethod
-    def extract(file_path: str, file_id: str, file_cap_time: Optional[datetime] = None) -> List[ExtractedObservation]:
+    @classmethod
+    def extract(
+        cls,
+        file_path: str,
+        file_id: str,
+        file_cap_time: Optional[datetime] = None,
+    ) -> List[ExtractedObservation]:
         observations: List[ExtractedObservation] = []
         if not os.path.isfile(file_path):
             return observations
+
+        # Pass 1: Parse all lines into structured dicts and index by trace_id
+        raw_lines: List[Dict[str, Any]] = []
+        trace_to_idents: Dict[str, Dict[str, str]] = {}
 
         with open(file_path, "r", encoding="utf-8") as f:
             for line_idx, line in enumerate(f, start=1):
@@ -562,62 +639,194 @@ class LogRecordExtractor:
                 ts: Optional[datetime] = None
                 sys_id: Optional[str] = None
                 event_name: str = ""
+                trace_id: Optional[str] = None
                 fields: Dict[str, str] = {}
                 raw_payload: Dict[str, Any] = {"line": clean_line}
 
-                # Try bracket format
-                m_b = LogRecordExtractor._RE_BRACKET.match(clean_line)
+                # Try format 1: Bracketed
+                m_b = cls._RE_BRACKET.match(clean_line)
                 if m_b:
                     ts = parse_timestamp_to_utc(m_b.group(1)) or file_cap_time
                     sys_id = m_b.group(3)
+                    trace_id = m_b.group(4)
                     event_name = m_b.group(5)
                     raw_payload["level"] = m_b.group(2)
-                    raw_payload["trace_id"] = m_b.group(4)
+                    raw_payload["trace_id"] = trace_id
                     raw_payload["event_name"] = event_name
                     rest = m_b.group(6)
-                    for k, v in LogRecordExtractor._RE_FIELDS.findall(rest):
-                        fields[k] = v
-                else:
-                    # Try KV format
-                    m_kv = LogRecordExtractor._RE_KV.match(clean_line)
+                    for k, v1, v2, v3 in cls._RE_KV.findall(rest):
+                        fields[k] = v1 or v2 or v3
+                # Try format 2: Pipe separated
+                elif cls._RE_PIPE.match(clean_line):
+                    m_p = cls._RE_PIPE.match(clean_line)
+                    if m_p:
+                        ts = parse_timestamp_to_utc(m_p.group(1)) or file_cap_time
+                        raw_payload["level"] = m_p.group(2)
+                        sys_id = m_p.group(3)
+                        trace_id = m_p.group(4)
+                        event_name = m_p.group(5)
+                        raw_payload["trace_id"] = trace_id
+                        raw_payload["event_name"] = event_name
+                        rest = m_p.group(6)
+                        for k, v1, v2, v3 in cls._RE_KV.findall(rest):
+                            fields[k] = v1 or v2 or v3
+                # Try format 3: RequestId KV
+                elif cls._RE_REQ_KV.match(clean_line):
+                    m_kv = cls._RE_REQ_KV.match(clean_line)
                     if m_kv:
                         ts = parse_timestamp_to_utc(m_kv.group(1)) or file_cap_time
-                        sys_id = m_kv.group(4)
-                        raw_payload["requestId"] = m_kv.group(2)
+                        trace_id = m_kv.group(2)
+                        raw_payload["requestId"] = trace_id
                         raw_payload["level"] = m_kv.group(3)
+                        sys_id = m_kv.group(4)
                         msg = m_kv.group(5).replace('\\"', '"')
-                        for k, v in LogRecordExtractor._RE_FIELDS.findall(msg):
-                            fields[k] = v
+                        for k, v1, v2, v3 in cls._RE_KV.findall(msg):
+                            fields[k] = v1 or v2 or v3
                         event_name = fields.get("event", "log_event")
-                    else:
-                        continue
+                # Try format 4: JSON per line
+                elif "{" in clean_line and (clean_line.startswith("{") or cls._RE_TS.match(clean_line)):
+                    idx = clean_line.index("{")
+                    m_ts = cls._RE_TS.match(clean_line)
+                    if m_ts:
+                        ts = parse_timestamp_to_utc(m_ts.group(1)) or file_cap_time
+                    try:
+                        j_data = json.loads(clean_line[idx:])
+                        if not ts:
+                            ts = parse_timestamp_to_utc(j_data.get("timestamp") or j_data.get("time")) or file_cap_time
+                        sys_id = j_data.get("service") or j_data.get("logger")
+                        event_name = j_data.get("event", "log_event")
+                        trace_id = j_data.get("trace_id") or j_data.get("requestId")
+                        for k, v in j_data.items():
+                            fields[k] = str(v)
+                    except Exception:
+                        pass
+                # Try format 5: Space separated KV / Syslog KV
+                else:
+                    m_ts = cls._RE_TS.match(clean_line)
+                    if m_ts:
+                        ts = parse_timestamp_to_utc(m_ts.group(1)) or file_cap_time
+                    for k, v1, v2, v3 in cls._RE_KV.findall(clean_line):
+                        fields[k] = v1 or v2 or v3
+                    sys_id = fields.get("service")
+                    event_name = fields.get("event", "")
+                    trace_id = fields.get("trace_id") or fields.get("requestId")
 
                 raw_payload.update(fields)
-                rid = fields.get("resource_id")
-                loc = f"line_{line_idx}"
+                if not trace_id:
+                    m_tr = cls._RE_TRACE_ID.search(clean_line)
+                    if m_tr:
+                        trace_id = m_tr.group(1) or m_tr.group(2)
 
-                # Extract associated subject identifiers
-                idents: Dict[str, str] = {}
-                for key_name in ("lookup_key", "subject_key", "correlation_key", "email", "user_email"):
+                # Line-level identifiers
+                line_idents: Dict[str, str] = {}
+                for key_name in (
+                    "subject_reference",
+                    "subject_ref",
+                    "match_key",
+                    "lookup_key",
+                    "subject_key",
+                    "correlation_key",
+                    "customer_reference",
+                    "matched_value",
+                    "user_id",
+                    "email",
+                    "user_email",
+                    "customer_email",
+                    "requester_email",
+                    "requester_phone",
+                    "requester_name",
+                    "phone",
+                ):
                     if key_name in fields:
                         val = fields[key_name]
-                        if "@" in val:
+                        if val in ("null", "None", ""):
+                            continue
+                        if key_name == "user_id":
+                            line_idents["user_id"] = val.strip()
+                        elif "@" in val:
                             norm_e = normalize_email(val)
                             if norm_e:
-                                idents["email"] = norm_e
+                                line_idents["email"] = norm_e
                         elif val.startswith("user_"):
-                            idents["user_id"] = val
+                            line_idents["user_id"] = val.strip()
+                        elif len(val) == 64 and all(c in "0123456789abcdefABCDEF" for c in val):
+                            line_idents["email_hash"] = val.strip().lower()
                         elif re.search(r"\d{7,}", val):
                             norm_p = normalize_phone(val)
                             if norm_p:
-                                idents["phone"] = norm_p
+                                line_idents["phone"] = norm_p
 
-                # Distinguish observed outcomes from logged claims
-                obs_state: Optional[ResourceState] = None
-                conf = ObservationConfidence.HIGH
-                ambiguity: List[str] = []
+                # If trace_id exists, aggregate identifiers across trace
+                if trace_id:
+                    trace_to_idents.setdefault(trace_id, {}).update(line_idents)
 
-                if "profile_lookup_completed" in event_name or fields.get("event") == "profile_lookup_completed":
+                raw_lines.append({
+                    "line_idx": line_idx,
+                    "ts": ts,
+                    "sys_id": sys_id,
+                    "event_name": event_name,
+                    "trace_id": trace_id,
+                    "fields": fields,
+                    "raw_payload": raw_payload,
+                    "line_idents": line_idents,
+                })
+
+        # Pass 2: Build observations with trace-correlated identifiers
+        for item in raw_lines:
+            line_idx = item["line_idx"]
+            ts = item["ts"]
+            sys_id = item["sys_id"]
+            event_name = item["event_name"]
+            trace_id = item["trace_id"]
+            fields = item["fields"]
+            raw_payload = item["raw_payload"]
+
+            # Combine line-level idents with trace-level idents
+            idents = dict(item["line_idents"])
+            if trace_id and trace_id in trace_to_idents:
+                for k, v in trace_to_idents[trace_id].items():
+                    if k not in idents:
+                        idents[k] = v
+
+            rid = fields.get("resource_id")
+            loc = f"line_{line_idx}"
+
+            obs_state: Optional[ResourceState] = None
+            conf = ObservationConfidence.HIGH
+            ambiguity: List[str] = []
+            obs_type = event_name or "LOG_EVENT"
+
+            # 1. Direct result values
+            res_val = fields.get("result")
+            if res_val:
+                res_upper = res_val.upper()
+                mapping = {
+                    "NOT_FOUND": (ResourceState.ABSENT, "LOG_READBACK_ABSENT"),
+                    "FOUND": (ResourceState.PRESENT, "LOG_READBACK_PRESENT"),
+                    "IDENTIFIABLE": (ResourceState.PRESENT, "LOG_READBACK_PRESENT"),
+                    "ANONYMIZED": (ResourceState.ANONYMIZED, "LOG_READBACK_ANONYMIZED"),
+                    "REDACTED": (ResourceState.REDACTED, "LOG_READBACK_REDACTED"),
+                    "ACTIVE": (ResourceState.ACTIVE, "LOG_READBACK_ACTIVE"),
+                    "ENABLED": (ResourceState.ACTIVE, "LOG_READBACK_ACTIVE"),
+                    "BLOCKED": (ResourceState.BLOCKED, "LOG_READBACK_BLOCKED"),
+                    "RESTORE_BLOCKED": (ResourceState.BLOCKED, "LOG_READBACK_BLOCKED"),
+                    "DISABLED": (ResourceState.DISABLED, "LOG_READBACK_DISABLED"),
+                    "FLOW_DISABLED": (ResourceState.DISABLED, "LOG_READBACK_DISABLED"),
+                }
+                if res_upper in mapping:
+                    obs_state, obs_type = mapping[res_upper]
+
+            # 2. Semantic event mapping
+            if obs_state is None:
+                ev_lower = (event_name or fields.get("event", "")).lower()
+                if "support_ticket_read_completed" in ev_lower:
+                    has_pii = any(
+                        fields.get(k) and fields.get(k) not in ("null", "None", "")
+                        for k in ("requester_email", "requester_phone", "requester_name")
+                    )
+                    obs_state = ResourceState.PRESENT if has_pii else ResourceState.REDACTED
+                    obs_type = "SUPPORT_LOOKUP_PRESENT" if has_pii else "SUPPORT_LOOKUP_REDACTED"
+                elif "profile_lookup_completed" in ev_lower:
                     rows = fields.get("rows")
                     status = fields.get("http_status")
                     if rows == "0" or status == "404":
@@ -629,12 +838,48 @@ class LogRecordExtractor:
                     else:
                         obs_state = ResourceState.UNKNOWN
                         obs_type = "LOOKUP_RESULT_UNKNOWN"
-                elif "export_started" in event_name or "lookup_started" in event_name or "scan_started" in event_name:
+                elif "audit_record_read_completed" in ev_lower:
+                    rows = fields.get("rows")
+                    if rows == "1":
+                        obs_state = ResourceState.PRESENT
+                        obs_type = "AUDIT_RECORD_READ_PRESENT"
+                elif "connector_config_read_completed" in ev_lower or "connector_heartbeat" in ev_lower:
+                    en = fields.get("enabled", "").lower()
+                    obs_state = ResourceState.ACTIVE if en == "true" else ResourceState.DISABLED
+                    obs_type = "CONNECTOR_CONFIG_READ"
+                elif "analytics_profile_read_completed" in ev_lower:
+                    has_pii = any(
+                        fields.get(k) and fields.get(k) not in ("null", "None", "")
+                        for k in ("email", "phone", "email_hash", "customer_reference")
+                    )
+                    obs_state = ResourceState.PRESENT if has_pii else ResourceState.ANONYMIZED
+                    obs_type = "ANALYTICS_PROFILE_READ"
+                elif "contact_lookup_completed" in ev_lower:
+                    rows = fields.get("rows")
+                    obs_state = ResourceState.PRESENT if rows == "1" else ResourceState.ABSENT
+                    obs_type = "CONTACT_LOOKUP_RESULT"
+                elif "restore_candidate_evaluated" in ev_lower:
+                    el = fields.get("eligible", "").lower()
+                    blk = fields.get("deletion_block", "").lower()
+                    obs_state = ResourceState.ACTIVE if (el == "true" and blk != "true") else ResourceState.BLOCKED
+                    obs_type = "RESTORE_CANDIDATE_EVAL"
+                elif "backup_catalog_read_completed" in ev_lower:
+                    ra = fields.get("restore_allowed", "").lower()
+                    obs_state = ResourceState.ACTIVE if ra == "true" else ResourceState.BLOCKED
+                    obs_type = "BACKUP_CATALOG_READ"
+                elif "index_query_completed" in ev_lower:
+                    res = fields.get("result", "").lower()
+                    obs_state = ResourceState.PRESENT if res in ("hit", "found") else ResourceState.ABSENT
+                    obs_type = "INDEX_QUERY_RESULT"
+                elif any(
+                    s in ev_lower
+                    for s in ("lookup_started", "scan_started", "query_started", "read_started", "export_started")
+                ):
                     obs_type = "LOG_CLAIM"
                     conf = ObservationConfidence.UNVERIFIED_CLAIM
                     obs_state = None
                     ambiguity.append("UNCORROBORATED_START_CLAIM")
-                elif "delivery_abandoned" in event_name:
+                elif "delivery_abandoned" in ev_lower:
                     obs_type = "LOG_FAILURE"
                     conf = ObservationConfidence.HIGH
                     obs_state = None
@@ -642,26 +887,27 @@ class LogRecordExtractor:
                     obs_type = "SYSTEM_LOG_EVENT"
                     conf = ObservationConfidence.MEDIUM
 
-                observations.append(
-                    ExtractedObservation(
-                        source_file=file_path,
-                        file_id=file_id,
-                        evidence_id=file_id,
-                        source_location=loc,
-                        observation_type=obs_type,
-                        extraction_method="LOG_PARSER",
-                        confidence=conf,
-                        timestamp=ts,
-                        resource_id=rid,
-                        system_id=sys_id,
-                        associated_identifiers=idents,
-                        observed_state=obs_state,
-                        raw_payload=raw_payload,
-                        ambiguity_flags=ambiguity,
-                    )
+            observations.append(
+                ExtractedObservation(
+                    source_file=file_path,
+                    file_id=file_id,
+                    evidence_id=file_id,
+                    source_location=loc,
+                    observation_type=obs_type,
+                    extraction_method="LOG_PARSER",
+                    confidence=conf,
+                    timestamp=ts,
+                    resource_id=rid,
+                    system_id=sys_id,
+                    associated_identifiers=idents,
+                    observed_state=obs_state,
+                    raw_payload=raw_payload,
+                    ambiguity_flags=ambiguity,
                 )
+            )
 
         return observations
+
 
 
 class PlainTextExtractor:
@@ -694,10 +940,21 @@ class PlainTextExtractor:
                             idents["user_id"] = raw_id
 
                     st = ResourceState.UNKNOWN
-                    if outcome.upper() == "NOT_FOUND":
+                    out_upper = outcome.upper()
+                    if out_upper == "NOT_FOUND":
                         st = ResourceState.ABSENT
-                    elif outcome.upper() in ("FOUND", "ACTIVE", "PRESENT"):
+                    elif out_upper in ("FOUND", "ACTIVE", "PRESENT"):
                         st = ResourceState.PRESENT
+                    elif out_upper == "REDACTED":
+                        st = ResourceState.REDACTED
+                    elif out_upper == "ANONYMIZED":
+                        st = ResourceState.ANONYMIZED
+                    elif out_upper in ("IDENTIFIABLE", "EXPOSED"):
+                        st = ResourceState.PRESENT
+                    elif out_upper == "DISABLED":
+                        st = ResourceState.DISABLED
+                    elif out_upper == "BLOCKED":
+                        st = ResourceState.BLOCKED
 
                     observations.append(
                         ExtractedObservation(
@@ -761,7 +1018,7 @@ class PdfDocumentExtractor:
                 for u in users:
                     idents["user_id"] = u
 
-                resources = re.findall(r"\b(?:account|support|audit_record|backup|search|export|tombstone)_\d+\b", text)
+                resources = re.findall(r"\b(?:account|support|audit_record|backup|search|export|tombstone|data_flow|analytics)_\d+\b", text)
                 primary_rid = resources[0] if resources else None
 
                 observations.append(

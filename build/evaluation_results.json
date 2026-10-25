@@ -1,0 +1,1017 @@
+{
+  "status_metrics": {
+    "sample_size": 32,
+    "total_ground_truth_cases": 32,
+    "total_prediction_cases": 32,
+    "overall_accuracy": 0.9062,
+    "macro_f1": 0.8798,
+    "confusion_matrix": {
+      "COMPLETE": {
+        "COMPLETE": 7,
+        "INCOMPLETE": 3,
+        "NOT_APPLICABLE": 0
+      },
+      "INCOMPLETE": {
+        "COMPLETE": 0,
+        "INCOMPLETE": 22,
+        "NOT_APPLICABLE": 0
+      },
+      "NOT_APPLICABLE": {
+        "COMPLETE": 0,
+        "INCOMPLETE": 0,
+        "NOT_APPLICABLE": 0
+      }
+    },
+    "per_class": {
+      "COMPLETE": {
+        "support": 10,
+        "tp": 7,
+        "fp": 0,
+        "fn": 3,
+        "precision": 1.0,
+        "recall": 0.7,
+        "f1": 0.8235
+      },
+      "INCOMPLETE": {
+        "support": 22,
+        "tp": 22,
+        "fp": 3,
+        "fn": 0,
+        "precision": 0.88,
+        "recall": 1.0,
+        "f1": 0.9362
+      },
+      "NOT_APPLICABLE": {
+        "support": 0,
+        "tp": 0,
+        "fp": 0,
+        "fn": 0,
+        "precision": null,
+        "recall": null,
+        "f1": null
+      }
+    }
+  },
+  "step_metrics": {
+    "total_truth_steps": 193,
+    "total_pred_steps": 132,
+    "matched_steps": 88,
+    "step_precision": 0.6667,
+    "step_recall": 0.456,
+    "step_f1": 0.5415,
+    "exact_sequence_matches": 1,
+    "sequence_accuracy": 0.0312,
+    "field_accuracies": {
+      "phase": 0.9313,
+      "system_id": 0.6107,
+      "resource_id": 0.6031,
+      "operation": 0.6183,
+      "state": 0.6718,
+      "evidence_id": 0.7328
+    },
+    "diagnostic_differences_count": 31
+  },
+  "diagnostics": [
+    {
+      "case_id": "case_01",
+      "truth_status": "COMPLETE",
+      "pred_status": "INCOMPLETE",
+      "truth_steps_count": 1,
+      "pred_steps_count": 0,
+      "truth_resources": [
+        "account_001"
+      ],
+      "pred_resources": [],
+      "truth_ops": [
+        "VERIFY_RECORD_ABSENT"
+      ],
+      "pred_ops": []
+    },
+    {
+      "case_id": "case_02",
+      "truth_status": "COMPLETE",
+      "pred_status": "INCOMPLETE",
+      "truth_steps_count": 1,
+      "pred_steps_count": 0,
+      "truth_resources": [
+        "account_002"
+      ],
+      "pred_resources": [],
+      "truth_ops": [
+        "VERIFY_RECORD_ABSENT"
+      ],
+      "pred_ops": []
+    },
+    {
+      "case_id": "case_03",
+      "truth_status": "COMPLETE",
+      "pred_status": "COMPLETE",
+      "truth_steps_count": 3,
+      "pred_steps_count": 2,
+      "truth_resources": [
+        "account_7566",
+        "analytics_9406",
+        "audit_record_2016"
+      ],
+      "pred_resources": [
+        "account_7566",
+        "audit_record_2016"
+      ],
+      "truth_ops": [
+        "VERIFY_RECORD_ABSENT",
+        "VERIFY_RECORD_PRESENT",
+        "VERIFY_RECORD_ANONYMIZED"
+      ],
+      "pred_ops": [
+        "VERIFY_RECORD_ABSENT",
+        "VERIFY_RECORD_PRESENT"
+      ]
+    },
+    {
+      "case_id": "case_04",
+      "truth_status": "COMPLETE",
+      "pred_status": "INCOMPLETE",
+      "truth_steps_count": 2,
+      "pred_steps_count": 0,
+      "truth_resources": [
+        "account_004",
+        "analytics_901"
+      ],
+      "pred_resources": [],
+      "truth_ops": [
+        "VERIFY_RECORD_ABSENT",
+        "VERIFY_RECORD_ANONYMIZED"
+      ],
+      "pred_ops": []
+    },
+    {
+      "case_id": "case_06",
+      "truth_status": "INCOMPLETE",
+      "pred_status": "INCOMPLETE",
+      "truth_steps_count": 4,
+      "pred_steps_count": 3,
+      "truth_resources": [
+        "account_006",
+        "search_001"
+      ],
+      "pred_resources": [
+        "search_001"
+      ],
+      "truth_ops": [
+        "REPORT_REMAINING_RECORD",
+        "DELETE_RECORD",
+        "VERIFY_RECORD_ABSENT",
+        "VERIFY_RECORD_ABSENT"
+      ],
+      "pred_ops": [
+        "REPORT_REMAINING_RECORD",
+        "DELETE_RECORD",
+        "VERIFY_RECORD_ABSENT"
+      ]
+    },
+    {
+      "case_id": "case_07",
+      "truth_status": "INCOMPLETE",
+      "pred_status": "INCOMPLETE",
+      "truth_steps_count": 4,
+      "pred_steps_count": 3,
+      "truth_resources": [
+        "account_007",
+        "support_001"
+      ],
+      "pred_resources": [
+        "support_001"
+      ],
+      "truth_ops": [
+        "REPORT_REMAINING_RECORD",
+        "DELETE_RECORD",
+        "VERIFY_RECORD_ABSENT",
+        "VERIFY_RECORD_ABSENT"
+      ],
+      "pred_ops": [
+        "REPORT_EXPOSED_PII",
+        "REDACT_RECORD",
+        "VERIFY_RECORD_REDACTED"
+      ]
+    },
+    {
+      "case_id": "case_08",
+      "truth_status": "INCOMPLETE",
+      "pred_status": "INCOMPLETE",
+      "truth_steps_count": 4,
+      "pred_steps_count": 3,
+      "truth_resources": [
+        "account_008",
+        "export_001"
+      ],
+      "pred_resources": [
+        "export_001"
+      ],
+      "truth_ops": [
+        "REPORT_REMAINING_RECORD",
+        "DELETE_RECORD",
+        "VERIFY_RECORD_ABSENT",
+        "VERIFY_RECORD_ABSENT"
+      ],
+      "pred_ops": [
+        "REPORT_REMAINING_RECORD",
+        "DELETE_RECORD",
+        "VERIFY_RECORD_ABSENT"
+      ]
+    },
+    {
+      "case_id": "case_09",
+      "truth_status": "INCOMPLETE",
+      "pred_status": "INCOMPLETE",
+      "truth_steps_count": 5,
+      "pred_steps_count": 3,
+      "truth_resources": [
+        "account_3960",
+        "audit_record_4902",
+        "backup_4978"
+      ],
+      "pred_resources": [
+        "backup_4978"
+      ],
+      "truth_ops": [
+        "REPORT_RESTORE_RISK",
+        "BLOCK_RESTORE",
+        "VERIFY_RECORD_ABSENT",
+        "VERIFY_RECORD_PRESENT",
+        "VERIFY_RESTORE_BLOCKED"
+      ],
+      "pred_ops": [
+        "REPORT_RESTORE_RISK",
+        "BLOCK_RESTORE",
+        "VERIFY_RESTORE_BLOCKED"
+      ]
+    },
+    {
+      "case_id": "case_10",
+      "truth_status": "INCOMPLETE",
+      "pred_status": "INCOMPLETE",
+      "truth_steps_count": 4,
+      "pred_steps_count": 0,
+      "truth_resources": [
+        "account_010",
+        "support_002"
+      ],
+      "pred_resources": [],
+      "truth_ops": [
+        "REPORT_REMAINING_RECORD",
+        "DELETE_RECORD",
+        "VERIFY_RECORD_ABSENT",
+        "VERIFY_RECORD_ABSENT"
+      ],
+      "pred_ops": []
+    },
+    {
+      "case_id": "case_11",
+      "truth_status": "INCOMPLETE",
+      "pred_status": "INCOMPLETE",
+      "truth_steps_count": 14,
+      "pred_steps_count": 12,
+      "truth_resources": [
+        "account_4248",
+        "analytics_2034",
+        "audit_record_9394",
+        "data_flow_9522",
+        "search_052",
+        "support_864"
+      ],
+      "pred_resources": [
+        "analytics_2034",
+        "data_flow_9522",
+        "search_052",
+        "support_864"
+      ],
+      "truth_ops": [
+        "REPORT_REMAINING_RECORD",
+        "REPORT_EXPOSED_PII",
+        "REPORT_EXPOSED_PII",
+        "REPORT_ACTIVE_DATA_FLOW",
+        "DISABLE_DATA_FLOW",
+        "DELETE_RECORD",
+        "REDACT_RECORD",
+        "ANONYMIZE_RECORD",
+        "VERIFY_RECORD_ABSENT",
+        "VERIFY_RECORD_ABSENT",
+        "VERIFY_RECORD_PRESENT",
+        "VERIFY_RECORD_REDACTED",
+        "VERIFY_RECORD_ANONYMIZED",
+        "VERIFY_DATA_FLOW_DISABLED"
+      ],
+      "pred_ops": [
+        "REPORT_REMAINING_RECORD",
+        "REPORT_EXPOSED_PII",
+        "REPORT_EXPOSED_PII",
+        "REPORT_ACTIVE_DATA_FLOW",
+        "DISABLE_DATA_FLOW",
+        "DELETE_RECORD",
+        "REDACT_RECORD",
+        "ANONYMIZE_RECORD",
+        "VERIFY_RECORD_ABSENT",
+        "VERIFY_RECORD_REDACTED",
+        "VERIFY_RECORD_ANONYMIZED",
+        "VERIFY_DATA_FLOW_DISABLED"
+      ]
+    },
+    {
+      "case_id": "case_12",
+      "truth_status": "INCOMPLETE",
+      "pred_status": "INCOMPLETE",
+      "truth_steps_count": 5,
+      "pred_steps_count": 3,
+      "truth_resources": [
+        "account_9797",
+        "analytics_9914",
+        "audit_record_2945"
+      ],
+      "pred_resources": [
+        "analytics_9914"
+      ],
+      "truth_ops": [
+        "REPORT_REMAINING_RECORD",
+        "DELETE_RECORD",
+        "VERIFY_RECORD_ABSENT",
+        "VERIFY_RECORD_ABSENT",
+        "VERIFY_RECORD_PRESENT"
+      ],
+      "pred_ops": [
+        "REPORT_EXPOSED_PII",
+        "ANONYMIZE_RECORD",
+        "VERIFY_RECORD_ANONYMIZED"
+      ]
+    },
+    {
+      "case_id": "case_13",
+      "truth_status": "INCOMPLETE",
+      "pred_status": "INCOMPLETE",
+      "truth_steps_count": 8,
+      "pred_steps_count": 6,
+      "truth_resources": [
+        "account_9335",
+        "audit_record_4816",
+        "search_1308",
+        "support_4218"
+      ],
+      "pred_resources": [
+        "search_1308",
+        "support_4218"
+      ],
+      "truth_ops": [
+        "REPORT_REMAINING_RECORD",
+        "REPORT_REMAINING_RECORD",
+        "DELETE_RECORD",
+        "DELETE_RECORD",
+        "VERIFY_RECORD_ABSENT",
+        "VERIFY_RECORD_ABSENT",
+        "VERIFY_RECORD_ABSENT",
+        "VERIFY_RECORD_PRESENT"
+      ],
+      "pred_ops": [
+        "REPORT_REMAINING_RECORD",
+        "REPORT_EXPOSED_PII",
+        "DELETE_RECORD",
+        "REDACT_RECORD",
+        "VERIFY_RECORD_ABSENT",
+        "VERIFY_RECORD_REDACTED"
+      ]
+    },
+    {
+      "case_id": "case_14",
+      "truth_status": "INCOMPLETE",
+      "pred_status": "INCOMPLETE",
+      "truth_steps_count": 5,
+      "pred_steps_count": 3,
+      "truth_resources": [
+        "account_3677",
+        "audit_record_987",
+        "backup_3870"
+      ],
+      "pred_resources": [
+        "backup_3870"
+      ],
+      "truth_ops": [
+        "REPORT_RESTORE_RISK",
+        "BLOCK_RESTORE",
+        "VERIFY_RECORD_ABSENT",
+        "VERIFY_RECORD_PRESENT",
+        "VERIFY_RESTORE_BLOCKED"
+      ],
+      "pred_ops": [
+        "REPORT_RESTORE_RISK",
+        "BLOCK_RESTORE",
+        "VERIFY_RESTORE_BLOCKED"
+      ]
+    },
+    {
+      "case_id": "case_15",
+      "truth_status": "INCOMPLETE",
+      "pred_status": "INCOMPLETE",
+      "truth_steps_count": 5,
+      "pred_steps_count": 3,
+      "truth_resources": [
+        "account_4745",
+        "audit_record_1596",
+        "data_flow_9846"
+      ],
+      "pred_resources": [
+        "data_flow_9846"
+      ],
+      "truth_ops": [
+        "REPORT_ACTIVE_DATA_FLOW",
+        "DISABLE_DATA_FLOW",
+        "VERIFY_RECORD_ABSENT",
+        "VERIFY_RECORD_PRESENT",
+        "VERIFY_DATA_FLOW_DISABLED"
+      ],
+      "pred_ops": [
+        "REPORT_ACTIVE_DATA_FLOW",
+        "DISABLE_DATA_FLOW",
+        "VERIFY_DATA_FLOW_DISABLED"
+      ]
+    },
+    {
+      "case_id": "case_16",
+      "truth_status": "INCOMPLETE",
+      "pred_status": "INCOMPLETE",
+      "truth_steps_count": 7,
+      "pred_steps_count": 3,
+      "truth_resources": [
+        "account_994",
+        "audit_record_9528",
+        "search_1007"
+      ],
+      "pred_resources": [
+        "account_994"
+      ],
+      "truth_ops": [
+        "REPORT_REMAINING_RECORD",
+        "REPORT_REMAINING_RECORD",
+        "DELETE_RECORD",
+        "DELETE_RECORD",
+        "VERIFY_RECORD_ABSENT",
+        "VERIFY_RECORD_ABSENT",
+        "VERIFY_RECORD_PRESENT"
+      ],
+      "pred_ops": [
+        "REPORT_REMAINING_RECORD",
+        "DELETE_RECORD",
+        "VERIFY_RECORD_ABSENT"
+      ]
+    },
+    {
+      "case_id": "case_17",
+      "truth_status": "INCOMPLETE",
+      "pred_status": "INCOMPLETE",
+      "truth_steps_count": 5,
+      "pred_steps_count": 3,
+      "truth_resources": [
+        "account_4092",
+        "audit_record_1797",
+        "backup_3245"
+      ],
+      "pred_resources": [
+        "backup_3245"
+      ],
+      "truth_ops": [
+        "REPORT_RESTORE_RISK",
+        "BLOCK_RESTORE",
+        "VERIFY_RECORD_ABSENT",
+        "VERIFY_RECORD_PRESENT",
+        "VERIFY_RESTORE_BLOCKED"
+      ],
+      "pred_ops": [
+        "REPORT_RESTORE_RISK",
+        "BLOCK_RESTORE",
+        "VERIFY_RESTORE_BLOCKED"
+      ]
+    },
+    {
+      "case_id": "case_18",
+      "truth_status": "INCOMPLETE",
+      "pred_status": "INCOMPLETE",
+      "truth_steps_count": 14,
+      "pred_steps_count": 15,
+      "truth_resources": [
+        "account_5521",
+        "analytics_037",
+        "audit_record_6645",
+        "data_flow_4890",
+        "search_4013",
+        "support_5569"
+      ],
+      "pred_resources": [
+        "account_050",
+        "analytics_037",
+        "data_flow_4890",
+        "search_4013",
+        "support_5569"
+      ],
+      "truth_ops": [
+        "REPORT_REMAINING_RECORD",
+        "REPORT_EXPOSED_PII",
+        "REPORT_EXPOSED_PII",
+        "REPORT_ACTIVE_DATA_FLOW",
+        "DISABLE_DATA_FLOW",
+        "DELETE_RECORD",
+        "REDACT_RECORD",
+        "ANONYMIZE_RECORD",
+        "VERIFY_RECORD_ABSENT",
+        "VERIFY_RECORD_ABSENT",
+        "VERIFY_RECORD_PRESENT",
+        "VERIFY_RECORD_REDACTED",
+        "VERIFY_RECORD_ANONYMIZED",
+        "VERIFY_DATA_FLOW_DISABLED"
+      ],
+      "pred_ops": [
+        "REPORT_REMAINING_RECORD",
+        "REPORT_REMAINING_RECORD",
+        "REPORT_EXPOSED_PII",
+        "REPORT_EXPOSED_PII",
+        "REPORT_ACTIVE_DATA_FLOW",
+        "DISABLE_DATA_FLOW",
+        "DELETE_RECORD",
+        "DELETE_RECORD",
+        "REDACT_RECORD",
+        "ANONYMIZE_RECORD",
+        "VERIFY_RECORD_ABSENT",
+        "VERIFY_RECORD_ABSENT",
+        "VERIFY_RECORD_REDACTED",
+        "VERIFY_RECORD_ANONYMIZED",
+        "VERIFY_DATA_FLOW_DISABLED"
+      ]
+    },
+    {
+      "case_id": "case_19",
+      "truth_status": "INCOMPLETE",
+      "pred_status": "INCOMPLETE",
+      "truth_steps_count": 8,
+      "pred_steps_count": 3,
+      "truth_resources": [
+        "account_9102",
+        "audit_record_6793",
+        "search_6083",
+        "support_9553"
+      ],
+      "pred_resources": [
+        "search_6083"
+      ],
+      "truth_ops": [
+        "REPORT_REMAINING_RECORD",
+        "REPORT_EXPOSED_PII",
+        "DELETE_RECORD",
+        "REDACT_RECORD",
+        "VERIFY_RECORD_ABSENT",
+        "VERIFY_RECORD_ABSENT",
+        "VERIFY_RECORD_PRESENT",
+        "VERIFY_RECORD_REDACTED"
+      ],
+      "pred_ops": [
+        "REPORT_REMAINING_RECORD",
+        "DELETE_RECORD",
+        "VERIFY_RECORD_ABSENT"
+      ]
+    },
+    {
+      "case_id": "case_20",
+      "truth_status": "INCOMPLETE",
+      "pred_status": "INCOMPLETE",
+      "truth_steps_count": 8,
+      "pred_steps_count": 6,
+      "truth_resources": [
+        "account_5037",
+        "audit_record_5569",
+        "data_flow_1770",
+        "search_4262"
+      ],
+      "pred_resources": [
+        "data_flow_1770",
+        "search_4262"
+      ],
+      "truth_ops": [
+        "REPORT_REMAINING_RECORD",
+        "REPORT_ACTIVE_DATA_FLOW",
+        "DISABLE_DATA_FLOW",
+        "DELETE_RECORD",
+        "VERIFY_RECORD_ABSENT",
+        "VERIFY_RECORD_ABSENT",
+        "VERIFY_RECORD_PRESENT",
+        "VERIFY_DATA_FLOW_DISABLED"
+      ],
+      "pred_ops": [
+        "REPORT_REMAINING_RECORD",
+        "REPORT_ACTIVE_DATA_FLOW",
+        "DISABLE_DATA_FLOW",
+        "DELETE_RECORD",
+        "VERIFY_RECORD_ABSENT",
+        "VERIFY_DATA_FLOW_DISABLED"
+      ]
+    },
+    {
+      "case_id": "case_21",
+      "truth_status": "COMPLETE",
+      "pred_status": "COMPLETE",
+      "truth_steps_count": 3,
+      "pred_steps_count": 1,
+      "truth_resources": [
+        "account_6440",
+        "analytics_5335",
+        "audit_record_3737"
+      ],
+      "pred_resources": [
+        "audit_record_3737"
+      ],
+      "truth_ops": [
+        "VERIFY_RECORD_ABSENT",
+        "VERIFY_RECORD_PRESENT",
+        "VERIFY_RECORD_ANONYMIZED"
+      ],
+      "pred_ops": [
+        "VERIFY_RECORD_PRESENT"
+      ]
+    },
+    {
+      "case_id": "case_22",
+      "truth_status": "INCOMPLETE",
+      "pred_status": "INCOMPLETE",
+      "truth_steps_count": 8,
+      "pred_steps_count": 3,
+      "truth_resources": [
+        "account_4990",
+        "analytics_4440",
+        "audit_record_3482",
+        "search_8911"
+      ],
+      "pred_resources": [
+        "analytics_4440"
+      ],
+      "truth_ops": [
+        "REPORT_REMAINING_RECORD",
+        "REPORT_EXPOSED_PII",
+        "DELETE_RECORD",
+        "ANONYMIZE_RECORD",
+        "VERIFY_RECORD_ABSENT",
+        "VERIFY_RECORD_ABSENT",
+        "VERIFY_RECORD_PRESENT",
+        "VERIFY_RECORD_ANONYMIZED"
+      ],
+      "pred_ops": [
+        "REPORT_EXPOSED_PII",
+        "ANONYMIZE_RECORD",
+        "VERIFY_RECORD_ANONYMIZED"
+      ]
+    },
+    {
+      "case_id": "case_23",
+      "truth_status": "INCOMPLETE",
+      "pred_status": "INCOMPLETE",
+      "truth_steps_count": 8,
+      "pred_steps_count": 6,
+      "truth_resources": [
+        "account_410",
+        "audit_record_4128",
+        "export_7364",
+        "search_898"
+      ],
+      "pred_resources": [
+        "export_7364",
+        "search_898"
+      ],
+      "truth_ops": [
+        "REPORT_REMAINING_RECORD",
+        "REPORT_REMAINING_RECORD",
+        "DELETE_RECORD",
+        "DELETE_RECORD",
+        "VERIFY_RECORD_ABSENT",
+        "VERIFY_RECORD_ABSENT",
+        "VERIFY_RECORD_ABSENT",
+        "VERIFY_RECORD_PRESENT"
+      ],
+      "pred_ops": [
+        "REPORT_REMAINING_RECORD",
+        "REPORT_REMAINING_RECORD",
+        "DELETE_RECORD",
+        "DELETE_RECORD",
+        "VERIFY_RECORD_ABSENT",
+        "VERIFY_RECORD_ABSENT"
+      ]
+    },
+    {
+      "case_id": "case_24",
+      "truth_status": "INCOMPLETE",
+      "pred_status": "INCOMPLETE",
+      "truth_steps_count": 7,
+      "pred_steps_count": 6,
+      "truth_resources": [
+        "account_5334",
+        "audit_record_7095",
+        "search_5577"
+      ],
+      "pred_resources": [
+        "account_5334",
+        "search_5577"
+      ],
+      "truth_ops": [
+        "REPORT_REMAINING_RECORD",
+        "REPORT_REMAINING_RECORD",
+        "DELETE_RECORD",
+        "DELETE_RECORD",
+        "VERIFY_RECORD_ABSENT",
+        "VERIFY_RECORD_ABSENT",
+        "VERIFY_RECORD_PRESENT"
+      ],
+      "pred_ops": [
+        "REPORT_REMAINING_RECORD",
+        "REPORT_REMAINING_RECORD",
+        "DELETE_RECORD",
+        "DELETE_RECORD",
+        "VERIFY_RECORD_ABSENT",
+        "VERIFY_RECORD_ABSENT"
+      ]
+    },
+    {
+      "case_id": "case_25",
+      "truth_status": "COMPLETE",
+      "pred_status": "COMPLETE",
+      "truth_steps_count": 3,
+      "pred_steps_count": 1,
+      "truth_resources": [
+        "account_3136",
+        "analytics_1895",
+        "audit_record_451"
+      ],
+      "pred_resources": [
+        "audit_record_451"
+      ],
+      "truth_ops": [
+        "VERIFY_RECORD_ABSENT",
+        "VERIFY_RECORD_PRESENT",
+        "VERIFY_RECORD_ANONYMIZED"
+      ],
+      "pred_ops": [
+        "VERIFY_RECORD_PRESENT"
+      ]
+    },
+    {
+      "case_id": "case_26",
+      "truth_status": "COMPLETE",
+      "pred_status": "COMPLETE",
+      "truth_steps_count": 6,
+      "pred_steps_count": 4,
+      "truth_resources": [
+        "account_5684",
+        "analytics_4566",
+        "audit_record_5416",
+        "backup_3120",
+        "data_flow_6244",
+        "support_4715"
+      ],
+      "pred_resources": [
+        "account_5684",
+        "audit_record_5416",
+        "backup_3120",
+        "support_4715"
+      ],
+      "truth_ops": [
+        "VERIFY_RECORD_ABSENT",
+        "VERIFY_RECORD_PRESENT",
+        "VERIFY_RECORD_REDACTED",
+        "VERIFY_RECORD_ANONYMIZED",
+        "VERIFY_DATA_FLOW_DISABLED",
+        "VERIFY_RESTORE_BLOCKED"
+      ],
+      "pred_ops": [
+        "VERIFY_RECORD_ABSENT",
+        "VERIFY_RECORD_PRESENT",
+        "VERIFY_RECORD_REDACTED",
+        "VERIFY_RESTORE_BLOCKED"
+      ]
+    },
+    {
+      "case_id": "case_27",
+      "truth_status": "COMPLETE",
+      "pred_status": "COMPLETE",
+      "truth_steps_count": 6,
+      "pred_steps_count": 4,
+      "truth_resources": [
+        "account_3866",
+        "analytics_4574",
+        "audit_record_3830",
+        "backup_5970",
+        "data_flow_2295",
+        "support_4707"
+      ],
+      "pred_resources": [
+        "account_3866",
+        "audit_record_3830",
+        "backup_5970",
+        "support_4707"
+      ],
+      "truth_ops": [
+        "VERIFY_RECORD_ABSENT",
+        "VERIFY_RECORD_PRESENT",
+        "VERIFY_RECORD_REDACTED",
+        "VERIFY_RECORD_ANONYMIZED",
+        "VERIFY_DATA_FLOW_DISABLED",
+        "VERIFY_RESTORE_BLOCKED"
+      ],
+      "pred_ops": [
+        "VERIFY_RECORD_ABSENT",
+        "VERIFY_RECORD_PRESENT",
+        "VERIFY_RECORD_REDACTED",
+        "VERIFY_RESTORE_BLOCKED"
+      ]
+    },
+    {
+      "case_id": "case_28",
+      "truth_status": "COMPLETE",
+      "pred_status": "COMPLETE",
+      "truth_steps_count": 6,
+      "pred_steps_count": 3,
+      "truth_resources": [
+        "account_5482",
+        "analytics_6077",
+        "audit_record_9265",
+        "backup_838",
+        "data_flow_2337",
+        "support_2351"
+      ],
+      "pred_resources": [
+        "audit_record_9265",
+        "backup_838",
+        "support_2351"
+      ],
+      "truth_ops": [
+        "VERIFY_RECORD_ABSENT",
+        "VERIFY_RECORD_PRESENT",
+        "VERIFY_RECORD_REDACTED",
+        "VERIFY_RECORD_ANONYMIZED",
+        "VERIFY_DATA_FLOW_DISABLED",
+        "VERIFY_RESTORE_BLOCKED"
+      ],
+      "pred_ops": [
+        "VERIFY_RECORD_PRESENT",
+        "VERIFY_RECORD_REDACTED",
+        "VERIFY_RESTORE_BLOCKED"
+      ]
+    },
+    {
+      "case_id": "case_29",
+      "truth_status": "INCOMPLETE",
+      "pred_status": "INCOMPLETE",
+      "truth_steps_count": 14,
+      "pred_steps_count": 12,
+      "truth_resources": [
+        "account_7012",
+        "analytics_5208",
+        "audit_record_3954",
+        "data_flow_3827",
+        "search_1993",
+        "support_5281"
+      ],
+      "pred_resources": [
+        "analytics_5208",
+        "data_flow_3827",
+        "search_1993",
+        "support_5281"
+      ],
+      "truth_ops": [
+        "REPORT_REMAINING_RECORD",
+        "REPORT_EXPOSED_PII",
+        "REPORT_EXPOSED_PII",
+        "REPORT_ACTIVE_DATA_FLOW",
+        "DISABLE_DATA_FLOW",
+        "DELETE_RECORD",
+        "REDACT_RECORD",
+        "ANONYMIZE_RECORD",
+        "VERIFY_RECORD_ABSENT",
+        "VERIFY_RECORD_ABSENT",
+        "VERIFY_RECORD_PRESENT",
+        "VERIFY_RECORD_REDACTED",
+        "VERIFY_RECORD_ANONYMIZED",
+        "VERIFY_DATA_FLOW_DISABLED"
+      ],
+      "pred_ops": [
+        "REPORT_REMAINING_RECORD",
+        "REPORT_EXPOSED_PII",
+        "REPORT_EXPOSED_PII",
+        "REPORT_ACTIVE_DATA_FLOW",
+        "DISABLE_DATA_FLOW",
+        "DELETE_RECORD",
+        "REDACT_RECORD",
+        "ANONYMIZE_RECORD",
+        "VERIFY_RECORD_ABSENT",
+        "VERIFY_RECORD_REDACTED",
+        "VERIFY_RECORD_ANONYMIZED",
+        "VERIFY_DATA_FLOW_DISABLED"
+      ]
+    },
+    {
+      "case_id": "case_30",
+      "truth_status": "INCOMPLETE",
+      "pred_status": "INCOMPLETE",
+      "truth_steps_count": 14,
+      "pred_steps_count": 12,
+      "truth_resources": [
+        "account_4163",
+        "analytics_3697",
+        "audit_record_1707",
+        "data_flow_8524",
+        "search_9359",
+        "support_6477"
+      ],
+      "pred_resources": [
+        "analytics_3697",
+        "data_flow_8524",
+        "search_9359",
+        "support_6477"
+      ],
+      "truth_ops": [
+        "REPORT_REMAINING_RECORD",
+        "REPORT_EXPOSED_PII",
+        "REPORT_EXPOSED_PII",
+        "REPORT_ACTIVE_DATA_FLOW",
+        "DISABLE_DATA_FLOW",
+        "DELETE_RECORD",
+        "REDACT_RECORD",
+        "ANONYMIZE_RECORD",
+        "VERIFY_RECORD_ABSENT",
+        "VERIFY_RECORD_ABSENT",
+        "VERIFY_RECORD_PRESENT",
+        "VERIFY_RECORD_REDACTED",
+        "VERIFY_RECORD_ANONYMIZED",
+        "VERIFY_DATA_FLOW_DISABLED"
+      ],
+      "pred_ops": [
+        "REPORT_REMAINING_RECORD",
+        "REPORT_EXPOSED_PII",
+        "REPORT_EXPOSED_PII",
+        "REPORT_ACTIVE_DATA_FLOW",
+        "DISABLE_DATA_FLOW",
+        "DELETE_RECORD",
+        "REDACT_RECORD",
+        "ANONYMIZE_RECORD",
+        "VERIFY_RECORD_ABSENT",
+        "VERIFY_RECORD_REDACTED",
+        "VERIFY_RECORD_ANONYMIZED",
+        "VERIFY_DATA_FLOW_DISABLED"
+      ]
+    },
+    {
+      "case_id": "case_31",
+      "truth_status": "COMPLETE",
+      "pred_status": "COMPLETE",
+      "truth_steps_count": 3,
+      "pred_steps_count": 3,
+      "truth_resources": [
+        "account_4857",
+        "audit_record_6909",
+        "tombstone_440"
+      ],
+      "pred_resources": [
+        "account_541",
+        "audit_record_6909",
+        "tombstone_440"
+      ],
+      "truth_ops": [
+        "VERIFY_RECORD_ABSENT",
+        "VERIFY_RECORD_PRESENT",
+        "VERIFY_RECORD_REDACTED"
+      ],
+      "pred_ops": [
+        "VERIFY_RECORD_ABSENT",
+        "VERIFY_RECORD_PRESENT",
+        "VERIFY_RECORD_REDACTED"
+      ]
+    },
+    {
+      "case_id": "case_32",
+      "truth_status": "INCOMPLETE",
+      "pred_status": "INCOMPLETE",
+      "truth_steps_count": 5,
+      "pred_steps_count": 3,
+      "truth_resources": [
+        "account_8858",
+        "audit_record_7068",
+        "tombstone_9178"
+      ],
+      "pred_resources": [
+        "tombstone_9178"
+      ],
+      "truth_ops": [
+        "REPORT_EXPOSED_PII",
+        "REDACT_RECORD",
+        "VERIFY_RECORD_ABSENT",
+        "VERIFY_RECORD_PRESENT",
+        "VERIFY_RECORD_REDACTED"
+      ],
+      "pred_ops": [
+        "REPORT_EXPOSED_PII",
+        "REDACT_RECORD",
+        "VERIFY_RECORD_REDACTED"
+      ]
+    }
+  ]
+}

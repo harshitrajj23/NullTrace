@@ -1,0 +1,211 @@
+{
+  "case_01": {
+    "email": "amina.elmasri@gmail.com",
+    "requested_at": "2026-08-18T09:14:00+00:00",
+    "audit_at": "2026-09-03T11:30:00+00:00",
+    "reported_status": "COMPLETE",
+    "request_text": "Hi, I haven\u2019t used this account in years and would like it closed. Please remove the profile and the personal details attached to it.",
+    "cluster_nodes": [
+      "email:amina.elmasri@gmail.com",
+      "user_id:user_01",
+      "phone:971504827316",
+      "email_hash:d4e1f59abcf9a1e0cfdc7c27ad6c07ed4ff88b326a16ed5eed5ec6bc31618c93"
+    ],
+    "candidate_resources": [
+      "account_001"
+    ],
+    "states": {
+      "account_001": "UNKNOWN"
+    },
+    "actions": {
+      "account_001": "DELETE"
+    },
+    "policy_satisfied": {
+      "account_001": false
+    },
+    "flow_risks": [],
+    "is_complete": false,
+    "deletion_status": "INCOMPLETE",
+    "reasons_incomplete": [
+      "UNKNOWN_RESOURCE_STATE",
+      "UNSATISFIED_POLICY"
+    ],
+    "all_matched_obs": [],
+    "cand_obs_details": {
+      "account_001": []
+    }
+  },
+  "case_02": {
+    "email": "mateo.rios@outlook.com",
+    "requested_at": "2026-08-21T18:06:00+00:00",
+    "audit_at": "2026-09-04T15:00:00+00:00",
+    "reported_status": "PARTIALLY_COMPLETE",
+    "request_text": "Intent\u00e9 eliminar mi cuenta ayer, pero la p\u00e1gina termin\u00f3 mostrando un error. \u00bfPueden comprobar si todav\u00eda queda alg\u00fan dato y completar la eliminaci\u00f3n si hace falta?",
+    "cluster_nodes": [
+      "email:mateo.rios@outlook.com",
+      "user_id:user_02",
+      "phone:34612847593",
+      "email_hash:fad1c282b6b8ff346ee92e617331f69c2b6bb345af954eeb44581c57529eab9d"
+    ],
+    "candidate_resources": [
+      "account_002"
+    ],
+    "states": {
+      "account_002": "UNKNOWN"
+    },
+    "actions": {
+      "account_002": "DELETE"
+    },
+    "policy_satisfied": {
+      "account_002": false
+    },
+    "flow_risks": [],
+    "is_complete": false,
+    "deletion_status": "INCOMPLETE",
+    "reasons_incomplete": [
+      "UNKNOWN_RESOURCE_STATE",
+      "UNSATISFIED_POLICY"
+    ],
+    "all_matched_obs": [],
+    "cand_obs_details": {
+      "account_002": []
+    }
+  },
+  "case_04": {
+    "email": "thandiwe.n@gmail.com",
+    "requested_at": "2026-08-25T12:32:00+00:00",
+    "audit_at": "2026-09-07T10:20:00+00:00",
+    "reported_status": "COMPLETE",
+    "request_text": "I\u2019m deleting my account. You can keep anonymous statistics, but nothing in analytics should still point back to me.",
+    "cluster_nodes": [
+      "email:thandiwe.n@gmail.com",
+      "user_id:user_04",
+      "phone:27716845928",
+      "email_hash:f730ef60615bde7a8f5ee21138637b4e9d4094855fbb02da6afcdba9c076281f"
+    ],
+    "candidate_resources": [],
+    "states": {},
+    "actions": {},
+    "policy_satisfied": {},
+    "flow_risks": [],
+    "is_complete": false,
+    "deletion_status": "INCOMPLETE",
+    "reasons_incomplete": [
+      "NO_RESOURCES_IDENTIFIED"
+    ],
+    "all_matched_obs": [],
+    "cand_obs_details": {}
+  },
+  "case_31": {
+    "email": "a.eze08@gmail.com",
+    "requested_at": "2026-09-04T12:00:00+00:00",
+    "audit_at": "2026-09-15T12:00:00+00:00",
+    "reported_status": "COMPLETE",
+    "request_text": "I no longer need this account. Please remove my name and contact details, but keeping an internal deleted-account reference is fine if other required records still depend on it.",
+    "cluster_nodes": [
+      "email:a.eze08@gmail.com",
+      "user_id:user_541",
+      "phone:2348030527943",
+      "email_hash:1b7bf5a90890498cc6b7d2b50b0580ad1dbfaee7766f5d09cd87ecb548533e9e"
+    ],
+    "candidate_resources": [
+      "account_541",
+      "audit_record_6909",
+      "tombstone_440"
+    ],
+    "states": {
+      "account_541": "PRESENT",
+      "audit_record_6909": "PRESENT",
+      "tombstone_440": "REDACTED"
+    },
+    "actions": {
+      "account_541": "DELETE",
+      "audit_record_6909": "RETAIN",
+      "tombstone_440": "REDACT"
+    },
+    "policy_satisfied": {
+      "account_541": false,
+      "audit_record_6909": true,
+      "tombstone_440": true
+    },
+    "flow_risks": [],
+    "is_complete": false,
+    "deletion_status": "INCOMPLETE",
+    "reasons_incomplete": [
+      "UNSATISFIED_POLICY"
+    ],
+    "all_matched_obs": [
+      {
+        "source_file": "customer_data_snapshot_bundle_20260915.json",
+        "file_id": "evidence_51",
+        "rid": "tombstone_440",
+        "type": "TOMBSTONE_RECORD",
+        "state": "REDACTED",
+        "ts": "2026-09-15T12:00:00+00:00",
+        "payload": {
+          "resource_id": "tombstone_440",
+          "subject_reference": "user_541",
+          "name": null,
+          "email": null,
+          "phone": null,
+          "email_hash": null,
+          "account_status": "DELETED"
+        }
+      },
+      {
+        "source_file": "customer_data_snapshot_bundle_20260915.json",
+        "file_id": "evidence_51",
+        "rid": "audit_record_6909",
+        "type": "DATA_RECORD",
+        "state": "PRESENT",
+        "ts": "2026-09-15T12:00:00+00:00",
+        "payload": {
+          "resource_id": "audit_record_6909",
+          "subject_reference": "user_541",
+          "event_name": "account_deletion_reviewed",
+          "actor_type": "automated_privacy_workflow",
+          "integrity_seal": "sha256:0000000000000000000000000000000000000000000000000000000000001afd"
+        }
+      }
+    ],
+    "cand_obs_details": {
+      "tombstone_440": [
+        {
+          "source_file": "customer_data_snapshot_bundle_20260915.json",
+          "file_id": "evidence_51",
+          "type": "TOMBSTONE_RECORD",
+          "state": "REDACTED",
+          "ts": "2026-09-15T12:00:00+00:00",
+          "pre_audit": true,
+          "payload": {
+            "resource_id": "tombstone_440",
+            "subject_reference": "user_541",
+            "name": null,
+            "email": null,
+            "phone": null,
+            "email_hash": null,
+            "account_status": "DELETED"
+          }
+        }
+      ],
+      "account_541": [],
+      "audit_record_6909": [
+        {
+          "source_file": "customer_data_snapshot_bundle_20260915.json",
+          "file_id": "evidence_51",
+          "type": "DATA_RECORD",
+          "state": "PRESENT",
+          "ts": "2026-09-15T12:00:00+00:00",
+          "pre_audit": true,
+          "payload": {
+            "resource_id": "audit_record_6909",
+            "subject_reference": "user_541",
+            "event_name": "account_deletion_reviewed",
+            "actor_type": "automated_privacy_workflow",
+            "integrity_seal": "sha256:0000000000000000000000000000000000000000000000000000000000001afd"
+          }
+        }
+      ]
+    }
+  }
+}
