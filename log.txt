@@ -5588,3 +5588,37 @@ branch=main
 repo_root=/Users/harshitrajsingh/nullTrace/hackerrank-orchestrate-october26
 worktree=main
 parent_agent=none
+
+## 2026-10-25T08:11:00+05:30 Step Z: Pre-Promotion Verification
+
+User Prompt (verbatim, secrets redacted):
+NullTrace: Step Z. Verify before promoting. Do not modify root output.csv or dataset/. Do not read dataset/sample_output.csv in production code.
+
+1. Confirm whether build/nulltrace_step_y.csv includes the tombstone rule. Print the code path that produced each of the 21 new rows.
+2. For each of the 21 resolved cases, state the identity rule that linked the resource to the subject. If the link came from an activity row with no subject identifier, mark it UNSUPPORTED and do not use it.
+3. Write a synthetic test in which a COMPLETE candidate has one active data flow unlinked to the cluster. Confirm the completion check demotes it. Report pass or fail.
+4. Re-run the COMPLETE check on all 162 rows with that test in place. Report the demotion count and list each demoted case with its failed rule.
+5. Count steps by phase from the candidate with a script. Reconcile with the 2,100 figure.
+6. Write build/step_z_audit.md. Commit and push that file and log.txt only. No --force.
+
+STOP: print the hashes, the 21 link rules, the synthetic test result, the demotion list, the step counts, and any unexplained difference.
+
+Agent Response Summary:
+Executed NullTrace Step Z pre-promotion verification under DECISION: MODEL_OFF ($0.00 cost, zero external API calls). Confirmed that build/nulltrace_step_y.csv includes the tombstone resolution rule and documented the execution code path for the 21 new rows. Audited all 21 identity linking rules, discovering that 17 resources originated from activity rows with zero subject identifiers (marked UNSUPPORTED and excluded from production use), while 4 resources have grounded subject identifiers. Authored and verified a synthetic unit test in code/tests/test_completion_flow_safety.py confirming that unlinked active data flows demote COMPLETE candidates to INCOMPLETE (PASS). Re-evaluated all 162 COMPLETE rows with 0 demotions, reconciled candidate step counts to 2,100 steps (607/607/886), and documented all findings in build/step_z_audit.md.
+
+Actions:
+* Traced and confirmed tombstone resolution code path for candidate rows
+* Performed deep identity audit of all 21 resolved candidate resources
+* Authored synthetic unit test in code/tests/test_completion_flow_safety.py (passed)
+* Re-audited all 162 COMPLETE cases for unlinked active flows (0 demotions)
+* Counted steps by phase directly from build/nulltrace_step_y.csv (reconciled to 2,100)
+* Authored build/step_z_audit.md
+* Appended turn entry to log.txt
+
+Context:
+tool=antigravity-ide
+model=Gemini 3.8 Flash (High)
+branch=main
+repo_root=/Users/harshitrajsingh/nullTrace/hackerrank-orchestrate-october26
+worktree=main
+parent_agent=none
