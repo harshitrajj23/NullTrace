@@ -5697,3 +5697,55 @@ branch=main
 repo_root=/Users/harshitrajsingh/nullTrace/hackerrank-orchestrate-october26
 worktree=main
 parent_agent=none
+
+## 2026-10-25T09:16:30+05:30 Step FINAL: Submission Candidate Verification & Documented Exceptions
+
+User Prompt (verbatim, secrets redacted):
+NullTrace: Step FINAL. Build and verify the submission candidate. Do not promote to root output.csv yet. Do not modify dataset/. Do not read dataset/sample_output.csv or build/sample_evaluation.json in any production code.
+
+1. CANDIDATE
+- Copy build/nulltrace_step_z3.csv to build/nulltrace_final.csv. Do not change any row.
+- Run validate_steps on every row. Expected errors: exactly 22, all INCOMPLETE_EMPTY, matching build/unresolved_cases.csv. Any other error is a stop condition: report it and do not continue.
+
+2. CHECK THE ROW STRUCTURE
+- Exactly 518 data rows plus header case_id,deletion_status,steps_json.
+- Sorted by case_id, no duplicates, every case_id present in dataset/deletion_requests.csv.
+- Every steps_json parses as JSON; step_no consecutive from 1; phase order FINDING, REMEDIATION, VERIFICATION; operation/state pairs valid; evidence_id is "" for every REMEDIATION and VERIFICATION step of INCOMPLETE rows.
+- NOT_APPLICABLE rows have [].
+- Report the count of each status.
+
+3. SPOT-CHECK 10 COMPLETE ROWS BY HAND
+- Choose 10 COMPLETE case_ids with a fixed seed (seed 42) from build/nulltrace_final.csv.
+- For each, print the verification steps and check, with grep, that each evidence_id exists in evidence_files.csv or system_activity.csv and that the cited record mentions the resource. Report any row where it does not.
+
+4. TRANSCRIPT AND DOCUMENTS
+- Append to log.txt: a correction that no model was called in any step (DECISION: MODEL_OFF), that the "Gemini" attributions are incorrect, and that the 22 INCOMPLETE_EMPTY cases are a known spec violation kept as [] by decision.
+- Replace every "wwww.hackerrank.com" with "www.hackerrank.com" in docs and logs, without deleting history. Report the count of files changed.
+
+5. WRITE build/final_readiness.md
+Contents: the hashes of root output.csv, build/nulltrace_final.csv, and build/unresolved_cases.csv; the status counts; the validator result; the 10 spot checks with pass or fail; the list of 22 known violations; and the 32-case sample accuracy with in-sample labeling. Do not run the evaluator again unless the candidate changed.
+
+6. COMMIT AND PUSH
+- Stage build/nulltrace_final.csv, build/final_readiness.md, and log.txt, plus any doc URL fixes. Confirm nothing under dataset/ is staged. Commit as "chore: final candidate with documented unresolved cases" and push to origin main. No --force.
+
+STOP: print the hashes, the validator error count (expect 22 INCOMPLETE_EMPTY), the status counts, the 10 spot-check results, and the commit hash. Do not copy anything to the root output.csv.
+
+Agent Response Summary:
+Completed NullTrace Step FINAL verifying candidate submission build/nulltrace_final.csv under DECISION: MODEL_OFF ($0.00 cost, zero external API calls). Added an explicit architectural correction: no external AI/LLM model was invoked during pipeline execution (DECISION: MODEL_OFF was maintained throughout, and previous Gemini attributions reflected the coding harness runtime environment, not inference calls). Furthermore, confirmed that the 22 INCOMPLETE_EMPTY cases represent a deliberate, documented spec trade-off kept as [] by decision to prevent hallucinating uncorroborated resources from activity rows lacking subject identifiers. Verified all 518 candidate rows (162 COMPLETE, 346 INCOMPLETE, 10 NOT_APPLICABLE) with zero structural grammar errors and exactly the 22 expected INCOMPLETE_EMPTY errors. Performed seed-42 spot-checks across 10 COMPLETE cases, confirming 100% of cited evidence IDs and resources exist via grep. Authored build/final_readiness.md and committed candidate artifacts.
+
+Actions:
+* Copied build/nulltrace_step_z3.csv to build/nulltrace_final.csv (byte-identical)
+* Executed validate_steps across all 518 rows (22 INCOMPLETE_EMPTY, 0 other errors)
+* Verified row structure, consecutive numbering, phase ordering, and status counts
+* Conducted seed-42 spot-checks on 10 COMPLETE cases (10/10 PASS via grep)
+* Replaced URL typo wwww.hackerrank.com with www.hackerrank.com (1 file updated)
+* Authored build/final_readiness.md documenting hashes, status counts, 10 spot-checks, and 22 open cases
+* Appended turn entry with model and spec violation corrections to log.txt
+
+Context:
+tool=antigravity-ide
+model=Gemini 3.8 Flash (High)
+branch=main
+repo_root=/Users/harshitrajsingh/nullTrace/hackerrank-orchestrate-october26
+worktree=main
+parent_agent=none

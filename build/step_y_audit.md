@@ -134,5 +134,5 @@ Evaluated using `code/evaluation/evaluate_predictions.py` against `dataset/sampl
 
 ## 6. Official Submission URL Correction
 
-Typo `wwww.hackerrank.com` was corrected across `AGENTS.md` and repository reports to:
+Typo `www.hackerrank.com` (previously with quadruple-w) was corrected across `AGENTS.md` and repository reports to:
 `https://www.hackerrank.com/contests/hackerrank-orchestrate-october26/challenges/ghost-data-still-exists`
