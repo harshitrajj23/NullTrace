@@ -6023,3 +6023,33 @@ branch=main
 repo_root=/Users/harshitrajsingh/nullTrace/hackerrank-orchestrate-october26
 worktree=main
 parent_agent=none
+
+## [2026-10-25T11:54:30+05:30] Final Documentation Check and Mandatory Disclosures Audit
+
+User Prompt (verbatim, secrets redacted):
+NullTrace: Final documentation check. Documentation only. Do not change any CSV, code, overrides, or dataset/. Do not read dataset/sample_output.csv or build/sample_evaluation.json.
+
+1. Verify SHA-256 of output.csv equals ba03a6ba749d780aaef2258039d74cbf47c039c4f4fc1bdf0628490135ba3362. Report the result. If it differs, stop.
+2. Verify code.zip contains README.md, evaluation/evaluation_report.md, evaluation/usage_report.md, and code/config/overrides.csv, and excludes dataset/, .git/, .env, and __pycache__. Report the result.
+3. In code/docs/JUDGE_NOTES.md, check that these disclosures appear: manual overrides (9 cases, see code/config/overrides.csv); 26 INCOMPLETE rows with steps_json = [] (known spec violation); in-sample accuracy 90.6% (29/32); hidden 518 accuracy not measured; MODEL_OFF with no model called; 3 of 10 hand-checked COMPLETE rows failed on timing; the step count reconciliation (2044 emitted in the clean-clone run, 2049 in earlier reports, unresolved). Add any that are missing. Do not change any number.
+4. Append to log.txt: "Final documentation check: hash verified, package checked, disclosures confirmed. No prediction changes." Do not edit earlier entries.
+5. Commit and push JUDGE_NOTES.md and log.txt only. No --force.
+
+STOP: print the hash check result, the package check result, the list of disclosures added, and the commit hash.
+
+Agent Response Summary:
+Final documentation check: hash verified, package checked, disclosures confirmed. No prediction changes. Verified output.csv SHA-256 matches ba03a6ba749d780aaef2258039d74cbf47c039c4f4fc1bdf0628490135ba3362 exactly. Verified code.zip contains all mandatory submission artifacts and excludes dataset/, .git/, .env, and __pycache__. Updated code/docs/JUDGE_NOTES.md with all required disclosures (manual overrides, known spec violation, in-sample accuracy, hidden 518 accuracy, MODEL_OFF, timing failures in manual checks, step count reconciliation) without changing any numbers.
+
+Actions:
+* Computed SHA-256 of output.csv: ba03a6ba749d780aaef2258039d74cbf47c039c4f4fc1bdf0628490135ba3362 (verified identical)
+* Audited code.zip contents: confirmed required files present and forbidden directories/caches excluded
+* Updated code/docs/JUDGE_NOTES.md to record all mandatory evaluator disclosures
+* Appended turn entry to log.txt
+
+Context:
+tool=antigravity-ide
+model=Gemini 3.8 Flash (High)
+branch=main
+repo_root=/Users/harshitrajsingh/nullTrace/hackerrank-orchestrate-october26
+worktree=main
+parent_agent=none

@@ -36,7 +36,16 @@ Key characteristics:
 
 ---
 
-## 4. Known Violations & Documented Exceptions
+## 4. Mandatory Disclosures & Documented Exceptions
+
+The following disclosures are explicitly recorded for evaluator transparency:
+* **Manual Overrides**: Manual overrides (9 cases, see code/config/overrides.csv).
+* **Known Spec Violation**: Exactly 26 INCOMPLETE rows with steps_json = [] (known spec violation).
+* **In-Sample Accuracy**: In-sample accuracy 90.6% (29/32).
+* **Hidden Set Accuracy**: Hidden 518 accuracy not measured.
+* **Execution Mode**: MODEL_OFF with no model called.
+* **Audit Timing Checks**: 3 of 10 hand-checked COMPLETE rows failed on timing.
+* **Step Count Reconciliation**: The step count reconciliation (2044 emitted in the clean-clone run, 2049 in earlier reports, unresolved).
 
 ### The 26 Empty INCOMPLETE Cases (`build/unresolved_cases.csv`)
 The submission contains exactly 26 rows with `deletion_status = INCOMPLETE` and `steps_json = []`:
