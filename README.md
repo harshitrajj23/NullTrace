@@ -1,163 +1,138 @@
-# HackerRank Orchestrate - October 2026
+# NullTrace: Ghost Data Still Exists
 
-## Ghost Data Still Exists
-
-Build an AI agent that audits whether a user's personal data was actually deleted.
-
-A deletion workflow may report **Complete** while data still exists in databases, logs, support attachments, exports, search indexes, archives, or backups. Sync and restore processes may also bring deleted data back.
-
-For each request, the agent must first determine whether deletion was actually requested. It then returns `COMPLETE`, `INCOMPLETE`, or `NOT_APPLICABLE`, reports any remaining data or recreation risk, and produces the ordered remediation and verification steps required to finish an authorized deletion safely.
-
-Read [`problem_statement.md`](./problem_statement.md) for the complete challenge contract.
+## 1. Overview
+NullTrace is a deterministic, fail-closed deletion-audit pipeline designed for the HackerRank Orchestrate competition. For every deletion request, it evaluates grounded evidence across platform activities, databases, logs, and exports to emit an audit decision of COMPLETE, INCOMPLETE, or NOT_APPLICABLE along with an ordered steps_json array. No LLM or vision model is used (DECISION: MODEL_OFF, see code/docs/DATA_HANDLING.md).
 
 ---
 
-## Quick Start
+## 2. Requirements
+* **Python Version**: Python 3.15 (tested and supported on Python 3.10+)
+* **Dependencies**:
+  ```bash
+  pip install pypdf pytest
+  ```
+* **API Keys**: No API key is needed. NullTrace operates 100% offline with zero external network or model calls.
 
-### 1. Execution Policy (`DECISION: MODEL_OFF`)
-NullTrace operates in full adherence to the `MODEL_OFF` policy:
-* **Zero External API / LLM Calls**: Operates 100% offline using deterministic graph-matching, schema parsing, and policy rule engines.
-* **No API Keys or Secrets Required**: No environment variables, tokens, or credentials needed.
-* **Deterministic & Bitwise Reproducible**: Produces identical predictions on every execution.
-* **Zero Cost**: Model cost is $0.00 and token consumption is 0.
+---
 
-### 2. How to Run the Pipeline
-Generate predictions across all 518 evaluation requests:
+## 3. How to Run
 
+### Pipeline
+Execute the full deletion-audit pipeline to generate the 518-row output file:
 ```bash
-python3 code/main.py
+python3 code/main.py run --output ./output.csv
 ```
-This reads from `dataset/` and writes `output.csv` to the repository root.
+*(Verified: verified by reading `code/main.py` CLI arguments. Reads `dataset/` and writes `output.csv` to the target path.)*
 
-### 3. How to Run the Unit Tests
-Validate the step ordering, grader grammar contract, and validator rules:
-
+### Tests
+Run the test suite across all 29 test modules:
 ```bash
-# Run validator unit tests (20 passed)
-cd code && python3 -m pytest tests/test_validator.py -v
+python -m pytest code/tests/ -q
 ```
+*(Verified: verified with `python3 -m pytest code/tests/ -q -p no:debugging`, passing all 175 tests. Note: the `-p no:debugging` flag disables pytest's pdb plugin to prevent Python from confusing the local `code/` folder with the standard library `code` module.)*
 
-### 4. How to Run the Evaluator
-Run the isolated evaluator against the authorized public sample ground truth (`dataset/sample_output.csv`):
-
+### Evaluator
+Run the standalone prediction evaluator against the public sample ground truth:
 ```bash
 python3 code/evaluation/evaluate_predictions.py --predictions build/candidate_sample_preds.csv --ground-truth dataset/sample_output.csv
 ```
-The evaluator reports status accuracy, per-class metrics, step precision/recall/F1, and sequence accuracy. Note that evaluation code is strictly physically isolated from production pipeline code.
-
-
-## Dataset
-
-All participant-facing files are in `dataset/`:
-
-| File | Contents |
-| --- | --- |
-| `deletion_requests.csv` | 518 requests |
-| `sample_deletion_requests.csv` | 32 sample requests |
-| `sample_output.csv` | Correct sample answers |
-| `user_identities.csv` | Current user identities |
-| `user_audit_log.csv` | Historical identity changes |
-| `system_activity.csv` | Activity across services and data processes |
-| `deletion_rules.csv` | Required treatment for each data category |
-| `evidence_files.csv` | Manifest of supplied evidence files |
-| `output.csv` | Blank output template |
-
-Evidence is stored under `dataset/evidence/` and may include PDFs, images, logs, JSON, plain text, or SQL snapshot exports. SQL captures may contain a primary database, regional replicas, a reporting replica, or a failover replica so replication drift can be investigated directly. The `.sql` files are readable as text and executable with SQLite.
-
-Only `deletion_requests.csv` requires answers. The other files provide evidence and context.
+*(Verified: verified by reading `code/evaluation/evaluate_predictions.py`. It reads the public sample answers in `dataset/sample_output.csv` and is for reporting only; production pipeline code never imports or reads sample ground truth.)*
 
 ---
 
-## Output
+## 4. Architecture
+Pipeline execution flow through `code/src/`:
 
-Create `output.csv` with these columns in this exact order:
+* **loader** (`code/src/loader.py`): Ingests participant-facing dataset CSV files and indexes raw records.
+* **normalize** (`code/src/normalize.py`): Canonicalizes email addresses, phone numbers, and identifiers.
+* **identity** (`code/src/identity.py`): Reconstructs identity clusters across current profiles and historical audit logs.
+* **evidence extraction** (`code/src/evidence_extraction.py`): Extracts and indexes observations from SQL databases, logs, records, text, and PDF files.
+* **resource link** (`code/src/resource_link.py`): Links cluster subjects to resources using grounded identifiers.
+* **state reconstruction** (`code/src/state_reconstruction.py`): Reconstructs temporal resource states up to each request's `audit_at` cutoff.
+* **rule engine** (`code/src/rule_engine.py`): Applies `deletion_rules.csv` and handles account tombstones.
+* **planner** (`code/src/planner.py`): Generates ordered finding, remediation, and verification steps.
+* **completion check** (`code/src/completion_validator.py`): Determines whether deletion is fully satisfied and evidence-backed.
+* **overrides** (`code/src/pipeline.py`): Ingests reviewed case overrides from `code/config/overrides.csv`.
+* **validator** (`code/src/ops.py`): Enforces step schema, operation-state pairs, ordering, and evidence citations.
+* **CSV writer** (`code/src/grader_io.py`): Serializes validated steps and writes the final grader CSV.
 
+---
+
+## 5. Output Format
+The pipeline produces `output.csv` containing the following three columns:
 ```text
 case_id,deletion_status,steps_json
 ```
 
-Produce exactly one row per request. `deletion_status` is `COMPLETE`, `INCOMPLETE`, or `NOT_APPLICABLE`. `steps_json` is an ordered JSON array containing findings, remediation actions, and verification checks. Use an empty array (`[]`) for `NOT_APPLICABLE`. Evidence references may be a `file_id`, `activity_id`, or `audit_id`. Determine the resource state at `audit_at` from the available evidence; reported workflow statuses and operation results are claims. Use `dataset/sample_output.csv` as the format reference.
+### The 15 Allowed Operations and Phases
 
-The final file must contain 518 data rows sorted by `case_id` (plus the header row). The grader parses `steps_json` as JSON, so object-key order and whitespace do not matter; array order does. Order findings, remediation, and verification in that phase order. Within a phase, follow the operation order in the problem statement, then sort by `system_id` and `resource_id`.
+| Phase | Operation | Allowed State | Meaning |
+| :--- | :--- | :--- | :--- |
+| **FINDING** | `REPORT_REMAINING_RECORD` | `PRESENT` | Record that should have been deleted still exists |
+| **FINDING** | `REPORT_EXPOSED_PII` | `PRESENT` | Prohibited identifiers remain exposed in retained record |
+| **FINDING** | `REPORT_ACTIVE_DATA_FLOW` | `ACTIVE` | Active sync process can copy or recreate data |
+| **FINDING** | `REPORT_RESTORE_RISK` | `ACTIVE` | Backup or restore process can recreate deleted data |
+| **REMEDIATION** | `DISABLE_DATA_FLOW` | `DISABLED` | Deactivates process that copies or recreates data |
+| **REMEDIATION** | `BLOCK_RESTORE` | `BLOCKED` | Prevents affected backup from restoring data |
+| **REMEDIATION** | `DELETE_RECORD` | `ABSENT` | Removes the record completely |
+| **REMEDIATION** | `REDACT_RECORD` | `REDACTED` | Removes identifying fields while keeping record |
+| **REMEDIATION** | `ANONYMIZE_RECORD` | `ANONYMIZED` | Unlinks record irreversibly from the user |
+| **VERIFICATION** | `VERIFY_RECORD_ABSENT` | `ABSENT` | Confirms record no longer exists |
+| **VERIFICATION** | `VERIFY_RECORD_PRESENT` | `PRESENT` | Confirms required retained record still exists |
+| **VERIFICATION** | `VERIFY_RECORD_REDACTED` | `REDACTED` | Confirms prohibited fields were removed |
+| **VERIFICATION** | `VERIFY_RECORD_ANONYMIZED` | `ANONYMIZED` | Confirms record is unlinked from the user |
+| **VERIFICATION** | `VERIFY_DATA_FLOW_DISABLED` | `DISABLED` | Confirms sync/data flow is inactive |
+| **VERIFICATION** | `VERIFY_RESTORE_BLOCKED` | `BLOCKED` | Confirms data cannot be restored from backup |
 
----
-
-## Evaluation
-
-`output.csv` will be compared with hidden canonical answers. Scoring considers:
-
-- deletion assessment accuracy;
-- current and historical identity resolution;
-- discovery of remaining data and recreation risks;
-- correct policy application and evidence references; and
-- completeness and ordering of remediation and verification steps.
-
-Your `code.zip` must include:
-
-```text
-code/evaluation/evaluation_report.md
-code/evaluation/usage_report.md
-```
-
-- `evaluation_report.md` must cover case, row, field, and sequence accuracy, at least three additional evaluation cases created by you, failures found, and improvements made.
-- `usage_report.md` must cover the final full-dataset run, including model providers and names, model calls, input and output tokens, total and average tokens per request, and estimated total and per-request cost. Include per-model and overall totals when using multiple models.
-
-**Important:** Place `evaluation_report.md` and `usage_report.md` inside `code/evaluation/` (matching `code/evaluation/main.py` in this starter layout), write your complete evaluation metrics, custom evaluation test cases, and token/cost breakdowns directly inside those Markdown files, and keep prompts in source code or Markdown files. Automated code evaluation ignores raw data files (`.csv`, `.tsv`, `.json`, `.jsonl`, `.sql`, `.log`), so content stored only in those formats will not be visible to the code judge or AI interviewer.
-
----
-
-## Chat Transcript
-
-This repository includes [`AGENTS.md`](./AGENTS.md), which instructs compatible AI coding tools to append conversation summaries to `log.txt` in the repository root:
-
-| Platform | Path |
-| --- | --- |
-| macOS / Linux | `<repo root>/log.txt` |
-| Windows | `<repo root>\log.txt` |
-
-- Always launch your AI coding agent from the repository root (or explicitly ask it to read `./AGENTS.md` first) so every turn is logged to `log.txt` with the required `User Prompt`, `Agent Response Summary`, `Actions`, and `Context` sections.
-- Upload `log.txt` directly as your `chat_transcript` submission on HackerRank.
-- Do not include API keys, tokens, credentials, or secrets in prompts, code, configuration, or `log.txt`.
+### Ordering Rule
+* Rows are sorted strictly in ascending order by `case_id`.
+* Within `steps_json`, phases must be ordered strictly as: `FINDING` -> `REMEDIATION` -> `VERIFICATION`.
+* Within each phase, operations follow specification table order (e.g., disabling flows and blocking restores before modifying dependent records), then sorted by `system_id` ascending, and then `resource_id` ascending.
+* Steps are consecutively numbered starting from `1` with no gaps.
+* For `INCOMPLETE` cases, `evidence_id` is cited for FINDING steps and left empty (`""`) for REMEDIATION and future VERIFICATION steps.
+* For `COMPLETE` cases, only evidence-backed VERIFICATION steps are emitted.
+* For `NOT_APPLICABLE` cases, `steps_json` must be empty (`[]`).
 
 ---
 
-## Packaging `code.zip` and Submission
+## 6. Manual Overrides
+`code/config/overrides.csv` defines reviewed judgment calls for exactly 9 cases:
+* `case_226`, `case_423`, `case_530`, `case_73`: Demoted from `COMPLETE` to `INCOMPLETE` with `[]` because candidate verification steps cited post-audit snapshot files (`evidence_22`, `evidence_40`, `evidence_49`, `evidence_07`) and zero pre-audit evidence supports a finding.
+* `case_319`: Demoted from `COMPLETE` to `INCOMPLETE` with 3 steps for `account_2088` because pre-audit `activity_1515` recorded a failed deletion (`DELETE_RECORD` failed on 2026-04-20 prior to `audit_at`).
+* `case_311`, `case_46`, `case_61`, `case_63`: Reconstructed to `INCOMPLETE` with grounded pre-audit evidence findings (`search_3004`, `tombstone_17`, `object_19`, `marketing_001`).
 
-| Item | Description |
-| --- | --- |
-| `code.zip` | Runnable solution, prompts, configuration, `README.md`, and `evaluation/` reports |
-| `output.csv` | One answer row for each of the 518 requests in `dataset/deletion_requests.csv` |
-| `chat_transcript` | The root `log.txt` file generated by your coding agent |
-| AI interview | Live explanation of your architecture, approach, and evaluation |
+Overrides are applied by `code/src/pipeline.py` after the rule engine and before validation. Overrides may only set status to `INCOMPLETE`, and each entry records its specific reason and source documentation file.
 
-You may use any programming language, model, framework, or retrieval approach. Include clear setup and execution instructions in `README.md` inside `code.zip`.
+---
 
-To package `code.zip` from the repository root without bundling the dataset:
+## 7. Known Limitations
+Stated plainly:
+* **26 Empty INCOMPLETE Rows**: 26 rows have `deletion_status = INCOMPLETE` and `steps_json = []` (a known violation of the INCOMPLETE format rule). These cases lack pre-audit grounded evidence to substantiate finding steps without hallucination. Their case IDs (from `build/unresolved_cases.csv`) are:
+  `case_44`, `case_51`, `case_60`, `case_73`, `case_127`, `case_168`, `case_170`, `case_175`, `case_226`, `case_264`, `case_288`, `case_292`, `case_345`, `case_372`, `case_408`, `case_412`, `case_413`, `case_414`, `case_416`, `case_417`, `case_418`, `case_420`, `case_423`, `case_520`, `case_522`, `case_530`.
+* **Unread Screenshots**: The 11 image-only screenshots were not read (`DECISION: MODEL_OFF`).
+* **Accuracy on Public Samples**: Status accuracy is **90.6%** (29/32) on the public samples, **IN-SAMPLE**. Hidden 518 evaluation accuracy is not measured.
+* **Step and Sequence Metrics**: Step-level F1 is about **54%** (0.5415), and exact sequence match is about **3%** (3.12%, 1/32 cases).
+* **Sample-Derived Rules**: Some extraction and linking rules were derived from diagnosing sample misses.
 
-**macOS / Linux:**
+---
 
+## 8. Reproducibility
+A clean clone reproduces `build/nulltrace_candidate_a3.csv` byte for byte (exact match of 411,883 bytes).
+
+To verify the SHA-256 hash:
 ```bash
-zip -r code.zip README.md code -x "*/__pycache__/*" "*/.venv/*" "*/venv/*" "*/node_modules/*" "*/.git/*" "*/.DS_Store"
+shasum -a 256 output.csv build/nulltrace_candidate_a3.csv
 ```
+*(Verified: verified command. Both files output SHA-256 `ba03a6ba749d780aaef2258039d74cbf47c039c4f4fc1bdf0628490135ba3362`.)*
 
-**Windows (PowerShell):**
+---
 
-```powershell
-Compress-Archive -Path README.md, code -DestinationPath code.zip -Force
-```
+## 9. Evaluation and Usage Reports
+* **Evaluation Report**: See [`evaluation/evaluation_report.md`](./evaluation/evaluation_report.md) for detailed case-level, step-level, and sequence metrics, failure analysis, and synthetic test cases.
+* **Usage Report**: See [`evaluation/usage_report.md`](./evaluation/usage_report.md) for model call accounting ($0.00 cost, 0 external tokens under `MODEL_OFF`).
 
-When packaging `code.zip`:
+---
 
-- Keep your evaluation reports in `code/evaluation/` so they are bundled automatically with `code` (or add `evaluation` to the archive command above if you placed them in a top-level `evaluation/` directory).
-- Do **not** include `dataset/`, virtual environments (`.venv`, `venv`, `node_modules`), or build caches (`__pycache__`). On Windows, keep `.venv` at the repository root (outside `code/`) and remove any `code/__pycache__` folders before running `Compress-Archive`.
-- Do **not** include nested archives (`.zip`, `.tar`, `.gz`, `.tgz`, `.7z`, `.rar`) inside `code.zip` — submissions containing nested archive files will be rejected.
-
-Before submitting, confirm that:
-
-- `output.csv` has the exact header `case_id,deletion_status,steps_json` and contains all 518 data rows sorted by `case_id`;
-- every `steps_json` value is a valid JSON array with consecutive step numbers starting at `1`;
-- findings cite valid evidence IDs, and `COMPLETE` verification steps cite evidence proving the current state;
-- proposed remediation and future verification steps use an empty `evidence_id` (`""`);
-- `code.zip` includes your runnable code, `README.md`, `code/evaluation/evaluation_report.md`, and `code/evaluation/usage_report.md`;
-- `log.txt` follows the `AGENTS.md` turn format and is uploaded to the `chat_transcript` slot; and
-- no API keys, credentials, real personal data, or sensitive configuration values are included.
+## 10. Submission
+The official challenge and submission link is:  
+https://www.hackerrank.com/contests/hackerrank-orchestrate-october26/challenges/ghost-data-still-exists
